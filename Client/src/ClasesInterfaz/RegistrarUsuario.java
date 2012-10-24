@@ -172,16 +172,16 @@ public class RegistrarUsuario extends JDialog {
         localidadJComboBox.setPreferredSize(new Dimension(2, 18));
         localidadJComboBox.setSize(new Dimension(375, 30));
         
-/*
+
         pais = PaisesBD.obtenerPaises();
         this.paisJComboBox.addItem("Seleccionar Pais");
         for(int i = 0; i< pais.size(); i++)
         {
             this.paisJComboBox.addItem(pais.elementAt(i).getNombre());
         }
-/
+
         this.localidadJComboBox.addItem("Seleccionar Localidad");
-        provinciaJComboBox.addItem("Seleccionar Provincia");*/
+        provinciaJComboBox.addItem("Seleccionar Provincia");
         this.getContentPane().add(localidadJComboBox, null);
         this.getContentPane().add(provinciaJComboBox, null);
         this.getContentPane().add(paisJComboBox, null);

@@ -17,7 +17,7 @@ public class ResultadosAnteriores {
         this.usuario = user;
     }
 
-    /*   public void setIdResultado(Integer idResultado) {
+      public void setIdResultado(Integer idResultado) {
         this.idResultado = idResultado;
     }
 
@@ -47,7 +47,7 @@ public class ResultadosAnteriores {
 
     public Puntos[] getPuntuacion() {
         return Puntuacion;
-    }*/
+    }
     
     
     

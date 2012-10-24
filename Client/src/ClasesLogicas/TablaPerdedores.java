@@ -13,11 +13,11 @@ public class TablaPerdedores {
         this.eventos = eventos;
     }
 
-   /* public void setEventos(Vector<Evento> eventos) {
+    public void setEventos(Vector<Evento> eventos) {
         this.eventos = eventos;
     }
 
     public Vector<Evento> getEventos() {
         return eventos;
-    }*/
+    }
 }

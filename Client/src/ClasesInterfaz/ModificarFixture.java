@@ -1,9 +1,7 @@
 package ClasesInterfaz;
 
-import ClasesLogicas.Competencia;
 
 import ClasesLogicas.Fixture;
-
 import ClasesLogicas.Usuario;
 
 import java.awt.Dimension;
@@ -39,8 +37,12 @@ public class ModificarFixture extends JDialog {
     private JList listaDeFechasJList = new JList();
     private Fixture fixtureSeleccionada=null;
     private Usuario usuarioActual=null;
-    
 
+
+    /**
+     * @param fixture
+     * @param usuario
+     */
     public ModificarFixture(Fixture fixture,Usuario usuario) {
         this(null, "", false, fixture, usuario);
     }

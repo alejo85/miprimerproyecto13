@@ -17,7 +17,7 @@ public class Evento {
         this.proximoEnfrentaminto = proximoEnfrentaminto;
     }
 
-/*
+
     public void setIdTabla(int idTabla) {
         this.idTabla = idTabla;
     }
@@ -49,5 +49,5 @@ public class Evento {
     public Encuentro getProximoEnfrentaminto() {
         return proximoEnfrentaminto;
     }
-*/
+
 }

@@ -18,8 +18,13 @@ public class Participante {
         this.imagen = imagen;
         this.historial = historial;
     }
+    public Participante() {
+        super();
+            }
 
- /*   public void setIdParticipante(Integer idParticipante) {
+
+
+    public void setIdParticipante(Integer idParticipante) {
         this.idParticipante = idParticipante;
     }
 
@@ -57,6 +62,6 @@ public class Participante {
 
     public ParticipanteAnterior[] getHistorial() {
         return historial;
-    }*/
+    }
     public void enviarCorreoElectronico(String correoElectronico){} 
 }

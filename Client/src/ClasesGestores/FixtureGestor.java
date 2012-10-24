@@ -1,16 +1,25 @@
 package ClasesGestores;
 
-import ClasesLogicas.Competencia;
+
+import ClasesLogicas.Fixture;
 import ClasesLogicas.LugarDeRealización;
 import ClasesLogicas.Participante;
-
-import java.util.Vector;
 
 public class FixtureGestor {
     public FixtureGestor() {
         super();
     }
-    public void generarFixture(Competencia competencia){}
+
+    /**
+     * @param lugares
+     * @param participantes
+     * @return
+     */
+    public Fixture generarFixture(LugarDeRealización[] lugares,
+                       Participante[] participantes){
+        
+        return new Fixture();
+        }
     public void actualizar(){}
     
 }

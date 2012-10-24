@@ -21,7 +21,7 @@ public class ParticipanteAnterior {
         this.imagen = imagen;
         this.fechaHora = fechaHora;
     }
-/*
+
     public void setIdParticipante(Integer idParticipante) {
         this.idParticipante = idParticipante;
     }
@@ -60,5 +60,5 @@ public class ParticipanteAnterior {
 
     public GregorianCalendar getFechaHora() {
         return fechaHora;
-    }*/
+    }
 }

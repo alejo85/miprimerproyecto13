@@ -21,7 +21,7 @@ public class Logueo {
         this.usuarioLogueado = usuarioLogueado;
         this.fechaHoraLogueo = fechaHoraLogueo;
     }
-/*
+
     public void setIdLogueo(Integer idLogueo) {
         this.idLogueo = idLogueo;
     }
@@ -52,5 +52,5 @@ public class Logueo {
 
     public GregorianCalendar getFechaHoraLogueo() {
         return fechaHoraLogueo;
-    }*/
+    }
 }

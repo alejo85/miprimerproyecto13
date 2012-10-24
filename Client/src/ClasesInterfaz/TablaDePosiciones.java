@@ -1,6 +1,8 @@
 package ClasesInterfaz;
 
 
+import ClasesLogicas.Posicion;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -21,19 +23,19 @@ public class TablaDePosiciones extends JDialog {
     private JScrollPane jScrollPaneTablaDePosiciones = new JScrollPane();
     private JTable tablaDePosicionesJTable = new JTable();
     private JButton cancelarJButton = new JButton();
-    private ClasesLogicas.TablaDePosiciones tablaSeleccionada=null;
+    private Posicion[] tablaSeleccionada=null;
 
 
     /**
      * @param tabla
      */
-    public TablaDePosiciones(ClasesLogicas.TablaDePosiciones tabla) {
+    public TablaDePosiciones(Posicion[] tabla) {
         this(null, "", false,tabla);
     }
     public TablaDePosiciones() {
         this(null, "", false);
     }
-    public TablaDePosiciones(Frame parent, String title, boolean modal,ClasesLogicas.TablaDePosiciones tabla) {
+    public TablaDePosiciones(Frame parent, String title, boolean modal,Posicion[] tabla) {
         super(parent, title, modal);
         try {
             tablaSeleccionada=tabla;

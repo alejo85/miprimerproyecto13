@@ -17,12 +17,12 @@ public class TablaDePosiciones {
         super();
         boolean add = this.tabla.add(posicion);
     }
-/*
+
     public void setTabla(Vector<Posicion> tabla) {
         this.tabla = tabla;
     }
 
     public Vector<Posicion> getTabla() {
         return tabla;
-    }*/
+    }
 }

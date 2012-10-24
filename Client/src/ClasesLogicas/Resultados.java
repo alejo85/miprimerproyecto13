@@ -16,7 +16,7 @@ public class Resultados {
         this.usuario = user;
     }
 
- /*   public void setIdResultado(Integer idResultado) {
+   public void setIdResultado(Integer idResultado) {
         this.idResultado = idResultado;
     }
 
@@ -46,5 +46,5 @@ public class Resultados {
 
     public Puntos[] getPuntuacion() {
         return Puntuacion;
-    }*/
+    }
 }
