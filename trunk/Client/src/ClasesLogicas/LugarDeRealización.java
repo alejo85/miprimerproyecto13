@@ -14,7 +14,7 @@ public class LugarDeRealización {
         this.disponibilidad = disponibilidad;
         this.deportesAsociados = deportesAsociados;
     }
-/*
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -53,7 +53,7 @@ public class LugarDeRealización {
 
     public Deporte[] getDeportesAsociados() {
         return deportesAsociados;
-    }*/
+    }
 
 
 }

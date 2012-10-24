@@ -14,7 +14,7 @@ public class Posicion {
     public Posicion() {
         super();
     }
-/*
+
     public Posicion(int idTabla, int posicion, int puntos, int partidosGanados, int partidosPerdidos,
                     int partidosEmpatados, int tantosAFavor, int tantosEncontra, int diferencia,
                     Participante participante) {
@@ -30,7 +30,7 @@ public class Posicion {
         this.diferencia = diferencia;
         this.participante = participante;
     }
-/*
+
     public void setIdTabla(int idTabla) {
         this.idTabla = idTabla;
     }
@@ -109,5 +109,5 @@ public class Posicion {
 
     public Participante getParticipante() {
         return participante;
-    }*/
+    }
 }

@@ -15,7 +15,7 @@ public class Puntos {
         super();
 
     }
-/*
+
     public void setIdPunto(Integer idPunto) {
         this.idPunto = idPunto;
     }
@@ -40,5 +40,5 @@ public class Puntos {
         return puntoB;
     }
 
-*/
+
 }

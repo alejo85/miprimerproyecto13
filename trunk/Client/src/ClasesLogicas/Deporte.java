@@ -15,7 +15,7 @@ public class Deporte {
     }
 
   
-/*
+
     public Integer getIdDeporte() {
         return idDeporte;
     }
@@ -23,5 +23,5 @@ public class Deporte {
     public String getNombre() {
         return nombre;
     }
-*/
+
 }

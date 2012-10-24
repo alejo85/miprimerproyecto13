@@ -8,6 +8,11 @@ public class LigaGestor {
     }
 
     /**
+     * @param idLiga
+     * @param puntosPorPartidoGanado
+     * @param empate
+     * @param puntosPorPartidoEmpatado
+     * @param puntosPorPartidoAsistido
      * @return
      */
     public Liga crearLiga(int idLiga, int puntosPorPartidoGanado, boolean empate, int puntosPorPartidoEmpatado, int puntosPorPartidoAsistido)

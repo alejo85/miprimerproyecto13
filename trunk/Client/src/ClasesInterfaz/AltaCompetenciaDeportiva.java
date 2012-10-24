@@ -12,23 +12,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 
 public class AltaCompetenciaDeportiva extends JDialog {
 
-   
-  
-  //  JPanel htmlPanel = new JPanel();
+
     private JTextArea nombreDeLaCompetenciaJTextArea = new JTextArea();
     private JLabel jLabelNombreDeLaCompetencia = new JLabel();
     private JLabel jLabelDeporte = new JLabel();
@@ -70,6 +71,16 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private int tamaño=10;
     private String fuenteLetra;
     private JPanel editorReglamentoJPanel = new JPanel();
+    private JComboBox fuenteJComboBox = new JComboBox();
+    private JComboBox fuenteTamañoJComboBox = new JComboBox();
+    private JButton alinaciónIzquierdaJButton = new JButton();
+    private JButton aliniaciónCentradaJButton = new JButton();
+    private JButton aliniaciónDerechaJButton = new JButton();
+    private JScrollPane jScrollPane1 = new JScrollPane();
+    private JEditorPane textoReglamentoJTextArea = new JEditorPane();
+    private JButton cursivaJButton = new JButton();
+    private JButton negritaJButton = new JButton();
+    private JButton subrayadoJButton = new JButton();
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
@@ -90,7 +101,6 @@ public class AltaCompetenciaDeportiva extends JDialog {
         this.setSize(new Dimension(1487, 765));
         this.getContentPane().setLayout( null );
         this.setTitle("Alta Competencia Deportiva");
-        
         nombreDeLaCompetenciaJTextArea.setBounds(new Rectangle(235, 30, 375, 30));
         nombreDeLaCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreDeLaCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -222,11 +232,6 @@ public class AltaCompetenciaDeportiva extends JDialog {
         aceptarJButton.setText("Aceptar");
         aceptarJButton.setBounds(new Rectangle(490, 670, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
-        aceptarJButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    aceptarJButton_actionPerformed(e);
-                }
-            });
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(680, 670, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -255,24 +260,87 @@ public class AltaCompetenciaDeportiva extends JDialog {
         editorReglamentoJPanel.setBounds(new Rectangle(50, 360, 710, 275));
 
         editorReglamentoJPanel.setLayout(null);
+        fuenteJComboBox.setBounds(new Rectangle(40, 10, 135, 30));
+        fuenteJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
+        fuenteJComboBox.setMinimumSize(new Dimension(2, 18));
+        fuenteJComboBox.setPreferredSize(new Dimension(2, 18));
 
+  
+        fuenteJComboBox.addItem("Helvetica");
+        fuenteJComboBox.addItem("TimesRoman");
+        fuenteJComboBox.addItem("Courier");
+        fuenteTamañoJComboBox.addItem(10);
+        fuenteTamañoJComboBox.addItem(11);
+        fuenteTamañoJComboBox.addItem(12);
+        fuenteTamañoJComboBox.addItem(13);
+        fuenteTamañoJComboBox.addItem(14);
+        fuenteTamañoJComboBox.addItem(15);
+        fuenteTamañoJComboBox.addItem(16);
+        fuenteTamañoJComboBox.addItem(17);
+        fuenteTamañoJComboBox.addItem(18);
+        fuenteTamañoJComboBox.addItem(19);
+        fuenteTamañoJComboBox.addItem(20);
+        fuenteTamañoJComboBox.addItem(21);
+        fuenteTamañoJComboBox.addItem(22);
+        fuenteTamañoJComboBox.addItem(23);
+        fuenteTamañoJComboBox.addItem(24);
+        fuenteTamañoJComboBox.addItem(25);
+        fuenteTamañoJComboBox.addItem(26);
+        fuenteTamañoJComboBox.addItem(27);
+        fuenteTamañoJComboBox.addItem(28);
+        fuenteTamañoJComboBox.addItem(29);
+        fuenteTamañoJComboBox.addItem(30);
 
+        textoReglamentoJTextArea.setContentType("text/rtf");
+        cursivaJButton.setBounds(new Rectangle(365, 10, 35, 30));
+        cursivaJButton.setFont(new Font("Tahoma", 0, 13));
+        cursivaJButton.setIcon(new ImageIcon("Imagenes\\cursiva.png"));
+ 
+        negritaJButton.setBounds(new Rectangle(405, 10, 35, 30));
+        negritaJButton.setFont(new Font("Tahoma", 0, 13));
+        negritaJButton.setIcon(new ImageIcon("Imagenes\\negrita.png"));
+      
+        subrayadoJButton.setBounds(new Rectangle(445, 10, 35, 30));
+        subrayadoJButton.setFont(new Font("Tahoma", 0, 13));
+        subrayadoJButton.setIcon(new ImageIcon("Imagenes\\subrayado.png"));
+
+        fuenteLetra = fuenteJComboBox.getSelectedItem().toString();
+        tamaño = Integer.parseInt(fuenteTamañoJComboBox.getSelectedItem().toString());
+        fuenteTamañoJComboBox.setBounds(new Rectangle(190, 10, 45, 30));
+        fuenteTamañoJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
+        fuenteTamañoJComboBox.setMinimumSize(new Dimension(2, 18));
+        fuenteTamañoJComboBox.setPreferredSize(new Dimension(2, 18));
+
+    
+        alinaciónIzquierdaJButton.setBounds(new Rectangle(245, 10, 35, 30));
+        alinaciónIzquierdaJButton.setFont(new Font("Tahoma", 0, 13));
+        alinaciónIzquierdaJButton.setIcon(new ImageIcon("Imagenes\\text_align_left.png"));
+    
+        aliniaciónCentradaJButton.setBounds(new Rectangle(285, 10, 35, 30));
+        aliniaciónCentradaJButton.setFont(new Font("Tahoma", 0, 13));
+        aliniaciónCentradaJButton.setIcon(new ImageIcon("Imagenes\\text_align_center.png"));
+     
+        aliniaciónDerechaJButton.setBounds(new Rectangle(325, 10, 35, 30));
+        aliniaciónDerechaJButton.setFont(new Font("Tahoma", 0, 13));
+        aliniaciónDerechaJButton.setIcon(new ImageIcon("Imagenes\\text_align_right.png"));
+        
         puntosPorPartidoEmpatadoJTextArea.setVisible(false);
         jLabelPuntosPorPartidoEmpatado.setVisible(false);
-
+        
+        jScrollPane1.setBounds(new Rectangle(30, 60, 655, 195));
+        jScrollPane1.getViewport().add(textoReglamentoJTextArea, null);
+        editorReglamentoJPanel.add(subrayadoJButton, null);
+        editorReglamentoJPanel.add(negritaJButton, null);
+        editorReglamentoJPanel.add(cursivaJButton, null);
+        editorReglamentoJPanel.add(jScrollPane1, null);
+        editorReglamentoJPanel.add(aliniaciónDerechaJButton, null);
+        editorReglamentoJPanel.add(aliniaciónCentradaJButton, null);
+        editorReglamentoJPanel.add(fuenteTamañoJComboBox, null);
+        editorReglamentoJPanel.add(fuenteJComboBox, null);
+        editorReglamentoJPanel.add(alinaciónIzquierdaJButton, null);
         modalidadLigaJPanel.setVisible(false);
         jPanelFormaDePuntuaciónSet.setVisible(false);
         formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
-
-
-
-      //  htmlPanel.add("<html><body><h1>hello world</h1></body></html>", null);
-
-    
-
-
-     //   editorReglamentoJPanel.add(htmlPanel, null);
-      
         this.getContentPane().add(editorReglamentoJPanel, null);
         this.getContentPane().add(agregarJButton, null);
         this.getContentPane().add(jLabelDisponibilidad, null);
@@ -283,9 +351,6 @@ public class AltaCompetenciaDeportiva extends JDialog {
         this.getContentPane().add(jLabelFormaDePuntuación, null);
         this.getContentPane().add(formaDePuntuaciónJComboBox, null);
         this.getContentPane().add(modalidadLigaJPanel, null);
-
-
-        //this.getContentPane().add(panel, null);
         this.getContentPane().add(jScrollBar1, null);
         this.getContentPane().add(lugarDeRealizaciónJList, null);
         this.getContentPane().add(jLabelReglamento, null);
@@ -351,10 +416,5 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         this.setVisible(false);
-    }
-
-    private void aceptarJButton_actionPerformed(ActionEvent e) {
-
-        
     }
 }

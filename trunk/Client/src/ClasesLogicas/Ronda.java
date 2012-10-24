@@ -1,24 +1,49 @@
 package ClasesLogicas;
 
-import java.util.Vector;
 
 public class Ronda {
     private int idRonda;
     private int numeroDeRonda;
-    private Vector<Encuentro> encuentros;
+    private Subronda [] ganadores;
+    private Subronda [] perdedores;
+    
     
     public Ronda() {
         super();
     }
 
-    public Ronda(int idRonda, int numeroDeRonda, Vector<Encuentro> encuentros) {
+
+
+
+    public Ronda(int idRonda, int numeroDeRonda, Subronda[] ganadores, Subronda[] perdedores) {
         super();
         this.idRonda = idRonda;
         this.numeroDeRonda = numeroDeRonda;
-        this.encuentros = encuentros;
+        this.ganadores = ganadores;
+        this.perdedores = perdedores;
     }
 
-    /*public void setIdRonda(int idRonda) {
+    public Ronda(int numeroDeRonda, Subronda[] ganadores, Subronda[] perdedores) {
+        super();
+        this.numeroDeRonda = numeroDeRonda;
+        this.ganadores = ganadores;
+        this.perdedores = perdedores;
+    }
+
+    public Ronda(int numeroDeRonda, Subronda[] ganadores) {
+        super();
+        this.numeroDeRonda = numeroDeRonda;
+        this.ganadores = ganadores;
+    }
+
+    public Ronda(int idRonda, int numeroDeRonda, Subronda[] ganadores) {
+        super();
+        this.idRonda = idRonda;
+        this.numeroDeRonda = numeroDeRonda;
+        this.ganadores = ganadores;
+    }
+
+    public void setIdRonda(int idRonda) {
         this.idRonda = idRonda;
     }
 
@@ -34,11 +59,19 @@ public class Ronda {
         return numeroDeRonda;
     }
 
-    public void setEncuentros(Vector<Encuentro> encuentros) {
-        this.encuentros = encuentros;
+    public void setGanadores(Subronda[] ganadores) {
+        this.ganadores = ganadores;
     }
 
-    public Vector<Encuentro> getEncuentros() {
-        return encuentros;
-    }*/
+    public Subronda[] getGanadores() {
+        return ganadores;
+    }
+
+    public void setPerdedores(Subronda[] perdedores) {
+        this.perdedores = perdedores;
+    }
+
+    public Subronda[] getPerdedores() {
+        return perdedores;
+    }
 }

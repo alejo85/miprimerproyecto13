@@ -11,6 +11,10 @@ public class Fixture{
         this.rondas = rondas;
     }
 
+    public Fixture() {
+        super();
+    }
+
     public void setIdFixture(int idFixture) {
         this.idFixture = idFixture;
     }
@@ -26,5 +30,17 @@ public class Fixture{
     public Ronda[] getRondas() {
         return rondas;
     }
-    public void generarRondas(Participante[] participantes){}
+
+    /**
+     * @param participantes
+     */
+    public void generarRondas(Participante[] participantes){
+       
+        }
+
+    /**
+     * @param participantes
+     */
+    public void cargarParticipantes(Participante[] participantes){
+        }
 }

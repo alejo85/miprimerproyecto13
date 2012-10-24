@@ -18,7 +18,41 @@ public class Encuentro {
         super();
    
     }
-/*
+
+    public Encuentro(Integer idEncuentro, Integer Ronda, Participante participanteA, Participante participanteB,
+                     Participante ganador, Participante perdedor, Boolean empate, Stack<Resultados> resultado,
+                     LugarDeRealización locación) {
+        super();
+        this.idEncuentro = idEncuentro;
+        this.Ronda = Ronda;
+        this.participanteA = participanteA;
+        this.participanteB = participanteB;
+        this.ganador = ganador;
+        this.perdedor = perdedor;
+        this.empate = empate;
+        this.resultado = resultado;
+        this.locación = locación;
+    }
+
+    public Encuentro(Integer Ronda, Participante participanteA, Participante participanteB, Participante ganador,
+                     Participante perdedor, Boolean empate, Stack<Resultados> resultado, LugarDeRealización locación) {
+        super();
+        this.Ronda = Ronda;
+        this.participanteA = participanteA;
+        this.participanteB = participanteB;
+        this.ganador = ganador;
+        this.perdedor = perdedor;
+        this.empate = empate;
+        this.resultado = resultado;
+        this.locación = locación;
+    }
+
+    public Encuentro(LugarDeRealización locación) {
+        super();
+        this.locación = locación;
+    }
+
+
     public void setIdEncuentro(Integer idEncuentro) {
         this.idEncuentro = idEncuentro;
     }
@@ -43,12 +77,12 @@ public class Encuentro {
         return participanteA;
     }
 
-    public void setParticipanteb(Participante participanteb) {
-        this.participanteb = participanteb;
+    public void setParticipanteB(Participante participanteB) {
+        this.participanteB = participanteB;
     }
 
-    public Participante getParticipanteb() {
-        return participanteb;
+    public Participante getParticipanteB() {
+        return participanteB;
     }
 
     public void setGanador(Participante ganador) {
@@ -59,6 +93,14 @@ public class Encuentro {
         return ganador;
     }
 
+    public void setPerdedor(Participante perdedor) {
+        this.perdedor = perdedor;
+    }
+
+    public Participante getPerdedor() {
+        return perdedor;
+    }
+
     public void setEmpate(Boolean empate) {
         this.empate = empate;
     }
@@ -67,16 +109,12 @@ public class Encuentro {
         return empate;
     }
 
-    public void setResultado(Resultados resultado) {
+    public void setResultado(Stack<Resultados> resultado) {
         this.resultado = resultado;
     }
 
-    public Resultados getResultado() {
+    public Stack<Resultados> getResultado() {
         return resultado;
-    }
-
-    public ResultadosAnteriores getResultadosAnteriores(){
-        return resultadosAnteriores;
     }
 
     public void setLocación(LugarDeRealización locación) {
@@ -86,18 +124,11 @@ public class Encuentro {
     public LugarDeRealización getLocación() {
         return locación;
     }
-*/
 
-    public Encuentro(Integer idEncuentro, Integer Ronda, Participante participanteA, Participante participanteb,
-                     Participante ganador, Boolean empate, Stack<Resultados> resultado, LugarDeRealización locación) {
-        super();
-        this.idEncuentro = idEncuentro;
-        this.Ronda = Ronda;
-        this.participanteA = participanteA;
-        this.participanteB = participanteb;
-        this.ganador = ganador;
-        this.empate = empate;
-        this.resultado = resultado;
-        this.locación = locación;
-    }
+    /**
+     * @param resultado
+     */
+    public void asignaResultado(Resultados resultado){
+            this.resultado.add(resultado);
+        }
 }

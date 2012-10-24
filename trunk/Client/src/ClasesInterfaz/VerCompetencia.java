@@ -51,6 +51,10 @@ public class VerCompetencia extends JDialog {
     private Usuario usuarioActual=null;
     private Competencia competencia=null;
 
+    /**
+     * @param usuario
+     * @param competencia
+     */
     public VerCompetencia(Usuario usuario, Competencia competencia) {
 
         this(null, "", false, usuario, competencia);
@@ -224,7 +228,7 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarFixtureJButton_actionPerformed(ActionEvent e) {
-        ModificarFixture ven = new ModificarFixture(competencia.getFixture(),usuarioActual);
+        ModificarFixture ven = new ModificarFixture();
         ven.setVisible(true);
     }
 

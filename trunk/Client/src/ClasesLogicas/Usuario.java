@@ -36,7 +36,7 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-/*
+
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -99,5 +99,5 @@ public class Usuario {
 
     public Logueo[] getLogueos() {
         return logueos;
-    }*/
+    }
 }
