@@ -3,6 +3,7 @@ package ClasesLogicas;
 
 import ClasesBD.Conexion;
 
+import ClasesInterfaz.AltaCompetenciaDeportiva;
 import ClasesInterfaz.Principal;
 
 import java.sql.SQLException;
@@ -15,13 +16,6 @@ public class InicioDeSistema {
 
     public static  void main(String[] args) {
 
-        try{
-            Conexion con = new Conexion();
-            con.conectar();
-       
-                } 
-        catch (SQLException e) {
-        }
         Principal ventana = new Principal();
     
         /*AltaCompetenciaDeportiva ven1 = new AltaCompetenciaDeportiva();

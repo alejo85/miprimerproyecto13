@@ -13,7 +13,6 @@ public class CompetenciaDB {
         super();
     }
 
-
     /**
      * @param nombreCompetencia
      * @param deporte

@@ -2,12 +2,16 @@ package ClasesInterfaz;
 
 
 import ClasesBD.LocalidadesDB;
-import ClasesBD.PaisesBD;
+
 import ClasesBD.RegionesBD;
 
 import ClasesLogicas.Localidad;
 import ClasesLogicas.Pais;
 import ClasesLogicas.Regiones;
+
+import InterfazGrafica.CampoTexto.AreaTextoApellido;
+
+import ClasesBD.RecidenciaDB;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,6 +19,8 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import java.sql.SQLException;
 
@@ -28,6 +34,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 
 public class RegistrarUsuario extends JDialog {
@@ -37,7 +45,7 @@ public class RegistrarUsuario extends JDialog {
     private JPasswordField contraseñaJPasswordField = new JPasswordField();
     private JPasswordField repetirContraseñaJPasswordField = new JPasswordField();
     private JLabel jLabelRepetirContraseña = new JLabel();
-    private JTextArea apellidoJTextArea = new JTextArea();
+    private AreaTextoApellido apellidoJTextArea = new AreaTextoApellido(20);
     private JLabel jLabelApellido = new JLabel();
     private JTextArea nombreJTextArea = new JTextArea();
     private JLabel jLabelNombre = new JLabel();
@@ -57,6 +65,11 @@ public class RegistrarUsuario extends JDialog {
     private Vector <Pais> pais;
     private Vector <Regiones> region;
     private Vector <Localidad> localidades;
+    
+    
+    
+    
+
 
     public RegistrarUsuario() {
         this(null, "", false);
@@ -134,9 +147,17 @@ public class RegistrarUsuario extends JDialog {
         aceptoTérminosCondicionesUsoJCheckBox.setBounds(new Rectangle(335, 445, 255, 30));
         aceptoTérminosCondicionesUsoJCheckBox.setFont(new Font("Tahoma", 0, 13));
         aceptoTérminosCondicionesUsoJCheckBox.setPreferredSize(new Dimension(240, 30));
+        aceptoTérminosCondicionesUsoJCheckBox.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent e) {
+                    aceptoTérminosCondicionesUsoJCheckBox_stateChanged(e);
+                }
+            });
+
         aceptarJButton.setText("Aceptar");
         aceptarJButton.setBounds(new Rectangle(330, 520, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
+        aceptarJButton.setEnabled(false);
+
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(525, 520, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -171,9 +192,8 @@ public class RegistrarUsuario extends JDialog {
         localidadJComboBox.setMinimumSize(new Dimension(2, 18));
         localidadJComboBox.setPreferredSize(new Dimension(2, 18));
         localidadJComboBox.setSize(new Dimension(375, 30));
-        
-
-        pais = PaisesBD.obtenerPaises();
+    
+        pais = RecidenciaDB.obtenerPaises();
         this.paisJComboBox.addItem("Seleccionar Pais");
         for(int i = 0; i< pais.size(); i++)
         {
@@ -270,4 +290,23 @@ private void cargarRegiones()
                 this.localidadJComboBox.addItem(localidades.elementAt(i).getNombre());
             }}
         }
+
+
+
+
+    private void aceptoTérminosCondicionesUsoJCheckBox_stateChanged(ChangeEvent e) {
+        
+        
+        if (aceptoTérminosCondicionesUsoJCheckBox.isSelected()==true) {
+                   aceptarJButton.setEnabled(true);
+               } else {
+                   aceptarJButton.setEnabled(false);   
+               }
+        
+        
+
+
+    }
+
+
 }
