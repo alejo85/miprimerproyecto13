@@ -86,11 +86,24 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
         this(null, "", false,usuarioLogueado);
     }
+    public AltaCompetenciaDeportiva() {
+
+        this(null, "", false);
+    }
 
     public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal,Usuario usuarioLogueado) {
         super(parent, title, modal);
         try {
             this.ussuarioActual=usuarioLogueado;
+            jbInit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal ) {
+        super(parent, title, modal);
+        try {
+         
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();

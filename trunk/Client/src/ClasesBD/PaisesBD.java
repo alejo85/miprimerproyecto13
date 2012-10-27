@@ -21,6 +21,7 @@ public class PaisesBD {
         try {
             conexion.conectar();
         } catch (SQLException e) {
+            System.out.println(e);
         }
         String consultasql;
         
@@ -41,6 +42,7 @@ public class PaisesBD {
             paises.add(p);
         }
         } catch (SQLException e) {
+            System.out.println(e);
         }
         conexion.cerrarConexion();
         return paises;
