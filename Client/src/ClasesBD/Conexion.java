@@ -10,7 +10,8 @@ import java.sql.Statement;
 public class Conexion
 {
     Connection conexion;
-    
+    Object conectar;
+
     public Conexion(){}
     public void conectar() throws SQLException 
     {

@@ -2,16 +2,34 @@ package ClasesBD;
 
 
 import ClasesLogicas.Deporte;
-
 import java.util.Vector;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class DeportesDB {
     public DeportesDB() {
         super();
     }
-    public Vector<Deporte> buscarDeporte(String deporrtes){
-                           Vector<Deporte> deportes = new Vector<Deporte> ();
-                       return deportes;
+    public static ResultSet buscarDeporte(){
+        
+        Conexion conexion = new Conexion();
+        ResultSet resultado;
+        String consultaSQL;
+
+        try {
+            conexion.conectar();
+        } catch (SQLException e) {
+        }
+        consultaSQL = "select * from deporte";
+        
+        try {
+            resultado = conexion.consultar(consultaSQL);
+        } catch (SQLException e) {
+        }
+        conexion.cerrarConexion();
+        
+        return resultado;
                        
                        }
 }
