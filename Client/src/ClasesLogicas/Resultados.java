@@ -6,7 +6,12 @@ public class Resultados {
     private Boolean asistencia;
     private Puntos[] Puntuacion;
     private Usuario usuario;
-    public Resultados(){super();}
+    
+    public Resultados(){
+        super();
+    
+    }
+    
     public Resultados(Integer idResultado, Integer numeroDeRonda, Boolean asistencia, Puntos[] Puntuacion, Usuario user) {
         super();
         this.idResultado = idResultado;

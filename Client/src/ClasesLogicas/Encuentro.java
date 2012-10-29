@@ -16,7 +16,6 @@ public class Encuentro {
 
     public Encuentro() {
         super();
-   
     }
 
     public Encuentro(Integer idEncuentro, Integer Ronda, Participante participanteA, Participante participanteB,
