@@ -5,6 +5,11 @@ package ClasesInterfaz;
 
 import ClasesLogicas.Usuario;
 
+import InterfazGrafica.CampoTexto.AreaTextoApellido;
+import InterfazGrafica.CampoTexto.AreaTextoCorreo;
+import InterfazGrafica.CampoTexto.AreaTextoDocumento;
+import InterfazGrafica.CampoTexto.AreaTextoNombre;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -17,19 +22,18 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 
 
 public class ModificarUsuario extends JDialog {
-    private JTextArea correoElectrónicoJTextArea = new JTextArea();
+    private AreaTextoCorreo correoElectrónicoJTextArea = new AreaTextoCorreo(40);
     private JLabel jLabelCorreoElectrónico = new JLabel();
-    private JTextArea apellidoJTextArea = new JTextArea();
+    private AreaTextoApellido apellidoJTextArea = new AreaTextoApellido(50);
     private JLabel jLabelApellido = new JLabel();
-    private JTextArea nombreJTextArea = new JTextArea();
+    private AreaTextoNombre nombreJTextArea = new AreaTextoNombre(50);
     private JLabel jLabelNombre = new JLabel();
     private JLabel jLabelTipoDeDocumento = new JLabel();
     private JComboBox tipoDeDocumentoJComboBox = new JComboBox();
-    private JTextArea numeroDocumentoJTextArea = new JTextArea();
+    private AreaTextoDocumento numeroDocumentoJTextArea = new AreaTextoDocumento(9);
     private JLabel jLabelNDocumento = new JLabel();
     private JLabel jLabelLocalidad = new JLabel();
     private JLabel jLabelProvincia = new JLabel();

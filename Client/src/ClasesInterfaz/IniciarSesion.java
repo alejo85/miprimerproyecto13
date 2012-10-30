@@ -3,6 +3,10 @@ package ClasesInterfaz;
 
 import ClasesLogicas.Usuario;
 
+import InterfazGrafica.CampoTexto.AreaTextoCorreo;
+
+import InterfazGrafica.CampoTexto.AreaTextoPassword;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -21,7 +25,7 @@ import javax.swing.JTextArea;
 
 
 public class IniciarSesion extends JDialog {
-    private JTextArea correoElectronicoJTextArea = new JTextArea();
+    private AreaTextoCorreo correoElectronicoJTextArea = new AreaTextoCorreo(40);
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JLabel jLabelContraseña = new JLabel();
     private JPanel panelRegistrarseJPanel = new JPanel();
@@ -30,7 +34,7 @@ public class IniciarSesion extends JDialog {
     private JButton cancelarJButton = new JButton();
     private JLabel jLabelLogo = new JLabel();
     private JLabel jLabelIngresoAlSistema = new JLabel();
-    private JPasswordField contraeñaJPasswordField = new JPasswordField();
+    private AreaTextoPassword contraeñaJPasswordField = new AreaTextoPassword(10);
     private Usuario usuarioActual = null;
 
     public IniciarSesion() {

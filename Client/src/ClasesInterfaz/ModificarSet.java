@@ -1,5 +1,8 @@
 package ClasesInterfaz;
 
+
+import InterfazGrafica.CampoTexto.AreaTextoNumerico;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -11,15 +14,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 
 
 public class ModificarSet extends JDialog {
 
 
-    private JTextArea puntosEquipoAJTextArea = new JTextArea();
+    private AreaTextoNumerico puntosEquipoAJTextArea = new AreaTextoNumerico(2);
     private JLabel jLabelPuntosEquipoA = new JLabel();
-    private JTextArea puntosEquiposBJTextArea = new JTextArea();
+    private AreaTextoNumerico puntosEquiposBJTextArea = new AreaTextoNumerico(2);
     private JLabel jLabelPuntosEquipoB = new JLabel();
     private JButton cancelarJButton = new JButton();
     private JButton aceptarJButton = new JButton();

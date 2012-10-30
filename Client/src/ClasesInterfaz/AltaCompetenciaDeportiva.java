@@ -3,6 +3,10 @@ package ClasesInterfaz;
 
 import ClasesLogicas.Usuario;
 
+import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
+import InterfazGrafica.CampoTexto.AreaTextoNombre;
+import InterfazGrafica.CampoTexto.AreaTextoNumerico;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -30,7 +34,7 @@ import javax.swing.JTextArea;
 public class AltaCompetenciaDeportiva extends JDialog {
 
 
-    private JTextArea nombreDeLaCompetenciaJTextArea = new JTextArea();
+    private AreaTextoNombre nombreDeLaCompetenciaJTextArea = new AreaTextoNombre(60);
     private JLabel jLabelNombreDeLaCompetencia = new JLabel();
     private JLabel jLabelDeporte = new JLabel();
     private JComboBox deporteJComboBox = new JComboBox();
@@ -44,26 +48,26 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private Usuario ussuarioActual=null;
     private BorderLayout borderLayout1 = new BorderLayout();
     private JLabel jLabelPuntosPorPartidoGanados = new JLabel();
-    private JTextArea puntosPorPartidoGanadosJTextArea = new JTextArea();
+    private AreaTextoNumerico puntosPorPartidoGanadosJTextArea = new AreaTextoNumerico(2);
     private JPanel jPanelEmpate = new JPanel();
     private JRadioButton empateSiJRadioButton = new JRadioButton();
     private JRadioButton empateNoJRadioButton = new JRadioButton();
-    private JTextArea puntosPorPartidoEmpatadoJTextArea = new JTextArea();
+    private AreaTextoNumerico puntosPorPartidoEmpatadoJTextArea = new AreaTextoNumerico(2);
     private JLabel jLabelPuntosPorPartidoEmpatado = new JLabel();
-    private JTextArea puntosPorPartidoAsistidoJTextArea = new JTextArea();
+    private AreaTextoNumerico puntosPorPartidoAsistidoJTextArea = new AreaTextoNumerico(2);
     private JLabel jLabelPuntosPorPartidosAsistido = new JLabel();
     private JComboBox formaDePuntuaciónJComboBox = new JComboBox();
     private JLabel jLabelFormaDePuntuación = new JLabel();
     private JPanel jPanelFormaDePuntuaciónSet = new JPanel();
     private JPanel formaDePuntuaciónPuntuaciónJPanel = new JPanel();
     private JLabel jLabelCantidadMaximaDeSets = new JLabel();
-    private JTextArea cantidadMaximaDeSetsJTextArea = new JTextArea();
-    private JTextArea tantosPorPartidosGanadosJTextArea = new JTextArea();
+    private AreaTextoNumerico cantidadMaximaDeSetsJTextArea = new AreaTextoNumerico(2);
+    private AreaTextoNumerico tantosPorPartidosGanadosJTextArea = new AreaTextoNumerico(2);
     private JLabel jLabelTantosPorPartidosGanados = new JLabel();
     private JButton aceptarJButton = new JButton();
     private JButton cancelarJButton = new JButton();
     private JButton quitarJButton = new JButton();
-    private JTextArea disponibilidadJTextArea = new JTextArea();
+    private AreaTextoNumerico disponibilidadJTextArea = new AreaTextoNumerico(4);
     private JLabel jLabelDisponibilidad = new JLabel();
     private JTable tablaLugarDisponibilidadJTable = new JTable();
     private JButton agregarJButton = new JButton();
@@ -237,7 +241,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
         modalidadLigaJPanel.add(jLabelPuntosPorPartidoGanados, null);
         modalidadLigaJPanel.add(jLabelPuntosPorPartidosAsistido, null);
         modalidadLigaJPanel.add(puntosPorPartidoAsistidoJTextArea, null);
-        modalidadLigaJPanel.setVisible(false);
+        
+        
         formaDePuntuaciónPuntuaciónJPanel.add(tantosPorPartidosGanadosJTextArea, null);
         formaDePuntuaciónPuntuaciónJPanel.add(jLabelTantosPorPartidosGanados, null);
         jPanelFormaDePuntuaciónSet.add(cantidadMaximaDeSetsJTextArea, null);
@@ -351,7 +356,9 @@ public class AltaCompetenciaDeportiva extends JDialog {
         editorReglamentoJPanel.add(fuenteTamañoJComboBox, null);
         editorReglamentoJPanel.add(fuenteJComboBox, null);
         editorReglamentoJPanel.add(alinaciónIzquierdaJButton, null);
+        
         modalidadLigaJPanel.setVisible(false);
+      
         jPanelFormaDePuntuaciónSet.setVisible(false);
         formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
         this.getContentPane().add(editorReglamentoJPanel, null);

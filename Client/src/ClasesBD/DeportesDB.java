@@ -14,7 +14,7 @@ public class DeportesDB {
     public static ResultSet buscarDeporte(){
         
         Conexion conexion = new Conexion();
-        ResultSet resultado;
+        ResultSet resultado=null;
         String consultaSQL;
 
         try {
