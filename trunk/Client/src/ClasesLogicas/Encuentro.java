@@ -4,7 +4,6 @@ import java.util.Stack;
 
 public class Encuentro {
     private Integer idEncuentro;
-    private Integer Ronda;
     private Participante participanteA;
     private Participante participanteB;
     private Participante ganador;
@@ -18,12 +17,11 @@ public class Encuentro {
         super();
     }
 
-    public Encuentro(Integer idEncuentro, Integer Ronda, Participante participanteA, Participante participanteB,
+    public Encuentro(Integer idEncuentro,Participante participanteA, Participante participanteB,
                      Participante ganador, Participante perdedor, Boolean empate, Stack<Resultados> resultado,
                      LugarDeRealización locación) {
         super();
         this.idEncuentro = idEncuentro;
-        this.Ronda = Ronda;
         this.participanteA = participanteA;
         this.participanteB = participanteB;
         this.ganador = ganador;
@@ -33,10 +31,9 @@ public class Encuentro {
         this.locación = locación;
     }
 
-    public Encuentro(Integer Ronda, Participante participanteA, Participante participanteB, Participante ganador,
+    public Encuentro(Participante participanteA, Participante participanteB, Participante ganador,
                      Participante perdedor, Boolean empate, Stack<Resultados> resultado, LugarDeRealización locación) {
         super();
-        this.Ronda = Ronda;
         this.participanteA = participanteA;
         this.participanteB = participanteB;
         this.ganador = ganador;
@@ -60,15 +57,8 @@ public class Encuentro {
         return idEncuentro;
     }
 
-    public void setRonda(Integer Ronda) {
-        this.Ronda = Ronda;
-    }
-
-    public Integer getRonda() {
-        return Ronda;
-    }
-
-    public void setParticipanteA(Participante participanteA) {
+    
+   public void setParticipanteA(Participante participanteA) {
         this.participanteA = participanteA;
     }
 

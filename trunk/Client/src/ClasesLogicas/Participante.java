@@ -5,16 +5,16 @@ import javax.swing.ImageIcon;
 public class Participante {
         private Integer idParticipante;
         private String nombre;
-        private String Correo;
+        private String correo;
         private ImageIcon imagen;
         private ParticipanteAnterior[] historial;
 
-    public Participante(Integer idParticipante, String nombre, String Correo, ImageIcon imagen,
+    public Participante(Integer idParticipante, String nombre, String correo, ImageIcon imagen,
                         ParticipanteAnterior[] historial) {
         super();
         this.idParticipante = idParticipante;
         this.nombre = nombre;
-        this.Correo = Correo;
+        this.correo =correo;
         this.imagen = imagen;
         this.historial = historial;
     }
@@ -40,12 +40,12 @@ public class Participante {
         return nombre;
     }
 
-    public void setCorreo(String Correo) {
-        this.Correo = Correo;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getCorreo() {
-        return Correo;
+        return correo;
     }
 
     public void setImagen(ImageIcon imagen) {
