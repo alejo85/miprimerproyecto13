@@ -1,5 +1,6 @@
 package ClasesInterfaz;
 
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Usuario;
 

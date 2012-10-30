@@ -1,6 +1,10 @@
 package ClasesInterfaz;
 
+
 import ClasesLogicas.Participante;
+
+import InterfazGrafica.CampoTexto.AreaTextoCorreo;
+import InterfazGrafica.CampoTexto.AreaTextoNombre;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,9 +24,9 @@ import javax.swing.JTextArea;
 
 
 public class ModificarParticipante extends JDialog {
-    private JTextArea nombreParticipanteJTextArea = new JTextArea();
+    private AreaTextoNombre nombreParticipanteJTextArea = new AreaTextoNombre(50);
     private JLabel jLabelNombreParticipante = new JLabel();
-    private JTextArea correoElectrónicoJTextArea = new JTextArea();
+    private AreaTextoCorreo correoElectrónicoJTextArea = new AreaTextoCorreo(40);
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JButton examinarJButton = new JButton();
     private JTextArea imagenJTextArea = new JTextArea();

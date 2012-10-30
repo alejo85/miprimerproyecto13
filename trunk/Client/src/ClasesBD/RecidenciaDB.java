@@ -2,6 +2,7 @@ package ClasesBD;
 
 
 import ClasesLogicas.Pais;
+import ClasesLogicas.Regiones;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,25 +22,22 @@ public class RecidenciaDB {
         try {
             conexion.conectar();
         } catch (SQLException e) {
-            System.out.println(e);
         }
         String consultasql;
         
-        consultasql="select * from paises";
+        consultasql="select * from PAISES";
         
-        ResultSet resultado=null;;
+        ResultSet resultado=null;
 
         try {
             resultado = conexion.consultar(consultasql);
         } catch (SQLException e) {
-            System.out.println(e);
         }
         try {
-            while (!resultado.next())
+            while (resultado.next())
         {
-            System.out.println(resultado.getInt(1));
-            int codigo = resultado.getInt(1);
-            String nombre = resultado.getString(2);
+            int codigo = resultado.getInt("ID");
+            String nombre = resultado.getString("NOMBRE");
             Pais p = new Pais(codigo,nombre);
             paises.add(p);
         }
@@ -78,5 +76,27 @@ public class RecidenciaDB {
         }
         conexion.cerrarConexion();
         return paises;
+    }
+    
+    public static Vector<Regiones> obtenerRegiones(int idPais) throws SQLException {
+        Conexion conexion = new Conexion();
+        Vector<Regiones> regiones = new Vector <Regiones>();
+        conexion.conectar();
+        String consultasql;
+        
+        consultasql="select * from REGIONES where ID_PAIS = " +idPais;
+        
+        ResultSet resultado = conexion.consultar(consultasql);
+
+        while (resultado.next()) 
+        {
+            int id = resultado.getInt("ID");
+
+            String nombre = resultado.getString("NOMBRE");
+            Regiones p = new Regiones(id, idPais,nombre);
+            regiones.add(p);
+        }
+        conexion.cerrarConexion();
+        return regiones;
     }
 }

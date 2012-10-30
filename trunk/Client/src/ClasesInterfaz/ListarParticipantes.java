@@ -4,6 +4,8 @@ package ClasesInterfaz;
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Usuario;
 
+import InterfazGrafica.CampoTexto.AreaTextoNombre;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -24,7 +26,7 @@ import javax.swing.JTextArea;
 
 
 public class ListarParticipantes extends JDialog {
-    private JTextArea nombreCompetenciaJTextArea = new JTextArea();
+    private AreaTextoNombre nombreCompetenciaJTextArea = new AreaTextoNombre(60);
     private JLabel jLabelNombreCompetencia = new JLabel();
     private JPanel participantesJPanel = new JPanel();
     private JButton cancelarJButton = new JButton();
@@ -62,6 +64,7 @@ public class ListarParticipantes extends JDialog {
         nombreCompetenciaJTextArea.setBounds(new Rectangle(235, 30, 375, 30));
         nombreCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nombreCompetenciaJTextArea.setEnabled(false);
         jLabelNombreCompetencia.setText("Nombre De La Competencia");
         jLabelNombreCompetencia.setBounds(new Rectangle(45, 25, 175, 25));
         jLabelNombreCompetencia.setFont(new Font("Tahoma", 0, 13));
