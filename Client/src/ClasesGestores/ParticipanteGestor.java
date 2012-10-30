@@ -1,7 +1,13 @@
 package ClasesGestores;
 
 
+import ClasesBD.ParticipanteDB;
+
 import ClasesLogicas.Participante;
+
+import java.sql.ResultSet;
+
+import java.sql.ResultSetMetaData;
 
 import javax.swing.ImageIcon;
 
@@ -12,16 +18,22 @@ public class ParticipanteGestor {
 
     /**
      * @param nombre
-     * @param Correo
+     * @param correo
      * @param imagen
      * @return
      */
-    public Participante agregarParticipante(String nombre, String Correo, ImageIcon imagen){
-        
-        return new Participante();
+    public Participante agregarParticipante(String nombre, String correo, ImageIcon imagen){
+        Participante resultado = new Participante();
+        resultado.setNombre(nombre);
+        resultado.setCorreo(correo);
+        resultado.setImagen(imagen);
+        return resultado;
         }
-    public void eliminarParticipante(){}
-    public void modificarParticipante(){}
-    public void instanciarParticipante(){}
+
+    public void modificarParticipante(int idCompetencia){}
+    public Participante[] instanciarParticipante(){
+        Participante[] retorno;
+        ResultSet resultado = ParticipanteDB.buscarParticipante(idCompetencia);
+            return retorno; }
     
 }

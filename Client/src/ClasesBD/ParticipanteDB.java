@@ -2,6 +2,8 @@ package ClasesBD;
 
 import ClasesLogicas.Participante;
 
+import java.sql.ResultSet;
+
 public class ParticipanteDB {
     public ParticipanteDB() {
         super();
@@ -43,5 +45,7 @@ public class ParticipanteDB {
      */
     public boolean eliminarParticipante(Participante participante){
                        return true;}
-
-}
+    public static ResultSet buscarParticipante(int idCompetencia){
+        ResultSet resultado = null;
+        return resultado;}
+ }

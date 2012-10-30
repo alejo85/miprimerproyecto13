@@ -4,24 +4,34 @@ public class Resultados {
     private Integer idResultado;
     private Integer numeroDeRonda;
     private Boolean asistencia;
-    private Puntos[] Puntuacion;
-    private Usuario usuario;
+    private Puntos[] puntuacion;
     
     public Resultados(){
         super();
     
     }
     
-    public Resultados(Integer idResultado, Integer numeroDeRonda, Boolean asistencia, Puntos[] Puntuacion, Usuario user) {
+    public Resultados(Integer idResultado, Integer numeroDeRonda, Boolean asistencia, Puntos[] puntuacion) {
         super();
         this.idResultado = idResultado;
         this.numeroDeRonda = numeroDeRonda;
         this.asistencia = asistencia;
-        this.Puntuacion = Puntuacion;
-        this.usuario = user;
+        this.puntuacion = puntuacion;
     }
 
-   public void setIdResultado(Integer idResultado) {
+    public Resultados(Integer numeroDeRonda, Boolean asistencia, Puntos[] puntuacion) {
+        super();
+        this.numeroDeRonda = numeroDeRonda;
+        this.asistencia = asistencia;
+        this.puntuacion = puntuacion;
+    }
+    public Resultados(Integer numeroDeRonda, Boolean asistencia, Puntos puntuacion) {
+        super();
+        this.numeroDeRonda = numeroDeRonda;
+        this.asistencia = asistencia;
+        this.puntuacion[0] = puntuacion;
+    }
+    public void setIdResultado(Integer idResultado) {
         this.idResultado = idResultado;
     }
 
@@ -45,11 +55,11 @@ public class Resultados {
         return asistencia;
     }
 
-    public void setPuntuacion(Puntos[] Puntuacion) {
-        this.Puntuacion = Puntuacion;
+    public void setPuntuacion(Puntos[] puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
     public Puntos[] getPuntuacion() {
-        return Puntuacion;
+        return puntuacion;
     }
 }

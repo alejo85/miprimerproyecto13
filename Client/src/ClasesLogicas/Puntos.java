@@ -16,6 +16,12 @@ public class Puntos {
 
     }
 
+    public Puntos(int puntoA, int puntoB) {
+        super();
+        this.puntoA = puntoA;
+        this.puntoB = puntoB;
+    }
+
     public void setIdPunto(Integer idPunto) {
         this.idPunto = idPunto;
     }
