@@ -3,13 +3,13 @@ package ClasesLogicas;
 import javax.swing.ImageIcon;
 
 public class Participante {
-        private Integer idParticipante;
+        private int idParticipante;
         private String nombre;
         private String correo;
         private ImageIcon imagen;
         private ParticipanteAnterior[] historial;
 
-    public Participante(Integer idParticipante, String nombre, String correo, ImageIcon imagen,
+    public Participante(int idParticipante, String nombre, String correo, ImageIcon imagen,
                         ParticipanteAnterior[] historial) {
         super();
         this.idParticipante = idParticipante;
@@ -24,11 +24,11 @@ public class Participante {
 
 
 
-    public void setIdParticipante(Integer idParticipante) {
+    public void setIdParticipante(int idParticipante) {
         this.idParticipante = idParticipante;
     }
 
-    public Integer getIdParticipante() {
+    public int getIdParticipante() {
         return idParticipante;
     }
 

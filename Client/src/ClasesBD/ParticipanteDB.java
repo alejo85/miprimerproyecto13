@@ -1,5 +1,6 @@
 package ClasesBD;
 
+
 import ClasesLogicas.Participante;
 
 import java.sql.ResultSet;
@@ -48,4 +49,7 @@ public class ParticipanteDB {
     public static ResultSet buscarParticipante(int idCompetencia){
         ResultSet resultado = null;
         return resultado;}
+     public static ResultSet buscarParticipanteAnterior(int idParticipante){
+         ResultSet resultado = null;
+         return resultado;}
  }
