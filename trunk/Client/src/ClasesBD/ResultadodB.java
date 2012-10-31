@@ -6,5 +6,7 @@ public class ResultadodB {
     public ResultadodB() {
         super();
     }
-    public void guardarResultado(Resultados unresultado){}
+    public void guardarResultado(Resultados unresultado){
+        
+        }
 }

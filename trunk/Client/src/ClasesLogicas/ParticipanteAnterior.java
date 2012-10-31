@@ -1,19 +1,16 @@
 package ClasesLogicas;
 
-import java.util.GregorianCalendar;
-
 import javax.swing.ImageIcon;
 
 
 public class ParticipanteAnterior {
-    private Integer idParticipante;
+    private int idParticipante;
     private String nombre;
     private String Correo;
     private ImageIcon imagen;
-    private GregorianCalendar fechaHora;
+    private String fechaHora;
 
-    public ParticipanteAnterior(Integer idParticipante, String nombre, String Correo, ImageIcon imagen,
-                                GregorianCalendar fechaHora) {
+    public ParticipanteAnterior(int idParticipante, String nombre, String Correo, ImageIcon imagen, String fechaHora) {
         super();
         this.idParticipante = idParticipante;
         this.nombre = nombre;
@@ -22,11 +19,11 @@ public class ParticipanteAnterior {
         this.fechaHora = fechaHora;
     }
 
-    public void setIdParticipante(Integer idParticipante) {
+    public void setIdParticipante(int idParticipante) {
         this.idParticipante = idParticipante;
     }
 
-    public Integer getIdParticipante() {
+    public int getIdParticipante() {
         return idParticipante;
     }
 
@@ -54,11 +51,11 @@ public class ParticipanteAnterior {
         return imagen;
     }
 
-    public void setFechaHora(GregorianCalendar fechaHora) {
+    public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
 
-    public GregorianCalendar getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 }
