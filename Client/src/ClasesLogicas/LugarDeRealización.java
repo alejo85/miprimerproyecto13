@@ -43,7 +43,7 @@ public class LugarDeRealización {
         this.disponibilidad = disponibilidad;
     }
 
-    public Integer getDisponibilidad() {
+    public int getDisponibilidad() {
         return disponibilidad;
     }
 
@@ -54,6 +54,9 @@ public class LugarDeRealización {
     public Deporte[] getDeportesAsociados() {
         return deportesAsociados;
     }
-
+  
+    public void menosDisponibilidad(){
+        disponibilidad--;
+        }
 
 }

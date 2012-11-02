@@ -27,5 +27,7 @@ public class UsuarioGestor {
      * @param password
      * @return
      */
-    public boolean loguearseUsuario(String correoElectronico, String password){return true;}
+    public boolean loguearseUsuario(String correoElectronico, String password){
+        return true;
+        }
 }

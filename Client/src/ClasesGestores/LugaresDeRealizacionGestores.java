@@ -50,6 +50,17 @@ public class LugaresDeRealizacionGestores {
     public Vector <LugarDeRealización> lugaresDeRealizaciónAsociadosAlDeporte(int codigoDeporte){
         return new Vector<LugarDeRealización>();
         }
-    
+    public static LugarDeRealización unLugar(LugarDeRealización [] lugares){
+            int i;
+        do{
+               i = (int)(Math.random()*(lugares.length));
+            
+            }
+        while(lugares[i].getDisponibilidad()>0);
+            lugares[i].menosDisponibilidad();
+  
+        
+        return lugares[i];
+        }
     
 }

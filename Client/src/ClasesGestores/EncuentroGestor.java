@@ -19,35 +19,68 @@ public class EncuentroGestor {
      * @return
      */
     public Encuentro nuevoEncuentro(Participante participanteA, Participante participanteB, LugarDeRealización lugar){
-        return new Encuentro();}
+        Encuentro retorno = new Encuentro();
+        //TODO
+        /*
+         * llamar a la base de datos
+         * */
+        retorno.setParticipanteA(participanteA);
+        retorno.setParticipanteB(participanteB);
+        retorno.setLocación(lugar);
+        return retorno;}
 
     /**
      * @param participante
      * @return
      */
-    public Encuentro actualizaParticipante(Participante participante){return new Encuentro();}
+    //no se de donde salio
+    public Encuentro actualizaParticipante(Participante participante){
+        
+        
+        return new Encuentro();
+        
+        
+        
+        }
 
     /**
      * @param resultados
      */
-    public void guardarResultado(Resultados resultados){}
+    public void guardarResultado(Encuentro unEncuentro, Resultados resultados){
+        unEncuentro.setResultado(resultados);    
+        
+        
+        }
 
 
     /**
-     * @param lugares
+     * @param lugares se pasa por copia
      * @return
      */
-    public Encuentro[] crearEncuantro(LugarDeRealización lugares[])
+    public Encuentro[] crearEncuantro(LugarDeRealización lugares[], int cantidaDeEncuentros)
     {
+         Encuentro [] encuentros;
+        for (int i=0; i < cantidaDeEncuentros; i++)
+        {
+            Encuentro temp=new Encuentro();
+            LugarDeRealización lugar = LugaresDeRealizacionGestores.unLugar(lugares);
+            temp.setLocación(lugar);
+            encuentros[i]=temp;
+            
+            
+        }
      return encuentros;
         
      }
 
-    /**j
+    /**
      * @param puntos
      */
-    public void guardarResultado(Puntos puntos[]){
-        }
+    public void guardarResultado(Encuentro unEncuentro, Puntos puntos[]){
+        
+            
+            
+            }
 
     /**
      * @param participanteGanador
