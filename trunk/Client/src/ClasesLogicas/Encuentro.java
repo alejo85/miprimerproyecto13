@@ -101,7 +101,9 @@ public class Encuentro {
     public void setResultado(Stack<Resultados> resultado) {
         this.resultado = resultado;
     }
-
+    public void setResultado(Resultados resultado) {
+        this.resultado.add(resultado);
+    }
     public Stack<Resultados> getResultado() {
         return resultado;
     }
