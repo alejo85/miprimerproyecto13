@@ -7,7 +7,7 @@ import ClasesLogicas.Puntos;
 import ClasesLogicas.Resultados;
 
 public class EncuentroGestor {
-    private Encuentro [] encuentros;
+
     public EncuentroGestor() {
         super();
     }
@@ -20,10 +20,8 @@ public class EncuentroGestor {
      */
     public Encuentro nuevoEncuentro(Participante participanteA, Participante participanteB, LugarDeRealización lugar){
         Encuentro retorno = new Encuentro();
-        //TODO
-        /*
-         * llamar a la base de datos
-         * */
+        //TODO llamar a la base de datos
+    
         retorno.setParticipanteA(participanteA);
         retorno.setParticipanteB(participanteB);
         retorno.setLocación(lugar);
@@ -33,7 +31,7 @@ public class EncuentroGestor {
      * @param participante
      * @return
      */
-    //no se de donde salio
+    //TODO no se de donde salio
     public Encuentro actualizaParticipante(Participante participante){
         
         
