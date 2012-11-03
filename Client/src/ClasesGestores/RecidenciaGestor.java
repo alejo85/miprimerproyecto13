@@ -24,6 +24,7 @@ public class RecidenciaGestor {
      * @return
      */
     public Vector<Regiones> obtenerRegiones(int codigoPais){
+        //TODO
         return new Vector <Regiones> ();
         }
 
@@ -32,6 +33,7 @@ public class RecidenciaGestor {
      * @return
      */
     public Vector<Localidad> obtenerLocalidades(int codigoRegion){
+        //TODO
         return new Vector <Localidad>();
         }
 }

@@ -37,6 +37,7 @@ public class RegionesBD {
             Regiones p = new Regiones(id, idPais,nombre);
             regiones.add(p);
         }
+        
         conexion.cerrarConexion();
         return regiones;
     }

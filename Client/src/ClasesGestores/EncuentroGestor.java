@@ -57,7 +57,7 @@ public class EncuentroGestor {
      */
     public Encuentro[] crearEncuantro(LugarDeRealización lugares[], int cantidaDeEncuentros)
     {
-         Encuentro [] encuentros;
+         Encuentro [] encuentros=null;
         for (int i=0; i < cantidaDeEncuentros; i++)
         {
             Encuentro temp=new Encuentro();
