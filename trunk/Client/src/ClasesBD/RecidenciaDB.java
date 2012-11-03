@@ -43,6 +43,7 @@ public class RecidenciaDB {
         }
         } catch (SQLException e) {
         }
+       
         conexion.cerrarConexion();
         return paises;
     }
@@ -73,6 +74,7 @@ public class RecidenciaDB {
             paises.add(p);
         }
         } catch (SQLException e) {
+            //TODO
         }
         conexion.cerrarConexion();
         return paises;
@@ -96,6 +98,7 @@ public class RecidenciaDB {
             Regiones p = new Regiones(id, idPais,nombre);
             regiones.add(p);
         }
+      
         conexion.cerrarConexion();
         return regiones;
     }
