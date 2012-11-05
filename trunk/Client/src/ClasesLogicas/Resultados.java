@@ -62,4 +62,8 @@ public class Resultados {
     public Puntos[] getPuntuacion() {
         return puntuacion;
     }
+
+    public void setPuntuacion(Puntos puntos) {
+        this.puntuacion[0]=puntos;
+    }
 }

@@ -13,6 +13,7 @@ public class EncuentroGestor {
     }
 
     /**
+     * todo hacer la descripcion correspondiente
      * @param participanteA
      * @param participanteB
      * @param lugar
@@ -74,8 +75,11 @@ public class EncuentroGestor {
     /**
      * @param puntos
      */
-    public void guardarResultado(Encuentro unEncuentro, Puntos puntos[]){
-        
+    public void guardarResultado(Encuentro unEncuentro, Puntos puntos[], boolean asistencia){
+        Resultados unResultado = new Resultados();
+        unResultado.setAsistencia(asistencia);
+        unResultado.setPuntuacion(puntos);
+            unEncuentro.setResultado(unResultado);
             
             
             }
@@ -83,14 +87,19 @@ public class EncuentroGestor {
     /**
      * @param participanteGanador
      */
-    public void ganador(Participante participanteGanador){
+    public void ganador(Encuentro unEncuentro,Participante participanteGanador){
+        unEncuentro.setGanador(participanteGanador);
+        //TODO verificar si es un ganador
         }
 
     /**
      * @param participanteA
      * @param participanteB
      */
-    public void ganador(Participante participanteA,Participante participanteB){}
+    public void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB){
+        unEncuentro.setEmpate(true);
+        //TODO si se crean puntos
+        }
 
     /**
      * @param participanteA
@@ -98,7 +107,21 @@ public class EncuentroGestor {
      * @param puntoA
      * @param puntoB
      */
-    public void ganador(Participante participanteA,Participante participanteB,int  puntoA,int  puntoB){
-        }
+    public void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB,int  puntoA,int  puntoB){
+        Puntos unPunto = new Puntos();
+        unPunto.setPuntoA(puntoA);
+        unPunto.setPuntoB(puntoB);
+        Resultados unResultado = new Resultados();
+        unResultado.setPuntuacion(unPunto);
+     
+        
+        if (puntoA==puntoB)
+            unEncuentro.setEmpate(true);
+        else
+            if(puntoA<puntoB)
+                 unEncuentro.setGanador(participanteB);
+            else
+                 unEncuentro.setGanador(participanteA);
+       }
 }
 

@@ -9,11 +9,21 @@ import ClasesLogicas.Subronda;
 import java.util.Vector;
 
 public class RondaGestor {
+  
     public RondaGestor() {
         super();
     }
-    public Vector <Ronda> generarRonda(Competencia unaCompetencia){return new Vector <Ronda>();}
+    
+   //TODO se borro public Ronda [] generarRonda(Competencia unaCompetencia)
+        
+        
+    public Ronda crearRonda
+    
+    
     public void actualizarRonda(){}
+    
+    
+    
     public void estadoRonda(){}
 
 
@@ -26,6 +36,23 @@ public class RondaGestor {
         }
 
 
-    public void actualizarEstado(){
+
+    
+
+
+    /**
+     * @param rondaAA = ronda A Actualizar
+     */
+    public void actualizarEstado(Ronda[] rondaAA){
+       
+        int i;
+        int tamanio= rondaAA.length;
+            
+        for (i=0;i<tamanio;i++){
+            
+            rondaAA[i].
         }
+        
+          
+    }
 }
