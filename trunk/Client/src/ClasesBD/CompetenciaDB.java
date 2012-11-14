@@ -20,7 +20,7 @@ public class CompetenciaDB {
      * @param estado
      * @return
      */
-    public static ResultSet buscarCompetencias(String nombreCompetencia, Deporte deporte, String Modalidad, String estado){
+    public static ResultSet buscarCompetencias(String nombreCompetencia, String deporte, String Modalidad, String estado){
             ResultSet resultado=null;
         
         return resultado;}
