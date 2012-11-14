@@ -1,12 +1,9 @@
 package ClasesGestores;
 
 
-import ClasesLogicas.Competencia;
 import ClasesLogicas.LugarDeRealización;
 import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
-
-import java.util.Vector;
 
 public class RondaGestor {
   
@@ -17,8 +14,13 @@ public class RondaGestor {
    //TODO se borro public Ronda [] generarRonda(Competencia unaCompetencia)
         
         
-    public Ronda crearRonda;
-    
+
+    public Ronda crearRonda(){
+        
+        return new Ronda();
+        
+        }
+
     
     public void actualizarRonda(){}
     
