@@ -1,6 +1,8 @@
 package ClasesInterfaz;
 
 
+import ClasesGestores.CompetenciaGestor;
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Usuario;
 
@@ -137,6 +139,11 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         buscarJButton.setText("Buscar");
         buscarJButton.setBounds(new Rectangle(715, 70, 110, 30));
         buscarJButton.setFont(new Font("Tahoma", 0, 13));
+        buscarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    buscarJButton_actionPerformed(e);
+                }
+            });
         resultadoJPanel.add(jScrollBar1, null);
         resultadoJPanel.add(verCompetenciaJButton, null);
         resultadoJPanel.add(nuevaCompetenciaJButton, null);
@@ -166,7 +173,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
 
     private void jButtonAceptar1_actionPerformed(ActionEvent e) {
-        
+        competenciaSelecionad = CompetenciaGestor.buscarCompetencia(tablaResultadoJTable.getSelectedRow().)
         VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
         ven.setVisible(true);
     }
@@ -174,5 +181,11 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
         AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual);
         ven.setVisible(true);
+    }
+
+    private void buscarJButton_actionPerformed(ActionEvent e) {
+        String  resultado [][]= CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(), this.DeporteJComboBox.getSelectedItem().toString(), modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString());
+        //todo cargar en la interfaz codigo de robert
+        
     }
 }
