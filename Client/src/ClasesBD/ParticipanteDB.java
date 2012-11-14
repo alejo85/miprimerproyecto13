@@ -22,6 +22,7 @@ public class ParticipanteDB {
     /**
      * @param correoElectronico
      * @return
+     * 
      */
     public boolean existeParticipantes(String correoElectronico){
                        return true;}

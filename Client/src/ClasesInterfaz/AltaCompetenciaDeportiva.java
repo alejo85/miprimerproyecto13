@@ -1,6 +1,7 @@
 package ClasesInterfaz;
 
 
+import ClasesLogicas.Deporte;
 import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
@@ -134,6 +135,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
         deporteJComboBox.setMinimumSize(new Dimension(2, 18));
         deporteJComboBox.setPreferredSize(new Dimension(2, 18));
         deporteJComboBox.setSize(new Dimension(250, 30));
+        deporteJComboBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    deporteJComboBox_actionPerformed(e);
+                }
+            });
         jLabelLugarDeRealización.setText("Lugar De Realización");
         jLabelLugarDeRealización.setBounds(new Rectangle(50, 115, 135, 25));
         jLabelLugarDeRealización.setFont(new Font("Tahoma", 0, 13));
@@ -388,6 +394,18 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
 
     }
+    //Metodos
+    
+    /**
+     * @param 
+     * @return
+     */
+    private void listarDeportes(){
+       deporte= buscarDeportes(); //todo ver que devuelve buscarDeportes en clasesBD
+       return deporte;
+        }
+    
+    //aca empiezan los action performers
     private void empateSiJRadioButton_actionPerformed(ActionEvent e) {
         empateNoJRadioButton.setSelected(false);
         puntosPorPartidoEmpatadoJTextArea.setVisible(true);
@@ -436,5 +454,9 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         this.setVisible(false);
+    }
+
+    private void deporteJComboBox_actionPerformed(ActionEvent e) {
+        //TODO aca llamamos al metodo para seleccionar el deporte
     }
 }

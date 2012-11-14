@@ -20,7 +20,7 @@ public class CompetenciaDB {
      * @param estado
      * @return
      */
-    public ResultSet buscarCompetencias(String nombreCompetencia, Deporte deporte, String Modalidad, String estado){
+    public static ResultSet buscarCompetencias(String nombreCompetencia, Deporte deporte, String Modalidad, String estado){
             ResultSet resultado=null;
         
         return resultado;}
@@ -33,16 +33,24 @@ public class CompetenciaDB {
      * @param usuario
      * @return
      */
-    public ResultSet buscarCompetencias(String nombreCompetencia, Deporte deporte, String Modalidad, String estado, String usuario){
+    public static ResultSet buscarCompetencias(String nombreCompetencia, Deporte deporte, String Modalidad, String estado, String usuario){
                 ResultSet resultado=null;
             
             return resultado;}
 
     /**
      * @param nombreCompetencia
+     * @param deporte
+     * @param Modalidad
+     * @param estado
      * @return
      */
-    public ResultSet buscarCompetencia(String nombreCompetencia){
+
+    /**
+     * @param nombreCompetencia
+     * @return
+     */
+    public static ResultSet buscarCompetencia(String nombreCompetencia){
                                ResultSet resultado=null;
                            
                            return resultado;}
