@@ -17,7 +17,7 @@ public class RondaGestor {
    //TODO se borro public Ronda [] generarRonda(Competencia unaCompetencia)
         
         
-    public Ronda crearRonda
+    public Ronda crearRonda;
     
     
     public void actualizarRonda(){}
@@ -50,7 +50,7 @@ public class RondaGestor {
             
         for (i=0;i<tamanio;i++){
             
-            rondaAA[i].
+        ///    rondaAA[i];
         }
         
           
