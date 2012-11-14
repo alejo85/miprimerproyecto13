@@ -1,11 +1,18 @@
 package ClasesGestores;
 
 
+import ClasesBD.CompetenciaDB;
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.Pais;
 import ClasesLogicas.Posicion;
 import ClasesLogicas.Usuario;
+
+import java.sql.ResultSet;
+
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 
@@ -181,5 +188,41 @@ public class CompetenciaGestor {
      * @param tabla
      */
     public void impimirTabla(Posicion[]tabla){}
+    
+    public static Competencia buscarCompetencia(int idCompetencia)
+    {
+        Competencia retorno = new Competencia   ();
+        //depende de como cristian me devuelva la competencia
+        return retorno;
+    }
+    public static String [][] buscarCompetencias(String nombre, String deporte, String modalidad,String estado){
+        String retorno[][] = null;
+        int i=0,j=0;
+        ResultSet consulta = CompetenciaDB.buscarCompetencias( nombre,  deporte,  modalidad, estado);
+
+        try {
+            while (consulta.next())
+            {
+            String codigo = consulta.getString("id_Competencia");
+            String nombreCompetencia = consulta.getString("Nombre_Competencia");
+                String deporteDeLaCompetencia = consulta.getString("Nombre");
+                String modalidadDeLaCompetencia = consulta.getString("Modalidad");
+                String estadoDeLaCompetencia = consulta.getString("Estado");
+
+                retorno[i][0] = codigo;
+                retorno[i][1] = nombreCompetencia; 
+                retorno[i][2] = deporteDeLaCompetencia; 
+                retorno[i][3] = modalidadDeLaCompetencia;
+                retorno[i][4] = estadoDeLaCompetencia;    
+                i++;
+                
+
+            }
+        } catch (SQLException e) {
+            
+            //todo hacer la exepcion correspondiente
+        }
+        return retorno;
+        }
     
 }
