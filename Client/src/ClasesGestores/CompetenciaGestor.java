@@ -6,15 +6,14 @@ import ClasesBD.CompetenciaDB;
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealización;
-import ClasesLogicas.Pais;
 import ClasesLogicas.Posicion;
 import ClasesLogicas.Usuario;
 
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
+
 
 public class CompetenciaGestor {
     public CompetenciaGestor() {

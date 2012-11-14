@@ -1,10 +1,11 @@
 package ClasesGestores;
 
 
-import ClasesLogicas.Deporte;
-import java.sql.ResultSet;
-import java.util.Vector;
 import ClasesBD.DeportesDB;
+
+import ClasesLogicas.Deporte;
+
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DeporteGestor {
@@ -15,14 +16,15 @@ public class DeporteGestor {
     /**
      * @return
      */
-    public Vector <Deporte> instanciarDeportes(){
+    public static Deporte[] instanciarDeportes(){
         
             
         int id;
         String nombre;
         ResultSet resultado;
         resultado = DeportesDB.buscarDeporte();
-        Vector<Deporte> listaDeportes = new Vector<Deporte>();
+        Deporte[] listaDeportes=null;
+        int i=0;
 
 
         try {
@@ -30,10 +32,11 @@ public class DeporteGestor {
 
                 id = resultado.getInt("id_deporte");
                 nombre = resultado.getString("nombre");
-                listaDeportes.add(new Deporte(id,nombre));
+                listaDeportes[i] = new Deporte(id,nombre);
             }
         
         } catch (SQLException e) {
+            //TODO exepcion de SQL
         }
                
         return listaDeportes;

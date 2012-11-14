@@ -1,6 +1,10 @@
 package ClasesInterfaz;
 
 
+import ClasesBD.DeportesDB;
+
+import ClasesGestores.DeporteGestor;
+
 import ClasesLogicas.Deporte;
 import ClasesLogicas.Usuario;
 
@@ -86,6 +90,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JButton cursivaJButton = new JButton();
     private JButton negritaJButton = new JButton();
     private JButton subrayadoJButton = new JButton();
+    private Deporte deporte [];
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
@@ -402,9 +407,12 @@ public class AltaCompetenciaDeportiva extends JDialog {
      */
     private void listarDeportes(){
        deporte= buscarDeportes(); //todo ver que devuelve buscarDeportes en clasesBD
-       return deporte;
+
         }
-    
+    private Deporte[] buscarDeportes(){
+
+       return DeporteGestor.instanciarDeportes();
+        }
     //aca empiezan los action performers
     private void empateSiJRadioButton_actionPerformed(ActionEvent e) {
         empateNoJRadioButton.setSelected(false);
