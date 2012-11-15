@@ -84,6 +84,9 @@ public class AreaTextoPassword extends JPasswordField
   
   return retorno;
  }
- 
+    public void error(){
+            this.setForeground(Color.white);
+            this.setBackground(Color.red);
+        }
  public String getPass() { return this.getText(); }
 }

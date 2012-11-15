@@ -1,5 +1,7 @@
 package ClasesInterfaz;
 
+import ClasesGestores.UsuarioGestor;
+
 import ClasesLogicas.Usuario;
 
 import java.awt.Dimension;
@@ -180,6 +182,10 @@ public class Central extends JFrame {
         menuBar.add(competencia);
         menuBar.add(lugar);
 
+                
+
+
+
         menuHelp.add( menuHelpAbout );
         menuBar.add( menuHelp );
         this.getContentPane().add(salirJButton, null);
@@ -239,8 +245,9 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar5_actionPerformed(ActionEvent e) {
-        ModificarUsuario ven = new ModificarUsuario(usuarioActual);
-        ven.setVisible(true);
+        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        /*ModificarUsuario ven = new ModificarUsuario(usuarioActual);
+        ven.setVisible(true);*/
     }
 
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {

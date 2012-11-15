@@ -40,6 +40,10 @@ public abstract class AreaTexto extends JTextField
    this.setEditable(true);
   }
  }
- 
+    public void error(){
+            this.setForeground(Color.white);
+            this.setBackground(Color.red);
+        }
  public String getTexto() { return this.getText(); }
 }
+

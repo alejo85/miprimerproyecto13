@@ -16,8 +16,7 @@ public class Usuario {
         super();
     }
 
-    public Usuario(Integer idUsuario, String correoElectronico, String apellido, String nombre, String tipoDocumento,
-                   Integer numeroDocumento, Localidad ciudad, Logueo[] logueos) {
+    public Usuario(Integer idUsuario, String correoElectronico, String apellido, String nombre, String tipoDocumento,Integer numeroDocumento, Localidad ciudad, Logueo[] logueos) {
         super();
         this.idUsuario = idUsuario;
         this.correoElectronico = correoElectronico;
@@ -29,12 +28,7 @@ public class Usuario {
         this.logueos = logueos;
     }
 
-    public Usuario(String correoElectronico, String apellido, String nombre) {
-        super();
-        this.correoElectronico = correoElectronico;
-        this.apellido = apellido;
-        this.nombre = nombre;
-    }
+
 
 
     public void setIdUsuario(Integer idUsuario) {
