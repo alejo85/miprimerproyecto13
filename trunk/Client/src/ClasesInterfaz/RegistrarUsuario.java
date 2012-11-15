@@ -324,14 +324,17 @@ private void cargarRegiones()
     }
     
     private void aceptarJButton_actionPerformed(ActionEvent e) {
-            if(!this.contraseñaJPasswordField.getPassword().equals(this.repetirContraseñaJPasswordField.getPassword())){
+        if(correoElectrónicoJTextArea.getText()== ""){
+            this.correoElectrónicoJTextArea.error(); 
+        }
+        if(!this.contraseñaJPasswordField.getPass().equals(this.repetirContraseñaJPasswordField.getPass())){
                  this.contraseñaJPasswordField.error(); 
                  this.repetirContraseñaJPasswordField.error(); 
-             }
-            if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
+        }
+        if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
                 JOptionPane.showOptionDialog(null, "Debes seleccionar un tipo de documento, ¡Acordarse de generar un metodo para rellenar el campo con rojo para este error!"  , "Campos no seleccionados", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-            }
-            System.out.println(nombreJTextArea.getText());
+        }
+           /* System.out.println(nombreJTextArea.getText());
             System.out.println(apellidoJTextArea.getText());
             System.out.println(correoElectrónicoJTextArea.getText());
             System.out.println(contraseñaJPasswordField.getPassword());
@@ -339,10 +342,19 @@ private void cargarRegiones()
             System.out.println(tipoDeDocumentoJComboBox.getSelectedItem());
             System.out.println(numeroDocumentoJTextArea.getText());
             System.out.println(localidadJComboBox.getSelectedItem());
+*/
             int idLocalidad = this.localidadJComboBox.getSelectedIndex();
             idLocalidad--;
-           
-            UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),tipoDeDocumentoJComboBox.getSelectedItem(),numeroDocumentoJTextArea.getText(),this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPassword());
+        try {
+            if(!UsuarioGestor.existeUsuario(correoElectrónicoJTextArea.getText())){
+            int doc = Integer.parseInt(numeroDocumentoJTextArea.getTexto());
+                UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
+            }
+            else{
+                JOptionPane.showOptionDialog(null, "El usuario se ha registrado con exito"  , "Registro de usuario", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            }
+        } catch (SQLException f) {//todo
         }
+    }
     
 }

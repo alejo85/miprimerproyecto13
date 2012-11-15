@@ -17,8 +17,9 @@ public class UsuarioGestor {
     public UsuarioGestor() {
         super();
     }
-    public Usuario crearUsuario(String correoElectronico, String apellido, String nombre, String tipoDocumento,Integer numeroDocumento,Localidad ciudad, String contraseña){
-            Usuario usuario= new Usuario;
+    
+    public static Usuario crearUsuario(String correoElectronico, String apellido, String nombre, String tipoDocumento,int numeroDocumento,Localidad ciudad, String  contraseña){
+            Usuario usuario= new Usuario();
             usuario.setCorreoElectronico(correoElectronico);
             usuario.setApellido(apellido);
             usuario.setNombre(nombre);
@@ -77,4 +78,15 @@ public class UsuarioGestor {
         }
         return uss;
         }
+    
+    public static Boolean existeUsuario(String correo) throws SQLException {
+
+            return UsuarioDB.existeUsuario(correo);
+      
+    }
+
+
+    public static void crearUsuario(String string, String string1, String string2, Object object, int i,
+                                    Localidad localidad, String string3) {
+    }
 }

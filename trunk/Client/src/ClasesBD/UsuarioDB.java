@@ -15,7 +15,7 @@ public class UsuarioDB {
     }
     public Boolean esNuevo(Usuario usuario){
                        return true;}
-    public static ResultSet registrarUsuario(Usuario usuario, String contraseña) throws SQLException {
+    public static ResultSet registrarUsuario(Usuario usuario, String  contraseña) throws SQLException {
             Conexion conexion = new Conexion();
             conexion.conectar();
             String consultasql;
@@ -24,7 +24,7 @@ public class UsuarioDB {
             System.out.println(consultasql);
             return conexion.consultar(consultasql);
      }
-    public Boolean existeUsuario(String correo) throws SQLException {
+    public static Boolean existeUsuario(String correo) throws SQLException {
          Conexion conexion = new Conexion();
          conexion.conectar();
          String consultasql;
