@@ -13,27 +13,45 @@ import InterfazGrafica.CampoTexto.AreaTextoNombre;
 import InterfazGrafica.CampoTexto.AreaTextoNumerico;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.Element;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.StyledEditorKit;
+
+import oracle.jdeveloper.layout.VerticalFlowLayout;
 
 
 public class AltaCompetenciaDeportiva extends JDialog {
@@ -50,7 +68,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JList lugarDeRealizaciónJList = new JList();
     private JScrollBar jScrollBar1 = new JScrollBar();
     private JPanel modalidadLigaJPanel = new JPanel();
-    private Usuario ussuarioActual=null;
+    private Usuario ussuarioActual = null;
     private BorderLayout borderLayout1 = new BorderLayout();
     private JLabel jLabelPuntosPorPartidoGanados = new JLabel();
     private AreaTextoNumerico puntosPorPartidoGanadosJTextArea = new AreaTextoNumerico(2);
@@ -77,43 +95,40 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JTable tablaLugarDisponibilidadJTable = new JTable();
     private JButton agregarJButton = new JButton();
     private JScrollBar jScrollBar2 = new JScrollBar();
-    private int tamaño=10;
+    private int tamaño = 10;
     private String fuenteLetra;
     private JPanel editorReglamentoJPanel = new JPanel();
-    private JComboBox fuenteJComboBox = new JComboBox();
-    private JComboBox fuenteTamañoJComboBox = new JComboBox();
-    private JButton alinaciónIzquierdaJButton = new JButton();
-    private JButton aliniaciónCentradaJButton = new JButton();
-    private JButton aliniaciónDerechaJButton = new JButton();
-    private JScrollPane jScrollPane1 = new JScrollPane();
-    private JEditorPane textoReglamentoJTextArea = new JEditorPane();
-    private JButton cursivaJButton = new JButton();
-    private JButton negritaJButton = new JButton();
-    private JButton subrayadoJButton = new JButton();
     private Deporte deporte[];
+    private RichTextBox box = new RichTextBox();
+    private JPanel reglamentoJPanel = new JPanel();
+    private JButton jButton1 = new JButton();
+    private JScrollPane panel;
+    private VerticalFlowLayout verticalFlowLayout1 = new VerticalFlowLayout();
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
-        this(null, "", false,usuarioLogueado);
+        this(null, "", false, usuarioLogueado);
     }
+
     public AltaCompetenciaDeportiva() {
 
         this(null, "", false);
     }
 
-    public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal,Usuario usuarioLogueado) {
+    public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal, Usuario usuarioLogueado) {
         super(parent, title, modal);
         try {
-            this.ussuarioActual=usuarioLogueado;
+            this.ussuarioActual = usuarioLogueado;
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal ) {
+
+    public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal) {
         super(parent, title, modal);
         try {
-         
+
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +137,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
     private void jbInit() throws Exception {
         this.setSize(new Dimension(1487, 765));
-        this.getContentPane().setLayout( null );
+        this.getContentPane().setLayout(null);
         this.setTitle("Alta Competencia Deportiva");
         nombreDeLaCompetenciaJTextArea.setBounds(new Rectangle(235, 30, 375, 30));
         nombreDeLaCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
@@ -141,16 +156,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
         deporteJComboBox.setPreferredSize(new Dimension(2, 18));
         deporteJComboBox.setSize(new Dimension(250, 30));
         deporteJComboBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    deporteJComboBox_actionPerformed(e);
-                }
-            });
-        
-       deporte = DeporteGestor.instanciarDeportes(); 
-       for(int i=0;i<deporte.length-1;i++){
-           this.deporteJComboBox.addItem(deporte[i].getNombre());
-           }
-        
+            public void actionPerformed(ActionEvent e) {
+                deporteJComboBox_actionPerformed(e);
+            }
+        });
         jLabelLugarDeRealización.setText("Lugar De Realización");
         jLabelLugarDeRealización.setBounds(new Rectangle(50, 115, 135, 25));
         jLabelLugarDeRealización.setFont(new Font("Tahoma", 0, 13));
@@ -162,13 +171,13 @@ public class AltaCompetenciaDeportiva extends JDialog {
         modalidadJComboBox.setMinimumSize(new Dimension(2, 18));
         modalidadJComboBox.setPreferredSize(new Dimension(2, 18));
         modalidadJComboBox.setSize(new Dimension(375, 30));
-       
+
 
         modalidadJComboBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    modalidadJComboBox_actionPerformed(e);
-                }
-            });
+            public void actionPerformed(ActionEvent e) {
+                modalidadJComboBox_actionPerformed(e);
+            }
+        });
         modalidadJComboBox.addItem("Sistema de Eliminatoria Simple");
         modalidadJComboBox.addItem("Sistema de Eliminatoria Doble");
         modalidadJComboBox.addItem("Sistema de Liga");
@@ -196,17 +205,17 @@ public class AltaCompetenciaDeportiva extends JDialog {
         empateSiJRadioButton.setText("Si");
         empateSiJRadioButton.setBounds(new Rectangle(25, 20, 85, 20));
         empateSiJRadioButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    empateSiJRadioButton_actionPerformed(e);
-                }
-            });
+            public void actionPerformed(ActionEvent e) {
+                empateSiJRadioButton_actionPerformed(e);
+            }
+        });
         empateNoJRadioButton.setText("No");
         empateNoJRadioButton.setBounds(new Rectangle(135, 20, 90, 20));
         empateNoJRadioButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    empateNoJRadioButton_actionPerformed(e);
-                }
-            });
+            public void actionPerformed(ActionEvent e) {
+                empateNoJRadioButton_actionPerformed(e);
+            }
+        });
         puntosPorPartidoEmpatadoJTextArea.setBounds(new Rectangle(205, 50, 240, 30));
         puntosPorPartidoEmpatadoJTextArea.setFont(new Font("Tahoma", 0, 13));
         puntosPorPartidoEmpatadoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -224,10 +233,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
         formaDePuntuaciónJComboBox.setMinimumSize(new Dimension(2, 18));
         formaDePuntuaciónJComboBox.setPreferredSize(new Dimension(2, 18));
         formaDePuntuaciónJComboBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    formaDePuntuaciónJComboBox_actionPerformed(e);
-                }
-            });
+            public void actionPerformed(ActionEvent e) {
+                formaDePuntuaciónJComboBox_actionPerformed(e);
+            }
+        });
         jLabelFormaDePuntuación.setText("Forma de Puntuacion");
         jLabelFormaDePuntuación.setBounds(new Rectangle(995, 295, 135, 25));
         jLabelFormaDePuntuación.setFont(new Font("Tahoma", 0, 13));
@@ -258,8 +267,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
         modalidadLigaJPanel.add(jLabelPuntosPorPartidoGanados, null);
         modalidadLigaJPanel.add(jLabelPuntosPorPartidosAsistido, null);
         modalidadLigaJPanel.add(puntosPorPartidoAsistidoJTextArea, null);
-        
-        
+
+
         formaDePuntuaciónPuntuaciónJPanel.add(tantosPorPartidosGanadosJTextArea, null);
         formaDePuntuaciónPuntuaciónJPanel.add(jLabelTantosPorPartidosGanados, null);
         jPanelFormaDePuntuaciónSet.add(cantidadMaximaDeSetsJTextArea, null);
@@ -273,10 +282,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
         cancelarJButton.setSize(new Dimension(110, 30));
 
         cancelarJButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    cancelarJButton_actionPerformed(e);
-                }
-            });
+            public void actionPerformed(ActionEvent e) {
+                cancelarJButton_actionPerformed(e);
+            }
+        });
         quitarJButton.setText("Quitar");
         quitarJButton.setBounds(new Rectangle(500, 225, 110, 30));
         quitarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -292,95 +301,34 @@ public class AltaCompetenciaDeportiva extends JDialog {
         agregarJButton.setBounds(new Rectangle(500, 185, 110, 30));
         agregarJButton.setFont(new Font("Tahoma", 0, 13));
         jScrollBar2.setBounds(new Rectangle(885, 115, 15, 165));
-        editorReglamentoJPanel.setBounds(new Rectangle(50, 360, 710, 275));
+        editorReglamentoJPanel.setBounds(new Rectangle(30, 385, 710, 275));
 
         editorReglamentoJPanel.setLayout(null);
-        fuenteJComboBox.setBounds(new Rectangle(40, 10, 135, 30));
-        fuenteJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
-        fuenteJComboBox.setMinimumSize(new Dimension(2, 18));
-        fuenteJComboBox.setPreferredSize(new Dimension(2, 18));
 
-  
-        fuenteJComboBox.addItem("Helvetica");
-        fuenteJComboBox.addItem("TimesRoman");
-        fuenteJComboBox.addItem("Courier");
-        fuenteTamañoJComboBox.addItem(10);
-        fuenteTamañoJComboBox.addItem(11);
-        fuenteTamañoJComboBox.addItem(12);
-        fuenteTamañoJComboBox.addItem(13);
-        fuenteTamañoJComboBox.addItem(14);
-        fuenteTamañoJComboBox.addItem(15);
-        fuenteTamañoJComboBox.addItem(16);
-        fuenteTamañoJComboBox.addItem(17);
-        fuenteTamañoJComboBox.addItem(18);
-        fuenteTamañoJComboBox.addItem(19);
-        fuenteTamañoJComboBox.addItem(20);
-        fuenteTamañoJComboBox.addItem(21);
-        fuenteTamañoJComboBox.addItem(22);
-        fuenteTamañoJComboBox.addItem(23);
-        fuenteTamañoJComboBox.addItem(24);
-        fuenteTamañoJComboBox.addItem(25);
-        fuenteTamañoJComboBox.addItem(26);
-        fuenteTamañoJComboBox.addItem(27);
-        fuenteTamañoJComboBox.addItem(28);
-        fuenteTamañoJComboBox.addItem(29);
-        fuenteTamañoJComboBox.addItem(30);
+        reglamentoJPanel.setBounds(new Rectangle(65, 415, 540, 220));
+        reglamentoJPanel.setLayout(verticalFlowLayout1);
+        jButton1.setText("jButton1");
 
-        textoReglamentoJTextArea.setContentType("text/rtf");
-        cursivaJButton.setBounds(new Rectangle(365, 10, 35, 30));
-        cursivaJButton.setFont(new Font("Tahoma", 0, 13));
-        cursivaJButton.setIcon(new ImageIcon("Imagenes\\cursiva.png"));
- 
-        negritaJButton.setBounds(new Rectangle(405, 10, 35, 30));
-        negritaJButton.setFont(new Font("Tahoma", 0, 13));
-        negritaJButton.setIcon(new ImageIcon("Imagenes\\negrita.png"));
-      
-        subrayadoJButton.setBounds(new Rectangle(445, 10, 35, 30));
-        subrayadoJButton.setFont(new Font("Tahoma", 0, 13));
-        subrayadoJButton.setIcon(new ImageIcon("Imagenes\\subrayado.png"));
-
-      
-        fuenteLetra = fuenteJComboBox.getSelectedItem().toString();
-        tamaño = Integer.parseInt(fuenteTamañoJComboBox.getSelectedItem().toString());
-        fuenteTamañoJComboBox.setBounds(new Rectangle(190, 10, 45, 30));
-        fuenteTamañoJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
-        fuenteTamañoJComboBox.setMinimumSize(new Dimension(2, 18));
-        fuenteTamañoJComboBox.setPreferredSize(new Dimension(2, 18));
-
-    
-        alinaciónIzquierdaJButton.setBounds(new Rectangle(245, 10, 35, 30));
-        alinaciónIzquierdaJButton.setFont(new Font("Tahoma", 0, 13));
-        alinaciónIzquierdaJButton.setIcon(new ImageIcon("Imagenes\\text_align_left.png"));
-
-
-        aliniaciónCentradaJButton.setBounds(new Rectangle(285, 10, 35, 30));
-        aliniaciónCentradaJButton.setFont(new Font("Tahoma", 0, 13));
-        aliniaciónCentradaJButton.setIcon(new ImageIcon("Imagenes\\text_align_center.png"));
+     //   panel.setPreferredSize(new Dimension(350, 270));
      
-        aliniaciónDerechaJButton.setBounds(new Rectangle(325, 10, 35, 30));
-        aliniaciónDerechaJButton.setFont(new Font("Tahoma", 0, 13));
-        aliniaciónDerechaJButton.setIcon(new ImageIcon("Imagenes\\text_align_right.png"));
-        
+   
+        box.setelementos();
+
         puntosPorPartidoEmpatadoJTextArea.setVisible(false);
         jLabelPuntosPorPartidoEmpatado.setVisible(false);
-        
-        jScrollPane1.setBounds(new Rectangle(30, 60, 655, 195));
-        jScrollPane1.getViewport().add(textoReglamentoJTextArea, null);
-        editorReglamentoJPanel.add(subrayadoJButton, null);
-        editorReglamentoJPanel.add(negritaJButton, null);
-        editorReglamentoJPanel.add(cursivaJButton, null);
-        editorReglamentoJPanel.add(jScrollPane1, null);
-        editorReglamentoJPanel.add(aliniaciónDerechaJButton, null);
-        editorReglamentoJPanel.add(aliniaciónCentradaJButton, null);
-        editorReglamentoJPanel.add(fuenteTamañoJComboBox, null);
-        editorReglamentoJPanel.add(fuenteJComboBox, null);
-        editorReglamentoJPanel.add(alinaciónIzquierdaJButton, null);
-        
+
+
         modalidadLigaJPanel.setVisible(false);
-      
+
         jPanelFormaDePuntuaciónSet.setVisible(false);
         formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
-        this.getContentPane().add(editorReglamentoJPanel, null);
+
+        reglamentoJPanel.add(box.getJPanel(), null);
+        panel = box.getJScrollPane();
+        panel.setSize(350, 270);
+        reglamentoJPanel.setPreferredSize(new Dimension(350,270));
+        reglamentoJPanel.add(panel, null);
+        this.getContentPane().add(reglamentoJPanel, null);
         this.getContentPane().add(agregarJButton, null);
         this.getContentPane().add(jLabelDisponibilidad, null);
         this.getContentPane().add(disponibilidadJTextArea, null);
@@ -408,62 +356,58 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
     }
     //Metodos
-    
+
     /**
-     * @param 
+     * @param
      * @return
      */
-    private void listarDeportes(){
-      
+    private void listarDeportes() {
+        deporte = buscarDeportes(); //todo ver que devuelve buscarDeportes en clasesBD
 
+    }
 
-        }
+    private Deporte[] buscarDeportes() {
 
+        return DeporteGestor.instanciarDeportes();
+    }
     //aca empiezan los action performers
+
     private void empateSiJRadioButton_actionPerformed(ActionEvent e) {
         empateNoJRadioButton.setSelected(false);
         puntosPorPartidoEmpatadoJTextArea.setVisible(true);
         jLabelPuntosPorPartidoEmpatado.setVisible(true);
-        
+
     }
 
     private void empateNoJRadioButton_actionPerformed(ActionEvent e) {
-        empateSiJRadioButton.setSelected(false);    
+        empateSiJRadioButton.setSelected(false);
         puntosPorPartidoEmpatadoJTextArea.setVisible(false);
         jLabelPuntosPorPartidoEmpatado.setVisible(false);
     }
 
     private void modalidadJComboBox_actionPerformed(ActionEvent e) {
-        if(modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")){
+        if (modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")) {
             modalidadLigaJPanel.setVisible(true);
-            }
-        else
-        modalidadLigaJPanel.setVisible(false);
+        } else
+            modalidadLigaJPanel.setVisible(false);
     }
 
     private void formaDePuntuaciónJComboBox_actionPerformed(ActionEvent e) {
-        if(formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets"))
+        if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets"))
 
         {
 
-        jPanelFormaDePuntuaciónSet.setVisible(true);
+            jPanelFormaDePuntuaciónSet.setVisible(true);
+            formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
+        } else if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")) {
+            jPanelFormaDePuntuaciónSet.setVisible(false);
+            formaDePuntuaciónPuntuaciónJPanel.setVisible(true);
+        } else if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Resultado Final")) {
+            jPanelFormaDePuntuaciónSet.setVisible(false);
             formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
         }
-        else
-            if(formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación"))
-        {
-            jPanelFormaDePuntuaciónSet.setVisible(false);
-                            formaDePuntuaciónPuntuaciónJPanel.setVisible(true);
-        }
-            else
-        if(formaDePuntuaciónJComboBox.getSelectedItem().equals("Resultado Final"))
-        {
-                jPanelFormaDePuntuaciónSet.setVisible(false);
-                                formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
-            }
 
-        
-        
+
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
@@ -471,11 +415,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
     }
 
     private void deporteJComboBox_actionPerformed(ActionEvent e) {
-       
-        //TODO aca  se lllama a los lugares de realizaciion
+        //TODO aca llamamos al metodo para seleccionar el deporte
     }
 
 
-    private void subrayadoJButton_actionPerformed(ActionEvent e) {
-    }
 }
