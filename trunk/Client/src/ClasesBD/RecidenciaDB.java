@@ -1,6 +1,7 @@
 package ClasesBD;
 
 
+import ClasesLogicas.Localidad;
 import ClasesLogicas.Pais;
 import ClasesLogicas.Regiones;
 
@@ -25,7 +26,7 @@ public class RecidenciaDB {
         }
         String consultasql;
         
-        consultasql="select * from PAISES";
+        consultasql="select * from Pais";
         
         ResultSet resultado=null;
 
@@ -36,7 +37,7 @@ public class RecidenciaDB {
         try {
             while (resultado.next())
         {
-            int codigo = resultado.getInt("ID");
+            int codigo = resultado.getInt("id_pais");
             String nombre = resultado.getString("NOMBRE");
             Pais p = new Pais(codigo,nombre);
             paises.add(p);
@@ -57,7 +58,7 @@ public class RecidenciaDB {
         }
         String consultasql;
         
-        consultasql="select * from PAISES";
+        consultasql="select * from Pais";
         
         ResultSet resultado=null;
 
@@ -68,7 +69,7 @@ public class RecidenciaDB {
         try {
             while (resultado.next())
         {
-            int codigo = resultado.getInt("ID");
+            int codigo = resultado.getInt("id_pais");
             String nombre = resultado.getString("NOMBRE");
             Pais p = new Pais(codigo,nombre);
             paises.add(p);
@@ -86,13 +87,13 @@ public class RecidenciaDB {
         conexion.conectar();
         String consultasql;
         
-        consultasql="select * from REGIONES where ID_PAIS = " +idPais;
+        consultasql="select * from REGION where ID_PAIS = " +idPais;
         
         ResultSet resultado = conexion.consultar(consultasql);
 
         while (resultado.next()) 
         {
-            int id = resultado.getInt("ID");
+            int id = resultado.getInt("id_region");
 
             String nombre = resultado.getString("NOMBRE");
             Regiones p = new Regiones(id, idPais,nombre);
@@ -101,5 +102,25 @@ public class RecidenciaDB {
       
         conexion.cerrarConexion();
         return regiones;
+    }
+    public  static Vector<Localidad> obtenerLocalidades(int idRegion) throws SQLException {
+        Conexion conexion = new Conexion();
+        Vector<Localidad> localidades = new Vector <Localidad>();
+        conexion.conectar();
+        String consultasql;
+        
+        consultasql="select * from ciudad where ID_REGION = " +idRegion;
+        
+        ResultSet resultado = conexion.consultar(consultasql);
+
+        while (resultado.next()) 
+        {
+            int id = resultado.getInt("id_ciudad");
+            String nombre = resultado.getString("NOMBRE");
+            Localidad p = new Localidad(id, idRegion,nombre);
+            localidades.add(p);
+        }
+        conexion.cerrarConexion();
+        return localidades;
     }
 }
