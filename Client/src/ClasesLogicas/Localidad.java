@@ -8,7 +8,7 @@ public class Localidad {
         super();
     }
 
-    public Localidad(int codigo, int codigoRegion, int codigoPais, String nombre) {
+    public Localidad(int codigo, int codigoRegion,  String nombre) {
         super();
         this.codigo = codigo;
 

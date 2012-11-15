@@ -250,8 +250,9 @@ private void cargarRegiones()
         idPais--;
         int codigo = this.pais.get(idPais).getCodigo();
         try {
-            region = RegionesBD.obtenerRegiones(codigo);
+            region = RecidenciaDB.obtenerRegiones(codigo);
         } catch (SQLException f) {
+            System.out.println(f.getMessage());
         }
         provinciaJComboBox.removeAllItems();
         provinciaJComboBox.addItem("Seleccionar Provincia");
@@ -275,7 +276,7 @@ private void cargarRegiones()
             int codigo = this.region.get(idRegion).getCodigo();
             
             try {
-                localidades = LocalidadesDB.obtenerLocalidades(codigo);
+                localidades = RecidenciaDB.obtenerLocalidades(codigo);
             } catch (SQLException f) {
             }
             localidadJComboBox.removeAllItems();
