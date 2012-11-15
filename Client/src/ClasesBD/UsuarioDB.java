@@ -28,10 +28,16 @@ public class UsuarioDB {
          Conexion conexion = new Conexion();
          conexion.conectar();
          String consultasql;
-         consultasql="select * from usuario where correo="+correo;
+         consultasql="select correo from usuario where correo="+correo;
          ResultSet resultado = conexion.consultar(consultasql);        
-         
-                          }
+         if(resultado.getString("correo").equals(correo)){
+             return true;
+         }
+         else{
+             return false;
+         }
+    }
+                          
     public Boolean existeUsuarioContraseña(String contraseña){
                        return true;}
     public Boolean actualizarUsuario(Usuario usuario){
