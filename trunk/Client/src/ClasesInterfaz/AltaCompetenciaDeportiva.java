@@ -90,7 +90,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JButton cursivaJButton = new JButton();
     private JButton negritaJButton = new JButton();
     private JButton subrayadoJButton = new JButton();
-    private Deporte deporte [];
+    private Deporte deporte[];
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
@@ -145,6 +145,12 @@ public class AltaCompetenciaDeportiva extends JDialog {
                     deporteJComboBox_actionPerformed(e);
                 }
             });
+        
+       deporte = DeporteGestor.instanciarDeportes(); 
+       for(int i=0;i<deporte.length-1;i++){
+           this.deporteJComboBox.addItem(deporte[i].getNombre());
+           }
+        
         jLabelLugarDeRealización.setText("Lugar De Realización");
         jLabelLugarDeRealización.setBounds(new Rectangle(50, 115, 135, 25));
         jLabelLugarDeRealización.setFont(new Font("Tahoma", 0, 13));
@@ -406,13 +412,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
      * @return
      */
     private void listarDeportes(){
-       deporte= buscarDeportes(); //todo ver que devuelve buscarDeportes en clasesBD
+      
+
 
         }
-    private Deporte[] buscarDeportes(){
 
-       return DeporteGestor.instanciarDeportes();
-        }
     //aca empiezan los action performers
     private void empateSiJRadioButton_actionPerformed(ActionEvent e) {
         empateNoJRadioButton.setSelected(false);
@@ -465,6 +469,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     }
 
     private void deporteJComboBox_actionPerformed(ActionEvent e) {
-        //TODO aca llamamos al metodo para seleccionar el deporte
+       
+        //TODO aca  se lllama a los lugares de realizaciion
     }
 }
