@@ -47,9 +47,10 @@ public class AreaTextoCorreo extends AreaTexto
   if ((!texto.matches(formatoFinal)) || (texto == ""))
   {
    this.setForeground(Color.white);
-   this.setBackground(Color.orange);
+   this.setBackground(Color.red);
    buenDato = false;
   }
   else buenDato = true;
  }
+ 
 }

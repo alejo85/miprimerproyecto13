@@ -339,6 +339,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         subrayadoJButton.setFont(new Font("Tahoma", 0, 13));
         subrayadoJButton.setIcon(new ImageIcon("Imagenes\\subrayado.png"));
 
+      
         fuenteLetra = fuenteJComboBox.getSelectedItem().toString();
         tamaño = Integer.parseInt(fuenteTamañoJComboBox.getSelectedItem().toString());
         fuenteTamañoJComboBox.setBounds(new Rectangle(190, 10, 45, 30));
@@ -350,7 +351,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
         alinaciónIzquierdaJButton.setBounds(new Rectangle(245, 10, 35, 30));
         alinaciónIzquierdaJButton.setFont(new Font("Tahoma", 0, 13));
         alinaciónIzquierdaJButton.setIcon(new ImageIcon("Imagenes\\text_align_left.png"));
-    
+
+
         aliniaciónCentradaJButton.setBounds(new Rectangle(285, 10, 35, 30));
         aliniaciónCentradaJButton.setFont(new Font("Tahoma", 0, 13));
         aliniaciónCentradaJButton.setIcon(new ImageIcon("Imagenes\\text_align_center.png"));
@@ -471,5 +473,9 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private void deporteJComboBox_actionPerformed(ActionEvent e) {
        
         //TODO aca  se lllama a los lugares de realizaciion
+    }
+
+
+    private void subrayadoJButton_actionPerformed(ActionEvent e) {
     }
 }

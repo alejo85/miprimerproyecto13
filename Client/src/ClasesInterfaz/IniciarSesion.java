@@ -1,6 +1,8 @@
 package ClasesInterfaz;
 
 
+import ClasesGestores.UsuarioGestor;
+
 import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoCorreo;
@@ -19,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
@@ -137,7 +140,13 @@ public class IniciarSesion extends JDialog {
     }
 
     private void aceptarJButton_actionPerformed(ActionEvent e) {
-        this.usuarioActual= new Usuario("corrientes@masfm.com","Olivera","Alejandro");
+        //this.usuarioActual= new Usuario("corrientes@masfm.com","Olivera","Alejandro");
+       this.usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
+       if(usuarioActual==null){
+           JOptionPane.showOptionDialog(null, "El correo electronico o la contraseña son incorrector"  , "Error al Autencicar", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+           this.correoElectronicoJTextArea.error();
+           this.contraeñaJPasswordField.error();
+       }
         
     }
 }

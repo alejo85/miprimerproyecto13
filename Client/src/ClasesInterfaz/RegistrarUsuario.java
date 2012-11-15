@@ -13,6 +13,13 @@ import InterfazGrafica.CampoTexto.AreaTextoApellido;
 
 import ClasesBD.RecidenciaDB;
 
+import ClasesGestores.UsuarioGestor;
+
+import InterfazGrafica.CampoTexto.AreaTextoCorreo;
+
+import InterfazGrafica.CampoTexto.AreaTextoDocumento;
+import InterfazGrafica.CampoTexto.AreaTextoPassword;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -32,6 +39,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
@@ -39,11 +47,11 @@ import javax.swing.event.ChangeListener;
 
 
 public class RegistrarUsuario extends JDialog {
-    private JTextArea correoElectrónicoJTextArea = new JTextArea();
+    private AreaTextoCorreo correoElectrónicoJTextArea = new AreaTextoCorreo(40);
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JLabel jLabelContraseña = new JLabel();
-    private JPasswordField contraseñaJPasswordField = new JPasswordField();
-    private JPasswordField repetirContraseñaJPasswordField = new JPasswordField();
+    private AreaTextoPassword contraseñaJPasswordField = new AreaTextoPassword(10);
+    private AreaTextoPassword repetirContraseñaJPasswordField = new AreaTextoPassword(10);
     private JLabel jLabelRepetirContraseña = new JLabel();
     private AreaTextoApellido apellidoJTextArea = new AreaTextoApellido(20);
     private JLabel jLabelApellido = new JLabel();
@@ -51,7 +59,7 @@ public class RegistrarUsuario extends JDialog {
     private JLabel jLabelNombre = new JLabel();
     private JLabel jLabelTipoDeDocumento = new JLabel();
     private JComboBox tipoDeDocumentoJComboBox = new JComboBox();
-    private JTextArea numeroDocumentoJTextArea = new JTextArea();
+    private AreaTextoDocumento numeroDocumentoJTextArea = new AreaTextoDocumento(8);
     private JLabel jLabelNDocumento = new JLabel();
     private JLabel jLabelLocalidad = new JLabel();
     private JLabel jLabelProvincia = new JLabel();
@@ -128,6 +136,11 @@ public class RegistrarUsuario extends JDialog {
         tipoDeDocumentoJComboBox.setMinimumSize(new Dimension(2, 18));
         tipoDeDocumentoJComboBox.setPreferredSize(new Dimension(2, 18));
         tipoDeDocumentoJComboBox.setSize(new Dimension(80, 30));
+        tipoDeDocumentoJComboBox.addItem("Tipo");
+        tipoDeDocumentoJComboBox.addItem("DNI");
+        tipoDeDocumentoJComboBox.addItem("LE");
+        tipoDeDocumentoJComboBox.addItem("LC");
+        tipoDeDocumentoJComboBox.addItem("PAS");
         numeroDocumentoJTextArea.setBounds(new Rectangle(580, 265, 145, 30));
         numeroDocumentoJTextArea.setFont(new Font("Tahoma", 0, 13));
         numeroDocumentoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -152,12 +165,16 @@ public class RegistrarUsuario extends JDialog {
                     aceptoTérminosCondicionesUsoJCheckBox_stateChanged(e);
                 }
             });
-
         aceptarJButton.setText("Aceptar");
         aceptarJButton.setBounds(new Rectangle(330, 520, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
         aceptarJButton.setEnabled(false);
 
+        aceptarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(525, 520, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -300,14 +317,32 @@ private void cargarRegiones()
         
         if (aceptoTérminosCondicionesUsoJCheckBox.isSelected()==true) {
                    aceptarJButton.setEnabled(true);
-               } else {
+               } 
+        else {
                    aceptarJButton.setEnabled(false);   
                }
-        
-        
-
-
     }
-
-
+    
+    private void aceptarJButton_actionPerformed(ActionEvent e) {
+            if(!this.contraseñaJPasswordField.getPassword().equals(this.repetirContraseñaJPasswordField.getPassword())){
+                 this.contraseñaJPasswordField.error(); 
+                 this.repetirContraseñaJPasswordField.error(); 
+             }
+            if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
+                JOptionPane.showOptionDialog(null, "Debes seleccionar un tipo de documento, ¡Acordarse de generar un metodo para rellenar el campo con rojo para este error!"  , "Campos no seleccionados", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            }
+            System.out.println(nombreJTextArea.getText());
+            System.out.println(apellidoJTextArea.getText());
+            System.out.println(correoElectrónicoJTextArea.getText());
+            System.out.println(contraseñaJPasswordField.getPassword());
+            System.out.println(repetirContraseñaJPasswordField.getPassword());
+            System.out.println(tipoDeDocumentoJComboBox.getSelectedItem());
+            System.out.println(numeroDocumentoJTextArea.getText());
+            System.out.println(localidadJComboBox.getSelectedItem());
+            int idLocalidad = this.localidadJComboBox.getSelectedIndex();
+            idLocalidad--;
+           
+            UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),tipoDeDocumentoJComboBox.getSelectedItem(),numeroDocumentoJTextArea.getText(),this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPassword());
+        }
+    
 }
