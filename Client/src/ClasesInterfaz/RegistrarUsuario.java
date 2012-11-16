@@ -294,7 +294,8 @@ private void cargarRegiones()
             
             try {
                 localidades = RecidenciaDB.obtenerLocalidades(codigo);
-            } catch (SQLException f) {
+            } catch (SQLException f) {//todo
+            System.out.println(f.getMessage());
             }
             localidadJComboBox.removeAllItems();
             localidadJComboBox.addItem("Seleccionar Localidad");
@@ -311,7 +312,53 @@ private void cargarRegiones()
 
 
 
+    private Boolean datosValidosRegistro(){
+        String errores="";
+        
+        if(this.contraseñaJPasswordField.getPass().length()<6 || this.contraseñaJPasswordField.getPass().length()<6){
+            this.contraseñaJPasswordField.error(); 
+            this.repetirContraseñaJPasswordField.error(); 
+            errores="\n\tLa longitud mínima para las contraseñas es de 6 carácteres ";
+        }
+        if(correoElectrónicoJTextArea.getText().equals("")){
+            this.correoElectrónicoJTextArea.error(); 
+            errores=errores +"\n\tCorreo electrónico vacio ";
+        }
+        if(this.contraseñaJPasswordField.getPass().equals("") || this.repetirContraseñaJPasswordField.getPass().equals("")){
+            errores= errores +"\n\tLas contraseñas no deben ser vacias ";
+            this.correoElectrónicoJTextArea.error(); 
+        }
+        if(!this.contraseñaJPasswordField.getPass().equals(this.repetirContraseñaJPasswordField.getPass())){
+            errores= errores +"\n\tLas contraseñas no coinciden ";
+                 this.contraseñaJPasswordField.error(); 
+                 this.repetirContraseñaJPasswordField.error(); 
+        }
+        if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
+            errores=errores + "\n\tNo has seleccionado un tipo de documento ";
+        }
+        if(numeroDocumentoJTextArea.getTexto().length()<7 || numeroDocumentoJTextArea.getTexto().length()>8){
+            errores=errores + "\n\tNúmero de documento inválido ";
+        }
+        System.out.println("Correo electronico en consulta:" +correoElectrónicoJTextArea.getText());
+        try {
+            if(UsuarioGestor.existeUsuario(correoElectrónicoJTextArea.getText())){
+                errores= errores +"\n\tEl correo ya se encuentra en uso ";
+                this.correoElectrónicoJTextArea.error();
+            }
+        } catch (SQLException e) {//todo
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Errore lenght vale:" +errores.length());
+        if(errores.length()>0){
+            JOptionPane.showOptionDialog(null, "Tienes los siguientes errores: \n"+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            return false;
+        }
+        else{
+            return true;
+        }
 
+    }
+    
     private void aceptoTérminosCondicionesUsoJCheckBox_stateChanged(ChangeEvent e) {
         
         
@@ -324,37 +371,19 @@ private void cargarRegiones()
     }
     
     private void aceptarJButton_actionPerformed(ActionEvent e) {
-        if(correoElectrónicoJTextArea.getText()== ""){
-            this.correoElectrónicoJTextArea.error(); 
-        }
-        if(!this.contraseñaJPasswordField.getPass().equals(this.repetirContraseñaJPasswordField.getPass())){
-                 this.contraseñaJPasswordField.error(); 
-                 this.repetirContraseñaJPasswordField.error(); 
-        }
-        if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
-                JOptionPane.showOptionDialog(null, "Debes seleccionar un tipo de documento, ¡Acordarse de generar un metodo para rellenar el campo con rojo para este error!"  , "Campos no seleccionados", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-        }
-           /* System.out.println(nombreJTextArea.getText());
-            System.out.println(apellidoJTextArea.getText());
-            System.out.println(correoElectrónicoJTextArea.getText());
-            System.out.println(contraseñaJPasswordField.getPassword());
-            System.out.println(repetirContraseñaJPasswordField.getPassword());
-            System.out.println(tipoDeDocumentoJComboBox.getSelectedItem());
-            System.out.println(numeroDocumentoJTextArea.getText());
-            System.out.println(localidadJComboBox.getSelectedItem());
-*/
+        Boolean datosValidos= false;
+        datosValidos= datosValidosRegistro();
+        System.out.println("Datos validos vale" +datosValidos);
+        if(datosValidos){
             int idLocalidad = this.localidadJComboBox.getSelectedIndex();
-            idLocalidad--;
-        try {
-            if(!UsuarioGestor.existeUsuario(correoElectrónicoJTextArea.getText())){
-            int doc = Integer.parseInt(numeroDocumentoJTextArea.getTexto());
-                UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
-            }
-            else{
-                JOptionPane.showOptionDialog(null, "El usuario se ha registrado con exito"  , "Registro de usuario", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-            }
-        } catch (SQLException f) {//todo
+         idLocalidad--;
+         int doc = Integer.parseInt(numeroDocumentoJTextArea.getTexto());
+         UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
+         JOptionPane.showOptionDialog(null, "El usuario se ha registrado con exito"  , "Registro exitoso", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+         //FIJARSE SI ESTA BIEN QUE CSE CIERRE ASI
+        this.setVisible(false);
         }
     }
+    
     
 }

@@ -19,8 +19,9 @@ public class UsuarioDB {
             Conexion conexion = new Conexion();
             conexion.conectar();
             String consultasql;
-            // DEBEMOS AGRERGAR LA CIUDAD...
-            consultasql="INSERT INTO usuario(correo, pass, apellido, nombre, tipo_documento, numero_documento,id_ciudad) VALUES ("+usuario.getCorreoElectronico() +"," +"?," +contraseña+"," +usuario.getNombre() +"," +usuario.getTipoDocumento() +","+ usuario.getNumeroDocumento() +"," +usuario.getCiudad().getCodigo() +");";
+            consultasql="INSERT INTO usuario(correo, pass, apellido, nombre, tipo_documento, numero_documento,id_ciudad) VALUES" +
+                "('"+usuario.getCorreoElectronico() +"','"+contraseña+ "','" +usuario.getApellido() +"','" +usuario.getNombre() +
+                        "','" +usuario.getTipoDocumento() +"','"+ usuario.getNumeroDocumento() +"','" +usuario.getCiudad().getCodigo() +"');";
             System.out.println(consultasql);
             return conexion.consultar(consultasql);
      }
@@ -28,18 +29,16 @@ public class UsuarioDB {
          Conexion conexion = new Conexion();
          conexion.conectar();
          String consultasql;
-         consultasql="select correo from usuario where correo="+correo;
-         ResultSet resultado = conexion.consultar(consultasql);        
+         consultasql="select correo from usuario where correo='"+correo+"'";
+         ResultSet resultado = conexion.consultar(consultasql); 
+         resultado.next();
          if(resultado.getString("correo").equals(correo)){
              return true;
          }
          else{
-             return false;
+             return true;
          }
     }
-                          
-    public Boolean existeUsuarioContraseña(String contraseña){
-                       return true;}
     public Boolean actualizarUsuario(Usuario usuario){
                        return true;}
     public static ResultSet autentica(String correo, String contraseña) throws SQLException {
@@ -47,6 +46,6 @@ public class UsuarioDB {
             conexion.conectar();
             String consultasql;
             consultasql="select * from Usuario where correo = '" +correo + "' and pass = '"+contraseña+"'";
-        return conexion.consultar(consultasql);
-}
+            return conexion.consultar(consultasql);
+    }
 }
