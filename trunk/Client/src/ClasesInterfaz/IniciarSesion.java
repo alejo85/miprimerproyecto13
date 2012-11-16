@@ -141,16 +141,15 @@ public class IniciarSesion extends JDialog {
 
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         
-       this.usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
+       usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
        if(usuarioActual==null){
            JOptionPane.showOptionDialog(null, "El correo electronico o la contraseña son incorrector"  , "Error al Autencicar", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
            this.correoElectronicoJTextArea.error();
            this.contraeñaJPasswordField.error();
        }
        else{
-           JOptionPane.showOptionDialog(null, "Has sido autenticado exitosamente"  , "Usuario logueado", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+           JOptionPane.showOptionDialog(null, "Bienvenido "+usuarioActual.getCorreoElectronico()  , "Usuario logueado", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
             this.setVisible(false);
-           
        }
        }
         

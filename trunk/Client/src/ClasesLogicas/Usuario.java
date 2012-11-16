@@ -18,7 +18,6 @@ public class Usuario {
 
     public Usuario(Integer idUsuario, String correoElectronico, String apellido, String nombre, String tipoDocumento,Integer numeroDocumento, Localidad ciudad, Logueo[] logueos) {
         super();
-        this.idUsuario = idUsuario;
         this.correoElectronico = correoElectronico;
         this.apellido = apellido;
         this.nombre = nombre;

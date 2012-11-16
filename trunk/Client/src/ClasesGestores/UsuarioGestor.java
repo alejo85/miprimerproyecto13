@@ -55,34 +55,25 @@ public class UsuarioGestor {
      * @return
      */
     public static Usuario loguearseUsuario(String correoElectronico, String contraseña){
-        Usuario uss= null;
-
-            ResultSet resultado=null;
-            System.out.println(correoElectronico);
-            System.out.println(contraseña);
+        Usuario usuario= null;
+        ResultSet resultado=null;
         try {
-            
             resultado = UsuarioDB.autentica(correoElectronico, contraseña);
+            resultado.next();
         } catch (SQLException e) {//todo
         System.out.println(e.getMessage());
         }
-
-           
         try {
-            resultado.next();
-            if(resultado.next()){
-               return uss;
+            if(resultado.getString("correo").equals(correoElectronico)){
+                usuario= new Usuario();
+                usuario.setCorreoElectronico(resultado.getString("correo"));
+                /* FALTA INSTANCIAR EL OBJETO COMPLETO*/
             }
-            else{
-               uss= new Usuario();
-               int id = resultado.getInt("id_usuario");
-           }
            
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            //todo
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());//todo
         }
-            return uss;
+            return usuario;
         }
 
     
