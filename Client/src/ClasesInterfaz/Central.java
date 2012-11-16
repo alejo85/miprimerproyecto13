@@ -245,8 +245,8 @@ public class Central extends JFrame {
            nuevo.setVisible(true);
            }
     void iniciarSecion_ActionPerformed (ActionEvent e){
-           IniciarSesion nuevo= new IniciarSesion();
-           nuevo.setVisible(true);
+           /*IniciarSesion nuevo= new IniciarSesion();
+           nuevo.setVisible(true);*/
     }
 
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
@@ -261,8 +261,8 @@ public class Central extends JFrame {
 
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
         IniciarSesion ven = new IniciarSesion();
-        this.setVisible(false);
-        ven.setVisible(true);
+       ven.setVisible(true);
+       usuarioActual=ven.getUsuarioActual();
     }
 
     private void jButtonAceptar7_actionPerformed(ActionEvent e) {
