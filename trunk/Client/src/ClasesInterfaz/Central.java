@@ -95,12 +95,21 @@ public class Central extends JFrame {
         jLabelSistemaDeGestiónDeCompetenciasDeportivas.setFont(new Font("Tahoma", 0, 38));
         jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalAlignment(SwingConstants.CENTER);
         jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalTextPosition(SwingConstants.CENTER);
-        usuarioJTextArea.setBounds(new Rectangle(490, 5, 130, 30));
-        usuarioJTextArea.setFont(new Font("Tahoma", 0, 13));
-        usuarioJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelUsuario.setText("Usuario:");
+        usuarioJTextArea.setBounds(new Rectangle(490, 5, 270, 35));
+        usuarioJTextArea.setFont(new Font("Tahoma", 0, 16));
+        usuarioJTextArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 1, 1));
+        
+        if(usuarioActual==null){
+        usuarioJTextArea.setText("No autenticado");
+        }
+        else{
+            usuarioJTextArea.setText(usuarioActual.getCorreoElectronico());
+        }
+
         jLabelUsuario.setBounds(new Rectangle(435, 10, 75, 25));
         jLabelUsuario.setFont(new Font("Tahoma", 0, 13));
+        jLabelUsuario.setText("Usuario:");
         modificarUsuarioJButton.setText("Modificar");
         modificarUsuarioJButton.setBounds(new Rectangle(820, 10, 135, 30));
         modificarUsuarioJButton.setFont(new Font("Tahoma", 0, 13));
