@@ -1,6 +1,5 @@
 package ClasesInterfaz;
 
-
 import ClasesGestores.UsuarioGestor;
 
 import ClasesLogicas.Usuario;
@@ -51,6 +50,7 @@ public class IniciarSesion extends JDialog {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    
     }
 
     private void jbInit() throws Exception {
@@ -149,7 +149,8 @@ public class IniciarSesion extends JDialog {
        }
        else{
            JOptionPane.showOptionDialog(null, "Has sido autenticado exitosamente"  , "Usuario logueado", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-           this.setVisible(false);
+            this.setVisible(false);
+           
        }
        }
         

@@ -66,10 +66,10 @@ public class Central extends JFrame {
         this.setJMenuBar( menuBar );
         this.getContentPane().setLayout( null );
         this.setSize(new Dimension(1019, 698));
-        this.setTitle( "Sistema De Gestion De Competencias" );
+        this.setTitle( "Sistema De Gestión De Competencias" );
         menuFile.setText( "Archivo" );
         menuFileExit.setText( "Salir" );
-        iniciarSecion.setText("Iniciar Secion");
+        iniciarSecion.setText("Iniciar Sesión");
         modificar.setText("Modificar");
         buscarCompetencia.setText("Buscar Competencias");
         buscarTodasLasCompetencias.setText("Buscar Todas las Competencias");
@@ -247,7 +247,7 @@ public class Central extends JFrame {
     void iniciarSecion_ActionPerformed (ActionEvent e){
            IniciarSesion nuevo= new IniciarSesion();
            nuevo.setVisible(true);
-           }
+    }
 
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
         System.exit(0);
@@ -261,6 +261,7 @@ public class Central extends JFrame {
 
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
         IniciarSesion ven = new IniciarSesion();
+        this.setVisible(false);
         ven.setVisible(true);
     }
 
@@ -283,6 +284,10 @@ public class Central extends JFrame {
     private void jButtonAceptar10_actionPerformed(ActionEvent e) {
         BuscarTodasLasCompetenciaDeportiva ven = new BuscarTodasLasCompetenciaDeportiva(usuarioActual);
         ven.setVisible(true);
+    }
+    
+    private void actualizarUsuarioActual(Usuario usuario){
+        usuarioActual=usuario;
     }
 }
 
