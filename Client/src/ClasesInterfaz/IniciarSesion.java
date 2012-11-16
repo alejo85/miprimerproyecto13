@@ -147,6 +147,10 @@ public class IniciarSesion extends JDialog {
            this.correoElectronicoJTextArea.error();
            this.contraeñaJPasswordField.error();
        }
+       else{
+           JOptionPane.showOptionDialog(null, "Has sido autenticado exitosamente"  , "Usuario logueado", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+           this.setVisible(false);
+       }
+       }
         
-    }
 }
