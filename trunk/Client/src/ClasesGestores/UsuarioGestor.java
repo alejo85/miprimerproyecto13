@@ -30,6 +30,7 @@ public class UsuarioGestor {
         try {
             UsuarioDB.registrarUsuario(usuario,contraseña);
         } catch (SQLException e) {//todo xception sql
+        System.out.println(e.getMessage());
         }
         return usuario;
     }
@@ -57,36 +58,37 @@ public class UsuarioGestor {
         Usuario uss= null;
 
             ResultSet resultado=null;
-
+            System.out.println(correoElectronico);
+            System.out.println(contraseña);
         try {
+            
             resultado = UsuarioDB.autentica(correoElectronico, contraseña);
         } catch (SQLException e) {//todo
         System.out.println(e.getMessage());
         }
 
-
+           
         try {
-            if(resultado.getRow()!=0)
-            {
-                uss= new Usuario();
-                int id = resultado.getInt("id_usuario");
+            resultado.next();
+            if(resultado.next()){
+               return uss;
             }
-
+            else{
+               uss= new Usuario();
+               int id = resultado.getInt("id_usuario");
+           }
+           
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             //todo
         }
-        return uss;
+            return uss;
         }
+
     
     public static Boolean existeUsuario(String correo) throws SQLException {
 
             return UsuarioDB.existeUsuario(correo);
       
-    }
-
-
-    public static void crearUsuario(String string, String string1, String string2, Object object, int i,
-                                    Localidad localidad, String string3) {
     }
 }
