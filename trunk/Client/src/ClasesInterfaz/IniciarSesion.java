@@ -8,6 +8,7 @@ import InterfazGrafica.CampoTexto.AreaTextoCorreo;
 
 import InterfazGrafica.CampoTexto.AreaTextoPassword;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -19,6 +20,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -39,8 +41,8 @@ public class IniciarSesion extends JDialog {
     private AreaTextoPassword contraeñaJPasswordField = new AreaTextoPassword(10);
     private Usuario usuarioActual = null;
 
-    public IniciarSesion() {
-        this(null, "", false);
+    public IniciarSesion(JFrame padre) {
+        this(padre, "", false);
     }
 
     public IniciarSesion(Frame parent, String title, boolean modal) {
@@ -149,7 +151,10 @@ public class IniciarSesion extends JDialog {
        }
        else{
            JOptionPane.showOptionDialog(null, "Bienvenido "+usuarioActual.getCorreoElectronico()  , "Usuario logueado", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-            this.setVisible(false);
+            
+           Central padre = (Central)this.getParent();
+           padre.setUsuarioActual(usuarioActual);
+           this.dispose();
        }
        }
         
