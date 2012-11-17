@@ -16,13 +16,16 @@ public class UsuarioDB {
     
     public static ResultSet registrarUsuario(Usuario usuario, String  contraseña) throws SQLException {
             Conexion conexion = new Conexion();
+            ResultSet resultado=null;
             conexion.conectar();
             String consultasql;
             consultasql="INSERT INTO usuario(correo, pass, apellido, nombre, tipo_documento, numero_documento,id_ciudad) VALUES" +
                 "('"+usuario.getCorreoElectronico() +"','"+contraseña+ "','" +usuario.getApellido() +"','" +usuario.getNombre() +
                         "','" +usuario.getTipoDocumento() +"','"+ usuario.getNumeroDocumento() +"','" +usuario.getCiudad().getCodigo() +"');";
+         
+         resultado = conexion.consultar(consultasql);
          conexion.cerrarConexion();
-            return conexion.consultar(consultasql);
+            return resultado;
      }
     public static Boolean existeUsuario(String correo) throws SQLException {
          Conexion conexion = new Conexion();
