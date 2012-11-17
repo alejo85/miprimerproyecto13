@@ -260,9 +260,12 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
-        IniciarSesion ven = new IniciarSesion();
+        IniciarSesion ven = new IniciarSesion(this);
        ven.setVisible(true);
-       usuarioActual=ven.getUsuarioActual();
+        usuarioActual= ven.getUsuarioActual();
+    
+        actualizarUsuarioActual();
+        
     }
 
     private void jButtonAceptar7_actionPerformed(ActionEvent e) {
@@ -286,8 +289,19 @@ public class Central extends JFrame {
         ven.setVisible(true);
     }
     
-    private void actualizarUsuarioActual(Usuario usuario){
-        usuarioActual=usuario;
+    private void actualizarUsuarioActual(){
+        if(usuarioActual!=null){
+        this.usuarioJTextArea.setText(usuarioActual.getCorreoElectronico());
+            this.repaint();
+        
+        }
+    }
+    public void setUsuarioActual(Usuario usuario){
+        this.usuarioActual=usuario;
+        this.usuarioJTextArea.setText(usuarioActual.getNombre()+" "+usuarioActual.getApellido());
+        
+        
+       
     }
 }
 
