@@ -30,7 +30,7 @@ public class UsuarioGestor {
         try {
             UsuarioDB.registrarUsuario(usuario,contraseña);
         } catch (SQLException e) {//todo xception sql
-        System.out.println(e.getMessage());
+        System.out.println("Al registrar en la base de datos"+e.getMessage());
         }
         return usuario;
     }
@@ -67,6 +67,8 @@ public class UsuarioGestor {
             if(resultado.getString("correo").equals(correoElectronico)){
                 usuario= new Usuario();
                 usuario.setCorreoElectronico(resultado.getString("correo"));
+                usuario.setApellido(resultado.getString("Apellido"));
+                usuario.setNombre(resultado.getString("Nombre"));
                 /* FALTA INSTANCIAR EL OBJETO COMPLETO*/
             }
            
