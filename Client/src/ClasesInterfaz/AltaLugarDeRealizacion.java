@@ -2,8 +2,7 @@ package ClasesInterfaz;
 
 
 import ClasesGestores.DeporteGestor;
-
-import ClasesGestores.UsuarioGestor;
+import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Deporte;
 import ClasesLogicas.Usuario;
@@ -15,9 +14,7 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.FocusAdapter;
-
 import java.awt.event.FocusEvent;
 
 import java.sql.SQLException;
@@ -32,11 +29,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 
 
 public class AltaLugarDeRealizacion extends JDialog {
@@ -250,7 +244,15 @@ public class AltaLugarDeRealizacion extends JDialog {
 
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         
-        datosValidosRegistro();
+        if(datosValidosRegistro()){
+
+            try {
+                LugaresDeRealizacionGestores.altaLugar(this.codigoJTextArea.getText(), this.nombreLugarDeRealizaciónJTextArea.getText(), this.descripciónJTextArea.getText(), dSeleccionados, usuarioActual );
+            } catch (SQLException f) {
+                System.out.println(f.getMessage());
+            }
+        }
+        
         
     }
     
@@ -274,7 +276,7 @@ public class AltaLugarDeRealizacion extends JDialog {
             listaDeportesSeleccionadosJList.setForeground(Color.white);
         }
       
-        System.out.println("Errore lenght vale:" +errores.length());
+       
         if(errores.length()>0){
             JOptionPane.showOptionDialog(null, "Tienes los siguientes errores: \n"+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
             return false;

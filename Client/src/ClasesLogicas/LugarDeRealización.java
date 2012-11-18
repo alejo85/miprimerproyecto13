@@ -14,7 +14,9 @@ public class LugarDeRealización {
         this.disponibilidad = disponibilidad;
         this.deportesAsociados = deportesAsociados;
     }
-
+    public LugarDeRealización() {
+        super();
+    }
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
