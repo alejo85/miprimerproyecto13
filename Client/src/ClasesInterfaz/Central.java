@@ -29,7 +29,7 @@ public class Central extends JFrame {
     private JMenu menuFile = new JMenu();
     private JMenu competencia = new JMenu();
     private JMenu lugar = new JMenu();
-    private Usuario usuarioActual=null;
+    private Usuario usuarioActual;
     private JMenuItem menuFileExit = new JMenuItem();
     private JMenuItem iniciarSecion = new JMenuItem();
     private JMenuItem modificar = new JMenuItem();
@@ -55,6 +55,16 @@ public class Central extends JFrame {
     private JButton salirJButton = new JButton();
 
     public Central() {
+        this.usuarioActual=null;
+        try {
+            jbInit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // EN CASO DE HABER INICIADO SESION SE ACTUALIZA EL USUARIO ACTUAL
+    public Central(Usuario usuario) {
+        this.actualizarUsuarioActual(usuario);
         try {
             jbInit();
         } catch (Exception e) {
@@ -118,14 +128,28 @@ public class Central extends JFrame {
                     jButtonAceptar5_actionPerformed(e);
                 }
             });
+        // SI ESTA LOGUEADO EL BOTON CUMPLE LA FUNCION DE CERRAR SESION
+        if(usuarioActual!=null){
         iniciarSesiónJButton.setBounds(new Rectangle(820, 55, 135, 30));
         iniciarSesiónJButton.setFont(new Font("Tahoma", 0, 13));
-        iniciarSesiónJButton.setText("Iniciar Sesión");
+        iniciarSesiónJButton.setText("Cerrar Sesión");
         iniciarSesiónJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonAceptar6_actionPerformed(e);
                 }
             });
+        }
+        // SI NO ESTA LOGUEADO EL BOTON CUMPLE LA FUNCION DE ABRIR INTERFAZ INICIAR SESION
+        else{
+            iniciarSesiónJButton.setBounds(new Rectangle(820, 55, 135, 30));
+            iniciarSesiónJButton.setFont(new Font("Tahoma", 0, 13));
+            iniciarSesiónJButton.setText("Iniciar Sesión");
+            iniciarSesiónJButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jButtonAceptar6_actionPerformed(e);
+                    }
+                });
+        }
         registrarseJButton.setText("Registrarse");
         registrarseJButton.setBounds(new Rectangle(820, 95, 135, 30));
         registrarseJButton.setFont(new Font("Tahoma", 0, 13));
@@ -258,14 +282,17 @@ public class Central extends JFrame {
         /*ModificarUsuario ven = new ModificarUsuario(usuarioActual);
         ven.setVisible(true);*/
     }
-
+// BOTON INICIAR SESION
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
-        IniciarSesion ven = new IniciarSesion(this);
-       ven.setVisible(true);
-        usuarioActual= ven.getUsuarioActual();
-    
-        actualizarUsuarioActual();
-        
+        if(usuarioActual==null){
+            IniciarSesion ven = new IniciarSesion();
+            ven.setVisible(true);
+            this.dispose();
+        }
+        else{
+            this.dispose();
+            new Principal();
+        }
     }
 
     private void jButtonAceptar7_actionPerformed(ActionEvent e) {
@@ -289,19 +316,8 @@ public class Central extends JFrame {
         ven.setVisible(true);
     }
     
-    private void actualizarUsuarioActual(){
-        if(usuarioActual!=null){
-        this.usuarioJTextArea.setText(usuarioActual.getCorreoElectronico());
-            this.repaint();
-        
-        }
-    }
-    public void setUsuarioActual(Usuario usuario){
-        this.usuarioActual=usuario;
-        this.usuarioJTextArea.setText(usuarioActual.getNombre()+" "+usuarioActual.getApellido());
-        
-        
-       
+    private void actualizarUsuarioActual(Usuario usuario){
+        usuarioActual=usuario;
     }
 }
 
