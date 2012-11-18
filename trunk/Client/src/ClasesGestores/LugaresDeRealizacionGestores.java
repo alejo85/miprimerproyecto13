@@ -47,7 +47,7 @@ public class LugaresDeRealizacionGestores {
      * @param codigoDeporte
      * @return
      */
-    public Vector <LugarDeRealización> lugaresDeRealizaciónAsociadosAlDeporte(int codigoDeporte){
+    public static Vector <LugarDeRealización> lugaresDeRealizaciónAsociadosAlDeporte(String correoElectronico, int codigoDeporte){
         return new Vector<LugarDeRealización>();
         }
     public static LugarDeRealización unLugar(LugarDeRealización [] lugares){
