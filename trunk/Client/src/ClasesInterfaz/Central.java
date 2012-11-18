@@ -1,6 +1,5 @@
 package ClasesInterfaz;
 
-import ClasesGestores.UsuarioGestor;
 
 import ClasesLogicas.Usuario;
 
@@ -114,7 +113,7 @@ public class Central extends JFrame {
         usuarioJTextArea.setText("No autenticado");
         }
         else{
-            usuarioJTextArea.setText(usuarioActual.getCorreoElectronico());
+            usuarioJTextArea.setText(usuarioActual.getNombre()+" "+usuarioActual.getApellido());
         }
 
         jLabelUsuario.setBounds(new Rectangle(435, 10, 75, 25));
@@ -318,6 +317,7 @@ public class Central extends JFrame {
     
     private void actualizarUsuarioActual(Usuario usuario){
         usuarioActual=usuario;
+        
     }
 }
 
