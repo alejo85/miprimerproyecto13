@@ -1,10 +1,19 @@
 package ClasesGestores;
 
 
+import ClasesBD.DeportesDB;
+import ClasesBD.LugarDeRealizaciónDB;
+
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.Usuario;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.Date;
 import java.util.Vector;
+
 
 public class LugaresDeRealizacionGestores {
     public LugaresDeRealizacionGestores() {
@@ -47,8 +56,36 @@ public class LugaresDeRealizacionGestores {
      * @param codigoDeporte
      * @return
      */
-    public static Vector <LugarDeRealización> lugaresDeRealizaciónAsociadosAlDeporte(String correoElectronico, int codigoDeporte){
-        return new Vector<LugarDeRealización>();
+    public static Vector <LugarDeRealización> lugaresDeRealizaciónAsociadosAlDeporte(String correoElectronico, int codigoDeporte) throws SQLException {
+            Vector<LugarDeRealización> resultado = new Vector<LugarDeRealización>();
+        
+                
+            
+            String nombre, id;
+            ResultSet resultadoSQL;
+            resultadoSQL = DeportesDB.buscarDeporte();
+            Vector <Deporte> listaDeportes=new Vector <Deporte>();
+            
+            LugarDeRealización unLugar;
+
+
+
+        
+                while (resultadoSQL.next()){
+                    id = resultadoSQL.getString("Codigo");
+                    nombre = resultadoSQL.getString("Nombre");
+                    unLugar = new LugarDeRealización();
+                    unLugar.setCodigo(id);                       
+                    resultado.add(unLugar);
+
+            
+                }
+            
+           
+        
+        
+        
+        return resultado;
         }
     public static LugarDeRealización unLugar(LugarDeRealización [] lugares){
             int i;
@@ -61,6 +98,22 @@ public class LugaresDeRealizacionGestores {
   
         
         return lugares[i];
+        }
+
+    /**
+     * @param codigo
+     * @param nombre
+     * @param descripcion
+     * @param dSeleccionados
+     * @param creado
+     * @throws SQLException
+     */
+    public static void altaLugar(String codigo, String nombre, String descripcion,Vector <Deporte> dSeleccionados, Usuario creado)throws SQLException{
+            java.util.Date fecha = new Date();
+            String dia = ""+fecha.getDay()+"/"+fecha.getMonth()+"/"+fecha.getYear();
+            String hora= ""+fecha.getHours()+":"+fecha.getMinutes();
+            ResultSet resultado=null;
+            resultado= LugarDeRealizaciónDB.altaLugarDeRealización( codigo,  nombre, descripcion, dSeleccionados,  creado.getCorreoElectronico(),  dia,  hora);
         }
     
 }

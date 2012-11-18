@@ -1,11 +1,7 @@
 package ClasesInterfaz;
 
 
-import ClasesBD.LugarDeRealizaciónDB;
-import ClasesBD.RecidenciaDB;
-
 import ClasesGestores.DeporteGestor;
-
 import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Deporte;
@@ -28,6 +24,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -47,6 +44,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
 
     private AreaTextoNombre nombreDeLaCompetenciaJTextArea = new AreaTextoNombre(60);
+    private DefaultListModel listModel = new DefaultListModel();
     private JLabel jLabelNombreDeLaCompetencia = new JLabel();
     private JLabel jLabelDeporte = new JLabel();
     private JComboBox deporteJComboBox = new JComboBox();
@@ -54,7 +52,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JLabel jLabelModalidad = new JLabel();
     private JComboBox modalidadJComboBox = new JComboBox();
     private JLabel jLabelReglamento = new JLabel();
-    private JList lugarDeRealizaciónJList = new JList();
+    private JList lugarDeRealizaciónJList = new JList(listModel);
     private JScrollBar jScrollBar1 = new JScrollBar();
     private JPanel modalidadLigaJPanel = new JPanel();
     private Usuario ussuarioActual = null;
@@ -419,15 +417,20 @@ public class AltaCompetenciaDeportiva extends JDialog {
         int codigo = this.deporte.get(deporte).getIdDeporte();
         try {
             lugares = LugaresDeRealizacionGestores.lugaresDeRealizaciónAsociadosAlDeporte(ussuarioActual.getCorreoElectronico(),codigo );
-        } catch (SQLException f) {
+        } 
+        catch (SQLException f) {
             System.out.println(f.getMessage());
         }
-        provinciaJComboBox.removeAllItems();
-        provinciaJComboBox.addItem("Seleccionar Provincia");
-        for(int i = 0; i< region.size(); i++)
-        {
-            this.provinciaJComboBox.addItem(region.elementAt(i).getNombre());
-        }
+        cargarLugares();
     }
+    
+    private void cargarLugares(){
 
+        for(int i =0; i<lugares.size();i++)
+        {
+            listModel.addElement(lugares.get(i).getNombre());
+                
+            }
+        
+        }
 }
