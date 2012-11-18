@@ -1,57 +1,43 @@
 package ClasesInterfaz;
 
 
-import ClasesBD.DeportesDB;
-
 import ClasesGestores.DeporteGestor;
+
 
 import ClasesLogicas.Deporte;
 import ClasesLogicas.Usuario;
 
-import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
 import InterfazGrafica.CampoTexto.AreaTextoNumerico;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.net.URL;
+
+import java.util.Vector;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.Element;
-import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.StyledEditorKit;
 
-import oracle.jdeveloper.layout.VerticalFlowLayout;
+import oracle.jdeveloper.layout.XYConstraints;
+import oracle.jdeveloper.layout.XYLayout;
 
 
 public class AltaCompetenciaDeportiva extends JDialog {
@@ -98,12 +84,18 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private int tamaño = 10;
     private String fuenteLetra;
     private JPanel editorReglamentoJPanel = new JPanel();
-    private Deporte deporte[];
+    private Vector <Deporte> deporte;
     private RichTextBox box = new RichTextBox();
     private JPanel reglamentoJPanel = new JPanel();
     private JButton jButton1 = new JButton();
     private JScrollPane panel;
-    private VerticalFlowLayout verticalFlowLayout1 = new VerticalFlowLayout();
+    private XYLayout xYLayout1 = new XYLayout();
+    private JButton subrayadoJButton = new JButton();
+    private JButton negritaJButton = new JButton();
+    private JButton cursivaJButton = new JButton();
+    private JButton aliniaciónDerechaJButton = new JButton();
+    private JButton aliniaciónCentradaJButton = new JButton();
+    private JButton alinaciónIzquierdaJButton = new JButton();
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
@@ -302,17 +294,35 @@ public class AltaCompetenciaDeportiva extends JDialog {
         agregarJButton.setFont(new Font("Tahoma", 0, 13));
         jScrollBar2.setBounds(new Rectangle(885, 115, 15, 165));
         editorReglamentoJPanel.setBounds(new Rectangle(30, 385, 710, 275));
-
+        subrayadoJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/subrayado.png")));
+        negritaJButton.setFont(new Font("Tahoma", 0, 13));
+        negritaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/negrita.png")));
+        
+        cursivaJButton.setFont(new Font("Tahoma", 0, 13));
+        cursivaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/cursiva.png")));
         editorReglamentoJPanel.setLayout(null);
 
         reglamentoJPanel.setBounds(new Rectangle(65, 415, 540, 220));
-        reglamentoJPanel.setLayout(verticalFlowLayout1);
+        reglamentoJPanel.setLayout(xYLayout1);
         jButton1.setText("jButton1");
 
      //   panel.setPreferredSize(new Dimension(350, 270));
-     
-   
-        box.setelementos();
+        Action italicAction = new ItalicAction();
+        Action boldAction = new BoldAction();
+        Action uAction = new UnderLineAction();
+        cursivaJButton.setAction(italicAction);
+        subrayadoJButton.setAction(uAction);
+        subrayadoJButton.setFont(new Font("Tahoma", 0, 13));
+        negritaJButton.setAction(boldAction);
+
+        aliniaciónDerechaJButton.setFont(new Font("Tahoma", 0, 13));
+        aliniaciónDerechaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/text_align_right.png")));
+        aliniaciónCentradaJButton.setFont(new Font("Tahoma", 0, 13));
+        aliniaciónCentradaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/text_align_center.png")));
+        alinaciónIzquierdaJButton.setFont(new Font("Tahoma", 0, 13));
+        alinaciónIzquierdaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/text_align_left.png")));
+
+     //   box.setelementos();
 
         puntosPorPartidoEmpatadoJTextArea.setVisible(false);
         jLabelPuntosPorPartidoEmpatado.setVisible(false);
@@ -327,7 +337,13 @@ public class AltaCompetenciaDeportiva extends JDialog {
         panel = box.getJScrollPane();
         panel.setSize(350, 270);
         reglamentoJPanel.setPreferredSize(new Dimension(350,270));
-        reglamentoJPanel.add(panel, null);
+        reglamentoJPanel.add(alinaciónIzquierdaJButton, new XYConstraints(245, 10, 35, 30));
+        reglamentoJPanel.add(aliniaciónCentradaJButton, new XYConstraints(285, 10, 35, 30));
+        reglamentoJPanel.add(aliniaciónDerechaJButton, new XYConstraints(325, 10, 35, 30));
+        reglamentoJPanel.add(cursivaJButton, new XYConstraints(365, 10, 35, 30));
+        reglamentoJPanel.add(negritaJButton, new XYConstraints(405, 10, 35, 30));
+        reglamentoJPanel.add(subrayadoJButton, new XYConstraints(445, 10, 35, 30));
+        reglamentoJPanel.add(panel, new XYConstraints(0, 45, 530, 110));
         this.getContentPane().add(reglamentoJPanel, null);
         this.getContentPane().add(agregarJButton, null);
         this.getContentPane().add(jLabelDisponibilidad, null);
@@ -366,7 +382,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
     }
 
-    private Deporte[] buscarDeportes() {
+    private Vector <Deporte> buscarDeportes() {
 
         return DeporteGestor.instanciarDeportes();
     }
@@ -419,4 +435,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
     }
 
 
+
+
+
+
+    
+  
 }

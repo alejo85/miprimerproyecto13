@@ -1,9 +1,33 @@
 package ClasesInterfaz;
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.text.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Action;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.Element;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.StyledEditorKit;
+
 
 public class RichTextBox{
 
@@ -55,25 +79,9 @@ public class RichTextBox{
 
   public JScrollPane getJScrollPane(){return scrollPane;}
   public JPanel getJPanel(){return north;}
-    private class BoldAction extends StyledEditorKit.StyledTextAction {
-        public BoldAction() {
-            super("bold");
-        }
+    
 
-        public void actionPerformed(ActionEvent e) {
-            JEditorPane editor = getEditor(e);
-            if (editor != null) {
-                StyledEditorKit kit = getStyledEditorKit(editor);
-                MutableAttributeSet attr = kit.getInputAttributes();
-                boolean bold = (StyleConstants.isBold(attr)) ? false : true;
-                SimpleAttributeSet sas = new SimpleAttributeSet();
-                StyleConstants.setBold(sas, bold);
-                setCharacterAttributes(editor, sas, false);
-            }
-        }
-    }
-
-    private class UnderLineAction extends StyledEditorKit.StyledTextAction {
+    public class UnderLineAction extends StyledEditorKit.StyledTextAction {
         public UnderLineAction() {
             super("underline");
         }
@@ -91,7 +99,7 @@ public class RichTextBox{
         }
     }
 
-    private class ItalicAction extends StyledEditorKit.StyledTextAction {
+    public class ItalicAction extends StyledEditorKit.StyledTextAction {
         public ItalicAction() {
             super("font-italic");
         }
@@ -109,7 +117,7 @@ public class RichTextBox{
         }
     }
 
-    private class ForegroundAction extends StyledEditorKit.StyledTextAction {
+    public class ForegroundAction extends StyledEditorKit.StyledTextAction {
         JColorChooser colorChooser = new JColorChooser();
         JDialog dialog = new JDialog();
         boolean noChange = false;
@@ -161,7 +169,7 @@ public class RichTextBox{
         private Color fg;
     }
 
-    private class FontAction extends StyledEditorKit.StyledTextAction {
+    public class FontAction extends StyledEditorKit.StyledTextAction {
         private String family;
         private float fontSize;
         JDialog formatText;

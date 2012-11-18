@@ -184,7 +184,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
 
     private void buscarJButton_actionPerformed(ActionEvent e) {
-        String  resultado [][]= CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(), this.DeporteJComboBox.getSelectedItem().toString(), modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString());
+        String  resultado[][] = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(), this.DeporteJComboBox.getSelectedItem().toString(), modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString());
         //todo cargar en la interfaz codigo de robert
         
     }

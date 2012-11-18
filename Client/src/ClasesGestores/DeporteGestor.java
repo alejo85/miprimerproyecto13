@@ -8,6 +8,8 @@ import ClasesLogicas.Deporte;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.Vector;
+
 public class DeporteGestor {
     public DeporteGestor() {
         super();
@@ -16,17 +18,17 @@ public class DeporteGestor {
     /**
      * @return
      */
-    public static Deporte[] instanciarDeportes(){
+    public static Vector <Deporte> instanciarDeportes(){
         
             
         int id;
         String nombre;
         ResultSet resultado;
         resultado = DeportesDB.buscarDeporte();
-        Deporte listaDeportes []= new Deporte[36];
+        Vector <Deporte> listaDeportes=new Vector <Deporte>();
         
         Deporte unDeporte;
-        int i=0;
+
 
 
         try {
@@ -35,9 +37,9 @@ public class DeporteGestor {
                 nombre = resultado.getString("nombre");
                 unDeporte = new Deporte(id,nombre);
                                        
-                listaDeportes[i] = unDeporte;
+                listaDeportes.add(unDeporte);
 
-                i++;
+        
             }
         
         } catch (SQLException e) {
