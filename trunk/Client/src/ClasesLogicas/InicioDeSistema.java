@@ -3,6 +3,7 @@ package ClasesLogicas;
 
 import ClasesBD.Conexion;
 
+import ClasesInterfaz.Alta;
 import ClasesInterfaz.AltaCompetenciaDeportiva;
 import ClasesInterfaz.Principal;
 
@@ -17,7 +18,7 @@ public class InicioDeSistema {
     public static  void main(String[] args) {
 
         Principal ventana = new Principal();
-    
+
         /*AltaCompetenciaDeportiva ven1 = new AltaCompetenciaDeportiva();
         AltaLugarDeRealizacion ven2 = new AltaLugarDeRealizacion();
         AltaParticipante ven3 = new AltaParticipante();

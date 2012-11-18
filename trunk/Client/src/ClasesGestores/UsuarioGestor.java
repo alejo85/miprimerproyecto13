@@ -1,12 +1,10 @@
 package ClasesGestores;
 
+
 import ClasesBD.UsuarioDB;
 
 import ClasesLogicas.Localidad;
-import ClasesLogicas.Logueo;
 import ClasesLogicas.Usuario;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,7 +79,8 @@ public class UsuarioGestor {
     
     public static Boolean existeUsuario(String correo) throws SQLException {
 
-            return UsuarioDB.existeUsuario(correo);
-      
-    }
+              return UsuarioDB.existeUsuario(correo);
+       
+      }
+
 }

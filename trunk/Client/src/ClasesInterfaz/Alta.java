@@ -19,6 +19,8 @@ import java.awt.event.ActionListener;
 
 import java.net.URL;
 
+import java.util.Vector;
+
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -81,7 +83,7 @@ public class Alta extends JDialog {
     private int tamaño = 10;
     private String fuenteLetra;
     private JPanel editorReglamentoJPanel = new JPanel();
-    private Deporte deporte[];
+    private Vector <Deporte> deporte;
     private RichTextBox box = new RichTextBox();
     private JPanel reglamentoJPanel = new JPanel();
     private JButton jButton1 = new JButton();
@@ -379,7 +381,7 @@ public class Alta extends JDialog {
 
     }
 
-    private Deporte[] buscarDeportes() {
+    private Vector <Deporte> buscarDeportes() {
 
         return DeporteGestor.instanciarDeportes();
     }

@@ -265,7 +265,7 @@ public class Central extends JFrame {
     
     
     void buscarLugarDeRealizacion_ActionPerformed (ActionEvent e){
-           BuscarLugareDeRealizacion nuevo= new BuscarLugareDeRealizacion();
+           BuscarLugareDeRealizacion nuevo= new BuscarLugareDeRealizacion(usuarioActual);
            nuevo.setVisible(true);
            }
     void iniciarSecion_ActionPerformed (ActionEvent e){
@@ -302,7 +302,7 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar8_actionPerformed(ActionEvent e) {
-        BuscarLugareDeRealizacion ven = new BuscarLugareDeRealizacion();
+        BuscarLugareDeRealizacion ven = new BuscarLugareDeRealizacion(usuarioActual);
         ven.setVisible(true);
     }
 

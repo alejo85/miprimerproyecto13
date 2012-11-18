@@ -2,6 +2,8 @@ package ClasesInterfaz;
 
 import ClasesLogicas.LugarDeRealización;
 
+import ClasesLogicas.Usuario;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -43,9 +45,10 @@ public class BuscarLugareDeRealizacion extends JDialog {
     private JButton cancelarJButton = new JButton();
     private JButton aceptarJButton = new JButton();
     private Vector <LugarDeRealización> lugar=null;
-
-    public BuscarLugareDeRealizacion() {
+    private Usuario usuarioActual=null;
+    public BuscarLugareDeRealizacion(Usuario usuario) {
         this(null, "", false);
+        usuarioActual=usuario;
     }
 
     public BuscarLugareDeRealizacion(Frame parent, String title, boolean modal) {
@@ -157,21 +160,16 @@ public class BuscarLugareDeRealizacion extends JDialog {
 
 
     private void nuevoLugarDeRealizaciónJButton_actionPerformed(ActionEvent e) {
-        AltaLugarDeRealizacion ven = new AltaLugarDeRealizacion();
+        AltaLugarDeRealizacion ven = new AltaLugarDeRealizacion(usuarioActual);
         ven.setVisible(true);
     }
 
     private void modificarLugarDeRealizaciónJButton_actionPerformed(ActionEvent e) {
-        ModificarLugarDeRealizacion ven = new ModificarLugarDeRealizacion();
-        ven.setVisible(true);
+        JOptionPane.showOptionDialog(null, "Por el momento esta funcionalidad no esta disponible"  , "Funcionalidad no disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
 
     private void eliminarLugarDeRealizaciónJButton_actionPerformed(ActionEvent e) {
-        int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea eliminar El lugar Nombre Lugar?.", "Eliminar Lugar De Realización.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
-        if (respuesta == 0){
-        
-            JOptionPane.showOptionDialog(null, "Se ha eliminado El lugar Nombre Lugar "  , "Lugar De Realización Eliminado.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-        }   
+        JOptionPane.showOptionDialog(null, "Por el momento esta funcionalidad no esta disponible"  , "Funcionalidad no disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
@@ -179,5 +177,6 @@ public class BuscarLugareDeRealizacion extends JDialog {
     }
 
     private void buscarJButton_actionPerformed(ActionEvent e) {
+        JOptionPane.showOptionDialog(null, "Por el momento esta funcionalidad no esta disponible"  , "Funcionalidad no disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
 }

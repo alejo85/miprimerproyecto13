@@ -44,7 +44,7 @@ public class AreaTextoPassword extends JPasswordField
   if ((!texto.matches(expresion)) || (texto == "") || (lon < 6))
   {
    this.setForeground(Color.white);
-   this.setBackground(Color.orange);
+   this.setBackground(Color.red);
    buenDato = false;
   }
   else buenDato = true;
