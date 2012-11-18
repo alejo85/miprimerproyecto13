@@ -1,8 +1,11 @@
 package ClasesBD;
 
+
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealización;
-import ClasesLogicas.Participante;
+
+import java.sql.ResultSet;
+
 
 public class LugarDeRealizaciónDB {
     public LugarDeRealizaciónDB() {
@@ -18,4 +21,11 @@ public class LugarDeRealizaciónDB {
                        return true;}
     public boolean eliminarLugarDeRealización(LugarDeRealización lugar){
                        return true;}
+    public static ResultSet buscarLugarDeRealización(String correoElectronico,int idDeporteSeleccionado ){
+                           ResultSet resultado=null;
+                       
+                       
+                       return resultado;
+                       
+                       }
 }
