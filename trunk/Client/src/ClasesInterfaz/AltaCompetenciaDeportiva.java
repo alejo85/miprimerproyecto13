@@ -1,10 +1,15 @@
 package ClasesInterfaz;
 
 
+import ClasesBD.LugarDeRealizaciónDB;
+import ClasesBD.RecidenciaDB;
+
 import ClasesGestores.DeporteGestor;
 
+import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Deporte;
+import ClasesLogicas.LugarDeRealización;
 import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
@@ -18,13 +23,11 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.net.URL;
+import java.sql.SQLException;
 
 import java.util.Vector;
 
-import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -84,18 +87,13 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private int tamaño = 10;
     private String fuenteLetra;
     private JPanel editorReglamentoJPanel = new JPanel();
-    private Vector <Deporte> deporte;
+    private  Vector <Deporte> deporte;
+    private  Vector <LugarDeRealización> lugares;
     private RichTextBox box = new RichTextBox();
     private JPanel reglamentoJPanel = new JPanel();
     private JButton jButton1 = new JButton();
     private JScrollPane panel;
     private XYLayout xYLayout1 = new XYLayout();
-    private JButton subrayadoJButton = new JButton();
-    private JButton negritaJButton = new JButton();
-    private JButton cursivaJButton = new JButton();
-    private JButton aliniaciónDerechaJButton = new JButton();
-    private JButton aliniaciónCentradaJButton = new JButton();
-    private JButton alinaciónIzquierdaJButton = new JButton();
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
@@ -294,12 +292,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         agregarJButton.setFont(new Font("Tahoma", 0, 13));
         jScrollBar2.setBounds(new Rectangle(885, 115, 15, 165));
         editorReglamentoJPanel.setBounds(new Rectangle(30, 385, 710, 275));
-        subrayadoJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/subrayado.png")));
-        negritaJButton.setFont(new Font("Tahoma", 0, 13));
-        negritaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/negrita.png")));
-        
-        cursivaJButton.setFont(new Font("Tahoma", 0, 13));
-        cursivaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/cursiva.png")));
+
         editorReglamentoJPanel.setLayout(null);
 
         reglamentoJPanel.setBounds(new Rectangle(65, 415, 540, 220));
@@ -307,22 +300,9 @@ public class AltaCompetenciaDeportiva extends JDialog {
         jButton1.setText("jButton1");
 
      //   panel.setPreferredSize(new Dimension(350, 270));
-        Action italicAction = new ItalicAction();
-        Action boldAction = new BoldAction();
-        Action uAction = new UnderLineAction();
-        cursivaJButton.setAction(italicAction);
-        subrayadoJButton.setAction(uAction);
-        subrayadoJButton.setFont(new Font("Tahoma", 0, 13));
-        negritaJButton.setAction(boldAction);
-
-        aliniaciónDerechaJButton.setFont(new Font("Tahoma", 0, 13));
-        aliniaciónDerechaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/text_align_right.png")));
-        aliniaciónCentradaJButton.setFont(new Font("Tahoma", 0, 13));
-        aliniaciónCentradaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/text_align_center.png")));
-        alinaciónIzquierdaJButton.setFont(new Font("Tahoma", 0, 13));
-        alinaciónIzquierdaJButton.setIcon(new ImageIcon(new URL("http://helloit.com.ar/tp/text_align_left.png")));
-
-     //   box.setelementos();
+     
+        listarDeportes();
+        box.setelementos();
 
         puntosPorPartidoEmpatadoJTextArea.setVisible(false);
         jLabelPuntosPorPartidoEmpatado.setVisible(false);
@@ -337,13 +317,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         panel = box.getJScrollPane();
         panel.setSize(350, 270);
         reglamentoJPanel.setPreferredSize(new Dimension(350,270));
-        reglamentoJPanel.add(alinaciónIzquierdaJButton, new XYConstraints(245, 10, 35, 30));
-        reglamentoJPanel.add(aliniaciónCentradaJButton, new XYConstraints(285, 10, 35, 30));
-        reglamentoJPanel.add(aliniaciónDerechaJButton, new XYConstraints(325, 10, 35, 30));
-        reglamentoJPanel.add(cursivaJButton, new XYConstraints(365, 10, 35, 30));
-        reglamentoJPanel.add(negritaJButton, new XYConstraints(405, 10, 35, 30));
-        reglamentoJPanel.add(subrayadoJButton, new XYConstraints(445, 10, 35, 30));
-        reglamentoJPanel.add(panel, new XYConstraints(0, 45, 530, 110));
+        reglamentoJPanel.add(panel, new XYConstraints(5, 45, 530, 140));
         this.getContentPane().add(reglamentoJPanel, null);
         this.getContentPane().add(agregarJButton, null);
         this.getContentPane().add(jLabelDisponibilidad, null);
@@ -379,10 +353,12 @@ public class AltaCompetenciaDeportiva extends JDialog {
      */
     private void listarDeportes() {
         deporte = buscarDeportes(); //todo ver que devuelve buscarDeportes en clasesBD
-
+        for(int i=0; i<deporte.size();i++){
+        deporteJComboBox.addItem(deporte.get(i).getNombre());
+        }
     }
 
-    private Vector <Deporte> buscarDeportes() {
+    private  Vector <Deporte> buscarDeportes() {
 
         return DeporteGestor.instanciarDeportes();
     }
@@ -431,14 +407,27 @@ public class AltaCompetenciaDeportiva extends JDialog {
     }
 
     private void deporteJComboBox_actionPerformed(ActionEvent e) {
-        //TODO aca llamamos al metodo para seleccionar el deporte
+        if(deporteJComboBox.getSelectedIndex()>0)
+        {
+         cargarLugaresDeRealizacion();
+        }
+        
+    }
+    private void cargarLugaresDeRealizacion() {
+        int deporte = this.deporteJComboBox.getSelectedIndex();
+        deporte--;
+        int codigo = this.deporte.get(deporte).getIdDeporte();
+        try {
+            lugares = LugaresDeRealizacionGestores.lugaresDeRealizaciónAsociadosAlDeporte(ussuarioActual.getCorreoElectronico(),codigo );
+        } catch (SQLException f) {
+            System.out.println(f.getMessage());
+        }
+        provinciaJComboBox.removeAllItems();
+        provinciaJComboBox.addItem("Seleccionar Provincia");
+        for(int i = 0; i< region.size(); i++)
+        {
+            this.provinciaJComboBox.addItem(region.elementAt(i).getNombre());
+        }
     }
 
-
-
-
-
-
-    
-  
 }
