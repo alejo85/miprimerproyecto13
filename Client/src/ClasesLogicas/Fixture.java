@@ -27,6 +27,12 @@ public class Fixture{
         this.rondas = rondas;
     }
 
+        
+    public void addRonda(Ronda ronda){
+        this.rondas[this.rondas.length]= ronda;
+    }
+
+
     public Ronda[] getRondas() {
         return rondas;
     }

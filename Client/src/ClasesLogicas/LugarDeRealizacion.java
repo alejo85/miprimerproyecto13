@@ -1,11 +1,11 @@
 package ClasesLogicas;
 
-public class LugarDeRealización {
+public class LugarDeRealizacion {
     private String codigo, Nombre, descripcion;
     private int disponibilidad;
     private Deporte[] deportesAsociados;
 
-    public LugarDeRealización(String codigo, String Nombre, String descripcion, int disponibilidad,
+    public LugarDeRealizacion(String codigo, String Nombre, String descripcion, int disponibilidad,
                               Deporte[] deportesAsociados) {
         super();
         this.codigo = codigo;
@@ -14,9 +14,11 @@ public class LugarDeRealización {
         this.disponibilidad = disponibilidad;
         this.deportesAsociados = deportesAsociados;
     }
-    public LugarDeRealización() {
+
+    public LugarDeRealizacion() {
         super();
     }
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -56,9 +58,9 @@ public class LugarDeRealización {
     public Deporte[] getDeportesAsociados() {
         return deportesAsociados;
     }
-  
-    public void menosDisponibilidad(){
+
+    public void menosDisponibilidad() {
         disponibilidad--;
-        }
+    }
 
 }

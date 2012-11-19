@@ -18,13 +18,13 @@ public class Competencia{
 	private Liga liga;
 	private Usuario usuarioCreador;
 	private Vector <Posicion> tablaDePosiciones;
-	private LugarDeRealización[] lugares;
+	private LugarDeRealizacion[] lugares;
 	private Participante[] participantes;
 
     public Competencia(int idCompetencia, int tantosPorPartidoGanado, int tantosPorPartidoAusenciaContrincante,
                        int cantidadDeSets, String nombreCompetencia, String modalidad, String formaDePuntuacion,
                        String estado, String reglamento, Deporte deporte, Fixture fixture, Liga liga,
-                       Usuario usuarioCreador, Vector<Posicion> tablaDePosiciones, LugarDeRealización[] lugares,
+                       Usuario usuarioCreador, Vector<Posicion> tablaDePosiciones, LugarDeRealizacion[] lugares,
                        Participante[] participantes) {
         super();
         this.idCompetencia = idCompetencia;
@@ -167,11 +167,11 @@ public class Competencia{
         return tablaDePosiciones;
     }
 
-    public void setLugares(LugarDeRealización[] lugares) {
+    public void setLugares(LugarDeRealizacion[] lugares) {
         this.lugares = lugares;
     }
 
-    public LugarDeRealización[] getLugares() {
+    public LugarDeRealizacion[] getLugares() {
         return lugares;
     }
 

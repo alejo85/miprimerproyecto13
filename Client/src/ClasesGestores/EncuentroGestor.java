@@ -1,7 +1,7 @@
 package ClasesGestores;
 
 import ClasesLogicas.Encuentro;
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
 import ClasesLogicas.Puntos;
 import ClasesLogicas.Resultados;
@@ -19,7 +19,7 @@ public class EncuentroGestor {
      * @param lugar
      * @return
      */
-    public Encuentro nuevoEncuentro(Participante participanteA, Participante participanteB, LugarDeRealización lugar){
+    public Encuentro nuevoEncuentro(Participante participanteA, Participante participanteB, LugarDeRealizacion lugar){
         Encuentro retorno = new Encuentro();
         //TODO llamar a la base de datos
     
@@ -56,19 +56,12 @@ public class EncuentroGestor {
      * @param lugares se pasa por copia
      * @return
      */
-    public Encuentro[] crearEncuantro(LugarDeRealización lugares[], int cantidaDeEncuentros)
+    public static Encuentro crearEncuentro(LugarDeRealizacion lugar)
     {
-         Encuentro [] encuentros=null;
-        for (int i=0; i < cantidaDeEncuentros; i++)
-        {
-            Encuentro temp=new Encuentro();
-            LugarDeRealización lugar = LugaresDeRealizacionGestores.unLugar(lugares);
-            temp.setLocación(lugar);
-            encuentros[i]=temp;
-            
-            
-        }
-     return encuentros;
+         Encuentro temp = new Encuentro();
+         temp.setLocación(lugar);
+                   
+     return temp;
         
      }
 

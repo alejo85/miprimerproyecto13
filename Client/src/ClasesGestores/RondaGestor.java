@@ -1,7 +1,8 @@
 package ClasesGestores;
 
 
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.Encuentro;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
 
@@ -15,11 +16,15 @@ public class RondaGestor {
         
         
 
-    public Ronda crearRonda(){
+    public static Ronda crearRonda(LugarDeRealizacion[] lugares,int cantidadDeEncuentros){
         
-        return new Ronda();
         
-        }
+        Ronda laRonda = new Ronda();
+        
+        laRonda.setGanadores(RondaGestor.generarSubRondaLiga(lugares,cantidadDeEncuentros));
+       
+       return laRonda;     
+    }
 
     
     public void actualizarRonda(){}
@@ -29,19 +34,7 @@ public class RondaGestor {
     public void estadoRonda(){}
 
 
-    /**
-     * @param lugares
-     * @return
-     */
-    public Subronda generarSubRonda(LugarDeRealización lugares[]){
-        return new Subronda();
-        }
-
-
-
-    
-
-
+  
     /**
      * @param rondaAA = ronda A Actualizar
      */
@@ -56,5 +49,39 @@ public class RondaGestor {
         }
         
           
+    }
+    
+    public static Subronda generarSubRondaLiga(LugarDeRealizacion[] lugares,int cantidadDeEncuentros){
+        
+        Subronda subronda = new Subronda();
+        
+        LugarDeRealizacion[] lugaresAux = lugares;
+        int random;
+        int repeticiones = cantidadDeEncuentros;
+        Encuentro encuentros[] = new Encuentro[cantidadDeEncuentros];
+                
+        //todo corregir el diagrama de secuencias!!! 17.1
+            
+        while (repeticiones>0){
+            
+            random = (int)Math.random()*lugaresAux.length;
+            if (lugaresAux[random].getDisponibilidad()>0){
+            
+                for(int i=0; i < cantidadDeEncuentros; i++){
+                    
+                   encuentros[i] = EncuentroGestor.crearEncuentro(lugaresAux[random]); 
+                }
+                
+                repeticiones--;
+        
+            }
+        }
+        
+        subronda.setEncuentros(encuentros);
+       
+        return subronda; 
+        
+        
+        
     }
 }

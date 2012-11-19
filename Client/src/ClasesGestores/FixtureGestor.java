@@ -2,8 +2,9 @@ package ClasesGestores;
 
 
 import ClasesLogicas.Fixture;
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
+import ClasesLogicas.Ronda;
 
 public class FixtureGestor {
     public FixtureGestor() {
@@ -15,11 +16,23 @@ public class FixtureGestor {
      * @param participantes
      * @return
      */
-    public Fixture generarFixture(LugarDeRealización[] lugares,
-                       Participante[] participantes){
+    public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
+        Participante[] participantes, int cantidadDeParticipantes){
         
-        return new Fixture();
+        Fixture fixture = new Fixture();
+        Ronda ronda;
+
+        
+        for (int i=0; i<cantidadDeParticipantes;i++){            
+            ronda = RondaGestor.crearRonda(lugares,cantidadDeParticipantes/2);
+            fixture.addRonda(ronda);   
         }
+        
+        
+        return fixture;
+        }
+   
+   
     public void actualizar(){}
     
 }

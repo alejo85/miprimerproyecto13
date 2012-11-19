@@ -1,6 +1,6 @@
 package ClasesInterfaz;
 
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.LugarDeRealizacion;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -38,13 +38,13 @@ public class ModificarLugarDeRealizacion extends JDialog {
     private JScrollBar jScrollBar3 = new JScrollBar();
     private JLabel jLabelDeportesSeleccionados = new JLabel();
     private JLabel jLabelDeportes = new JLabel();
-    private LugarDeRealización lugarActual=null;
+    private LugarDeRealizacion lugarActual=null;
 
-    public ModificarLugarDeRealizacion(LugarDeRealización lugar) {
+    public ModificarLugarDeRealizacion(LugarDeRealizacion lugar) {
         this(null, "", false, lugar);
     }
 
-    public ModificarLugarDeRealizacion(Frame parent, String title, boolean modal,LugarDeRealización lugar) {
+    public ModificarLugarDeRealizacion(Frame parent, String title, boolean modal,LugarDeRealizacion lugar) {
         super(parent, title, modal);
         try {
             lugarActual=lugar;

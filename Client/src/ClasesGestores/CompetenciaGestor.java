@@ -5,7 +5,9 @@ import ClasesBD.CompetenciaDB;
 
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.Fixture;
+import ClasesLogicas.LugarDeRealizacion;
+import ClasesLogicas.Participante;
 import ClasesLogicas.Posicion;
 import ClasesLogicas.Usuario;
 
@@ -30,7 +32,7 @@ public class CompetenciaGestor {
      * @param deporte
      * @param lugares
      */
-    public void altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealización[] lugares ){
+    public void altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealizacion[] lugares ){
         
         }
 
@@ -45,7 +47,7 @@ public class CompetenciaGestor {
      * @param deporte
      * @param lugares
      */
-    public void modificarCompetencia(int idCompetencia, Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealización[] lugares ){
+    public void modificarCompetencia(int idCompetencia, Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealizacion[] lugares ){
         
         }
 
@@ -66,7 +68,7 @@ public class CompetenciaGestor {
      * @param deporte
      * @param lugares
      */
-    public void modificarCompetencia(Competencia competenciaAModificar, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealización[] lugares  ){
+    public void modificarCompetencia(Competencia competenciaAModificar, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealizacion[] lugares  ){
     
         }
 
@@ -98,7 +100,7 @@ public class CompetenciaGestor {
      * @param deporte
      * @param lugares
      */
-    public void instanciarCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealización[] lugares ){
+    public void instanciarCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, LugarDeRealizacion[] lugares ){
      
         }
 
@@ -174,9 +176,49 @@ public class CompetenciaGestor {
     /**j
      * @param competenci
      */
-    public void generarFixture(ClasesLogicas.Competencia competenci){
+    public static void generarFixture(ClasesLogicas.Competencia competencia){
         
+        
+        Participante[] participantes = competencia.getParticipantes();
+        LugarDeRealizacion[] lugares = competencia.getLugares();
+        String modalidad = competencia.getModalidad();
+        Fixture fixture;
+        
+        switch (Modalidad.valueOf(modalidad)){
+            
+        //todo definir EN TODOS LADOS modalidad como Simple y Doble    
+        case Liga:
+            
+            fixture = FixtureGestor.generarFixture(lugares, participantes, participantes.length);
+            competencia.setFixture(fixture);
+            CompetenciaDB.guardarFixture(competencia);            
+            
+            break;
+        
+        case Simple:
+            break;
+        
+        case Doble:
+            break;
+        
+        default:
+            break;
+            
         }
+           
+                    
+                    
+    }
+            
+      
+
+    private static boolean validarDisponibilidad() {
+        return false;
+    }
+
+        
+        
+        
 
     /**
      * @param tabla
@@ -224,4 +266,10 @@ public class CompetenciaGestor {
         return retorno;
         }
     
+    
+    public static enum Modalidad
+    {
+        Liga, Simple, Doble; 
+    }
+
 }

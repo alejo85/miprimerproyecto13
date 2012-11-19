@@ -2,7 +2,7 @@ package ClasesBD;
 
 
 import ClasesLogicas.Deporte;
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.LugarDeRealizacion;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -74,7 +74,8 @@ public class LugarDeRealizaciónDB {
             System.out.println(consultasql);
             try {
                 resultado = conexion.consultar(consultasql);
-            } catch (SQLException f) {
+            } 
+            catch (SQLException f) {
                 System.out.println(f.getMessage());
             }
         try {
@@ -91,9 +92,9 @@ public class LugarDeRealizaciónDB {
         }
     public boolean existeLugarDeRealización(String nombreLugarDerealización){
                        return true;}
-    public boolean modificarLugarDeRealización(LugarDeRealización lugar){
+    public boolean modificarLugarDeRealización(LugarDeRealizacion lugar){
                        return true;}
-    public boolean eliminarLugarDeRealización(LugarDeRealización lugar){
+    public boolean eliminarLugarDeRealización(LugarDeRealizacion lugar){
                        return true;}
     public static ResultSet buscarLugarDeRealización(String correoElectronico,int idDeporteSeleccionado ){
                            ResultSet resultado=null;
