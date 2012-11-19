@@ -46,7 +46,6 @@ public class DeporteGestor {
             System.out.println(e.getMessage());
             //TODO exepcion de SQL
         }
-               
         return listaDeportes;
         }
 }
