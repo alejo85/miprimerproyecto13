@@ -23,25 +23,6 @@ public class Ronda {
         this.perdedores = perdedores;
     }
 
-    public Ronda(int numeroDeRonda, Subronda[] ganadores, Subronda[] perdedores) {
-        super();
-        this.numeroDeRonda = numeroDeRonda;
-        this.ganadores = ganadores;
-        this.perdedores = perdedores;
-    }
-
-    public Ronda(int numeroDeRonda, Subronda[] ganadores) {
-        super();
-        this.numeroDeRonda = numeroDeRonda;
-        this.ganadores = ganadores;
-    }
-
-    public Ronda(int idRonda, int numeroDeRonda, Subronda[] ganadores) {
-        super();
-        this.idRonda = idRonda;
-        this.numeroDeRonda = numeroDeRonda;
-        this.ganadores = ganadores;
-    }
 
     public void setIdRonda(int idRonda) {
         this.idRonda = idRonda;
@@ -61,6 +42,11 @@ public class Ronda {
 
     public void setGanadores(Subronda[] ganadores) {
         this.ganadores = ganadores;
+    }
+    
+    public void setGanadores (Subronda ganadores){
+        
+        this.ganadores[this.ganadores.length] = ganadores;
     }
 
     public Subronda[] getGanadores() {

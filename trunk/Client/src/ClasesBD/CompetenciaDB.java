@@ -130,7 +130,7 @@ public class CompetenciaDB {
     /**
      * @param competencia
      */
-    public void guardarFixture(ClasesLogicas.Competencia competencia){
+    public static void guardarFixture(ClasesLogicas.Competencia competencia){
 
  
     }

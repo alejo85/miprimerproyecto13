@@ -10,7 +10,7 @@ public class Encuentro {
     private Participante perdedor;
     private Boolean empate;
     private Stack <Resultados> resultado;
-    private LugarDeRealización locación;
+    private LugarDeRealizacion locación;
 
 
     public Encuentro() {
@@ -19,7 +19,7 @@ public class Encuentro {
 
     public Encuentro(Integer idEncuentro,Participante participanteA, Participante participanteB,
                      Participante ganador, Participante perdedor, Boolean empate, Stack<Resultados> resultado,
-                     LugarDeRealización locación) {
+                     LugarDeRealizacion locación) {
         super();
         this.idEncuentro = idEncuentro;
         this.participanteA = participanteA;
@@ -32,7 +32,7 @@ public class Encuentro {
     }
 
     public Encuentro(Participante participanteA, Participante participanteB, Participante ganador,
-                     Participante perdedor, Boolean empate, Stack<Resultados> resultado, LugarDeRealización locación) {
+                     Participante perdedor, Boolean empate, Stack<Resultados> resultado, LugarDeRealizacion locación) {
         super();
         this.participanteA = participanteA;
         this.participanteB = participanteB;
@@ -43,7 +43,7 @@ public class Encuentro {
         this.locación = locación;
     }
 
-    public Encuentro(LugarDeRealización locación) {
+    public Encuentro(LugarDeRealizacion locación) {
         super();
         this.locación = locación;
     }
@@ -108,11 +108,11 @@ public class Encuentro {
         return resultado;
     }
 
-    public void setLocación(LugarDeRealización locación) {
+    public void setLocación(LugarDeRealizacion locación) {
         this.locación = locación;
     }
 
-    public LugarDeRealización getLocación() {
+    public LugarDeRealizacion getLocación() {
         return locación;
     }
 

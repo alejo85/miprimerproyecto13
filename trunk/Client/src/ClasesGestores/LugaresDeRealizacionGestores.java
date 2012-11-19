@@ -5,7 +5,7 @@ import ClasesBD.DeportesDB;
 import ClasesBD.LugarDeRealizaciónDB;
 
 import ClasesLogicas.Deporte;
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Usuario;
 
 import java.sql.ResultSet;
@@ -28,9 +28,9 @@ public class LugaresDeRealizacionGestores {
      * @param deportesAsociados
      * @return
      */
-    public LugarDeRealización altaLugaresDeRealizacion(String codigo, String Nombre, String descripcion, int disponibilidad,
+    public LugarDeRealizacion altaLugaresDeRealizacion(String codigo, String Nombre, String descripcion, int disponibilidad,
                               Deporte[] deportesAsociados){
-        return new LugarDeRealización( codigo,  Nombre,  descripcion,  disponibilidad, deportesAsociados);}
+        return new LugarDeRealizacion( codigo,  Nombre,  descripcion,  disponibilidad, deportesAsociados);}
 
     /**
      * @param codigo
@@ -56,8 +56,8 @@ public class LugaresDeRealizacionGestores {
      * @param codigoDeporte
      * @return
      */
-    public static Vector <LugarDeRealización> lugaresDeRealizaciónAsociadosAlDeporte(String correoElectronico, int codigoDeporte) throws SQLException {
-            Vector<LugarDeRealización> resultado = new Vector<LugarDeRealización>();
+    public static Vector <LugarDeRealizacion> lugaresDeRealizaciónAsociadosAlDeporte(String correoElectronico, int codigoDeporte) throws SQLException {
+            Vector<LugarDeRealizacion> resultado = new Vector<LugarDeRealizacion>();
         
                 
             
@@ -66,7 +66,7 @@ public class LugaresDeRealizacionGestores {
             resultadoSQL = DeportesDB.buscarDeporte();
             Vector <Deporte> listaDeportes=new Vector <Deporte>();
             
-            LugarDeRealización unLugar;
+            LugarDeRealizacion unLugar;
 
 
 
@@ -74,7 +74,7 @@ public class LugaresDeRealizacionGestores {
                 while (resultadoSQL.next()){
                     id = resultadoSQL.getString("Codigo");
                     nombre = resultadoSQL.getString("Nombre");
-                    unLugar = new LugarDeRealización();
+                    unLugar = new LugarDeRealizacion();
                     unLugar.setCodigo(id);                       
                     resultado.add(unLugar);
 
@@ -87,7 +87,7 @@ public class LugaresDeRealizacionGestores {
         
         return resultado;
         }
-    public static LugarDeRealización unLugar(LugarDeRealización [] lugares){
+    public static LugarDeRealizacion unLugar(LugarDeRealizacion [] lugares){
             int i;
         do{
                i = (int)(Math.random()*(lugares.length));
