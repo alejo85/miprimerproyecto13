@@ -185,7 +185,7 @@ public class IniciarSesion extends JDialog {
            this.contraeñaJPasswordField.error();
        }
        else{
-           JOptionPane.showOptionDialog(null, "Bienvenido "+usuarioActual.getCorreoElectronico()  , "Usuario logueado", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+           JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/check.png"));
            this.setVisible(false);
            new Principal(this.getUsuarioActual());
        }
