@@ -91,45 +91,45 @@ public class RegistrarUsuario extends JDialog {
     }
 
     private void jbInit() throws Exception {
-        this.setSize(new Dimension(975, 689));
+        this.setSize(new Dimension(540, 600));
         this.getContentPane().setLayout( null );
         this.setTitle("Registrar Usuario");
-        correoElectrónicoJTextArea.setBounds(new Rectangle(350, 40, 375, 30));
+        correoElectrónicoJTextArea.setBounds(new Rectangle(130, 20, 375, 30));
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelCorreoElectrónico.setText("Correo electrónico");
-        jLabelCorreoElectrónico.setBounds(new Rectangle(215, 40, 135, 25));
+        jLabelCorreoElectrónico.setBounds(new Rectangle(15, 20, 135, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 13));
         jLabelContraseña.setText("Contraseña");
-        jLabelContraseña.setBounds(new Rectangle(215, 85, 135, 25));
+        jLabelContraseña.setBounds(new Rectangle(15, 65, 135, 25));
         jLabelContraseña.setFont(new Font("Tahoma", 0, 13));
-        contraseñaJPasswordField.setBounds(new Rectangle(350, 85, 375, 30));
+        contraseñaJPasswordField.setBounds(new Rectangle(130, 65, 375, 30));
         contraseñaJPasswordField.setMinimumSize(new Dimension(5, 22));
         contraseñaJPasswordField.setFont(new Font("Tahoma", 0, 13));
         contraseñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        repetirContraseñaJPasswordField.setBounds(new Rectangle(350, 130, 375, 30));
+        repetirContraseñaJPasswordField.setBounds(new Rectangle(130, 110, 375, 30));
         repetirContraseñaJPasswordField.setMinimumSize(new Dimension(5, 22));
         repetirContraseñaJPasswordField.setFont(new Font("Tahoma", 0, 13));
         repetirContraseñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelRepetirContraseña.setText("Repetir Contraseña");
-        jLabelRepetirContraseña.setBounds(new Rectangle(215, 130, 135, 25));
+        jLabelRepetirContraseña.setBounds(new Rectangle(15, 110, 135, 25));
         jLabelRepetirContraseña.setFont(new Font("Tahoma", 0, 13));
-        apellidoJTextArea.setBounds(new Rectangle(350, 175, 375, 30));
+        apellidoJTextArea.setBounds(new Rectangle(130, 155, 375, 30));
         apellidoJTextArea.setFont(new Font("Tahoma", 0, 13));
         apellidoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelApellido.setText("Apellido");
-        jLabelApellido.setBounds(new Rectangle(215, 175, 135, 25));
+        jLabelApellido.setBounds(new Rectangle(15, 155, 135, 25));
         jLabelApellido.setFont(new Font("Tahoma", 0, 13));
-        nombreJTextArea.setBounds(new Rectangle(350, 215, 375, 30));
+        nombreJTextArea.setBounds(new Rectangle(130, 195, 375, 30));
         nombreJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelNombre.setText("Nombre");
-        jLabelNombre.setBounds(new Rectangle(215, 215, 135, 25));
+        jLabelNombre.setBounds(new Rectangle(15, 195, 135, 25));
         jLabelNombre.setFont(new Font("Tahoma", 0, 13));
         jLabelTipoDeDocumento.setText("Tipo De Documento");
-        jLabelTipoDeDocumento.setBounds(new Rectangle(215, 260, 135, 25));
+        jLabelTipoDeDocumento.setBounds(new Rectangle(15, 247, 135, 25));
         jLabelTipoDeDocumento.setFont(new Font("Tahoma", 0, 13));
-        tipoDeDocumentoJComboBox.setBounds(new Rectangle(350, 265, 80, 30));
+        tipoDeDocumentoJComboBox.setBounds(new Rectangle(140, 245, 80, 30));
         tipoDeDocumentoJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
         tipoDeDocumentoJComboBox.setMinimumSize(new Dimension(2, 18));
         tipoDeDocumentoJComboBox.setPreferredSize(new Dimension(2, 18));
@@ -144,23 +144,23 @@ public class RegistrarUsuario extends JDialog {
         tipoDeDocumentoJComboBox.addItem("LE");
         tipoDeDocumentoJComboBox.addItem("LC");
         tipoDeDocumentoJComboBox.addItem("PAS");
-        numeroDocumentoJTextArea.setBounds(new Rectangle(580, 265, 145, 30));
+        numeroDocumentoJTextArea.setBounds(new Rectangle(360, 245, 145, 30));
         numeroDocumentoJTextArea.setFont(new Font("Tahoma", 0, 13));
         numeroDocumentoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelNDocumento.setText("Nº De Documento");
-        jLabelNDocumento.setBounds(new Rectangle(445, 265, 135, 25));
+        jLabelNDocumento.setBounds(new Rectangle(245, 245, 135, 25));
         jLabelNDocumento.setFont(new Font("Tahoma", 0, 13));
         jLabelLocalidad.setText("Localidad");
-        jLabelLocalidad.setBounds(new Rectangle(215, 390, 135, 25));
+        jLabelLocalidad.setBounds(new Rectangle(15, 370, 135, 25));
         jLabelLocalidad.setFont(new Font("Tahoma", 0, 13));
         jLabelProvincia.setText("Provincia");
-        jLabelProvincia.setBounds(new Rectangle(215, 350, 135, 25));
+        jLabelProvincia.setBounds(new Rectangle(15, 330, 135, 25));
         jLabelProvincia.setFont(new Font("Tahoma", 0, 13));
         jLabelPaís.setText("País");
-        jLabelPaís.setBounds(new Rectangle(215, 310, 135, 25));
+        jLabelPaís.setBounds(new Rectangle(15, 290, 135, 25));
         jLabelPaís.setFont(new Font("Tahoma", 0, 13));
         aceptoTérminosCondicionesUsoJCheckBox.setText("Acepto Términos y Condiciones de Uso");
-        aceptoTérminosCondicionesUsoJCheckBox.setBounds(new Rectangle(335, 445, 255, 30));
+        aceptoTérminosCondicionesUsoJCheckBox.setBounds(new Rectangle(150, 445, 255, 30));
         aceptoTérminosCondicionesUsoJCheckBox.setFont(new Font("Tahoma", 0, 13));
         aceptoTérminosCondicionesUsoJCheckBox.setPreferredSize(new Dimension(240, 30));
         aceptoTérminosCondicionesUsoJCheckBox.addChangeListener(new ChangeListener() {
@@ -169,7 +169,7 @@ public class RegistrarUsuario extends JDialog {
                 }
             });
         aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(330, 520, 110, 30));
+        aceptarJButton.setBounds(new Rectangle(130, 500, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
         aceptarJButton.setEnabled(false);
 
@@ -179,7 +179,7 @@ public class RegistrarUsuario extends JDialog {
                 }
             });
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(525, 520, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(300, 500, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
@@ -187,7 +187,7 @@ public class RegistrarUsuario extends JDialog {
                     cancelarJButton_actionPerformed(e);
                 }
             });
-        paisJComboBox.setBounds(new Rectangle(350, 310, 375, 30));
+        paisJComboBox.setBounds(new Rectangle(130, 290, 375, 30));
         paisJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
         paisJComboBox.setMinimumSize(new Dimension(2, 18));
         paisJComboBox.setPreferredSize(new Dimension(2, 18));
@@ -202,7 +202,7 @@ public class RegistrarUsuario extends JDialog {
                     paisJComboBox_focusGained(e);
                 }
             });
-        provinciaJComboBox.setBounds(new Rectangle(350, 350, 375, 30));
+        provinciaJComboBox.setBounds(new Rectangle(130, 330, 375, 30));
         provinciaJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
         provinciaJComboBox.setMinimumSize(new Dimension(2, 18));
         provinciaJComboBox.setPreferredSize(new Dimension(2, 18));
@@ -217,7 +217,7 @@ public class RegistrarUsuario extends JDialog {
                     provinciaJComboBox_focusGained(e);
                 }
             });
-        localidadJComboBox.setBounds(new Rectangle(350, 390, 375, 30));
+        localidadJComboBox.setBounds(new Rectangle(130, 370, 375, 30));
         localidadJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
         localidadJComboBox.setMinimumSize(new Dimension(2, 18));
         localidadJComboBox.setPreferredSize(new Dimension(2, 18));
