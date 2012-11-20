@@ -1,5 +1,6 @@
 package ClasesLogicas;
 
+
 public class Fixture{
 
 	private int idFixture;
@@ -28,10 +29,6 @@ public class Fixture{
     }
 
         
-    public void addRonda(Ronda ronda){
-        this.rondas[this.rondas.length]= ronda;
-    }
-
 
     public Ronda[] getRondas() {
         return rondas;
@@ -47,6 +44,25 @@ public class Fixture{
     /**
      * @param participantes
      */
-    public void cargarParticipantes(Participante[] participantes){
+    public void cargarParticipantes(Participante[][] locales, Participante[][] visitantes){
+       
+            int nroRonda = locales.length;
+            int nroEncuentro = locales[0].length;
+            int i, j;
+            Encuentro[] encuentros;
+                           
+            for (i=0;i<nroRonda;i++){
+                
+                encuentros = this.rondas[i].getGanadores().getEncuentros();
+                for(j=0;j<nroEncuentro;j++){
+
+                    encuentros[j].setParticipanteA(locales[i][j]);
+                    encuentros[j].setParticipanteB(visitantes[i][j]);
+                                      
+                }
+            }
+       
+       
+       
         }
 }

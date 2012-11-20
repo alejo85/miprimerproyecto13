@@ -23,6 +23,10 @@ public class Participante {
             }
 
 
+    public Participante(String nombre){
+
+        this.nombre=nombre;
+    }
 
     public void setIdParticipante(int idParticipante) {
         this.idParticipante = idParticipante;

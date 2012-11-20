@@ -4,8 +4,8 @@ package ClasesLogicas;
 public class Ronda {
     private int idRonda;
     private int numeroDeRonda;
-    private Subronda [] ganadores;
-    private Subronda [] perdedores;
+    private Subronda ganadores;
+    private Subronda perdedores;
     
     
     public Ronda() {
@@ -15,7 +15,7 @@ public class Ronda {
 
 
 
-    public Ronda(int idRonda, int numeroDeRonda, Subronda[] ganadores, Subronda[] perdedores) {
+    public Ronda(int idRonda, int numeroDeRonda, Subronda ganadores, Subronda perdedores) {
         super();
         this.idRonda = idRonda;
         this.numeroDeRonda = numeroDeRonda;
@@ -40,24 +40,25 @@ public class Ronda {
         return numeroDeRonda;
     }
 
-    public void setGanadores(Subronda[] ganadores) {
+    public void setGanadores(Subronda ganadores) {
         this.ganadores = ganadores;
     }
-    
-    public void setGanadores (Subronda ganadores){
+  
+ //todo revisar si esto al final no se usa   
+/*    public void setGanadores (Subronda ganadores){
         
         this.ganadores[this.ganadores.length] = ganadores;
     }
-
-    public Subronda[] getGanadores() {
+*/
+    public Subronda getGanadores() {
         return ganadores;
     }
 
-    public void setPerdedores(Subronda[] perdedores) {
+    public void setPerdedores(Subronda perdedores) {
         this.perdedores = perdedores;
     }
 
-    public Subronda[] getPerdedores() {
+    public Subronda getPerdedores() {
         return perdedores;
     }
 }
