@@ -28,7 +28,7 @@ public class Central extends JFrame {
     private JMenu menuFile = new JMenu();
     private JMenu competencia = new JMenu();
     private JMenu lugar = new JMenu();
-    private Usuario usuarioActual;
+    private Usuario usuarioActual=new Usuario();
     private JMenuItem menuFileExit = new JMenuItem();
     private JMenuItem iniciarSecion = new JMenuItem();
     private JMenuItem modificar = new JMenuItem();
@@ -54,7 +54,7 @@ public class Central extends JFrame {
     private JButton salirJButton = new JButton();
 
     public Central() {
-        this.usuarioActual=null;
+//        this.usuarioActual=null;
         try {
             jbInit();
         } catch (Exception e) {
@@ -108,7 +108,11 @@ public class Central extends JFrame {
         usuarioJTextArea.setBounds(new Rectangle(490, 5, 270, 35));
         usuarioJTextArea.setFont(new Font("Tahoma", 0, 16));
         usuarioJTextArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 1, 1));
-        
+       //
+       //TODO Eliminar INICIA usuarioAutenticado
+        usuarioActual.setApellido("Olivera");
+        usuarioActual.setNombre("Alejandro");
+        usuarioActual.setCorreoElectronico("alejo@masfm.com");
         if(usuarioActual==null){
         usuarioJTextArea.setText("No autenticado");
         }

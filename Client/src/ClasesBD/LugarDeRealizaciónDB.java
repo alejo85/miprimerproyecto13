@@ -14,8 +14,26 @@ public class LugarDeRealizaciónDB {
     public LugarDeRealizaciónDB() {
         super();
     }
-    public boolean buscarLugarDeRealización(String codigo, String nombreLugarDerealización,Deporte deporteSeleccionado ){
-                       return true;}
+    public static ResultSet buscarLugarDeRealización(String correoElectronico, int idDeporteSeleccionado ){
+                           Conexion conexion = new Conexion();
+                           ResultSet resultado=null;
+                           int idLugarDeRealizacion;
+                           try {
+                               conexion.conectar();
+                           } catch (SQLException f) {
+                               System.out.println(f.getMessage());
+                           }
+                           String consultasql;
+                           consultasql="select L.* from LUGAR_DE_REALIZACION as L, CREA as C, ASOCIADO as A where C.Creador='"+correoElectronico+"' and C.id_Lugar_de_Realizacion=A.id_Lugar_de_Realizacion and A.id_Deporte='"+idDeporteSeleccionado+"' and C.id_Lugar_de_Realizacion=L.id_Lugar_de_Realizacion;";
+                            System.out.println(consultasql);
+                           try {
+                               resultado = conexion.consultar(consultasql);
+                           } catch (SQLException e) {
+                               System.out.println(e.getMessage());
+                           }
+                           conexion.cerrarConexion();
+                           return resultado;
+                           }
     public static void altaLugarDeRealización(String codigo, String nombre,String descripcion, Vector <Deporte> dSeleccionados, String creado, String dia, String hora){
     
         Conexion conexion = new Conexion();
@@ -83,12 +101,6 @@ public class LugarDeRealizaciónDB {
                        return true;}
     public boolean eliminarLugarDeRealización(LugarDeRealización lugar){
                        return true;}
-    public static ResultSet buscarLugarDeRealización(String correoElectronico,int idDeporteSeleccionado ){
-                           ResultSet resultado=null;
-                       
-                       
-                       return resultado;
-                       
-                       }
+   
 
 }

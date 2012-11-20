@@ -4,6 +4,7 @@ public class LugarDeRealizacion {
     private String codigo, Nombre, descripcion;
     private int disponibilidad;
     private Deporte[] deportesAsociados;
+    private int idLugar;
 
     public LugarDeRealizacion(String codigo, String Nombre, String descripcion, int disponibilidad,
                               Deporte[] deportesAsociados) {
@@ -50,7 +51,9 @@ public class LugarDeRealizacion {
     public int getDisponibilidad() {
         return disponibilidad;
     }
-
+    public String getDisponibilidadString() {
+        return ""+disponibilidad;
+    }
     public void setDeportesAsociados(Deporte[] deportesAsociados) {
         this.deportesAsociados = deportesAsociados;
     }
@@ -63,4 +66,11 @@ public class LugarDeRealizacion {
         disponibilidad--;
     }
 
+    public void setIdLugar(int idLugar) {
+        this.idLugar = idLugar;
+    }
+
+    public int getIdLugar() {
+        return idLugar;
+    }
 }

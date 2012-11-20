@@ -5,12 +5,15 @@ import ClasesBD.DeportesDB;
 import ClasesBD.LugarDeRealizaciónDB;
 
 import ClasesLogicas.Deporte;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.LugarDeRealización;
 import ClasesLogicas.Usuario;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -56,33 +59,38 @@ public class LugaresDeRealizacionGestores {
      * @param codigoDeporte
      * @return
      */
-    public static Vector <LugarDeRealización> lugaresDeRealizaciónAsociadosAlDeporte(String correoElectronico, int codigoDeporte) throws SQLException {
-            Vector<LugarDeRealización> resultado = new Vector<LugarDeRealización>();
+    public static Vector<LugarDeRealizacion> lugaresDeRealizaciónAsociadosAlDeporte(String correoElectronico, int codigoDeporte) throws SQLException {
+            Vector<LugarDeRealizacion> resultado = new Vector<LugarDeRealizacion>();
         
                 
             
-            String nombre, id;
+            String nombre,Codigo;
+            int id, id_Lugar_de_Realizacion;
             ResultSet resultadoSQL;
-            resultadoSQL = DeportesDB.buscarDeporte();
-            Vector <Deporte> listaDeportes=new Vector <Deporte>();
-            
-            LugarDeRealización unLugar;
+            resultadoSQL = LugarDeRealizaciónDB.buscarLugarDeRealización(correoElectronico, codigoDeporte);
+           
+      
+            LugarDeRealizacion unLugar;
 
 
 
         
                 while (resultadoSQL.next()){
-                    id = resultadoSQL.getString("Codigo");
+                    id = resultadoSQL.getInt("id_Lugar_de_Realizacion");
                     nombre = resultadoSQL.getString("Nombre");
-                    unLugar = new LugarDeRealización();
-                    unLugar.setCodigo(id);                       
+                    unLugar = new LugarDeRealizacion();
+                    unLugar.setIdLugar(id);
+                    unLugar.setNombre(nombre);
                     resultado.add(unLugar);
 
             
                 }
             
-           
+       
         
+        
+        
+                 
         
         
         return resultado;
@@ -115,5 +123,5 @@ public class LugaresDeRealizacionGestores {
             LugarDeRealizaciónDB.altaLugarDeRealización( codigo,  nombre, descripcion, dSeleccionados,  creado.getCorreoElectronico(),  dia,  hora);
             
         }
-    
+
 }
