@@ -80,7 +80,7 @@ public class IniciarSesion extends JDialog {
         jLabelCorreoElectrónico.setText("Correo Electrónico");
         jLabelCorreoElectrónico.setBounds(new Rectangle(10, 100, 175, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 15));
-        correoElectronicoJTextArea.setBounds(new Rectangle(130, 100, 375, 30));
+        correoElectronicoJTextArea.setBounds(new Rectangle(135, 100, 365, 30));
         correoElectronicoJTextArea.setFont(new Font("Tahoma", 0, 15));
         correoElectronicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         
@@ -88,7 +88,7 @@ public class IniciarSesion extends JDialog {
         jLabelContraseña.setText("Contraseña");
         jLabelContraseña.setBounds(new Rectangle(10, 158, 175, 25));
         jLabelContraseña.setFont(new Font("Tahoma", 0, 15));
-        contraeñaJPasswordField.setBounds(new Rectangle(130, 155, 375, 30));
+        contraeñaJPasswordField.setBounds(new Rectangle(135, 155, 365, 30));
         contraeñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         
         // RECUADRO TEXTO Y BOTON
