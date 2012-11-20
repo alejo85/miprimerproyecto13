@@ -423,7 +423,6 @@ private void cargarRegiones()
             System.out.println(e.getMessage());
         }
 
-        System.out.println("Errore lenght vale:" +errores.length());
         if(errores.length()>0){
             JOptionPane.showOptionDialog(null, "Tienes los siguientes errores:"+errores2+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
             return false;
@@ -448,7 +447,6 @@ private void cargarRegiones()
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         Boolean datosValidos= false;
         datosValidos= datosValidosRegistro();
-        System.out.println("Datos validos vale " +datosValidos);
         if(datosValidos){
             int idLocalidad = this.localidadJComboBox.getSelectedIndex();
          idLocalidad--;
