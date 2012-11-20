@@ -27,6 +27,9 @@ import java.awt.event.FocusAdapter;
 
 import java.awt.event.FocusEvent;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import java.sql.SQLException;
 
 import java.util.Vector;
@@ -91,6 +94,7 @@ public class RegistrarUsuario extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        CerrarVentana();
         this.setSize(new Dimension(540, 600));
         this.getContentPane().setLayout( null );
         this.setTitle("Registrar Usuario");
@@ -267,7 +271,9 @@ public class RegistrarUsuario extends JDialog {
 
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        new Principal();
     }
 
     private void paisJComboBox_actionPerformed(ActionEvent e) {
@@ -277,6 +283,15 @@ public class RegistrarUsuario extends JDialog {
        }
        
        
+    }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        new Principal();
+    }
+    });
     }
 private void cargarRegiones()
 {

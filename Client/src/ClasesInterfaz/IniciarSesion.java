@@ -10,6 +10,7 @@ import InterfazGrafica.CampoTexto.AreaTextoPassword;
 
 import ClasesInterfaz.Central;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -61,27 +62,38 @@ public class IniciarSesion extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        // CAMBIAR COLOR DE FONDO
+       // getContentPane().setBackground(new java.awt.Color(58,58,58));
         CerrarVentana();
-        this.setSize(new Dimension(950, 565));
+        // TAMAÑO VENTANA
+        this.setSize(new Dimension(530, 425));
         this.getContentPane().setLayout( null );
         this.setTitle("Iniciar Sesión");
-        correoElectronicoJTextArea.setBounds(new Rectangle(505, 140, 375, 30));
+        
+        //CORREO ELECTRONICO TEXTO Y CAMPO
+        jLabelCorreoElectrónico.setText("Correo Electronico");
+        jLabelCorreoElectrónico.setBounds(new Rectangle(10, 100, 175, 25));
+        jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 15));
+        correoElectronicoJTextArea.setBounds(new Rectangle(130, 100, 375, 30));
         correoElectronicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectronicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabelCorreoElectrónico.setText("Correo Electronico");
-        jLabelCorreoElectrónico.setBounds(new Rectangle(320, 140, 175, 25));
-        jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 13));
+        
+        // CONTRASEÑA TEXTO Y CAMPO
         jLabelContraseña.setText("Contraseña");
-        jLabelContraseña.setBounds(new Rectangle(320, 218, 175, 25));
-        jLabelContraseña.setFont(new Font("Tahoma", 0, 13));
-        panelRegistrarseJPanel.setBounds(new Rectangle(490, 285, 360, 105));
+        jLabelContraseña.setBounds(new Rectangle(10, 158, 175, 25));
+        jLabelContraseña.setFont(new Font("Tahoma", 0, 15));
+        contraeñaJPasswordField.setBounds(new Rectangle(130, 155, 375, 30));
+        contraeñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        
+        // RECUADRO TEXTO Y BOTON
+        panelRegistrarseJPanel.setBounds(new Rectangle(100, 215, 360, 105));
         panelRegistrarseJPanel.setLayout(null);
         panelRegistrarseJPanel.setBorder(BorderFactory.createTitledBorder("Si no esta regitrado, Registrese!"));
         panelRegistrarseJPanel.setFont(new Font("Dialog", 0, 50));
         regiistrarseJButton.setText("Registrarse");
         ImageIcon imagenCandado = new ImageIcon("Imagenes//bola8.png");
-        regiistrarseJButton.setBounds(new Rectangle(105, 35, 110, 30));
-        regiistrarseJButton.setFont(new Font("Tahoma", 0, 13));
+        regiistrarseJButton.setBounds(new Rectangle(115, 35, 110, 30));
+        regiistrarseJButton.setFont(new Font("Tahoma", 0, 15));
         regiistrarseJButton.setAlignmentX((float) 10.0);
         regiistrarseJButton.setAlignmentY((float) 10.0);
         regiistrarseJButton.addActionListener(new ActionListener() {
@@ -89,16 +101,18 @@ public class IniciarSesion extends JDialog {
                     regiistrarseJButton_actionPerformed(e);
                 }
             });
+        // BOTON ACEPTAR
         aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(230, 425, 110, 30));
+        aceptarJButton.setBounds(new Rectangle(130, 340, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
         aceptarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     aceptarJButton_actionPerformed(e);
                 }
             });
+        // BOTON CANCELAR
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(535, 425, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(300, 340, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
@@ -110,10 +124,9 @@ public class IniciarSesion extends JDialog {
 
         jLabelLogo.setIcon(imagenCandado);
         jLabelIngresoAlSistema.setText("Ingreso Al Sistema");
-        jLabelIngresoAlSistema.setBounds(new Rectangle(145, 35, 375, 70));
-        jLabelIngresoAlSistema.setFont(new Font("Tahoma", 0, 42));
-        contraeñaJPasswordField.setBounds(new Rectangle(505, 215, 375, 30));
-        contraeñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jLabelIngresoAlSistema.setBounds(new Rectangle(145, 5, 375, 70));
+        jLabelIngresoAlSistema.setFont(new Font("Tahoma", 0, 22));
+
         this.getContentPane().add(contraeñaJPasswordField, null);
         this.getContentPane().add(jLabelLogo, null);
         this.getContentPane().add(jLabelIngresoAlSistema, null);
@@ -127,7 +140,10 @@ public class IniciarSesion extends JDialog {
     }
 
     private void regiistrarseJButton_actionPerformed(ActionEvent e) {
-        RegistrarUsuario nuevo= new RegistrarUsuario();
+        RegistrarUsuario ven =  new RegistrarUsuario();
+        ven.setVisible(true);
+        this.setVisible(false);
+        this.dispose();
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
