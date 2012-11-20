@@ -38,6 +38,7 @@ public class IniciarSesion extends JDialog {
     private AreaTextoCorreo correoElectronicoJTextArea = new AreaTextoCorreo(40);
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JLabel jLabelContraseña = new JLabel();
+    private JLabel jLabelAclaracionErrores = new JLabel();
     private JPanel panelRegistrarseJPanel = new JPanel();
     private JButton regiistrarseJButton = new JButton();
     private JButton aceptarJButton = new JButton();
@@ -69,17 +70,21 @@ public class IniciarSesion extends JDialog {
         this.setSize(new Dimension(530, 425));
         this.getContentPane().setLayout( null );
         this.setTitle("Iniciar Sesión");
-        
+        // TITULO FUNCIONALIDAD
+        jLabelIngresoAlSistema.setText("Ingreso Al Sistema");
+        jLabelIngresoAlSistema.setBounds(new Rectangle(145, 5, 375, 70));
+        jLabelIngresoAlSistema.setFont(new Font("Tahoma", 0, 22));
+
         //CORREO ELECTRONICO TEXTO Y CAMPO
-        jLabelCorreoElectrónico.setText("Correo Electronico");
+        jLabelCorreoElectrónico.setText("Correo Electronico (*)");
         jLabelCorreoElectrónico.setBounds(new Rectangle(10, 100, 175, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 15));
         correoElectronicoJTextArea.setBounds(new Rectangle(130, 100, 375, 30));
-        correoElectronicoJTextArea.setFont(new Font("Tahoma", 0, 13));
+        correoElectronicoJTextArea.setFont(new Font("Tahoma", 0, 15));
         correoElectronicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         
         // CONTRASEÑA TEXTO Y CAMPO
-        jLabelContraseña.setText("Contraseña");
+        jLabelContraseña.setText("Contraseña (*)");
         jLabelContraseña.setBounds(new Rectangle(10, 158, 175, 25));
         jLabelContraseña.setFont(new Font("Tahoma", 0, 15));
         contraeñaJPasswordField.setBounds(new Rectangle(130, 155, 375, 30));
@@ -120,12 +125,16 @@ public class IniciarSesion extends JDialog {
                     cancelarJButton_actionPerformed(e);
                 }
             });
+        
+        //ACLARACION COMO SE MUESTRAN LOS ERRORES
+        jLabelAclaracionErrores.setText("(*) Los errores en campos se marcan con rojo.");
+        jLabelAclaracionErrores.setBounds(new Rectangle(40, 300, 175, 25));
+        jLabelAclaracionErrores.setFont(new Font("Tahoma", 0, 15));
+        
+        
         jLabelLogo.setBounds(new Rectangle(95, 135, 195, 160));
 
         jLabelLogo.setIcon(imagenCandado);
-        jLabelIngresoAlSistema.setText("Ingreso Al Sistema");
-        jLabelIngresoAlSistema.setBounds(new Rectangle(145, 5, 375, 70));
-        jLabelIngresoAlSistema.setFont(new Font("Tahoma", 0, 22));
 
         this.getContentPane().add(contraeñaJPasswordField, null);
         this.getContentPane().add(jLabelLogo, null);
@@ -169,7 +178,7 @@ public class IniciarSesion extends JDialog {
         
        usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
        if(usuarioActual==null){
-           JOptionPane.showOptionDialog(null, "El correo electronico o la contraseña son incorrector"  , "Error al Autencicar", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+           JOptionPane.showOptionDialog(null, "El correo electronico o la contraseña son incorrectos "  , "Error al Autencicar", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
            this.correoElectronicoJTextArea.error();
            this.contraeñaJPasswordField.error();
        }
