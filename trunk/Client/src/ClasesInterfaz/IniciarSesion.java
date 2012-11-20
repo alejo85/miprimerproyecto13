@@ -67,16 +67,17 @@ public class IniciarSesion extends JDialog {
        // getContentPane().setBackground(new java.awt.Color(58,58,58));
         CerrarVentana();
         // TAMAÑO VENTANA
-        this.setSize(new Dimension(530, 425));
+        this.setSize(new Dimension(530, 455));
         this.getContentPane().setLayout( null );
         this.setTitle("Iniciar Sesión");
+        
         // TITULO FUNCIONALIDAD
         jLabelIngresoAlSistema.setText("Ingreso Al Sistema");
         jLabelIngresoAlSistema.setBounds(new Rectangle(145, 5, 375, 70));
         jLabelIngresoAlSistema.setFont(new Font("Tahoma", 0, 22));
 
         //CORREO ELECTRONICO TEXTO Y CAMPO
-        jLabelCorreoElectrónico.setText("Correo Electronico (*)");
+        jLabelCorreoElectrónico.setText("Correo Electrónico");
         jLabelCorreoElectrónico.setBounds(new Rectangle(10, 100, 175, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 15));
         correoElectronicoJTextArea.setBounds(new Rectangle(130, 100, 375, 30));
@@ -84,14 +85,14 @@ public class IniciarSesion extends JDialog {
         correoElectronicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         
         // CONTRASEÑA TEXTO Y CAMPO
-        jLabelContraseña.setText("Contraseña (*)");
+        jLabelContraseña.setText("Contraseña");
         jLabelContraseña.setBounds(new Rectangle(10, 158, 175, 25));
         jLabelContraseña.setFont(new Font("Tahoma", 0, 15));
         contraeñaJPasswordField.setBounds(new Rectangle(130, 155, 375, 30));
         contraeñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         
         // RECUADRO TEXTO Y BOTON
-        panelRegistrarseJPanel.setBounds(new Rectangle(100, 215, 360, 105));
+        panelRegistrarseJPanel.setBounds(new Rectangle(100, 260, 360, 105));
         panelRegistrarseJPanel.setLayout(null);
         panelRegistrarseJPanel.setBorder(BorderFactory.createTitledBorder("Si no esta regitrado, Registrese!"));
         panelRegistrarseJPanel.setFont(new Font("Dialog", 0, 50));
@@ -108,7 +109,7 @@ public class IniciarSesion extends JDialog {
             });
         // BOTON ACEPTAR
         aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(130, 340, 110, 30));
+        aceptarJButton.setBounds(new Rectangle(130, 380, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
         aceptarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -117,7 +118,7 @@ public class IniciarSesion extends JDialog {
             });
         // BOTON CANCELAR
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(300, 340, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(300, 380, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
@@ -127,10 +128,10 @@ public class IniciarSesion extends JDialog {
             });
         
         //ACLARACION COMO SE MUESTRAN LOS ERRORES
-        jLabelAclaracionErrores.setText("(*) Los errores en campos se marcan con rojo.");
-        jLabelAclaracionErrores.setBounds(new Rectangle(40, 300, 175, 25));
+        jLabelAclaracionErrores.setText("(*) Los campos con fondo rojo contienen errores");
+        jLabelAclaracionErrores.setBounds(new Rectangle(110, 180, 375, 70));
         jLabelAclaracionErrores.setFont(new Font("Tahoma", 0, 15));
-        
+        jLabelAclaracionErrores.setForeground(Color.red);
         
         jLabelLogo.setBounds(new Rectangle(95, 135, 195, 160));
 
@@ -145,7 +146,8 @@ public class IniciarSesion extends JDialog {
         this.getContentPane().add(panelRegistrarseJPanel, null);
         this.getContentPane().add(jLabelContraseña, null);
         this.getContentPane().add(jLabelCorreoElectrónico, null);
-        this.getContentPane().add(correoElectronicoJTextArea, null);
+        this.getContentPane().add(correoElectronicoJTextArea, null); 
+        this.getContentPane().add(jLabelAclaracionErrores, null);
     }
 
     private void regiistrarseJButton_actionPerformed(ActionEvent e) {
