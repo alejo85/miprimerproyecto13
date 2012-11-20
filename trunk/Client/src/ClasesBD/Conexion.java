@@ -16,7 +16,7 @@ public class Conexion
     public void conectar() throws SQLException 
     {
 
-        this.conexion = DriverManager.getConnection("jdbc:postgresql://192.168.0.101:5432/TP?user=postgres&password=Publica123");
+        this.conexion = DriverManager.getConnection("jdbc:postgresql://192.168.1.78:5432/TP?user=postgres&password=Publica123");
 
     }
 
