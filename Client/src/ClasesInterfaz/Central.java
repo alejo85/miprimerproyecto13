@@ -78,22 +78,33 @@ public class Central extends JFrame {
         this.getContentPane().setLayout( null );
         this.setSize(new Dimension(820, 570));
         this.setTitle( "Sistema De Gestión De Competencias" );
-        menuFile.setText( "Archivo" );
-        menuFileExit.setText( "Salir" );
+        // PESTAÑA GESTION MENU SUPERIOR
+        menuFile.setText( "Gestión" );
         iniciarSecion.setText("Iniciar Sesión");
+        registrarse.setText("Registrarse");
         modificar.setText("Modificar");
+        menuFileExit.setText( "Salir" );
+        // PESTAÑA COMPETENCIA
+        competencia.setText("Competencia");
         buscarCompetencia.setText("Buscar Competencias");
         buscarTodasLasCompetencias.setText("Buscar Todas las Competencias");
-        competencia.setText("Competencia");
         usuarioJTextArea.setEditable(false);
-        modificar.addActionListener(new ActionListener(){public void actionPerformed( ActionEvent ae ) { modificar_ActionPerformed( ae ); } });
+        // PESTAÑA LUGAR DE REALIZACION
         lugar.setText("Lugar de Realización");
-        registrarse.setText("Registrarse");
-        registrarse.addActionListener(new ActionListener(){public void actionPerformed( ActionEvent ae ) { registrarse_ActionPerformed( ae ); } });
-        menuFileExit.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { fileExit_ActionPerformed( ae ); } } );
-        menuHelp.setText( "Ayuda" );
         buscarLugarDeRealizacion.setText("Buscar Lugar de Realización");
+        // PESTAÑA AYUDA
+        menuHelp.setText( "Ayuda" );
         menuHelpAbout.setText( "Acerca de..." );
+        
+        //ACCION BOTONES
+        // ACCION BOTON INICIAR SESION
+        iniciarSecion.addActionListener(new ActionListener(){public void actionPerformed( ActionEvent ae ) { jButtonAceptar6_actionPerformed( ae ); } });
+        // ACCION BOTONES MODIFICAR
+        modificar.addActionListener(new ActionListener(){public void actionPerformed( ActionEvent ae ) { jButtonAceptar5_actionPerformed( ae ); } });
+        // ACCION BOTON REGISTRAR
+        registrarse.addActionListener(new ActionListener(){public void actionPerformed( ActionEvent ae ) { jButtonAceptar7_actionPerformed( ae ); } });
+        menuFileExit.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { jButtonAceptar2_actionPerformed( ae ); } } );
+        
         menuHelpAbout.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { helpAbout_ActionPerformed( ae ); } } );
         ImageIcon imagenCandado = new ImageIcon("Imagenes//bola8.png");
        /* jLabelBienvenidos.setText("Bienvienido");
@@ -182,7 +193,7 @@ public class Central extends JFrame {
         lugarDeRealizaciónJPanel.setLayout(null);
         lugarDeRealizaciónJPanel.setBorder(BorderFactory.createTitledBorder("Lugar de Realización"));
         lugarDeRealizaciónJPanel.setFont(new Font("Dialog", 0, 50));
-        listarLugarDeRealizaciónJButton.setBounds(new Rectangle(10, 70, 230, 55));
+        listarLugarDeRealizaciónJButton.setBounds(new Rectangle(10, 90, 230, 55));
         listarLugarDeRealizaciónJButton.setFont(new Font("Tahoma", 0, 13));
         listarLugarDeRealizaciónJButton.setText("Listar Lugar De Realización");
         listarLugarDeRealizaciónJButton.addActionListener(new ActionListener() {
@@ -222,7 +233,6 @@ public class Central extends JFrame {
                     jButtonAceptar2_actionPerformed(e);
                 }
             });
-        iniciarSecion.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { iniciarSecion_ActionPerformed( ae ); } });
         buscarCompetencia.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarCompetencia_ActionPerformed( ae ); } });
         buscarTodasLasCompetencias.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarTodasLasCompetencias_ActionPerformed( ae ); } });
         buscarLugarDeRealizacion.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarLugarDeRealizacion_ActionPerformed( ae ); } });
@@ -261,50 +271,34 @@ public class Central extends JFrame {
 
     }
 
-    void fileExit_ActionPerformed(ActionEvent e) {
-        System.exit(0);
-    }
-
     void helpAbout_ActionPerformed(ActionEvent e) {
         JOptionPane.showMessageDialog(this, new Central_AboutBoxPanel1(), "Acerca de", JOptionPane.PLAIN_MESSAGE);
     }
-     void registrarse_ActionPerformed (ActionEvent e){
-            RegistrarUsuario nuevo= new RegistrarUsuario();
-            nuevo.setVisible(true);
-            }
-    void modificar_ActionPerformed (ActionEvent e){
-           ModificarUsuario nuevo= new ModificarUsuario(usuarioActual);
-           nuevo.setVisible(true);
-           }
     void buscarCompetencia_ActionPerformed (ActionEvent e){
            BuscarCompetenciaDeportiva nuevo= new BuscarCompetenciaDeportiva(usuarioActual);
            nuevo.setVisible(true);
            }
+    // ACCION BOTON BUSCAR TODAS LAS COMPETENCIAS DEPORTIVAS
     void buscarTodasLasCompetencias_ActionPerformed (ActionEvent e){
            BuscarTodasLasCompetenciaDeportiva nuevo= new BuscarTodasLasCompetenciaDeportiva(usuarioActual);
            nuevo.setVisible(true);
            }
-    
-    
+    // ACCION BOTON BUSCAR LUGAR DE REALIZACION
     void buscarLugarDeRealizacion_ActionPerformed (ActionEvent e){
            BuscarLugareDeRealizacion nuevo= new BuscarLugareDeRealizacion(usuarioActual);
            nuevo.setVisible(true);
            }
-    void iniciarSecion_ActionPerformed (ActionEvent e){
-           /*IniciarSesion nuevo= new IniciarSesion();
-           nuevo.setVisible(true);*/
-    }
-
+   // ACCION BOTON SALIR
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
         System.exit(0);
     }
-
+    // ACCION BOTON MODIFICAR
     private void jButtonAceptar5_actionPerformed(ActionEvent e) {
         JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
         /*ModificarUsuario ven = new ModificarUsuario(usuarioActual);
         ven.setVisible(true);*/
     }
-// BOTON INICIAR SESION
+// ACCION BOTON INICIAR SESION O CERRAR SESION DEPENDIENDO DEL OBJETO USUARIO
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
         if(usuarioActual==null){
             IniciarSesion ven = new IniciarSesion();
