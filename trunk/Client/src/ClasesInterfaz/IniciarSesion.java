@@ -17,6 +17,10 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,6 +45,7 @@ public class IniciarSesion extends JDialog {
     private JLabel jLabelIngresoAlSistema = new JLabel();
     private AreaTextoPassword contraeñaJPasswordField = new AreaTextoPassword(10);
     private Usuario usuarioActual = null;
+    
 
     public IniciarSesion() {
         this(null, "", false);
@@ -56,6 +61,7 @@ public class IniciarSesion extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        CerrarVentana();
         this.setSize(new Dimension(950, 565));
         this.getContentPane().setLayout( null );
         this.setTitle("Iniciar Sesión");
@@ -118,25 +124,27 @@ public class IniciarSesion extends JDialog {
         this.getContentPane().add(jLabelContraseña, null);
         this.getContentPane().add(jLabelCorreoElectrónico, null);
         this.getContentPane().add(correoElectronicoJTextArea, null);
-
-
     }
-
-
-
-
 
     private void regiistrarseJButton_actionPerformed(ActionEvent e) {
         RegistrarUsuario nuevo= new RegistrarUsuario();
-        nuevo.setVisible(true);
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        new Principal();
     }
-
-
-
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        new Principal();
+    }
+    });
+    }
+ 
     public Usuario getUsuarioActual() {
         return usuarioActual;
     }
