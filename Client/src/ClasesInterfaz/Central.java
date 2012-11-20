@@ -3,6 +3,7 @@ package ClasesInterfaz;
 
 import ClasesLogicas.Usuario;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -28,7 +29,7 @@ public class Central extends JFrame {
     private JMenu menuFile = new JMenu();
     private JMenu competencia = new JMenu();
     private JMenu lugar = new JMenu();
-    private Usuario usuarioActual=new Usuario();
+    private Usuario usuarioActual;
     private JMenuItem menuFileExit = new JMenuItem();
     private JMenuItem iniciarSecion = new JMenuItem();
     private JMenuItem modificar = new JMenuItem();
@@ -38,11 +39,12 @@ public class Central extends JFrame {
     private JMenuItem registrarse = new JMenuItem();
     private JMenu menuHelp = new JMenu();
     private JMenuItem menuHelpAbout = new JMenuItem();
-    private JLabel jLabelBienvenidos = new JLabel();
+    //private JLabel jLabelBienvenidos = new JLabel();
     private JLabel logoJLabel = new JLabel();
     private JLabel jLabelSistemaDeGestiónDeCompetenciasDeportivas = new JLabel();
     private JTextArea usuarioJTextArea = new JTextArea();
     private JLabel jLabelUsuario = new JLabel();
+    private JPanel gestiónUsuarioJPanel = new JPanel();
     private JButton modificarUsuarioJButton = new JButton();
     private JButton iniciarSesiónJButton = new JButton();
     private JButton registrarseJButton = new JButton();
@@ -54,7 +56,7 @@ public class Central extends JFrame {
     private JButton salirJButton = new JButton();
 
     public Central() {
-//        this.usuarioActual=null;
+        this.usuarioActual=null;
         try {
             jbInit();
         } catch (Exception e) {
@@ -74,7 +76,7 @@ public class Central extends JFrame {
     private void jbInit() throws Exception {
         this.setJMenuBar( menuBar );
         this.getContentPane().setLayout( null );
-        this.setSize(new Dimension(1019, 698));
+        this.setSize(new Dimension(820, 570));
         this.setTitle( "Sistema De Gestión De Competencias" );
         menuFile.setText( "Archivo" );
         menuFileExit.setText( "Salir" );
@@ -94,46 +96,48 @@ public class Central extends JFrame {
         menuHelpAbout.setText( "Acerca de..." );
         menuHelpAbout.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { helpAbout_ActionPerformed( ae ); } } );
         ImageIcon imagenCandado = new ImageIcon("Imagenes//bola8.png");
-        jLabelBienvenidos.setText("Bienvienidos");
-        jLabelBienvenidos.setBounds(new Rectangle(95, 10, 250, 70));
-        jLabelBienvenidos.setFont(new Font("Tahoma", 0, 42));
+       /* jLabelBienvenidos.setText("Bienvienido");
+        jLabelBienvenidos.setBounds(new Rectangle(35, 5, 250, 70));
+        jLabelBienvenidos.setFont(new Font("Tahoma", 0, 32));*/
         logoJLabel.setBounds(new Rectangle(130, 95, 195, 160));
         logoJLabel.setIcon(imagenCandado);
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setText("<html>Sistema de Gestión de Competencias Deportivas</html>");
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setBounds(new Rectangle(485, 155, 450, 120));
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setFont(new Font("Tahoma", 0, 38));
+        
+        
+        // TITULO SISTEMA DE GESTION
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setText("Sistema de Gestión de Competencias Deportivas");
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setBounds(new Rectangle(5, 5, 550, 80));
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setFont(new Font("Tahoma", 0, 22));
         jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalAlignment(SwingConstants.CENTER);
         jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalTextPosition(SwingConstants.CENTER);
-        jLabelUsuario.setText("Usuario:");
-        usuarioJTextArea.setBounds(new Rectangle(490, 5, 270, 35));
+        
+        Color colorAplicacion=new Color(238, 238, 238);
+        usuarioJTextArea.setBounds(new Rectangle(45, 85, 300, 40));
+        usuarioJTextArea.setBackground(colorAplicacion);
         usuarioJTextArea.setFont(new Font("Tahoma", 0, 16));
         usuarioJTextArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 1, 1));
-       //
-       //TODO Eliminar INICIA usuarioAutenticado
-        usuarioActual.setApellido("Olivera");
-        usuarioActual.setNombre("Alejandro");
-        usuarioActual.setCorreoElectronico("alejo@masfm.com");
+        usuarioJTextArea.setForeground(Color.blue);
+        
         if(usuarioActual==null){
-        usuarioJTextArea.setText("No autenticado");
+        usuarioJTextArea.setText("Usted no esta autenticado");
         }
         else{
-            usuarioJTextArea.setText(usuarioActual.getNombre()+" "+usuarioActual.getApellido());
+            usuarioJTextArea.setText("Bienvenido "+usuarioActual.getNombre()+" "+usuarioActual.getApellido());
         }
 
-        jLabelUsuario.setBounds(new Rectangle(435, 10, 75, 25));
-        jLabelUsuario.setFont(new Font("Tahoma", 0, 13));
+        /*
         jLabelUsuario.setText("Usuario:");
-        modificarUsuarioJButton.setText("Modificar");
-        modificarUsuarioJButton.setBounds(new Rectangle(820, 10, 135, 30));
-        modificarUsuarioJButton.setFont(new Font("Tahoma", 0, 13));
-        modificarUsuarioJButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    jButtonAceptar5_actionPerformed(e);
-                }
-            });
+         jLabelUsuario.setBounds(new Rectangle(5, 50, 550, 80));
+        jLabelUsuario.setFont(new Font("Tahoma", 0, 13));
+        jLabelUsuario.setText("Usuario:");*/
+        
+        // CONTENEDOR BOTONES GESTION DE USUARIO
+        gestiónUsuarioJPanel.setBounds(new Rectangle(5, 170, 250, 240));
+        gestiónUsuarioJPanel.setLayout(null);
+        gestiónUsuarioJPanel.setBorder(BorderFactory.createTitledBorder("Gestión de usuario"));
+        gestiónUsuarioJPanel.setFont(new Font("Dialog", 0, 50));
         // SI ESTA LOGUEADO EL BOTON CUMPLE LA FUNCION DE CERRAR SESION
         if(usuarioActual!=null){
-        iniciarSesiónJButton.setBounds(new Rectangle(820, 55, 135, 30));
+        iniciarSesiónJButton.setBounds(new Rectangle(10, 30, 230, 55));
         iniciarSesiónJButton.setFont(new Font("Tahoma", 0, 13));
         iniciarSesiónJButton.setText("Cerrar Sesión");
         iniciarSesiónJButton.addActionListener(new ActionListener() {
@@ -144,7 +148,7 @@ public class Central extends JFrame {
         }
         // SI NO ESTA LOGUEADO EL BOTON CUMPLE LA FUNCION DE ABRIR INTERFAZ INICIAR SESION
         else{
-            iniciarSesiónJButton.setBounds(new Rectangle(820, 55, 135, 30));
+            iniciarSesiónJButton.setBounds(new Rectangle(10, 30, 230, 55));
             iniciarSesiónJButton.setFont(new Font("Tahoma", 0, 13));
             iniciarSesiónJButton.setText("Iniciar Sesión");
             iniciarSesiónJButton.addActionListener(new ActionListener() {
@@ -153,19 +157,32 @@ public class Central extends JFrame {
                     }
                 });
         }
+        
+        // BOTON REGISTRAR
         registrarseJButton.setText("Registrarse");
-        registrarseJButton.setBounds(new Rectangle(820, 95, 135, 30));
+        registrarseJButton.setBounds(new Rectangle(10, 100, 230, 55));
         registrarseJButton.setFont(new Font("Tahoma", 0, 13));
         registrarseJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonAceptar7_actionPerformed(e);
                 }
             });
-        lugarDeRealizaciónJPanel.setBounds(new Rectangle(50, 305, 385, 255));
+        
+        // BOTON MODIFICAR*/
+        modificarUsuarioJButton.setText("Modificar");
+        modificarUsuarioJButton.setBounds(new Rectangle(10, 170, 230, 55));
+        modificarUsuarioJButton.setFont(new Font("Tahoma", 0, 13));
+        modificarUsuarioJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    jButtonAceptar5_actionPerformed(e);
+                }
+            });
+        
+        lugarDeRealizaciónJPanel.setBounds(new Rectangle(280, 170, 250, 240));
         lugarDeRealizaciónJPanel.setLayout(null);
         lugarDeRealizaciónJPanel.setBorder(BorderFactory.createTitledBorder("Lugar de Realización"));
         lugarDeRealizaciónJPanel.setFont(new Font("Dialog", 0, 50));
-        listarLugarDeRealizaciónJButton.setBounds(new Rectangle(30, 85, 330, 95));
+        listarLugarDeRealizaciónJButton.setBounds(new Rectangle(10, 70, 230, 55));
         listarLugarDeRealizaciónJButton.setFont(new Font("Tahoma", 0, 13));
         listarLugarDeRealizaciónJButton.setText("Listar Lugar De Realización");
         listarLugarDeRealizaciónJButton.addActionListener(new ActionListener() {
@@ -173,11 +190,11 @@ public class Central extends JFrame {
                     jButtonAceptar8_actionPerformed(e);
                 }
             });
-        competenciaJPanel.setBounds(new Rectangle(505, 295, 420, 265));
+        competenciaJPanel.setBounds(new Rectangle(550, 170, 250, 240));
         competenciaJPanel.setLayout(null);
         competenciaJPanel.setBorder(BorderFactory.createTitledBorder("Competencia"));
         competenciaJPanel.setFont(new Font("Dialog", 0, 50));
-        buscarCompetenciaJButton.setBounds(new Rectangle(555, 315, 330, 95));
+        buscarCompetenciaJButton.setBounds(new Rectangle(560, 230, 230, 55));
         buscarCompetenciaJButton.setFont(new Font("Tahoma", 0, 13));
         buscarCompetenciaJButton.setText("Buscar Competencia");
         buscarCompetenciaJButton.setActionCommand("");
@@ -186,7 +203,7 @@ public class Central extends JFrame {
                     jButtonAceptar9_actionPerformed(e);
                 }
             });
-        buscarTodasLasCompetenciasJButton.setBounds(new Rectangle(555, 440, 330, 95));
+        buscarTodasLasCompetenciasJButton.setBounds(new Rectangle(560, 300, 230, 55));
         buscarTodasLasCompetenciasJButton.setFont(new Font("Tahoma", 0, 13));
         buscarTodasLasCompetenciasJButton.setText("Buscar Todas Las Competencias");
         buscarTodasLasCompetenciasJButton.setActionCommand("");
@@ -195,8 +212,10 @@ public class Central extends JFrame {
                     jButtonAceptar10_actionPerformed(e);
                 }
             });
-        salirJButton.setText("Salir");
-        salirJButton.setBounds(new Rectangle(755, 590, 110, 30));
+        
+        //BOTON PARA SALIR DEL SISTEMA
+        salirJButton.setText("Salir del sistema");
+        salirJButton.setBounds(new Rectangle(560, 445, 230, 55));
         salirJButton.setFont(new Font("Tahoma", 0, 13));
         salirJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -207,6 +226,8 @@ public class Central extends JFrame {
         buscarCompetencia.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarCompetencia_ActionPerformed( ae ); } });
         buscarTodasLasCompetencias.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarTodasLasCompetencias_ActionPerformed( ae ); } });
         buscarLugarDeRealizacion.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarLugarDeRealizacion_ActionPerformed( ae ); } });
+        
+        // MENU SUPERIOR - AGREGANDO BOTONES
         menuFile.add(iniciarSecion);
         menuFile.add(registrarse);
         menuFile.add(modificar);
@@ -217,27 +238,25 @@ public class Central extends JFrame {
         menuBar.add( menuFile );
         menuBar.add(competencia);
         menuBar.add(lugar);
-
-                
-
-
-
         menuHelp.add( menuHelpAbout );
         menuBar.add( menuHelp );
+        
+        // BOTONES DENTRO DE JPANELS
         this.getContentPane().add(salirJButton, null);
         this.getContentPane().add(buscarTodasLasCompetenciasJButton, null);
         this.getContentPane().add(buscarCompetenciaJButton, null);
         this.getContentPane().add(competenciaJPanel, null);
         lugarDeRealizaciónJPanel.add(listarLugarDeRealizaciónJButton, null);
         this.getContentPane().add(lugarDeRealizaciónJPanel, null);
-        this.getContentPane().add(registrarseJButton, null);
-        this.getContentPane().add(iniciarSesiónJButton, null);
-        this.getContentPane().add(modificarUsuarioJButton, null);
+        gestiónUsuarioJPanel.add(modificarUsuarioJButton, null);
+        gestiónUsuarioJPanel.add(iniciarSesiónJButton, null);
+        gestiónUsuarioJPanel.add(registrarseJButton, null);
+        this.getContentPane().add(gestiónUsuarioJPanel, null);
         this.getContentPane().add(jLabelUsuario, null);
         this.getContentPane().add(usuarioJTextArea, null);
         this.getContentPane().add(jLabelSistemaDeGestiónDeCompetenciasDeportivas, null);
         this.getContentPane().add(logoJLabel, null);
-        this.getContentPane().add(jLabelBienvenidos, null);
+        //this.getContentPane().add(jLabelBienvenidos, null);
         
 
     }
@@ -300,6 +319,8 @@ public class Central extends JFrame {
 
     private void jButtonAceptar7_actionPerformed(ActionEvent e) {
         RegistrarUsuario ven =  new RegistrarUsuario();
+        setVisible(false);
+        dispose();
         ven.setVisible(true);
         
     }
