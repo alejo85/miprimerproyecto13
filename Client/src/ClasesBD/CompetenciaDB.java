@@ -1,8 +1,11 @@
 package ClasesBD;
 
 
+import ClasesGestores.LugaresDeRealizacionGestores;
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
 
 import java.sql.ResultSet;
@@ -127,12 +130,12 @@ public class CompetenciaDB {
                                        else
                                                {
                                                        System.out.println("llega al empateno");
-                                                       consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
+                                                       consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                                        System.out.println(consultasql);
                                                        resultado= conexion.consultar(consultasql);
                                                }
                                        System.out.println("llega al puntuacion");
-                                       consultasql="INSERT INTO puntuacion(tantos_por_ausencia_contrincante, id_competencia)VALUES('"+competencia.getTantosPorPartidoAusenciaContrincante()+"', '"+competencia.getIdCompetencia()+"');";
+                                       consultasql="INSERT INTO puntuacion(tantos_por_ausencia_contrincante, id_competencia)VALUES('"+competencia.getTantosPorPartidoAusenciaContrincante()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                        System.out.println(consultasql);
                                        resultado= conexion.consultar(consultasql);
                                        System.out.println("termina al puntuacion");
@@ -143,21 +146,28 @@ public class CompetenciaDB {
                                        
                                        if(competencia.getLiga().getEmpate())
                                        {
-                                               consultasql="INSERT INTO liga(ptos_por_empate, ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoEmpatado()+"', '"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"');";
+                                               consultasql="INSERT INTO liga(ptos_por_empate, ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoEmpatado()+"', '"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                                System.out.println(consultasql);
                                                resultado= conexion.consultar(consultasql);
                                        }
                                        else
                                                {
-                                                       consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().       getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"');";
+                                                       consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                                        System.out.println(consultasql);
                                                        resultado= conexion.consultar(consultasql);
                                                }
-                                       consultasql="INSERT INTO set(id_competencia, cantidad_de_sets)VALUES('"+competencia.getIdCompetencia()+"', '"+competencia.getCantidadDeSets()+"');";
+                                       consultasql="INSERT INTO set(id_competencia, cantidad_de_sets)VALUES('"+competencia.getIdCompetencia()+"', '"+competencia.getCantidadDeSets()+"')RETURNING *";
                                        System.out.println(consultasql);
                                        resultado= conexion.consultar(consultasql);
                                }
-                             
+                               LugarDeRealizacion lugares[]=competencia.getLugares();
+                               for(int i=0; i<lugares.length;i++){
+                                       consultasql="INSERT INTO juega(id_competencia, id_lugar_de_realizacion, disponibilidad)VALUES ('"+competencia.getIdCompetencia()+"', '"+lugares[i].getIdLugar()+"', '"+lugares[i].getDisponibilidad()+"')RETURNING *";
+                                       System.out.println(consultasql);
+                                       resultado= conexion.consultar(consultasql);
+                                   
+                                   
+                                   }
                                conexion.cerrarConexion();
                                
                            
