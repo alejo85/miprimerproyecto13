@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class Central extends JFrame {
@@ -56,11 +58,41 @@ public class Central extends JFrame {
     private JButton salirJButton = new JButton();
 
     public Central() {
-        //this.usuarioActual=null;
-        usuarioActual= new Usuario();
-        usuarioActual.setNombre("Alejandro");
-        usuarioActual.setApellido("Olivera");
-        usuarioActual.setCorreoElectronico("alejo@masfm.com");
+        
+        /// muestra los look and feel instalados
+        
+       /* UIManager.LookAndFeelInfo plaf[] = UIManager.getInstalledLookAndFeels();
+         
+        for (int i=0; i < plaf.length; i++){
+         
+              System.out.println("Nombre: " + plaf[i].getName());
+         
+              System.out.println("Nombre de la clase: "+ plaf[i].getClassName());
+         
+        }
+        
+        */
+        //// seteamos look and feel
+        
+        try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //aca pasamos de parametro una funcion
+                                                                                    //que toma el look and feel del sistema, para pasar uno
+                                                                                    //especifico se pasa asi ("nombredellookandfeel")
+                }
+                catch (UnsupportedLookAndFeelException e) {
+                   // handle exception
+                }
+                catch (ClassNotFoundException e) {
+                   // handle exception
+                }
+                catch (InstantiationException e) {
+                   // handle exception
+                }
+                catch (IllegalAccessException e) {
+                   // handle exception
+                }
+        
+        this.usuarioActual=null;
         try {
             jbInit();
         } catch (Exception e) {
@@ -125,9 +157,8 @@ public class Central extends JFrame {
         jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalAlignment(SwingConstants.CENTER);
         jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalTextPosition(SwingConstants.CENTER);
         
-        Color colorAplicacion=new Color(238, 238, 238);
         usuarioJTextArea.setBounds(new Rectangle(45, 85, 300, 40));
-        usuarioJTextArea.setBackground(colorAplicacion);
+        usuarioJTextArea.setBackground(null);
         usuarioJTextArea.setFont(new Font("Tahoma", 0, 16));
         usuarioJTextArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 1, 1));
         usuarioJTextArea.setForeground(Color.blue);
@@ -279,7 +310,7 @@ public class Central extends JFrame {
         JOptionPane.showMessageDialog(this, new Central_AboutBoxPanel1(), "Acerca de", JOptionPane.PLAIN_MESSAGE);
     }
     void buscarCompetencia_ActionPerformed (ActionEvent e){
-           BuscarCompetenciaDeportiva nuevo= new BuscarCompetenciaDeportiva(this,usuarioActual);
+           BuscarCompetenciaDeportiva nuevo= new BuscarCompetenciaDeportiva(usuarioActual);
            nuevo.setVisible(true);
            }
     // ACCION BOTON BUSCAR TODAS LAS COMPETENCIAS DEPORTIVAS
@@ -329,8 +360,7 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar9_actionPerformed(ActionEvent e) {
-        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(this,usuarioActual);
-        this.setVisible(false);
+        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(usuarioActual);
         ven.setVisible(true);
     }
 

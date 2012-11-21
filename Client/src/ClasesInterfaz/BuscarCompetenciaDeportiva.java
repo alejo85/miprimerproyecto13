@@ -3,15 +3,22 @@ package ClasesInterfaz;
 
 import ClasesGestores.CompetenciaGestor;
 
+import ClasesGestores.DeporteGestor;
+
 import ClasesLogicas.Competencia;
+import ClasesLogicas.Deporte;
 import ClasesLogicas.Usuario;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -47,12 +54,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private JButton buscarJButton = new JButton();
     private Usuario usuarioActual= null;
     private Competencia competenciaSelecionad=null;
-    private Frame parent;
+    private  Vector <Deporte> deporte;
     
 
-    public BuscarCompetenciaDeportiva(Frame parent, Usuario usuariologueado) {
+    public BuscarCompetenciaDeportiva(Usuario usuariologueado) {
         
-        this(parent, "", false,usuariologueado);
+        this(null, "", false,usuariologueado);
         
         
     }
@@ -61,7 +68,6 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         super(parent, title, modal);
         try {
             this.usuarioActual=usuariologueado;
-            
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,19 +77,91 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private void jbInit() throws Exception {
         this.setSize(new Dimension(1065, 796));
         this.getContentPane().setLayout( null );
+       
+        //TITULO VENTANA
         this.setTitle("Buscar Competencia");
+        
+        //BOTON ACEPTAR
         aceptarJButton.setText("Aceptar");
         aceptarJButton.setBounds(new Rectangle(300, 690, 110, 30));
-        aceptarJButton.setFont(new Font("Tahoma", 0, 13));
+        aceptarJButton.setFont(new Font("Tahoma", 0, 15));
+        
+        //BOTON CANCELAR
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(595, 690, 110, 30));
-        cancelarJButton.setFont(new Font("Tahoma", 0, 13));
+        cancelarJButton.setFont(new Font("Tahoma", 0, 15));
         cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonCancelar_actionPerformed(e);
                 }
             });
+        
+        // JPANEL BUSQUEDA POR
+        busqueadaJPanel.setBounds(new Rectangle(15, 15, 750, 200));
+        busqueadaJPanel.setLayout(null);
+        Color borde= new Color(40,40,40);
+        busqueadaJPanel.setBorder(BorderFactory.createLineBorder(borde,2));
+        
+        // ELEMENTOS DEL JPANEL BUSCAR POR
+        
+        // 1 . NOMBRE DE LA COMPETENCIA
+        jLabelNombreDeLaCompetencia.setText("Nombre De La Competencia");
+        jLabelNombreDeLaCompetencia.setBounds(new Rectangle(15, 20, 205, 25));
+        jLabelNombreDeLaCompetencia.setFont(new Font("Tahoma", 0, 15));
+        nombreCompetenciaJTextArea.setBounds(new Rectangle(210, 20, 375, 30));
+        nombreCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
+        nombreCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        
+        // 2. DEPORTES
+        jLabelDeporte.setText("Deporte");
+        jLabelDeporte.setBounds(new Rectangle(15, 70, 135, 25));
+        jLabelDeporte.setFont(new Font("Tahoma", 0, 15));
+        DeporteJComboBox.setBounds(new Rectangle(75, 70, 175, 30));
+        DeporteJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
+        DeporteJComboBox.setMinimumSize(new Dimension(2, 18));
+        DeporteJComboBox.setPreferredSize(new Dimension(2, 18));
+        DeporteJComboBox.setFont(new Font("Tahoma", 0, 15));
+        listarDeportes();
+        // 3. MODALIDAD
+        jLabelModalidad.setText("Modalidad");
+        jLabelModalidad.setBounds(new Rectangle(257, 70, 135, 25));
+        jLabelModalidad.setFont(new Font("Tahoma", 0, 15));
+        modalidadJComboBox.setBounds(new Rectangle(330, 70, 145, 30));
+        modalidadJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
+        modalidadJComboBox.setMinimumSize(new Dimension(2, 18));
+        modalidadJComboBox.setPreferredSize(new Dimension(2, 18));
+        modalidadJComboBox.addItem("Liga");
+        modalidadJComboBox.addItem("Eliminación simple");
+        modalidadJComboBox.addItem("Eliminación doble");
+        modalidadJComboBox.setFont(new Font("Tahoma", 0, 15));
+        
+        // 4. ESTADO
+        jLabelEstado.setText("Estado");
+        jLabelEstado.setBounds(new Rectangle(480, 70, 135, 25));
+        jLabelEstado.setFont(new Font("Tahoma", 0, 15));
+        estadoJComboBox.setBounds(new Rectangle(530, 70, 145, 30));
+        estadoJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
+        estadoJComboBox.setMinimumSize(new Dimension(2, 18));
+        estadoJComboBox.setPreferredSize(new Dimension(2, 18));
+        estadoJComboBox.addItem("Creada");
+        estadoJComboBox.addItem("Planificada");
+        estadoJComboBox.addItem("En disputa");
+        estadoJComboBox.addItem("Finalizada");
+        estadoJComboBox.setFont(new Font("Tahoma", 0, 15));
+        
+        // 5. BOTON BUSCAR
+        buscarJButton.setText("Buscar");
+        buscarJButton.setBounds(new Rectangle(250, 130, 110, 40));
+        buscarJButton.setFont(new Font("Tahoma", 0, 15));
+        buscarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    buscarJButton_actionPerformed(e);
+                }
+            });
+        // TERMINA JPANEL BUSCAR POR
+        
+        // JPANEL RESULTADOS
         resultadoJPanel.setBounds(new Rectangle(65, 300, 910, 345));
         resultadoJPanel.setLayout(null);
         resultadoJPanel.setBorder(BorderFactory.createTitledBorder("Resultados"));
@@ -106,46 +184,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             });
         jScrollBar2.setBounds(new Rectangle(870, 30, 15, 230));
         jScrollPane2.setBounds(new Rectangle(20, 30, 860, 230));
-        jLabelModalidad.setText("Modalidad");
-        jLabelModalidad.setBounds(new Rectangle(60, 115, 135, 25));
-        jLabelModalidad.setFont(new Font("Tahoma", 0, 13));
-        modalidadJComboBox.setBounds(new Rectangle(240, 115, 375, 30));
-        modalidadJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
-        modalidadJComboBox.setMinimumSize(new Dimension(2, 18));
-        modalidadJComboBox.setPreferredSize(new Dimension(2, 18));
-        modalidadJComboBox.setSize(new Dimension(375, 30));
-        busqueadaJPanel.setBounds(new Rectangle(75, 15, 900, 260));
-        busqueadaJPanel.setLayout(null);
-        busqueadaJPanel.setBorder(BorderFactory.createTitledBorder("Buscar por"));
-        DeporteJComboBox.setBounds(new Rectangle(240, 70, 375, 30));
-        DeporteJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
-        DeporteJComboBox.setMinimumSize(new Dimension(2, 18));
-        DeporteJComboBox.setPreferredSize(new Dimension(2, 18));
-        jLabelDeporte.setText("Deporte");
-        jLabelDeporte.setBounds(new Rectangle(60, 70, 135, 25));
-        jLabelDeporte.setFont(new Font("Tahoma", 0, 13));
-        nombreCompetenciaJTextArea.setBounds(new Rectangle(240, 20, 375, 30));
-        nombreCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
-        nombreCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabelNombreDeLaCompetencia.setText("Nombre De La Competencia");
-        jLabelNombreDeLaCompetencia.setBounds(new Rectangle(60, 15, 175, 25));
-        jLabelNombreDeLaCompetencia.setFont(new Font("Tahoma", 0, 13));
-        estadoJComboBox.setBounds(new Rectangle(240, 160, 250, 30));
-        estadoJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
-        estadoJComboBox.setMinimumSize(new Dimension(2, 18));
-        estadoJComboBox.setPreferredSize(new Dimension(2, 18));
-        estadoJComboBox.setSize(new Dimension(375, 30));
-        jLabelEstado.setText("Estado");
-        jLabelEstado.setBounds(new Rectangle(60, 160, 135, 25));
-        jLabelEstado.setFont(new Font("Tahoma", 0, 13));
-        buscarJButton.setText("Buscar");
-        buscarJButton.setBounds(new Rectangle(715, 70, 110, 30));
-        buscarJButton.setFont(new Font("Tahoma", 0, 13));
-        buscarJButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    buscarJButton_actionPerformed(e);
-                }
-            });
+
+        
+ 
+
+
+      
         resultadoJPanel.add(jScrollBar1, null);
         resultadoJPanel.add(verCompetenciaJButton, null);
         resultadoJPanel.add(nuevaCompetenciaJButton, null);
@@ -169,21 +213,26 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         this.getContentPane().add(aceptarJButton, null);
        
     }
+    // CARGAR DEPORTES
+    private void listarDeportes() {
+        deporte = DeporteGestor.instanciarDeportes();
+        for(int i=0; i<deporte.size();i++){
+        DeporteJComboBox.addItem(deporte.get(i).getNombre());
+        }
+    }
 
     private void jButtonCancelar_actionPerformed(ActionEvent e) {
         this.setVisible(false);
-        this.getParent().setVisible(true);
     }
 
     private void jButtonAceptar1_actionPerformed(ActionEvent e) {
         competenciaSelecionad = CompetenciaGestor.buscarCompetencia(tablaResultadoJTable.getSelectedRow());
-        VerCompetencia ven = new VerCompetencia( usuarioActual, competenciaSelecionad);
+        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
         ven.setVisible(true);
     }
 
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
         AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual);
-        
         ven.setVisible(true);
     }
 
