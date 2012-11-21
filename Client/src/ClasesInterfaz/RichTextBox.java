@@ -76,7 +76,9 @@ public class RichTextBox{
     menu.add(colorMenu);
     north.add(menu);
   }
-
+  public JTextPane textPane(){
+      return textPane;
+      }
   public JScrollPane getJScrollPane(){return scrollPane;}
   public JPanel getJPanel(){return north;}
     
