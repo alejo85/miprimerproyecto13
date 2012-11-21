@@ -6,7 +6,7 @@ import ClasesGestores.DeporteGestor;
 import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Deporte;
-import ClasesLogicas.LugarDeRealizacion;
+import ClasesLogicas.LugarDeRealización;
 import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
 
@@ -91,8 +91,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private String fuenteLetra;
     private JPanel editorReglamentoJPanel = new JPanel();
     private  Vector <Deporte> deporte;
-    private  Vector<LugarDeRealizacion> lugares;
-    private  Vector<LugarDeRealizacion> lugaresSeleccionados=new Vector<LugarDeRealizacion> ();
+    private  Vector<LugarDeRealización> lugares;
+    private  Vector<LugarDeRealización> lugaresSeleccionados=new Vector<LugarDeRealizacion> ();
     private RichTextBox box = new RichTextBox();
     private JPanel reglamentoJPanel = new JPanel();
     private JButton jButton1 = new JButton();
