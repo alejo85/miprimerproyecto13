@@ -138,7 +138,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
 
     private void jbInit() throws Exception {
-        CerrarVentana();
+        
         this.setSize(new Dimension(1487, 765));
         this.getContentPane().setLayout(null);
         this.setTitle("Alta Competencia Deportiva");
@@ -289,11 +289,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
 
-        cancelarJButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cancelarJButton_actionPerformed(e);
-            }
-        });
+   
         quitarJButton.setText("Quitar");
         quitarJButton.setBounds(new Rectangle(500, 225, 110, 30));
         quitarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -449,10 +445,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
     }
 
-    private void cancelarJButton_actionPerformed(ActionEvent e) {
-        CerrarVentana();
-    }
-
+   
     private void deporteJComboBox_actionPerformed(ActionEvent e) {
         deporteJComboBox.setBackground(background);
         deporteJComboBox.setForeground(foreground);
