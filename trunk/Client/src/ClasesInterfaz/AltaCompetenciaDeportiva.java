@@ -6,7 +6,7 @@ import ClasesGestores.DeporteGestor;
 import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Deporte;
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
 
@@ -91,8 +91,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private String fuenteLetra;
     private JPanel editorReglamentoJPanel = new JPanel();
     private  Vector <Deporte> deporte;
-    private  Vector<LugarDeRealización> lugares;
-    private  Vector<LugarDeRealización> lugaresSeleccionados=new Vector<LugarDeRealización> ();
+    private  Vector<LugarDeRealizacion> lugares;
+    private  Vector<LugarDeRealizacion> lugaresSeleccionados=new Vector<LugarDeRealizacion> ();
     private RichTextBox box = new RichTextBox();
     private JPanel reglamentoJPanel = new JPanel();
     private JButton jButton1 = new JButton();
@@ -512,7 +512,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         int row =listaLugaresJTable.getSelectedRow();
         
         if(row>-1&&!disponibilidadJTextArea.getText().equals("")){
-                LugarDeRealización unLugar = lugares.get(row);
+                LugarDeRealizacion unLugar = lugares.get(row);
                 
                 unLugar.setDisponibilidad(Integer.parseInt(disponibilidadJTextArea.getText()));
                 lugaresSeleccionados.add(unLugar);
@@ -528,7 +528,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         
         
         if(row>-1){
-                LugarDeRealización unLugar = lugaresSeleccionados.get(row);
+                LugarDeRealizacion unLugar = lugaresSeleccionados.get(row);
                 unLugar.setDisponibilidad(0);
                 lugares.add(unLugar);
                 lugaresSeleccionados.remove(row);
