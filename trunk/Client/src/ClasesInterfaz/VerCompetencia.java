@@ -55,7 +55,7 @@ public class VerCompetencia extends JDialog {
      * @param usuario
      * @param competencia
      */
-    public VerCompetencia(Usuario usuario, Competencia competencia) {
+    public VerCompetencia( Usuario usuario, Competencia competencia) {
 
         this(null, "", false, usuario, competencia);
     }
