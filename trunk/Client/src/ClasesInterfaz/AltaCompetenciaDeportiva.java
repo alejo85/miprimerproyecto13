@@ -545,7 +545,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
             }
     }
 
-    }
+    
     private Boolean datosValidosRegistro(){
         String errores="";
         String errores2="";
