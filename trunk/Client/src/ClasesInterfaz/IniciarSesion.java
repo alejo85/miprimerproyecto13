@@ -15,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -180,6 +181,7 @@ public class IniciarSesion extends JDialog {
         
        usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
        if(usuarioActual==null){
+           Toolkit.getDefaultToolkit().beep();
            JOptionPane.showOptionDialog(null, "El correo electronico o la contraseña son incorrectos "  , "Error al Autencicar", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
            this.correoElectronicoJTextArea.error();
            this.contraeñaJPasswordField.error();
