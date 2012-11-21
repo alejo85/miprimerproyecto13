@@ -544,15 +544,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
                 cargarLugaresSeleccionados();
             }
     }
-    private void CerrarVentana(){
-    addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent e) {
-        setVisible(false);
-        ventanaAnterior.setVisible(true);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        
-    }
-    });
+
     }
     private Boolean datosValidosRegistro(){
         String errores="";

@@ -47,11 +47,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private JButton buscarJButton = new JButton();
     private Usuario usuarioActual= null;
     private Competencia competenciaSelecionad=null;
+    private Frame parent;
     
 
-    public BuscarCompetenciaDeportiva(Usuario usuariologueado) {
+    public BuscarCompetenciaDeportiva(Frame parent, Usuario usuariologueado) {
         
-        this(null, "", false,usuariologueado);
+        this(parent, "", false,usuariologueado);
         
         
     }
@@ -60,6 +61,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         super(parent, title, modal);
         try {
             this.usuarioActual=usuariologueado;
+            
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,16 +172,18 @@ public class BuscarCompetenciaDeportiva extends JDialog {
 
     private void jButtonCancelar_actionPerformed(ActionEvent e) {
         this.setVisible(false);
+        this.getParent().setVisible(true);
     }
 
     private void jButtonAceptar1_actionPerformed(ActionEvent e) {
         competenciaSelecionad = CompetenciaGestor.buscarCompetencia(tablaResultadoJTable.getSelectedRow());
-        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
+        VerCompetencia ven = new VerCompetencia( usuarioActual, competenciaSelecionad);
         ven.setVisible(true);
     }
 
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
         AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual);
+        
         ven.setVisible(true);
     }
 
