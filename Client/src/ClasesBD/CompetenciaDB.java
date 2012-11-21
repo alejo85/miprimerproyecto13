@@ -82,15 +82,16 @@ public class CompetenciaDB {
                                conexion.conectar();
                                System.out.println("llega conecta conexion");
                                String consultasql;
+                               int id;
                                if(competencia.getReglamento().equals(""))
                                        {
                                                System.out.println(competencia.getModalidad());
                                                consultasql="INSERT INTO competencia( nombre_competencia, modalidad, forma_puntuacion, estado, tantos_por_partido_ganado, creador, id_deporte)" +
                                                "VALUES ('"+competencia.getNombreCompetencia()+"', '"+competencia.getModalidad()+
                                                "','"+competencia.getFormaDePuntuacion()+"', '"+competencia.getEstado()+"', '"+competencia.getTantosPorPartidoGanado()+"', '"
-                                               +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"');";
+                                               +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"')RETURNING id_Competencia;";
                                                System.out.println(consultasql);
-                                               resultado= conexion.consultar(consultasql);
+                                                resultado=conexion.consultar(consultasql);
                                        }
                                else
                                        {
@@ -98,28 +99,35 @@ public class CompetenciaDB {
                                                consultasql="INSERT INTO competencia( nombre_competencia, reglamento, modalidad, forma_puntuacion, estado, tantos_por_partido_ganado, creador, id_deporte)" +
                                                "VALUES ('"+competencia.getNombreCompetencia()+"', '"+competencia.getReglamento()+"', '"+competencia.getModalidad()+
                                                "','"+competencia.getFormaDePuntuacion()+"', '"+competencia.getEstado()+"', '"+competencia.getTantosPorPartidoGanado()+"', '"
-                                               +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"');";
+                                               +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"')RETURNING id_Competencia;";
                                                System.out.println(consultasql);
-                                               resultado= conexion.consultar(consultasql);
-                                               competencia.setIdCompetencia(idCompetencia());
+                                               resultado=conexion.consultar(consultasql);
+                                               
                                                System.out.println("llega al regla no null");
                                        }
+                               System.out.println("sale al regla no null");
+                               resultado.next();
+                               System.out.println("despues del next");
+                               id = resultado.getInt("id_Competencia");
+                               System.out.println("despues del getint");
+                               competencia.setIdCompetencia(id);
                                
-                               if (competencia.getModalidad().equals("Puntuación"))
+                               
+                               if (competencia.getFormaDePuntuacion().equals("Puntuación"))
                                {
                                        System.out.println("llega al puntuacion");
                                        
                                        if(competencia.getLiga().getEmpate())
                                                {
                                                        System.out.println("llega al empatesi");
-                                                       consultasql="INSERT INTO liga(ptos_por_empate, ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoEmpatado()+"', '"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"');";
+                                                       consultasql="INSERT INTO liga(ptos_por_empate, ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoEmpatado()+"', '"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                                        System.out.println(consultasql);
                                                        resultado= conexion.consultar(consultasql);
                                                }
                                        else
                                                {
                                                        System.out.println("llega al empateno");
-                                                       consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"');";
+                                                       consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                                        System.out.println(consultasql);
                                                        resultado= conexion.consultar(consultasql);
                                                }
@@ -129,8 +137,8 @@ public class CompetenciaDB {
                                        resultado= conexion.consultar(consultasql);
                                        System.out.println("termina al puntuacion");
                                }
-
-                               if (competencia.getModalidad().equals("Sets"))
+                               
+                               if (competencia.getFormaDePuntuacion().equals("Sets"))
                                {
                                        
                                        if(competencia.getLiga().getEmpate())
@@ -174,7 +182,7 @@ public class CompetenciaDB {
             resultado = conexion.consultar(consultasql);
             resultado.next();
 
-            id = resultado.getInt("max");
+            id = resultado.getInt("id_Competencia");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
