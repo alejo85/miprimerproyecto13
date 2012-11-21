@@ -41,7 +41,7 @@ public class Liga {
         this.empate = empate;
     }
 
-    public boolean isEmpate() {
+    public boolean getEmpate() {
         return empate;
     }
 
