@@ -1,6 +1,7 @@
 package ClasesInterfaz;
 
 
+import ClasesGestores.CompetenciaGestor;
 import ClasesGestores.DeporteGestor;
 import ClasesGestores.LugaresDeRealizacionGestores;
 
@@ -13,12 +14,15 @@ import InterfazGrafica.CampoTexto.AreaTextoNombre;
 import InterfazGrafica.CampoTexto.AreaTextoNumerico;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import java.sql.SQLException;
 
@@ -29,21 +33,22 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-import javax.swing.table.TableColumn;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
 
 public class AltaCompetenciaDeportiva extends JDialog {
-
+    
     private ModeloTabla modelo = new ModeloTabla(new String[] { "Lugar De Realizacion" }, 0);
     private ModeloTabla modelo2 = new ModeloTabla(new String[] { "Lugar De Realizacion","Disponibilidad" }, 0);
     private AreaTextoNombre nombreDeLaCompetenciaJTextArea = new AreaTextoNombre(60);
@@ -96,38 +101,44 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JScrollPane jScrollPane1 = new JScrollPane();
     private JTable listaLugaresJTable = new JTable();
     private JScrollPane jScrollPane2 = new JScrollPane();
+    private JDialog ventanaAnterior=null;
+    private Color background = deporteJComboBox.getBackground();
+    private Color foreground = deporteJComboBox.getForeground();
+    private boolean empate;
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
-        this(null, "", false, usuarioLogueado);
-    }
+           this(null, "", false, usuarioLogueado);
+       }
 
-    public AltaCompetenciaDeportiva() {
+       public AltaCompetenciaDeportiva() {
 
-        this(null, "", false);
-    }
+           this(null, "", false);
+       }
 
-    public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal, Usuario usuarioLogueado) {
-        super(parent, title, modal);
-        try {
-            this.ussuarioActual = usuarioLogueado;
-            jbInit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+       public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal, Usuario usuarioLogueado) {
+           super(parent, title, modal);
+           try {
+               this.ussuarioActual = usuarioLogueado;
+               jbInit();
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
 
-    public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal) {
-        super(parent, title, modal);
-        try {
+       public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal) {
+           super(parent, title, modal);
+           try {
 
-            jbInit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+               jbInit();
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
+
 
     private void jbInit() throws Exception {
+        CerrarVentana();
         this.setSize(new Dimension(1487, 765));
         this.getContentPane().setLayout(null);
         this.setTitle("Alta Competencia Deportiva");
@@ -268,6 +279,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
         aceptarJButton.setText("Aceptar");
         aceptarJButton.setBounds(new Rectangle(490, 670, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
+        aceptarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(680, 670, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -313,6 +329,17 @@ public class AltaCompetenciaDeportiva extends JDialog {
      //   panel.setPreferredSize(new Dimension(350, 270));
 
         jScrollPane1.setBounds(new Rectangle(235, 125, 245, 140));
+        listaLugaresJTable.addAncestorListener(new AncestorListener() {
+                public void ancestorAdded(AncestorEvent e) {
+                    listaLugaresJTable_ancestorAdded(e);
+                }
+
+                public void ancestorRemoved(AncestorEvent e) {
+                }
+
+                public void ancestorMoved(AncestorEvent e) {
+                }
+            });
         jScrollPane2.setBounds(new Rectangle(670, 125, 270, 135));
         listarDeportes();
         box.setelementos();
@@ -379,6 +406,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     //aca empiezan los action performers
 
     private void empateSiJRadioButton_actionPerformed(ActionEvent e) {
+        empate=true;
         empateNoJRadioButton.setSelected(false);
         puntosPorPartidoEmpatadoJTextArea.setVisible(true);
         jLabelPuntosPorPartidoEmpatado.setVisible(true);
@@ -386,12 +414,15 @@ public class AltaCompetenciaDeportiva extends JDialog {
     }
 
     private void empateNoJRadioButton_actionPerformed(ActionEvent e) {
+        empate=false;
         empateSiJRadioButton.setSelected(false);
         puntosPorPartidoEmpatadoJTextArea.setVisible(false);
         jLabelPuntosPorPartidoEmpatado.setVisible(false);
     }
 
     private void modalidadJComboBox_actionPerformed(ActionEvent e) {
+        modalidadJComboBox.setBackground(background);
+        modalidadJComboBox.setForeground(foreground);
         if (modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")) {
             modalidadLigaJPanel.setVisible(true);
         } else
@@ -399,6 +430,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
     }
 
     private void formaDePuntuaciónJComboBox_actionPerformed(ActionEvent e) {
+        formaDePuntuaciónJComboBox.setBackground(background);
+        formaDePuntuaciónJComboBox.setForeground(foreground);
         if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets"))
 
         {
@@ -417,10 +450,13 @@ public class AltaCompetenciaDeportiva extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        CerrarVentana();
     }
 
     private void deporteJComboBox_actionPerformed(ActionEvent e) {
+        deporteJComboBox.setBackground(background);
+        deporteJComboBox.setForeground(foreground);
+        listaLugaresJTable();
         if(deporteJComboBox.getSelectedIndex()>0)
         {
          cargarLugaresDeRealizacion();
@@ -507,5 +543,144 @@ public class AltaCompetenciaDeportiva extends JDialog {
                 
                 cargarLugaresSeleccionados();
             }
+    }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        ventanaAnterior.setVisible(true);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        
+    }
+    });
+    }
+    private Boolean datosValidosRegistro(){
+        String errores="";
+        String errores2="";
+
+     
+      
+          if(nombreDeLaCompetenciaJTextArea.getText().equals("")){
+              this.nombreDeLaCompetenciaJTextArea.error();
+              errores=errores +"\n        Nombre de la Competencia Vacio";
+          }
+        if(this.deporteJComboBox.getSelectedIndex()<1){
+            errores=errores + "\n        Debe Seleccionar Un Deporte ";
+            deporteJComboBox.setBackground(Color.red);
+            deporteJComboBox.setForeground(Color.white);
+        }
+        if(this.lugaresSeleccionados.size()<1){
+            errores=errores + "\n        Debe Seleccionar Un Lugar de Relaizacion ";
+            listaLugaresJTable.setBackground(Color.red);
+            listaLugaresJTable.setForeground(Color.white);
+        }
+        if(this.modalidadJComboBox.getSelectedIndex()<1){
+            errores=errores + "\n        Debe Seleccionar Una Modalidad ";
+            modalidadJComboBox.setBackground(Color.red);
+            modalidadJComboBox.setForeground(Color.white);
+        }
+        else{
+            if(this.modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")){
+                    if(puntosPorPartidoGanadosJTextArea.getText().equals("")){
+                        this.puntosPorPartidoGanadosJTextArea.error();
+                        errores=errores +"\n        Puntos por partido ganados no puede ser Vacio";
+                    }
+                if(empate){
+                    if(puntosPorPartidoEmpatadoJTextArea.getText().equals("")){
+                        this.puntosPorPartidoEmpatadoJTextArea.error();
+                        errores=errores +"\n        Puntos por partido empatados no puede ser Vacio";
+                    }
+                }
+                if(puntosPorPartidoAsistidoJTextArea.getText().equals("")){
+                    this.puntosPorPartidoAsistidoJTextArea.error();
+                    errores=errores +"\n        Puntos por partido asistido no puede ser Vacio";
+                }
+            
+            }
+            else{
+                    JOptionPane.showOptionDialog(null, "Modalidad no Disponible:" , "Errores al Seleccionar Disponivilidad", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+                
+                }
+        }
+        if(this.formaDePuntuaciónJComboBox.getSelectedIndex()<1){
+            errores=errores + "\n        Debe Seleccionar Una Forma de Puntuacion ";
+            formaDePuntuaciónJComboBox.setBackground(Color.red);
+            formaDePuntuaciónJComboBox.setForeground(Color.white);
+        }
+        else{
+                if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")){
+                        if(tantosPorPartidosGanadosJTextArea.getText().equals("")){
+                            this.tantosPorPartidosGanadosJTextArea.error();
+                            errores=errores +"\n        Tantos por partidos ganados no puede ser Vacio";
+                        }
+                }
+                if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets")){
+                    if(cantidadMaximaDeSetsJTextArea.getText().equals("")){
+                        this.cantidadMaximaDeSetsJTextArea.error();
+                        errores=errores +"\n        La Cantidad de Set no puede ser Vacio";
+                    }
+                }
+            
+            
+            
+            
+            }
+        try {
+            if(CompetenciaGestor.validarNombreDeCompetencia(nombreDeLaCompetenciaJTextArea.getText(), ussuarioActual.getCorreoElectronico())){
+                errores= errores +"\n        Nombre de la Competencia Ya usado";
+                this.nombreDeLaCompetenciaJTextArea.error();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Errore lenght vale:" +errores.length());
+        if(errores.length()>0){
+            JOptionPane.showOptionDialog(null, "Tienes los siguientes errores:"+errores2+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
+    private void aceptarJButton_actionPerformed(ActionEvent e) {
+        boolean resultado;
+        if(datosValidosRegistro())
+        {
+            int deporte = this.deporteJComboBox.getSelectedIndex();
+            int cantidadDeSets =-1, tantosPorPartidoAusenciaContrincante=-1,puntosPorPartidoEmpatado=-1;
+            deporte--;
+            JEditorPane editor = box.textPane();
+
+            
+            if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets"))
+
+            {
+                cantidadDeSets = Integer.parseInt(cantidadMaximaDeSetsJTextArea.getText());
+                tantosPorPartidoAusenciaContrincante=-1;
+            } 
+            if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")) {
+                tantosPorPartidoAusenciaContrincante = Integer.parseInt(tantosPorPartidosGanadosJTextArea.getText());
+                cantidadDeSets=-1;
+            }
+            if(empate)
+            {
+                    puntosPorPartidoEmpatado=Integer.parseInt(puntosPorPartidoEmpatadoJTextArea.getText());
+                }
+            
+            else
+                puntosPorPartidoEmpatado=-1;
+            System.out.println(formaDePuntuaciónJComboBox.getSelectedItem().toString());
+            resultado =  CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(), "Liga", formaDePuntuaciónJComboBox.getSelectedItem().toString(), "Creada", editor.getText(), this.deporte.get(deporte), lugaresSeleccionados, empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),puntosPorPartidoEmpatado,Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),  cantidadDeSets,  tantosPorPartidoAusenciaContrincante);
+            
+        }
+    }
+
+    private void listaLugaresJTable_ancestorAdded(AncestorEvent e) {
+        listaLugaresJTable();
+    }
+    private void listaLugaresJTable() {
+        listaLugaresJTable.setBackground(Color.white);
+        listaLugaresJTable.setForeground(Color.black);
     }
 }
