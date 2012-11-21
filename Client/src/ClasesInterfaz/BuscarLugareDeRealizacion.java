@@ -1,6 +1,6 @@
 package ClasesInterfaz;
 
-import ClasesLogicas.LugarDeRealizacion;
+import ClasesLogicas.LugarDeRealización;
 
 import ClasesLogicas.Usuario;
 
@@ -44,7 +44,7 @@ public class BuscarLugareDeRealizacion extends JDialog {
     private JButton eliminarLugarDeRealizaciónJButton = new JButton();
     private JButton cancelarJButton = new JButton();
     private JButton aceptarJButton = new JButton();
-    private Vector <LugarDeRealizacion> lugar=null;
+    private Vector <LugarDeRealización> lugar=null;
     private Usuario usuarioActual=null;
     public BuscarLugareDeRealizacion(Usuario usuario) {
         this(null, "", false);
