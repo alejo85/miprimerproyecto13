@@ -118,9 +118,21 @@ public class LugaresDeRealizacionGestores {
      */
     public static void altaLugar(String codigo, String nombre, String descripcion,Vector <Deporte> dSeleccionados, Usuario creado)throws SQLException{
             java.util.Date fecha = new Date();
-            String dia = ""+fecha.getDay()+"/"+fecha.getMonth()+"/"+fecha.getYear();
-            String hora= ""+fecha.getHours()+":"+fecha.getMinutes();
-            LugarDeRealizaciónDB.altaLugarDeRealización( codigo,  nombre, descripcion, dSeleccionados,  creado.getCorreoElectronico(),  dia,  hora);
+            int dia = fecha.getDate();
+            int mes = fecha.getMonth() + 1;
+            int anio = fecha.getYear() + 1900;
+            int hora = fecha.getHours();
+            int min = fecha.getMinutes();
+            String horas;
+            
+            if (min < 10)
+            {
+                horas= ""+hora+":"+"0" + min;
+                
+            }
+            String dias = ""+dia+"/"+mes+"/"+anio;
+            horas = ""+hora+":"+ min;
+            LugarDeRealizaciónDB.altaLugarDeRealización( codigo,  nombre, descripcion, dSeleccionados,  creado.getCorreoElectronico(),  dias,  horas);
             
         }
 
