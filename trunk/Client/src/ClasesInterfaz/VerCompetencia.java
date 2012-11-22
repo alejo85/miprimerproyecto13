@@ -33,9 +33,7 @@ public class VerCompetencia extends JDialog {
     private JLabel jLabelModalidad = new JLabel();
     private JLabel jLabelEstado = new JLabel();
     private JTextArea estadoJTextArea = new JTextArea();
-    private JScrollBar jScrollBar1 = new JScrollBar();
     private JLabel jLabelParticipante = new JLabel();
-    private JScrollBar jScrollBar2 = new JScrollBar();
     private JTable tablaProximosEncuentosJTable = new JTable();
     private JLabel jLabelProximosEncuentros = new JLabel();
     private JButton modificarCompetenciaJButton = new JButton();
@@ -49,7 +47,7 @@ public class VerCompetencia extends JDialog {
     private JList listaParticipantesJList = new JList();
     private JButton cancelarJButton = new JButton();
     private Usuario usuarioActual=null;
-    private Competencia competencia=null;
+    private Competencia competencia;
 
     /**
      * @param usuario
@@ -65,6 +63,7 @@ public class VerCompetencia extends JDialog {
         try {
             this.usuarioActual=usuario;
             this.competencia=competencia;
+            
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,6 +74,7 @@ public class VerCompetencia extends JDialog {
         this.setSize(new Dimension(991, 567));
         this.getContentPane().setLayout( null );
         this.setTitle("Ver Competencia");
+        cargarDatos();
         nombreDeLaCompetenciaJTextArea.setBounds(new Rectangle(235, 30, 375, 30));
         nombreDeLaCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreDeLaCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -103,11 +103,9 @@ public class VerCompetencia extends JDialog {
         estadoJTextArea.setFont(new Font("Tahoma", 0, 13));
         estadoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         estadoJTextArea.setNextFocusableComponent(this);
-        jScrollBar1.setBounds(new Rectangle(590, 200, 20, 125));
         jLabelParticipante.setText("Participantes");
         jLabelParticipante.setBounds(new Rectangle(45, 230, 135, 25));
         jLabelParticipante.setFont(new Font("Tahoma", 0, 13));
-        jScrollBar2.setBounds(new Rectangle(590, 340, 20, 120));
         jLabelProximosEncuentros.setText("Proximos Encuentros");
         jLabelProximosEncuentros.setBounds(new Rectangle(45, 355, 135, 25));
         jLabelProximosEncuentros.setFont(new Font("Tahoma", 0, 13));
@@ -178,10 +176,8 @@ public class VerCompetencia extends JDialog {
         this.getContentPane().add(gestionarParticipantesJButton, null);
         this.getContentPane().add(eliminarCompetenciaJButton, null);
         this.getContentPane().add(modificarCompetenciaJButton, null);
-        this.getContentPane().add(jScrollBar2, null);
         this.getContentPane().add(jLabelProximosEncuentros, null);
         this.getContentPane().add(jLabelParticipante, null);
-        this.getContentPane().add(jScrollBar1, null);
         this.getContentPane().add(estadoJTextArea, null);
         this.getContentPane().add(jLabelEstado, null);
         this.getContentPane().add(jLabelModalidad, null);
@@ -236,4 +232,10 @@ public class VerCompetencia extends JDialog {
         TablaDePosiciones ven = new TablaDePosiciones();
         ven.setVisible(true);
     }
+    private void cargarDatos(){
+        nombreDeLaCompetenciaJTextArea.setText(competencia.getNombreCompetencia());
+        deporteJTextArea.setText(competencia.getDeporte().getNombre());
+        modalidadJTextArea.setText(competencia.getModalidad());
+        estadoJTextArea.setText(competencia.getEstado());
+        }
 }

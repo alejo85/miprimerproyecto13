@@ -1,5 +1,8 @@
 package ClasesInterfaz;
 
+import ClasesGestores.ParticipanteGestor;
+
+import ClasesLogicas.Competencia;
 import ClasesLogicas.Participante;
 
 import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
@@ -35,14 +38,16 @@ public class AltaParticipante extends JDialog {
     private JButton cancelarJButton = new JButton();
     private JButton aceptarJButton = new JButton();
     private Participante participanteNuevo=null;
+    private Competencia competenciaSeleccionada=null;
 
-    public AltaParticipante() {
-        this(null, "", false);
+    public AltaParticipante(Competencia competencia) {
+        this(null, "", false, competencia);
     }
 
-    public AltaParticipante(Frame parent, String title, boolean modal) {
+    public AltaParticipante(Frame parent, String title, boolean modal, Competencia competencia) {
         super(parent, title, modal);
         try {
+            competenciaSeleccionada=competencia;
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,6 +96,11 @@ public class AltaParticipante extends JDialog {
         aceptarJButton.setText("Aceptar");
         aceptarJButton.setBounds(new Rectangle(320, 240, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
+        aceptarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         this.getContentPane().add(aceptarJButton, null);
         this.getContentPane().add(cancelarJButton, null);
         this.getContentPane().add(jLabelImagen, null);
@@ -118,5 +128,32 @@ public class AltaParticipante extends JDialog {
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         this.setVisible(false);
+    }
+
+    private void aceptarJButton_actionPerformed(ActionEvent e) {
+        String errores ="";
+        if(!correoElectrónicoJTextArea.getText().equals("")){
+            if(!nombreParticipanteJTextArea.getText().equals("")){
+                if(imagenJTextArea.getText().equals("")){
+                    Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText());
+                  }
+                else
+                {
+                        //Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), imagenJTextArea.getText());
+                    }
+                
+                }
+            else{
+                    nombreParticipanteJTextArea.error();
+                    errores+="          El nombre del participante no puede ser  nulo";
+                
+                }
+            
+            }
+        else
+        {
+                correoElectrónicoJTextArea.error();
+                errores+="          El correo electronico del participante no puede ser  nulo";
+            }
     }
 }
