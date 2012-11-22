@@ -40,10 +40,8 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private JButton aceptarJButton = new JButton();
     private JButton cancelarJButton = new JButton();
     private JPanel resultadoJPanel = new JPanel();
-    private JScrollBar jScrollBar1 = new JScrollBar();
     private JButton nuevaCompetenciaJButton = new JButton();
     private JButton verCompetenciaJButton = new JButton();
-    private JScrollBar jScrollBar2 = new JScrollBar();
     private JScrollPane jScrollPane2 = new JScrollPane();
     private JTable tablaResultadoJTable = new JTable();
     private JLabel jLabelModalidad = new JLabel();
@@ -192,6 +190,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         // JPANEL RESULTADOS
         resultadoJPanel.setBounds(new Rectangle(15, 245, 775, 375));
         resultadoJPanel.setLayout(null);
+
         //resultadoJPanel.setBorder(BorderFactory.createTitledBorder("Resultados obtenidos"));
         resultadoJPanel.setBorder(BorderFactory.createLineBorder(borde,2));
         
@@ -200,9 +199,10 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         jLabelResultadosObtenidos.setFont(new Font("Tahoma", 0, 15));
         
         jScrollPane2.setBounds(new Rectangle(20, 50, 720, 230));
-        jScrollBar1.setBounds(new Rectangle(740, 50, 20, 230));
+
         
         // BOTON NUEVA COMPETENCIA
+
         nuevaCompetenciaJButton.setText("Nueva Competencia");
         nuevaCompetenciaJButton.setBounds(new Rectangle(445, 310, 170, 40));
         nuevaCompetenciaJButton.setFont(new Font("Tahoma", 0, 15));
@@ -216,24 +216,21 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         verCompetenciaJButton.setText("Ver Competencia");
         verCompetenciaJButton.setBounds(new Rectangle(150, 310, 170, 40));
         verCompetenciaJButton.setFont(new Font("Tahoma", 0, 15));
+        tablaResultadoJTable.setModel(modelo);
         verCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonAceptar1_actionPerformed(e);
                 }
             });
+
         
         //jScrollBar2.setBounds(new Rectangle(890, 30, 15, 230)); ¿ por que dos scrollbar ?
         
 
-        
- 
 
 
-      
-        resultadoJPanel.add(jScrollBar1, null);
         resultadoJPanel.add(verCompetenciaJButton, null);
         resultadoJPanel.add(nuevaCompetenciaJButton, null);
-        resultadoJPanel.add(jScrollBar2, null);
         jScrollPane2.getViewport().add(tablaResultadoJTable, null);
         resultadoJPanel.add(jScrollPane2, null);
         resultadoJPanel.add(nuevaCompetenciaJButton, null);
@@ -268,7 +265,8 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
 
     private void jButtonAceptar1_actionPerformed(ActionEvent e) {
-        competenciaSelecionad = CompetenciaGestor.buscarCompetencia(tablaResultadoJTable.getSelectedRow());
+        competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
+        System.out.println(this.competenciaSelecionad.getNombreCompetencia());
         VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
         ven.setVisible(true);
     }
@@ -279,7 +277,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
 
     private void buscarJButton_actionPerformed(ActionEvent e) {
-        int error=0;
+        int error=0, idDeporte=-1;
         if(this.nombreCompetenciaJTextArea.getText().equals(""))error++;
         if(this.DeporteJComboBox.getSelectedItem().equals("Seleccione un Deporte"))error++;
         if(modalidadJComboBox.getSelectedItem().equals("Seleccione Una Modalidad"))error++;
@@ -293,9 +291,11 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                 estadoJComboBox.setBackground(Color.red);
                 estadoJComboBox.setForeground(Color.white);
             }
+        if(DeporteJComboBox.getSelectedIndex()>0){
+        idDeporte=deporte.get(DeporteJComboBox.getSelectedIndex()-1).getIdDeporte();}
+        competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte , modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
         
-        String  resultado[][] = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(), deporte.get(DeporteJComboBox.getSelectedIndex()-1).getIdDeporte(), modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
-        //todo cargar en la interfaz codigo de robert
+        cargarResultados();
         
     }
 
@@ -312,5 +312,22 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private void estadoJComboBox_actionPerformed(ActionEvent e) {
         estadoJComboBox.setBackground(background);
         estadoJComboBox.setForeground(foreground);
+    }
+    private void cargarResultados(){
+        
+        modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
+        tablaResultadoJTable.setModel(modelo);
+        System.out.println("tamaño resultado: "+competenciasEncontradas.size());
+        for(int i =0; i<competenciasEncontradas.size();i++)
+        {
+            Vector <String> datos = new Vector <String>();
+            datos.add(competenciasEncontradas.get(i).getNombreCompetencia());
+            datos.add(competenciasEncontradas.get(i).getDeporte().getNombre());
+            datos.add(competenciasEncontradas.get(i).getModalidad());
+            datos.add(competenciasEncontradas.get(i).getEstado());
+            modelo.addRow(datos);
+           
+                
+        }
     }
 }
