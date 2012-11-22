@@ -1,5 +1,6 @@
 package ClasesInterfaz;
 
+import ClasesGestores.CompetenciaGestor;
 import ClasesGestores.ParticipanteGestor;
 
 import ClasesLogicas.Competencia;
@@ -135,12 +136,23 @@ public class AltaParticipante extends JDialog {
         if(!correoElectrónicoJTextArea.getText().equals("")){
             if(!nombreParticipanteJTextArea.getText().equals("")){
                 if(imagenJTextArea.getText().equals("")){
-                    Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText());
-                  }
-                else
-                {
-                        //Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), imagenJTextArea.getText());
+                if(CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
+                        Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
+                    
+                    
                     }
+                    
+                      else
+                      {
+                              //Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), imagenJTextArea.getText());
+                          }
+                  }
+                else{
+                        errores+="          El nombre del participante ya esta registrado";
+                    
+                    
+                    }
+                
                 
                 }
             else{

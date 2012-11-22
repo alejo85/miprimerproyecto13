@@ -2,6 +2,7 @@ package ClasesInterfaz;
 
 
 import ClasesLogicas.Competencia;
+import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
 
 import java.awt.Dimension;
@@ -10,6 +11,8 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,6 +28,7 @@ import javax.swing.JTextArea;
 
 
 public class VerCompetencia extends JDialog {
+    private ModeloTabla modelo = new ModeloTabla(new String[] { "Nombre" }, 0);
     private JTextArea nombreDeLaCompetenciaJTextArea = new JTextArea();
     private JLabel jLabelDeporte = new JLabel();
     private JLabel jLabelnombreDeLaCompetencia = new JLabel();
@@ -44,10 +48,10 @@ public class VerCompetencia extends JDialog {
     private JButton mostrarTablaDePosicionesJButton = new JButton();
     private JScrollPane jScrollPaneParticipante = new JScrollPane();
     private JScrollPane jScrollPaneProximoEncuentro = new JScrollPane();
-    private JList listaParticipantesJList = new JList();
     private JButton cancelarJButton = new JButton();
     private Usuario usuarioActual=null;
     private Competencia competencia;
+    private JTable jTable1 = new JTable();
 
     /**
      * @param usuario
@@ -186,7 +190,7 @@ public class VerCompetencia extends JDialog {
         this.getContentPane().add(jLabelnombreDeLaCompetencia, null);
         this.getContentPane().add(jLabelDeporte, null);
         this.getContentPane().add(nombreDeLaCompetenciaJTextArea, null);
-        jScrollPaneParticipante.getViewport().add(listaParticipantesJList, null);
+        jScrollPaneParticipante.getViewport().add(jTable1, null);
         this.getContentPane().add(jScrollPaneParticipante, null);
         jScrollPaneProximoEncuentro.getViewport().add(tablaProximosEncuentosJTable, null);
         this.getContentPane().add(jScrollPaneProximoEncuentro, null);
@@ -237,5 +241,12 @@ public class VerCompetencia extends JDialog {
         deporteJTextArea.setText(competencia.getDeporte().getNombre());
         modalidadJTextArea.setText(competencia.getModalidad());
         estadoJTextArea.setText(competencia.getEstado());
+        modelo = new ModeloTabla(new String[] { "Nombre" }, 0);
+        for(int i=0; i<competencia.getParticipantes().length;i++ ){
+                Vector <String> datos = new Vector <String>();
+                datos.add(competencia.getParticipantes()[i].getNombre());
+                modelo.addRow(datos);
+            }
+           jTable1.setModel(modelo);
         }
 }

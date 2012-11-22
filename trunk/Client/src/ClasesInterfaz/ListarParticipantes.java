@@ -14,16 +14,16 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.Vector;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 
 
 public class ListarParticipantes extends JDialog {
@@ -60,6 +60,7 @@ public class ListarParticipantes extends JDialog {
 
     private void jbInit() throws Exception {
         tablaParticipantesJTable.setModel(modelo);
+        cargarParticipantes();
         this.setSize(new Dimension(808, 627));
         this.getContentPane().setLayout( null );
         this.setTitle("Listado de Participantes");
@@ -145,4 +146,12 @@ public class ListarParticipantes extends JDialog {
             JOptionPane.showOptionDialog(null, "Se ha eliminado el participante nombre del participante de la competecnia Nombre Competencia "  , "Participante Eliminado.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
         }  
     }
+    private void cargarParticipantes(){
+            for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
+                    Vector <String> datos = new Vector <String>();
+                    datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
+                    datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
+                    modelo.addRow(datos);
+                }
+        }
 }

@@ -265,10 +265,11 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
 
     private void jButtonAceptar1_actionPerformed(ActionEvent e) {
+        if(tablaResultadoJTable.getSelectedRow()>0){
         competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
         System.out.println(this.competenciaSelecionad.getNombreCompetencia());
         VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
-        ven.setVisible(true);
+        ven.setVisible(true);}
     }
 
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
