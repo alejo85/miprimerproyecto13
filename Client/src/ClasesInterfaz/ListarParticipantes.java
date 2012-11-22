@@ -2,6 +2,7 @@ package ClasesInterfaz;
 
 
 import ClasesLogicas.Competencia;
+import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
@@ -26,6 +27,7 @@ import javax.swing.JTextArea;
 
 
 public class ListarParticipantes extends JDialog {
+    private ModeloTabla modelo = new ModeloTabla(new String[] { "Nombre", "Correo" }, 0);
     private AreaTextoNombre nombreCompetenciaJTextArea = new AreaTextoNombre(60);
     private JLabel jLabelNombreCompetencia = new JLabel();
     private JPanel participantesJPanel = new JPanel();
@@ -33,7 +35,6 @@ public class ListarParticipantes extends JDialog {
     private JButton altaParticipanteJButton = new JButton();
     private JScrollPane jScrollPane1 = new JScrollPane();
     private JTable tablaParticipantesJTable = new JTable();
-    private JScrollBar jScrollBar1 = new JScrollBar();
     private JButton modificarParticipanteJButton = new JButton();
     private JButton eliminarPrticipanteJButton = new JButton();
     private Competencia competenciaSeleccionada=null;
@@ -58,6 +59,7 @@ public class ListarParticipantes extends JDialog {
 
 
     private void jbInit() throws Exception {
+        tablaParticipantesJTable.setModel(modelo);
         this.setSize(new Dimension(808, 627));
         this.getContentPane().setLayout( null );
         this.setTitle("Listado de Participantes");
@@ -90,7 +92,6 @@ public class ListarParticipantes extends JDialog {
                 }
             });
         jScrollPane1.setBounds(new Rectangle(35, 25, 425, 345));
-        jScrollBar1.setBounds(new Rectangle(455, 25, 15, 345));
         modificarParticipanteJButton.setText("Modificar Participante");
         modificarParticipanteJButton.setBounds(new Rectangle(600, 250, 165, 30));
         modificarParticipanteJButton.setFont(new Font("Tahoma", 0, 13));
@@ -112,7 +113,6 @@ public class ListarParticipantes extends JDialog {
         this.getContentPane().add(altaParticipanteJButton, null);
         this.getContentPane().add(cancelarJButton, null);
         jScrollPane1.getViewport().add(tablaParticipantesJTable, null);
-        participantesJPanel.add(jScrollBar1, null);
         participantesJPanel.add(jScrollPane1, null);
         this.getContentPane().add(participantesJPanel, null);
         this.getContentPane().add(jLabelNombreCompetencia, null);
@@ -125,7 +125,7 @@ public class ListarParticipantes extends JDialog {
 
 
     private void altaParticipanteJButton_actionPerformed(ActionEvent e) {
-        AltaParticipante ven = new AltaParticipante();
+        AltaParticipante ven = new AltaParticipante(competenciaSeleccionada);
         ven.setVisible(true);
     }
 
