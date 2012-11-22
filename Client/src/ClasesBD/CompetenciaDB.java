@@ -295,5 +295,46 @@ public class CompetenciaDB {
 
  
     }
+    public static boolean validadNombreParticipante(String nombreDelParticipante, int idCompetencia) throws SQLException {
+            Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            conexion.conectar();
+            String consultasql;
+            
+            consultasql="SELECT A.id_competencia, A.id_participante, A.fecha, A.hora, P.id_participante, P.nombre, P.correo, P.imagen\n" + 
+            "  FROM participa as A, participante as P where P.nombre='"+nombreDelParticipante+"' and A.id_competencia='"+idCompetencia+"';";
+            System.out.println(consultasql);
+            resultado = conexion.consultar(consultasql);
+        
+        conexion.cerrarConexion();
+            if(resultado ==null){
+                return false;
+                
+            }
+            else{
+                return false;
+            }
+        
+    }
+
+    /**
+     * @param participante
+     * @param idCompetencia
+     */
+    public static void agregarParticipante(Participante participante, int idCompetencia, String dias, String horas) throws SQLException {
+        
+            Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            conexion.conectar();
+            String consultasql;
+            consultasql="INSERT INTO participa(id_competencia, id_participante, fecha, hora)VALUES('"+idCompetencia+"', '"+participante.getIdParticipante()+"', '"+dias+"', '"+horas+"');";
+            
+            resultado = conexion.consultar(consultasql);
+            conexion.cerrarConexion();
+        
+        
+        }
+        
+        
     
 }

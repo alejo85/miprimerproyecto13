@@ -158,9 +158,15 @@ public class CompetenciaGestor {
      * @param nombreDelParticipante
      * @return
      */
-    public boolean validadNombreParticipante(String nombreDelParticipante){
-        return true;
+    public static boolean validadNombreParticipante(String nombreDelParticipante, int idCompetencia){
+
+        try {
+            return CompetenciaDB.validadNombreParticipante( nombreDelParticipante,  idCompetencia);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+        return false;
+    }
 
     /**
      * @param corrreoDelParticipante
@@ -268,6 +274,7 @@ public class CompetenciaGestor {
 
         Competencia unaCompetencia=new Competencia   ();
         Deporte unDeporte;
+        
         int i=0;
         
 
@@ -300,6 +307,10 @@ public class CompetenciaGestor {
                 
 
             }while (consulta.next());
+            
+            unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
+            
+            
         } catch (SQLException e) {
             
             //todo hacer la exepcion correspondiente
@@ -311,9 +322,12 @@ public class CompetenciaGestor {
         
         
         
-        //depende de como cristian me devuelva la competencia
+       
         return unaCompetencia;
     }
+    
+    
+    
     public static Vector <Competencia>  buscarCompetencias(String nombre, int deporte, String modalidad,String estado,String correo){
         Vector <Competencia> competenciaEncontradas= new Vector <Competencia>();
         Competencia unaCompetencia=null;
