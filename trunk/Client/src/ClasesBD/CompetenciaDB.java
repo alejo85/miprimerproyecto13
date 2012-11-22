@@ -1,8 +1,6 @@
 package ClasesBD;
 
 
-import ClasesGestores.LugaresDeRealizacionGestores;
-
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealizacion;
@@ -32,14 +30,28 @@ public class CompetenciaDB {
             String where="";
             conexion.conectar();
             String consultasql="";
-           /* if(!nombreCompetencia.equals("")){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
-            if(deporte!=0){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
-            if(!modalidad.equals("Seleccione Una Modalidad")){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
-            if(!estado.equals("Seleccione Un Estado")){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
-                consultasql="SELECT C.id_competencia, C.nombre_competencia, C.modalidad, C.estado,  C.creador, C.id_deporte FROM competencia as C where C.creador='"+correo+"' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%' and C.id_deporte='"+deporte+"' and C.modalidad ='"+modalidad+"' and C.estado'"+estado+"';";
-               */ ResultSet resultado = conexion.consultar(consultasql); /*
+           if(!nombreCompetencia.equals(""))where+="and  C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";
+            if(deporte>0)where+="and C.id_deporte='"+deporte+"'";
+            if(!modalidad.equals("Seleccione Una Modalidad"))where+="and C.modalidad ='"+modalidad+"'";
+            if(!estado.equals("Seleccione Un Estado"))where+="and C.estado='"+estado+"'";
+                consultasql="SELECT C.id_competencia, C.nombre_competencia, C.modalidad, C.estado,  C.creador, C.id_deporte FROM competencia as C where C.creador='"+correo+"'"+where+";";
+                System.out.println(consultasql);
+                ResultSet resultado = conexion.consultar(consultasql); 
                 resultado.next();
-                conexion.cerrarConexion();*/
+                conexion.cerrarConexion();
+        
+        return resultado;}
+    public static ResultSet buscarCompetencias(int idCompetencia) throws SQLException {
+            Conexion conexion = new Conexion();
+
+            conexion.conectar();
+            String consultasql="";
+   
+                consultasql="SELECT * FROM competencia where id_Competencia='"+idCompetencia+"';";
+                System.out.println(consultasql);
+                ResultSet resultado = conexion.consultar(consultasql); 
+                resultado.next();
+                conexion.cerrarConexion();
         
         return resultado;}
 

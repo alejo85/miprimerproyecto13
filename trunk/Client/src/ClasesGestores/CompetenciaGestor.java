@@ -263,42 +263,98 @@ public class CompetenciaGestor {
     
     public static Competencia buscarCompetencia(int idCompetencia)
     {
-        Competencia retorno = new Competencia   ();
+       
+
+
+        Competencia unaCompetencia=new Competencia   ();
+        Deporte unDeporte;
+        int i=0;
+        
+
+        ResultSet consulta=null;
+
+        try {
+            consulta = CompetenciaDB.buscarCompetencias( idCompetencia);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            do
+            {
+                    System.out.println("Se ejecuta el while:"+i);
+                i++;
+                unaCompetencia=new Competencia();
+            int codigo = consulta.getInt("id_Competencia");
+            String nombreCompetencia = consulta.getString("Nombre_Competencia");
+                int deporteDeLaCompetencia = consulta.getInt("id_Deporte");
+                String modalidadDeLaCompetencia = consulta.getString("Modalidad");
+                String estadoDeLaCompetencia = consulta.getString("Estado");
+                unDeporte=DeporteGestor.buscarDeporte(deporteDeLaCompetencia);
+                unaCompetencia.setIdCompetencia(codigo);
+                unaCompetencia.setNombreCompetencia(nombreCompetencia);
+                unaCompetencia.setDeporte(unDeporte);
+                unaCompetencia.setModalidad(modalidadDeLaCompetencia);
+                unaCompetencia.setEstado(estadoDeLaCompetencia);
+  
+               
+                
+
+            }while (consulta.next());
+        } catch (SQLException e) {
+            
+            //todo hacer la exepcion correspondiente
+        }
+        
+        
+        
+        
+        
+        
+        
         //depende de como cristian me devuelva la competencia
-        return retorno;
+        return unaCompetencia;
     }
-    public static String [][] buscarCompetencias(String nombre, int deporte, String modalidad,String estado,String correo){
-        String retorno[][] = null;
-        int i=0,j=0;
+    public static Vector <Competencia>  buscarCompetencias(String nombre, int deporte, String modalidad,String estado,String correo){
+        Vector <Competencia> competenciaEncontradas= new Vector <Competencia>();
+        Competencia unaCompetencia=null;
+        Deporte unDeporte;
+        int i=0;
+        
+
         ResultSet consulta=null;
 
         try {
             consulta = CompetenciaDB.buscarCompetencias( nombre,  deporte,  modalidad, estado, correo);
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         try {
-            while (consulta.next())
+            do
             {
-            String codigo = consulta.getString("id_Competencia");
+                    System.out.println("Se ejecuta el while:"+i);
+                i++;
+                unaCompetencia=new Competencia();
+            int codigo = consulta.getInt("id_Competencia");
             String nombreCompetencia = consulta.getString("Nombre_Competencia");
-                String deporteDeLaCompetencia = consulta.getString("Nombre");
+                int deporteDeLaCompetencia = consulta.getInt("id_Deporte");
                 String modalidadDeLaCompetencia = consulta.getString("Modalidad");
                 String estadoDeLaCompetencia = consulta.getString("Estado");
-
-                retorno[i][0] = codigo;
-                retorno[i][1] = nombreCompetencia; 
-                retorno[i][2] = deporteDeLaCompetencia; 
-                retorno[i][3] = modalidadDeLaCompetencia;
-                retorno[i][4] = estadoDeLaCompetencia;    
-                i++;
+                unDeporte=DeporteGestor.buscarDeporte(deporteDeLaCompetencia);
+                unaCompetencia.setIdCompetencia(codigo);
+                unaCompetencia.setNombreCompetencia(nombreCompetencia);
+                unaCompetencia.setDeporte(unDeporte);
+                unaCompetencia.setModalidad(modalidadDeLaCompetencia);
+                unaCompetencia.setEstado(estadoDeLaCompetencia);
+                competenciaEncontradas.add(unaCompetencia);
+               
                 
 
-            }
+            }while (consulta.next());
         } catch (SQLException e) {
             
             //todo hacer la exepcion correspondiente
         }
-        return retorno;
+        return competenciaEncontradas;
         }
     
     
