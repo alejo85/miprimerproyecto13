@@ -23,9 +23,23 @@ public class CompetenciaDB {
      * @param Modalidad
      * @param estado
      * @return
+     * 
+     * 
      */
-    public static ResultSet buscarCompetencias(String nombreCompetencia, String deporte, String Modalidad, String estado){
-            ResultSet resultado=null;
+    public static ResultSet buscarCompetencias(String nombreCompetencia,int deporte, String modalidad, String estado, String correo) throws SQLException {
+            Conexion conexion = new Conexion();
+            String select="";
+            String where="";
+            conexion.conectar();
+            String consultasql="";
+           /* if(!nombreCompetencia.equals("")){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
+            if(deporte!=0){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
+            if(!modalidad.equals("Seleccione Una Modalidad")){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
+            if(!estado.equals("Seleccione Un Estado")){where+="' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%'";select+="C.nombre_competencia";}
+                consultasql="SELECT C.id_competencia, C.nombre_competencia, C.modalidad, C.estado,  C.creador, C.id_deporte FROM competencia as C where C.creador='"+correo+"' C.nombre_competencia ILIKE '%"+nombreCompetencia+"%' and C.id_deporte='"+deporte+"' and C.modalidad ='"+modalidad+"' and C.estado'"+estado+"';";
+               */ ResultSet resultado = conexion.consultar(consultasql); /*
+                resultado.next();
+                conexion.cerrarConexion();*/
         
         return resultado;}
 
