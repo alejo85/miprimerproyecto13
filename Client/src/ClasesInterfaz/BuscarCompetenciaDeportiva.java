@@ -84,7 +84,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private void jbInit() throws Exception {
         
         // DIMENSION DE LA VENTANA
-        this.setSize(new Dimension(785, 670));
+        this.setSize(new Dimension(820, 670));
         this.getContentPane().setLayout( null );
        
         //TITULO VENTANA
@@ -107,7 +107,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             });
         
         // JPANEL BUSQUEDA POR
-        busqueadaJPanel.setBounds(new Rectangle(15, 15, 825, 200));
+        busqueadaJPanel.setBounds(new Rectangle(15, 15, 775, 200));
         busqueadaJPanel.setLayout(null);
         Color borde= new Color(100,100,100);
         busqueadaJPanel.setBorder(BorderFactory.createLineBorder(borde,2));
@@ -190,7 +190,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         // TERMINA JPANEL BUSCAR POR
         
         // JPANEL RESULTADOS
-        resultadoJPanel.setBounds(new Rectangle(15, 245, 750, 375));
+        resultadoJPanel.setBounds(new Rectangle(15, 245, 775, 375));
         resultadoJPanel.setLayout(null);
         //resultadoJPanel.setBorder(BorderFactory.createTitledBorder("Resultados obtenidos"));
         resultadoJPanel.setBorder(BorderFactory.createLineBorder(borde,2));
@@ -199,8 +199,8 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         jLabelResultadosObtenidos.setBounds(new Rectangle(15, 15, 205, 25));
         jLabelResultadosObtenidos.setFont(new Font("Tahoma", 0, 15));
         
-        jScrollPane2.setBounds(new Rectangle(20, 50, 700, 230));
-        jScrollBar1.setBounds(new Rectangle(720, 50, 20, 230));
+        jScrollPane2.setBounds(new Rectangle(20, 50, 720, 230));
+        jScrollBar1.setBounds(new Rectangle(740, 50, 20, 230));
         
         // BOTON NUEVA COMPETENCIA
         nuevaCompetenciaJButton.setText("Nueva Competencia");
