@@ -267,11 +267,15 @@ public class CompetenciaGestor {
         //depende de como cristian me devuelva la competencia
         return retorno;
     }
-    public static String [][] buscarCompetencias(String nombre, String deporte, String modalidad,String estado){
+    public static String [][] buscarCompetencias(String nombre, int deporte, String modalidad,String estado,String correo){
         String retorno[][] = null;
         int i=0,j=0;
-        ResultSet consulta = CompetenciaDB.buscarCompetencias( nombre,  deporte,  modalidad, estado);
+        ResultSet consulta=null;
 
+        try {
+            consulta = CompetenciaDB.buscarCompetencias( nombre,  deporte,  modalidad, estado, correo);
+        } catch (SQLException e) {
+        }
         try {
             while (consulta.next())
             {
