@@ -7,7 +7,10 @@ import ClasesGestores.DeporteGestor;
 
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
+import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
+
+import InterfazGrafica.CampoTexto.AreaTextoNombre;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -33,6 +36,7 @@ import javax.swing.JTextArea;
 
 
 public class BuscarCompetenciaDeportiva extends JDialog {
+    private ModeloTabla modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
     private JButton aceptarJButton = new JButton();
     private JButton cancelarJButton = new JButton();
     private JPanel resultadoJPanel = new JPanel();
@@ -47,15 +51,17 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private JPanel busqueadaJPanel = new JPanel();
     private JComboBox DeporteJComboBox = new JComboBox();
     private JLabel jLabelDeporte = new JLabel();
-    private JTextArea nombreCompetenciaJTextArea = new JTextArea();
+    private AreaTextoNombre nombreCompetenciaJTextArea = new AreaTextoNombre(60);
     private JLabel jLabelNombreDeLaCompetencia = new JLabel();
     private JComboBox estadoJComboBox = new JComboBox();
     private JLabel jLabelEstado = new JLabel();
     private JButton buscarJButton = new JButton();
     private Usuario usuarioActual= null;
+    private Vector <Competencia> competenciasEncontradas;
     private Competencia competenciaSelecionad=null;
     private  Vector <Deporte> deporte;
-    
+    private Color background = modalidadJComboBox.getBackground();
+    private Color foreground = modalidadJComboBox.getForeground();
 
     public BuscarCompetenciaDeportiva(Usuario usuariologueado) {
         
@@ -98,7 +104,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             });
         
         // JPANEL BUSQUEDA POR
-        busqueadaJPanel.setBounds(new Rectangle(15, 15, 750, 200));
+        busqueadaJPanel.setBounds(new Rectangle(15, 15, 825, 200));
         busqueadaJPanel.setLayout(null);
         Color borde= new Color(40,40,40);
         busqueadaJPanel.setBorder(BorderFactory.createLineBorder(borde,2));
@@ -122,28 +128,40 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         DeporteJComboBox.setMinimumSize(new Dimension(2, 18));
         DeporteJComboBox.setPreferredSize(new Dimension(2, 18));
         DeporteJComboBox.setFont(new Font("Tahoma", 0, 15));
+        DeporteJComboBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    DeporteJComboBox_actionPerformed(e);
+                }
+            });
         listarDeportes();
         // 3. MODALIDAD
         jLabelModalidad.setText("Modalidad");
         jLabelModalidad.setBounds(new Rectangle(257, 70, 135, 25));
         jLabelModalidad.setFont(new Font("Tahoma", 0, 15));
-        modalidadJComboBox.setBounds(new Rectangle(330, 70, 145, 30));
+        modalidadJComboBox.setBounds(new Rectangle(330, 70, 205, 30));
         modalidadJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
         modalidadJComboBox.setMinimumSize(new Dimension(2, 18));
         modalidadJComboBox.setPreferredSize(new Dimension(2, 18));
+        modalidadJComboBox.addItem("Seleccione Una Modalidad");
         modalidadJComboBox.addItem("Liga");
         modalidadJComboBox.addItem("Eliminación simple");
         modalidadJComboBox.addItem("Eliminación doble");
         modalidadJComboBox.setFont(new Font("Tahoma", 0, 15));
         
         // 4. ESTADO
+        modalidadJComboBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    modalidadJComboBox_actionPerformed(e);
+                }
+            });
         jLabelEstado.setText("Estado");
-        jLabelEstado.setBounds(new Rectangle(480, 70, 135, 25));
+        jLabelEstado.setBounds(new Rectangle(540, 70, 135, 25));
         jLabelEstado.setFont(new Font("Tahoma", 0, 15));
-        estadoJComboBox.setBounds(new Rectangle(530, 70, 145, 30));
+        estadoJComboBox.setBounds(new Rectangle(590, 70, 175, 30));
         estadoJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
         estadoJComboBox.setMinimumSize(new Dimension(2, 18));
         estadoJComboBox.setPreferredSize(new Dimension(2, 18));
+        estadoJComboBox.addItem("Seleccione Un Estado");
         estadoJComboBox.addItem("Creada");
         estadoJComboBox.addItem("Planificada");
         estadoJComboBox.addItem("En disputa");
@@ -151,6 +169,11 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         estadoJComboBox.setFont(new Font("Tahoma", 0, 15));
         
         // 5. BOTON BUSCAR
+        estadoJComboBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    estadoJComboBox_actionPerformed(e);
+                }
+            });
         buscarJButton.setText("Buscar");
         buscarJButton.setBounds(new Rectangle(250, 130, 110, 40));
         buscarJButton.setFont(new Font("Tahoma", 0, 15));
@@ -215,6 +238,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
     // CARGAR DEPORTES
     private void listarDeportes() {
+        DeporteJComboBox.addItem("Seleccione un Deporte");
         deporte = DeporteGestor.instanciarDeportes();
         for(int i=0; i<deporte.size();i++){
         DeporteJComboBox.addItem(deporte.get(i).getNombre());
@@ -237,8 +261,38 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
 
     private void buscarJButton_actionPerformed(ActionEvent e) {
-        String  resultado[][] = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(), this.DeporteJComboBox.getSelectedItem().toString(), modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString());
+        int error=0;
+        if(this.nombreCompetenciaJTextArea.getText().equals(""))error++;
+        if(this.DeporteJComboBox.getSelectedItem().equals("Seleccione un Deporte"))error++;
+        if(modalidadJComboBox.getSelectedItem().equals("Seleccione Una Modalidad"))error++;
+        if(this.estadoJComboBox.getSelectedItem().equals("Seleccione Un Estado"))error++;
+        if(error==4){
+                nombreCompetenciaJTextArea.error();
+                DeporteJComboBox.setBackground(Color.red);
+                DeporteJComboBox.setForeground(Color.white);
+                modalidadJComboBox.setForeground(Color.white);
+                modalidadJComboBox.setBackground(Color.red);
+                estadoJComboBox.setBackground(Color.red);
+                estadoJComboBox.setForeground(Color.white);
+            }
+        
+        String  resultado[][] = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(), deporte.get(DeporteJComboBox.getSelectedIndex()-1).getIdDeporte(), modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
         //todo cargar en la interfaz codigo de robert
         
+    }
+
+    private void DeporteJComboBox_actionPerformed(ActionEvent e) {
+        DeporteJComboBox.setBackground(background);
+        DeporteJComboBox.setForeground(foreground);
+    }
+
+    private void modalidadJComboBox_actionPerformed(ActionEvent e) {
+        modalidadJComboBox.setBackground(background);
+        modalidadJComboBox.setForeground(foreground);
+    }
+
+    private void estadoJComboBox_actionPerformed(ActionEvent e) {
+        estadoJComboBox.setBackground(background);
+        estadoJComboBox.setForeground(foreground);
     }
 }
