@@ -1,7 +1,6 @@
 package ClasesGestores;
 
 
-import ClasesLogicas.Deporte;
 import ClasesLogicas.Fixture;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
@@ -52,7 +51,7 @@ public class FixtureGestor {
         
         fixture.setRondas(rondas);
         cargarParticipantes(participantes, fixture);
-        
+            System.out.println("antes de retonar fixture");
         return fixture;
         }
    

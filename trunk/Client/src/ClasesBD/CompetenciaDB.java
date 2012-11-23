@@ -292,7 +292,7 @@ public class CompetenciaDB {
      * @param competencia
      */
     public static void guardarFixture(ClasesLogicas.Competencia competencia){
-
+        System.out.println("antes del guardar el fixture!!!");
  
     }
     public static boolean validadNombreParticipante(String nombreDelParticipante, int idCompetencia) throws SQLException {
@@ -302,17 +302,19 @@ public class CompetenciaDB {
             String consultasql;
             
             consultasql="SELECT A.id_competencia, A.id_participante, A.fecha, A.hora, P.id_participante, P.nombre, P.correo, P.imagen\n" + 
-            "  FROM participa as A, participante as P where P.nombre='"+nombreDelParticipante+"' and A.id_competencia='"+idCompetencia+"';";
+            "  FROM participa as A, participante as P where P.nombre='"+nombreDelParticipante+"' and A.id_competencia='"+idCompetencia+"' and A.id_participante=P.id_participante;";
             System.out.println(consultasql);
             resultado = conexion.consultar(consultasql);
         
         conexion.cerrarConexion();
-            if(resultado ==null){
+            if(resultado.next()){
+                System.out.println(false);
                 return false;
                 
             }
             else{
-                return false;
+                System.out.println(true);
+                return true;
             }
         
     }

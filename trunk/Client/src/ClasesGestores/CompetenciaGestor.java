@@ -222,7 +222,7 @@ public class CompetenciaGestor {
             
         //todo definir EN TODOS LADOS modalidad como Simple y Doble    
         case Liga:
-            
+            System.out.println("antes del gestor Fixture");
             fixture = FixtureGestor.generarFixture(lugares, participantes, participantes.length);
             competencia.setFixture(fixture);
             CompetenciaDB.guardarFixture(competencia);            
@@ -309,7 +309,7 @@ public class CompetenciaGestor {
             }while (consulta.next());
             
             unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
-            
+            unaCompetencia.setLugares(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(unaCompetencia.getIdCompetencia()));
             
         } catch (SQLException e) {
             
