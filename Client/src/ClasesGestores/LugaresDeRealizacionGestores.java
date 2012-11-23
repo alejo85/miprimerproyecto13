@@ -1,21 +1,24 @@
 package ClasesGestores;
 
 
-import ClasesBD.DeportesDB;
 import ClasesBD.LugarDeRealizaciónDB;
+
+import ClasesBD.ParticipanteDB;
 
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.Participante;
+import ClasesLogicas.ParticipanteAnterior;
 import ClasesLogicas.Usuario;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+
+import javax.swing.ImageIcon;
 
 
 public class LugaresDeRealizacionGestores {
@@ -134,6 +137,44 @@ public class LugaresDeRealizacionGestores {
             horas = ""+hora+":"+ min;
             LugarDeRealizaciónDB.altaLugarDeRealización( codigo,  nombre, descripcion, dSeleccionados,  creado.getCorreoElectronico(),  dias,  horas);
             
+        }
+    public static LugarDeRealizacion[] lugaresDeLaCompetencia(int idCompetencia){
+            LugarDeRealizacion retorno=null;
+                Vector <LugarDeRealizacion> datos=new Vector <LugarDeRealizacion>();
+                LugarDeRealizacion [] lugares=null;
+            ResultSet resultado;
+
+            try {
+                resultado = LugarDeRealizaciónDB.buscarCompetencia(idCompetencia);
+                ParticipanteAnterior aux = null;
+
+               
+                    while(resultado.next()){
+                        int id = resultado.getInt("id_lugar_de_realizacion");
+                        String nombre = resultado.getString("nombre");
+                        int disponibilidad = resultado.getInt("disponibilidad");
+                       
+                        
+                      retorno = new LugarDeRealizacion();
+                        retorno.setNombre(nombre);
+                        retorno.setIdLugar(id);
+                        retorno.setDisponibilidad(disponibilidad);
+                        datos.add(retorno);
+                        //todo recuperarImagen
+                    }
+                    lugares= new LugarDeRealizacion[datos.size()];
+                    for(int j=0;j<datos.size();j++){
+                            lugares[j]=datos.get(j);
+                        }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            
+            
+            return lugares; 
+        
+        
+        
         }
 
 }

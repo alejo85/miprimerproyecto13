@@ -37,6 +37,7 @@ public class ParticipanteGestor {
         return resultado;
         }
     public static Participante agregarParticipante(String nombre, String correo, Competencia competencia){
+            System.out.println("llego a el gestor");
         Participante resultado = new Participante();
         resultado.setNombre(nombre);
         resultado.setCorreo(correo);

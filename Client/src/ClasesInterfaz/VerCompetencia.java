@@ -1,6 +1,8 @@
 package ClasesInterfaz;
 
 
+import ClasesGestores.CompetenciaGestor;
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
@@ -222,7 +224,7 @@ public class VerCompetencia extends JDialog {
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
         int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea generar el fixture de la competencia Nombre Competencia?.", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
-            
+            CompetenciaGestor.generarFixture(competencia);
             JOptionPane.showOptionDialog(null, "Se ha generar el fixture de la  competencia Nombre Competencia "  , "Generar Fixture.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
         } 
     }

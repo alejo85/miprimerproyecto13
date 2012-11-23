@@ -56,6 +56,7 @@ public class RondaGestor {
         Subronda subronda = new Subronda();
         
         LugarDeRealizacion[] lugaresAux = lugares;
+        System.out.println(lugaresAux.length);
         int random;
         int repeticiones = cantidadDeEncuentros;
         Encuentro encuentros[] = new Encuentro[cantidadDeEncuentros];
@@ -65,6 +66,7 @@ public class RondaGestor {
         while (repeticiones>0){
             
             random = (int)Math.random()*lugaresAux.length;
+            
             if (lugaresAux[random].getDisponibilidad()>0){
             
                 for(int i=0; i < cantidadDeEncuentros; i++){

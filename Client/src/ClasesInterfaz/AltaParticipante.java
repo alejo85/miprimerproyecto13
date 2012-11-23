@@ -135,11 +135,12 @@ public class AltaParticipante extends JDialog {
         String errores ="";
         if(!correoElectrónicoJTextArea.getText().equals("")){
             if(!nombreParticipanteJTextArea.getText().equals("")){
-                if(imagenJTextArea.getText().equals("")){
-                if(CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
+               if(CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
+                 if(imagenJTextArea.getText().equals("")){
+                        System.out.println("antes del gestor");
                         Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
                     
-                    
+                        System.out.println("Despues del gestor");
                     }
                     
                       else
@@ -167,5 +168,7 @@ public class AltaParticipante extends JDialog {
                 correoElectrónicoJTextArea.error();
                 errores+="          El correo electronico del participante no puede ser  nulo";
             }
+        if(!errores.equals(""))
+            System.out.println(errores);
     }
 }

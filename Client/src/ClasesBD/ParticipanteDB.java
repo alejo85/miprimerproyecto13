@@ -16,6 +16,7 @@ public class ParticipanteDB {
      * @return
      */
     public static int altaParticipante(Participante participante) throws SQLException {
+            System.out.println("llego a la base");
         int idParticipante=0;
             Conexion conexion = new Conexion();
             ResultSet resultado=null;

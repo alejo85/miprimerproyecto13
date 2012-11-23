@@ -101,6 +101,23 @@ public class LugarDeRealizaciónDB {
                        return true;}
     public boolean eliminarLugarDeRealización(LugarDeRealizacion lugar){
                        return true;}
+    public static ResultSet buscarCompetencia(int competencia){
+                           Conexion conexion = new Conexion();
+                           ResultSet resultado=null;
+                           int id=0;
+                           String consultasql;
+                           consultasql="SELECT *\n" + 
+                           "  FROM lugar_de_realizacion as L, juega as J where L.id_lugar_de_realizacion=J.id_lugar_de_realizacion and J.id_competencia='"+competencia+"';";
+                            System.out.println(consultasql);
+                           try {
+                           conexion.conectar();
+                           resultado = conexion.consultar(consultasql);
+                           
+
+                           id = resultado.getInt("max");
+                           } catch (SQLException e) {
+                           }
+                       return resultado;}
    
 
 }
