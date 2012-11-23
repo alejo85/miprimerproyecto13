@@ -42,7 +42,7 @@ public class AreaTextoNombre extends AreaTexto
   if ((!texto.matches(formatoFinal)) || (texto == "") || (texto.length() < 3))
   {
    this.setForeground(Color.white);
-   this.setBackground(Color.orange);
+   this.setBackground(Color.red);
    buenDato = false;
   }
   else buenDato = true;
