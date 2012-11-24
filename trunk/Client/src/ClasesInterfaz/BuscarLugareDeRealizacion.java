@@ -118,11 +118,11 @@ public class BuscarLugareDeRealizacion extends JDialog {
     	TitledBorder titleborder = BorderFactory.createTitledBorder(border, "Buscar por");
     	busquedaJPanel.setBorder(titleborder);
 
-    	JPanel subpanel1 = new JPanel (new FlowLayout(FlowLayout.LEFT));
-		JPanel subpanel2 = new JPanel (new FlowLayout(FlowLayout.LEFT));
-		JPanel subpanel3 = new JPanel (new FlowLayout(FlowLayout.LEFT));
+    	JPanel subpanel1 = new JPanel (new FlowLayout(FlowLayout.CENTER));
+		JPanel subpanel2 = new JPanel (new FlowLayout(FlowLayout.CENTER));
+		JPanel subpanel3 = new JPanel (new FlowLayout(FlowLayout.CENTER));
     	
-    	jLabelCodigo.setText("Codigo:                ");
+    	jLabelCodigo.setText("Codigo: ");
     	//jLabelCodigo.setBounds(new Rectangle(35, 25, 135, 25));
         jLabelCodigo.setFont(new Font("Tahoma", 0, 13));
         
@@ -131,7 +131,7 @@ public class BuscarLugareDeRealizacion extends JDialog {
         //codigoLugarDeRealizaciónJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
     	
       //jLabelNombre.setBounds(new Rectangle(35, 65, 135, 25));
-        jLabelNombre.setText("Nombre Del Lugar:");
+        jLabelNombre.setText("    Nombre Del Lugar:");
         jLabelNombre.setFont(new Font("Tahoma", 0, 13));
         
         nombreLugarDeRealizaciónJTextArea.setFont(new Font("Tahoma", 0, 13));
@@ -144,7 +144,7 @@ public class BuscarLugareDeRealizacion extends JDialog {
                 }
             });
         
-        jLabelDeporte.setText("Deporte:               ");
+        jLabelDeporte.setText("Deporte: ");
         jLabelDeporte.setFont(new Font("Tahoma", 0, 13));
       
         deporteJComboBox.setMaximumSize(new Dimension(2147483647, 2147483647));
