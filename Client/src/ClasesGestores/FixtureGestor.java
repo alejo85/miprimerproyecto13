@@ -42,7 +42,32 @@ public class FixtureGestor {
         Participante[] participantes, int cantidadDeParticipantes){
         
         Fixture fixture = new Fixture();
-        Ronda rondas[] = new Ronda[cantidadDeParticipantes-1];
+        Ronda rondas[];
+        Participante participantesAux[];
+           
+        //Comienza decisicion para ver si el numero de participantes es impar, y si se debe
+        //agregar un participante auxiliar
+        if((cantidadDeParticipantes % 2) == 0){
+            
+            rondas = new Ronda[cantidadDeParticipantes-1];
+            participantesAux = participantes;
+        }
+           
+        else{
+            participantesAux = new Participante[cantidadDeParticipantes+1];
+            int i;
+            cantidadDeParticipantes++;
+            
+            rondas = new Ronda[cantidadDeParticipantes];
+            
+            for (i=0;i<cantidadDeParticipantes;i++)
+                participantesAux[i] = participantes[i];
+            
+            participantesAux[i+1] = new Participante("*");  //se agrega el participantes auxiliar
+        }
+
+        //Fin de la decision, empieza el generar fixture
+
 
         
         for (int i=0; i<cantidadDeParticipantes-1;i++){            
@@ -50,7 +75,7 @@ public class FixtureGestor {
         }
         
         fixture.setRondas(rondas);
-        cargarParticipantes(participantes, fixture);
+        cargarParticipantes(participantesAux, fixture);
             System.out.println("antes de retonar fixture");
         return fixture;
         }
