@@ -88,6 +88,7 @@ public class ParticipanteGestor {
                    
                     i=0;
                   retorno= new Participante();
+                    retorno.setIdParticipante(idParticipante);
                     retorno.setNombre(nombre);
                     retorno.setCorreo(correo);
                     datos.add(retorno);

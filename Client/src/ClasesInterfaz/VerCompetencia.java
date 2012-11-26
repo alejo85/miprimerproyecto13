@@ -21,9 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -250,5 +248,10 @@ public class VerCompetencia extends JDialog {
                 modelo.addRow(datos);
             }
            jTable1.setModel(modelo);
+            if(competencia.getFixture() != null)
+            {
+                //TODO CArgar fixture tabla en la pantalla
+                }
         }
+       
 }
