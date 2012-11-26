@@ -1,10 +1,14 @@
 package ClasesGestores;
 
 
+import ClasesBD.FixtureDB;
+
 import ClasesLogicas.Fixture;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
 import ClasesLogicas.Ronda;
+
+import java.sql.SQLException;
 
 public class FixtureGestor {
     public FixtureGestor() {
@@ -39,7 +43,7 @@ public class FixtureGestor {
      }
   */
     public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
-        Participante[] participantes, int cantidadDeParticipantes){
+        Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
         
         Fixture fixture = new Fixture();
         Ronda rondas[];
@@ -69,13 +73,19 @@ public class FixtureGestor {
         //Fin de la decision, empieza el generar fixture
 
 
-        
+        try {
+            fixture.setIdFixture(FixtureDB.idFixture(idCompetencia));
+        } 
+        catch (SQLException e) {
+        }
         for (int i=0; i<cantidadDeParticipantes-1;i++){            
-            rondas[i] = RondaGestor.crearRonda(lugares,cantidadDeParticipantes/2);
+            rondas[i] = RondaGestor.crearRonda(lugares,cantidadDeParticipantes/2, fixture.getIdFixture(), i+1);
         }
         
         fixture.setRondas(rondas);
+
         cargarParticipantes(participantesAux, fixture);
+
             System.out.println("antes de retonar fixture");
         return fixture;
         }
@@ -115,7 +125,19 @@ public class FixtureGestor {
             }
         }
         fixture.cargarParticipantes(locales, visitantes);
-        
+        //TODO Guardar los participantes a la base
     }
-    
+    public static Fixture retornarFixture( int idCompetencia){
+        
+        Fixture fixture = new Fixture();
+
+        try {
+            fixture.setIdFixture(FixtureDB.getIdFixture(idCompetencia));
+            fixture.setRondas(RondaGestor.getRondas(fixture.getIdFixture()));
+        
+        } catch (SQLException e) {
+        }
+        System.out.println("antes de retonar fixture");
+        return fixture;
+        }
 }
