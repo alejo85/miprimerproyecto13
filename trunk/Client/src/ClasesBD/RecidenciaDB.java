@@ -23,6 +23,7 @@ public class RecidenciaDB {
         try {
             conexion.conectar();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         String consultasql;
         

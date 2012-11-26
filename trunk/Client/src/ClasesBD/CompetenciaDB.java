@@ -3,11 +3,17 @@ package ClasesBD;
 
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
+import ClasesLogicas.Encuentro;
 import ClasesLogicas.LugarDeRealizacion;
+import ClasesLogicas.Pais;
 import ClasesLogicas.Participante;
+
+import ClasesLogicas.Subronda;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.util.Vector;
 
 
 public class CompetenciaDB {
@@ -291,10 +297,33 @@ public class CompetenciaDB {
     /**
      * @param competencia
      */
-    public static void guardarFixture(ClasesLogicas.Competencia competencia){
+    public static void guardarFixture(Vector<Encuentro> encuentros){
         System.out.println("antes del guardar el fixture!!!");
+        Conexion conexion = new Conexion();
+        ResultSet resultado=null;
+        
+        try {
+               for(int i=0;i<encuentros.size();i++)
+               {
+                    conexion.conectar();
+                    String consultasql;
+                    
+                    consultasql="UPDATE encuentro\n" + 
+                    "   SET id_participantea='"+encuentros.get(i).getParticipanteA().getIdParticipante()+"', \n" + 
+                    "       id_participanteb='"+encuentros.get(i).getParticipanteB().getIdParticipante()+"'\n" + 
+                    " WHERE id_encuentro='"+encuentros.get(i).getIdEncuentro()+"' and id_lugar_de_realizacion='"+encuentros.get(i).getLocación().getIdLugar()+"'RETURNING *;";
+                    System.out.println(consultasql);
+                    resultado = conexion.consultar(consultasql);
+                    conexion.cerrarConexion();
+               }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
  
     }
+
     public static boolean validadNombreParticipante(String nombreDelParticipante, int idCompetencia) throws SQLException {
             Conexion conexion = new Conexion();
             ResultSet resultado=null;

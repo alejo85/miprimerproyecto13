@@ -1,10 +1,15 @@
 package ClasesGestores;
 
+
+import ClasesBD.EncuentroDB;
+
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
 import ClasesLogicas.Puntos;
 import ClasesLogicas.Resultados;
+
+import java.sql.SQLException;
 
 public class EncuentroGestor {
 
@@ -56,12 +61,16 @@ public class EncuentroGestor {
      * @param lugares se pasa por copia
      * @return
      */
-    public static Encuentro crearEncuentro(LugarDeRealizacion lugar)
+    public static Encuentro crearEncuentro(LugarDeRealizacion lugar, int idSubRonda)
     {
          Encuentro temp = new Encuentro();
          temp.setLocación(lugar);
-                   
-     return temp;
+
+        try {
+            temp.setIdEncuentro(EncuentroDB.guardarEncuentro(temp, idSubRonda));
+        } catch (SQLException e) {
+        }
+        return temp;
         
      }
 
