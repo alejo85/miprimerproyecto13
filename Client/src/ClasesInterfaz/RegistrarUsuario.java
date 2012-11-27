@@ -20,6 +20,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -75,9 +76,7 @@ public class RegistrarUsuario extends JDialog {
     private Vector <Localidad> localidades;
     private Color background = tipoDeDocumentoJComboBox.getBackground();
     private Color foreground = tipoDeDocumentoJComboBox.getForeground();
-   
-   
-   
+    private JButton jButton1 = new JButton();
 
 
     public RegistrarUsuario() {
@@ -95,7 +94,7 @@ public class RegistrarUsuario extends JDialog {
 
     private void jbInit() throws Exception {
         CerrarVentana();
-        this.setSize(new Dimension(540, 600));
+        this.setSize(new Dimension(635, 600));
         this.getContentPane().setLayout( null );
         this.setTitle("Registrar Usuario");
         correoElectrónicoJTextArea.setBounds(new Rectangle(130, 20, 375, 30));
@@ -232,6 +231,8 @@ public class RegistrarUsuario extends JDialog {
                     localidadJComboBox_focusGained(e);
                 }
             });
+        jButton1.setVisible(false);
+        jButton1.setBounds(new Rectangle(555, 450, 75, 21));
         pais = RecidenciaDB.obtenerPaises();
         this.paisJComboBox.addItem("Seleccionar Pais");
         for(int i = 0; i< pais.size(); i++)
@@ -241,6 +242,7 @@ public class RegistrarUsuario extends JDialog {
 
         this.localidadJComboBox.addItem("Seleccionar Localidad");
         provinciaJComboBox.addItem("Seleccionar Provincia");
+        this.getContentPane().add(jButton1, null);
         this.getContentPane().add(localidadJComboBox, null);
         this.getContentPane().add(provinciaJComboBox, null);
         this.getContentPane().add(paisJComboBox, null);
@@ -424,7 +426,8 @@ private void cargarRegiones()
         }
 
         if(errores.length()>0){
-            JOptionPane.showOptionDialog(null, "Tienes los siguientes errores:"+errores2+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showOptionDialog(jButton1, "Tienes los siguientes errores:"+errores2+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
             return false;
         }
         else{
@@ -453,6 +456,7 @@ private void cargarRegiones()
          int doc = Integer.parseInt(numeroDocumentoJTextArea.getTexto());
          UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
          JOptionPane.showOptionDialog(null, "El usuario se ha registrado con exito"  , "Registro exitoso", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        
          //FIJARSE SI ESTA BIEN QUE CSE CIERRE ASI
         this.setVisible(false);
         }

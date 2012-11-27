@@ -65,11 +65,11 @@ public class EncuentroGestor {
     {
          Encuentro temp = new Encuentro();
          temp.setLocación(lugar);
-
+/*
         try {
-            temp.setIdEncuentro(EncuentroDB.guardarEncuentro(temp, idSubRonda));
+           temp.setIdEncuentro(EncuentroDB.guardarEncuentro(temp, idSubRonda));
         } catch (SQLException e) {
-        }
+        }*/
         return temp;
         
      }

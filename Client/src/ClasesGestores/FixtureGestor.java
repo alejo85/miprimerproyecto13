@@ -3,6 +3,7 @@ package ClasesGestores;
 
 import ClasesBD.FixtureDB;
 
+import ClasesLogicas.Deporte;
 import ClasesLogicas.Fixture;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
@@ -21,7 +22,7 @@ public class FixtureGestor {
      * @return
      */
  //todo borrar main de prueba
- /*  
+  
      public static  void main(String[] args) {
     
         int i;
@@ -38,10 +39,10 @@ public class FixtureGestor {
             participantes[i]=new Participante(i+"");
         }
         
-        fixture = generarFixture(lugares, participantes, 6);    
+        fixture = generarFixture(lugares, participantes, 6,8);    
         System.out.println("");
      }
-  */
+ 
     public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
         Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
         
