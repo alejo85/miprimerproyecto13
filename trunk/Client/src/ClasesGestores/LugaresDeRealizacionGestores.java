@@ -7,7 +7,7 @@ import ClasesBD.ParticipanteDB;
 
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealizacion;
-import ClasesLogicas.LugarDeRealización;
+import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
 import ClasesLogicas.ParticipanteAnterior;
 import ClasesLogicas.Usuario;
@@ -34,9 +34,9 @@ public class LugaresDeRealizacionGestores {
      * @param deportesAsociados
      * @return
      */
-    public LugarDeRealización altaLugaresDeRealizacion(String codigo, String Nombre, String descripcion, int disponibilidad,
+    public LugarDeRealizacion altaLugaresDeRealizacion(String codigo, String Nombre, String descripcion, int disponibilidad,
                               Deporte[] deportesAsociados){
-        return new LugarDeRealización( codigo,  Nombre,  descripcion,  disponibilidad, deportesAsociados);}
+        return new LugarDeRealizacion( codigo,  Nombre,  descripcion,  disponibilidad, deportesAsociados);}
 
     /**
      * @param codigo
@@ -98,7 +98,7 @@ public class LugaresDeRealizacionGestores {
         
         return resultado;
         }
-    public static LugarDeRealización unLugar(LugarDeRealización [] lugares){
+    public static LugarDeRealizacion unLugar(LugarDeRealizacion [] lugares){
             int i;
         do{
                i = (int)(Math.random()*(lugares.length));
