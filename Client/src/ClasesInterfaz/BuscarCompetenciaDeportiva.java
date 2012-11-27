@@ -21,6 +21,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.print.PrinterException;
+
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -84,7 +86,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         // DIMENSION DE LA VENTANA
         this.setSize(new Dimension(820, 670));
         this.getContentPane().setLayout( null );
-       
+        
         //TITULO VENTANA
         this.setTitle("Buscar Competencia");
         
@@ -297,7 +299,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte , modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
         
         cargarResultados();
-        
+
+
+        try {
+            tablaResultadoJTable.print();
+        } catch (PrinterException f) {
+        }
     }
 
     private void DeporteJComboBox_actionPerformed(ActionEvent e) {
