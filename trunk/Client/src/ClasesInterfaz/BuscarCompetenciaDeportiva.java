@@ -302,7 +302,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
 
 
         try {
-            tablaResultadoJTable.print();
+            tablaResultadoJTable.print(JTable.PrintMode.FIT_WIDTH);
         } catch (PrinterException f) {
         }
     }
