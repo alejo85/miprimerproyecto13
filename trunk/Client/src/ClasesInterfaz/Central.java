@@ -73,11 +73,15 @@ public class Central extends JFrame {
         
         */
         //// seteamos look and feel
-        
+     /*  
         try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //aca pasamos de parametro una funcion
+                
+               UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //aca pasamos de parametro una funcion
                                                                                     //que toma el look and feel del sistema, para pasar uno
                                                                                     //especifico se pasa asi ("nombredellookandfeel")
+              
+    
+              
                 }
                 catch (UnsupportedLookAndFeelException e) {
                    // handle exception
@@ -91,8 +95,9 @@ public class Central extends JFrame {
                 catch (IllegalAccessException e) {
                    // handle exception
                 }
-        
+        */
         this.usuarioActual=null;
+       
         try {
             jbInit();
         } catch (Exception e) {
@@ -110,6 +115,10 @@ public class Central extends JFrame {
     }
 
     private void jbInit() throws Exception {
+        this.usuarioActual= new Usuario();
+        this.usuarioActual.setNombre("Alejandro");
+        this.usuarioActual.setApellido("Olivera");
+        this.usuarioActual.setCorreoElectronico("alejo@masfm.com");
         this.setJMenuBar( menuBar );
         this.getContentPane().setLayout( null );
         this.setSize(new Dimension(820, 570));

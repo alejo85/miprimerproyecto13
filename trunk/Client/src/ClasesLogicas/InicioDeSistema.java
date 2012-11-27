@@ -3,7 +3,7 @@ package ClasesLogicas;
 
 import ClasesBD.Conexion;
 
-import ClasesInterfaz.Alta;
+
 import ClasesInterfaz.AltaCompetenciaDeportiva;
 import ClasesInterfaz.Principal;
 
