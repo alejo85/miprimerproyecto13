@@ -54,7 +54,7 @@ public class RondaGestor {
                 unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
                 unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
                 unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores"),  participantes));
-                System.out.println("Id Ronda"+unaRonda.getIdRonda()+" Numero de Ronda: "+ unaRonda.getNumeroDeRonda()+" tamaño de j: "+datos.size());
+                System.out.println("Id Ronda"+unaRonda.getIdRonda()+" Numero de Ronda: "+ unaRonda.getNumeroDeRonda()+" tamaño de j: "+datos.size()+" IdSubRonda: "+unaRonda.getGanadores().getIdSubronda() );
                 datos.add(unaRonda);
             
             } 
@@ -78,7 +78,7 @@ public class RondaGestor {
             while (busqueda.next()){
                 unaRonda.setIdSubronda(idSubRonda);
                 Encuentro[] encuentrosDeSubRonda =EncuentroGestor.encuentrosDeSubRonda(idSubRonda,participantes );
-                System.out.println("lonitud de  encuentros de la base: "+encuentrosDeSubRonda.length);
+               // System.out.println("lonitud de  encuentros de la base: "+encuentrosDeSubRonda.length);
             unaRonda.setEncuentros(encuentrosDeSubRonda);
    
             
@@ -124,7 +124,7 @@ public class RondaGestor {
                 
         //todo corregir el diagrama de secuencias!!! 17.1
             
-        while (repeticiones>0){
+      //  while (repeticiones>0){
             
             random = 0 + (int)(Math.random()*lugaresAux.length);
             
@@ -140,7 +140,7 @@ public class RondaGestor {
                 repeticiones--;
         
             }
-        }
+      //  }
         
         subronda.setEncuentros(encuentros);
        
