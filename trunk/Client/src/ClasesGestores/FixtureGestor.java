@@ -23,7 +23,7 @@ public class FixtureGestor {
      */
  //todo borrar main de prueba
   
-     public static  void main(String[] args) {
+   /*  public static  void main(String[] args) {
     
         int i;
         LugarDeRealizacion[] lugares = new LugarDeRealizacion[3];
@@ -42,7 +42,7 @@ public class FixtureGestor {
         fixture = generarFixture(lugares, participantes, 6,8);    
         System.out.println("");
      }
- 
+ */
     public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
         Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
         
@@ -81,6 +81,7 @@ public class FixtureGestor {
         }
         for (int i=0; i<cantidadDeParticipantes-1;i++){            
             rondas[i] = RondaGestor.crearRonda(lugares,cantidadDeParticipantes/2, fixture.getIdFixture(), i+1);
+            
         }
         
         fixture.setRondas(rondas);
@@ -128,17 +129,18 @@ public class FixtureGestor {
         fixture.cargarParticipantes(locales, visitantes);
         //TODO Guardar los participantes a la base
     }
-    public static Fixture retornarFixture( int idCompetencia){
+    public static Fixture retornarFixture( int idCompetencia, Participante [] participantes){
         
         Fixture fixture = new Fixture();
 
         try {
             fixture.setIdFixture(FixtureDB.getIdFixture(idCompetencia));
-            fixture.setRondas(RondaGestor.getRondas(fixture.getIdFixture()));
+            fixture.setRondas(RondaGestor.getRondas(fixture.getIdFixture(), participantes));
         
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println("antes de retonar fixture");
+            System.out.println("antes de retornar el fixture");
         return fixture;
         }
 }

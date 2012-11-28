@@ -3,12 +3,8 @@ package ClasesGestores;
 
 import ClasesBD.LugarDeRealizaciónDB;
 
-import ClasesBD.ParticipanteDB;
-
 import ClasesLogicas.Deporte;
 import ClasesLogicas.LugarDeRealizacion;
-import ClasesLogicas.LugarDeRealizacion;
-import ClasesLogicas.Participante;
 import ClasesLogicas.ParticipanteAnterior;
 import ClasesLogicas.Usuario;
 
@@ -17,8 +13,6 @@ import java.sql.SQLException;
 
 import java.util.Date;
 import java.util.Vector;
-
-import javax.swing.ImageIcon;
 
 
 public class LugaresDeRealizacionGestores {
@@ -67,8 +61,8 @@ public class LugaresDeRealizacionGestores {
         
                 
             
-            String nombre,Codigo;
-            int id, id_Lugar_de_Realizacion;
+            String nombre;
+            int id;
             ResultSet resultadoSQL;
             resultadoSQL = LugarDeRealizaciónDB.buscarLugarDeRealización(correoElectronico, codigoDeporte);
            
@@ -176,5 +170,6 @@ public class LugaresDeRealizacionGestores {
         
         
         }
+
 
 }

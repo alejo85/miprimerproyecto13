@@ -4,7 +4,9 @@ package ClasesInterfaz;
 import ClasesGestores.CompetenciaGestor;
 
 import ClasesLogicas.Competencia;
+import ClasesLogicas.Encuentro;
 import ClasesLogicas.ModeloTabla;
+import ClasesLogicas.Ronda;
 import ClasesLogicas.Usuario;
 
 import java.awt.Dimension;
@@ -29,6 +31,7 @@ import javax.swing.JTextArea;
 
 public class VerCompetencia extends JDialog {
     private ModeloTabla modelo = new ModeloTabla(new String[] { "Nombre" }, 0);
+    private ModeloTabla modelo2 = new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
     private JTextArea nombreDeLaCompetenciaJTextArea = new JTextArea();
     private JLabel jLabelDeporte = new JLabel();
     private JLabel jLabelnombreDeLaCompetencia = new JLabel();
@@ -251,7 +254,25 @@ public class VerCompetencia extends JDialog {
             if(competencia.getFixture() != null)
             {
                 //TODO CArgar fixture tabla en la pantalla
+                    //cargarFixture(competencia.getFixture().getRondas());
                 }
         }
-       
+private void cargarFixture(Ronda [] rondas){
+        modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
+        for(int i=0; i<rondas.length;i++ ){
+                Encuentro[] encuentrosDeSubRonda=rondas[i].getGanadores().getEncuentros();
+                System.out.println("Valor de I: "+i+" id de subrondas: "+rondas[i].getGanadores().getIdSubronda());
+               /* for(int j=0;j<encuentrosDeSubRonda.length;j++)
+               {
+                        System.out.println("Valor de I: "+i+" valor de j: "+j);
+                    /*Vector <String> datos = new Vector <String>();
+                    datos.add(""+rondas[i].getNumeroDeRonda());
+                    datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
+                    datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
+                    
+                
+                    modelo.addRow(datos);
+                    }*/
+            }
+    }
 }

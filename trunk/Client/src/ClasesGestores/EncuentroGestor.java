@@ -6,10 +6,15 @@ import ClasesBD.EncuentroDB;
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
+import ClasesLogicas.ParticipanteAnterior;
 import ClasesLogicas.Puntos;
 import ClasesLogicas.Resultados;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.util.Vector;
+
 
 public class EncuentroGestor {
 
@@ -48,6 +53,63 @@ public class EncuentroGestor {
         }
 
     /**
+     * @param idSubRonda
+     * @param participantes
+     * @return
+     */
+    public static Encuentro[] encuentrosDeSubRonda(int idSubRonda, Participante [] participantes)
+    {
+        
+        System.out.println("encuentrosDeSubRonda");
+            Encuentro retorno=null;
+                Vector <Encuentro> datos=new Vector <Encuentro>();
+                Encuentro [] encuentros=null;
+            ResultSet resultado;
+
+            try {
+                resultado = EncuentroDB.buscarEncuentros(idSubRonda);
+                ParticipanteAnterior aux = null;
+
+               
+                    while(resultado.next()){
+                        int id = resultado.getInt("id_encuentro");
+                        int idParticipanteA= resultado.getInt("id_participantea");
+                        int idParticipanteB= resultado.getInt("id_participanteb");
+                        int idParticipanteGanador= resultado.getInt("id_participante_ganador");
+                        int idParticipantePerdedor= resultado.getInt("id_participante_perdedor");
+                        int idResultado= resultado.getInt("id_resultado");
+                        String fechaResultado = resultado.getString("nombre");
+                        String horaResultado = resultado.getString("nombre");
+                        int disponibilidad = resultado.getInt("disponibilidad");
+                       
+                        
+                      retorno = new Encuentro();
+                        retorno.setIdEncuentro(id);
+                        retorno.setParticipanteA(ParticipanteGestor.buscarUnParticipante(idParticipanteA, participantes));
+                        retorno.setParticipanteB(ParticipanteGestor.buscarUnParticipante(idParticipanteB, participantes));
+                        retorno.setGanador(ParticipanteGestor.buscarUnParticipante(idParticipanteGanador, participantes));
+                        retorno.setPerdedor(ParticipanteGestor.buscarUnParticipante(idParticipantePerdedor, participantes));
+                        //TODO RecuperarResultado
+                        System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre());
+                        datos.add(retorno);
+                 
+                    }
+                    encuentros= new Encuentro[datos.size()];
+                    for(int j=0;j<datos.size();j++){
+                            encuentros[j]=datos.get(j);
+                        }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            
+            
+            return encuentros; 
+        
+        
+        
+        }
+
+    /**
      * @param resultados
      */
     public void guardarResultado(Encuentro unEncuentro, Resultados resultados){
@@ -65,11 +127,11 @@ public class EncuentroGestor {
     {
          Encuentro temp = new Encuentro();
          temp.setLocación(lugar);
-/*
+
         try {
            temp.setIdEncuentro(EncuentroDB.guardarEncuentro(temp, idSubRonda));
         } catch (SQLException e) {
-        }*/
+        }
         return temp;
         
      }
