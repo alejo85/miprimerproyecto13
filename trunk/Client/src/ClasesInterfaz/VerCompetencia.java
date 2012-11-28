@@ -7,6 +7,7 @@ import ClasesLogicas.Competencia;
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Ronda;
+import ClasesLogicas.Subronda;
 import ClasesLogicas.Usuario;
 
 import java.awt.Dimension;
@@ -176,6 +177,7 @@ public class VerCompetencia extends JDialog {
                     cancelarJButton_actionPerformed(e);
                 }
             });
+        tablaProximosEncuentosJTable.setModel(modelo2);
         this.getContentPane().add(cancelarJButton, null);
         this.getContentPane().add(mostrarTablaDePosicionesJButton, null);
         this.getContentPane().add(generarFixtureJButton, null);
@@ -254,25 +256,27 @@ public class VerCompetencia extends JDialog {
             if(competencia.getFixture() != null)
             {
                 //TODO CArgar fixture tabla en la pantalla
-                    //cargarFixture(competencia.getFixture().getRondas());
+                    cargarFixture(competencia.getFixture().getRondas());
                 }
         }
 private void cargarFixture(Ronda [] rondas){
         modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
         for(int i=0; i<rondas.length;i++ ){
-                Encuentro[] encuentrosDeSubRonda=rondas[i].getGanadores().getEncuentros();
-                System.out.println("Valor de I: "+i+" id de subrondas: "+rondas[i].getGanadores().getIdSubronda());
-               /* for(int j=0;j<encuentrosDeSubRonda.length;j++)
+                Subronda sub = rondas[i].getGanadores();
+                Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
+                System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
+             for(int j=0;j<encuentrosDeSubRonda.length;j++)
                {
-                        System.out.println("Valor de I: "+i+" valor de j: "+j);
-                    /*Vector <String> datos = new Vector <String>();
+                    //    System.out.println("Valor de I: "+i+" valor de j: "+j);
+                    Vector <String> datos = new Vector <String>();
                     datos.add(""+rondas[i].getNumeroDeRonda());
                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
                     
                 
-                    modelo.addRow(datos);
-                    }*/
+                    modelo2.addRow(datos);
+                    }
             }
+        tablaProximosEncuentosJTable.setModel(modelo2);
     }
 }

@@ -78,9 +78,9 @@ public class EncuentroGestor {
                         int idParticipanteGanador= resultado.getInt("id_participante_ganador");
                         int idParticipantePerdedor= resultado.getInt("id_participante_perdedor");
                         int idResultado= resultado.getInt("id_resultado");
-                        String fechaResultado = resultado.getString("nombre");
-                        String horaResultado = resultado.getString("nombre");
-                        int disponibilidad = resultado.getInt("disponibilidad");
+                        String fechaResultado = resultado.getString("fecha_resultado");
+                        String horaResultado = resultado.getString("hora_resultado");
+                       // int disponibilidad = resultado.getInt("disponibilidad");
                        
                         
                       retorno = new Encuentro();
