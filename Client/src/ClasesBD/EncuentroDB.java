@@ -26,7 +26,7 @@ public class EncuentroDB {
         }
     public static int guardarEncuentro(Encuentro encuentro, int idSubRonda) throws SQLException {
         
-            System.out.println("llego a la base id_encuentro");
+   
             int idEncuentro=0;
             Conexion conexion = new Conexion();
             ResultSet resultado=null;
@@ -34,11 +34,27 @@ public class EncuentroDB {
             String consultasql;
             
             consultasql="INSERT INTO encuentro(id_lugar_de_realizacion, id_Subronda )VALUES ('"+encuentro.getLocación().getIdLugar()+"', '"+idSubRonda+"' )RETURNING id_encuentro;";
+            System.out.println(consultasql);
             resultado=conexion.consultar(consultasql);
             resultado.next();
-            System.out.println("despues del next id_encuentro");
+            
             idEncuentro = resultado.getInt("id_encuentro");
+            System.out.println("despues id_encuentro: "+idEncuentro);
             return idEncuentro;
+        
+        }
+    public static ResultSet buscarEncuentros(int idSubRonda) throws SQLException {
+            //System.out.println("llego a la base id_encuentro");
+
+            Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            conexion.conectar();
+            String consultasql;
+            
+            consultasql="SELECT *  FROM encuentro where id_subronda='"+idSubRonda+"';";
+            System.out.println(consultasql);
+            resultado=conexion.consultar(consultasql);
+            return resultado;
         
         }
 }

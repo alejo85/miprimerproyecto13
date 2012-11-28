@@ -49,7 +49,7 @@ public class CompetenciaGestor {
             unaCompetencia.setLiga(LigaGestor.crearLiga(puntosPorPartidoGanados, empate, puntosPorPartidoEmpatado, puntosPorPartidoAsistido));
             unaCompetencia.setCantidadDeSets(cantidadDeSets);
             unaCompetencia.setTantosPorPartidoAusenciaContrincante(tantosPorPartidoAusenciaContrincante);
-        System.out.println("crea la competencia");
+   //     System.out.println("crea la competencia");
         try {
             return CompetenciaDB.registrarCompetencia(unaCompetencia);
         } catch (SQLException e) {
@@ -316,7 +316,7 @@ public class CompetenciaGestor {
         try {
             do
             {
-                    System.out.println("Se ejecuta el while:"+i);
+                    //System.out.println("Se ejecuta el while:"+i);
                 i++;
                 unaCompetencia=new Competencia();
             int codigo = consulta.getInt("id_Competencia");
@@ -338,7 +338,7 @@ public class CompetenciaGestor {
             
             unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setLugares(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(unaCompetencia.getIdCompetencia()));
-            unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia));
+            unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia, unaCompetencia.getParticipantes()));
             
         } catch (SQLException e) {
             
@@ -374,7 +374,7 @@ public class CompetenciaGestor {
         try {
             do
             {
-                    System.out.println("Se ejecuta el while:"+i);
+                   // System.out.println("Se ejecuta el while:"+i);
                 i++;
                 unaCompetencia=new Competencia();
             int codigo = consulta.getInt("id_Competencia");

@@ -2,7 +2,6 @@ package ClasesInterfaz;
 
 
 import ClasesGestores.CompetenciaGestor;
-
 import ClasesGestores.DeporteGestor;
 
 import ClasesLogicas.Competencia;
@@ -13,15 +12,12 @@ import ClasesLogicas.Usuario;
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.awt.print.PrinterException;
 
 import java.util.Vector;
 
@@ -31,10 +27,8 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 
 
 public class BuscarCompetenciaDeportiva extends JDialog {
@@ -299,12 +293,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte , modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
         
         cargarResultados();
-
+/*
 
         try {
             tablaResultadoJTable.print(JTable.PrintMode.FIT_WIDTH);
         } catch (PrinterException f) {
-        }
+        }*/
     }
 
     private void DeporteJComboBox_actionPerformed(ActionEvent e) {

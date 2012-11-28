@@ -5,6 +5,7 @@ import ClasesBD.FixtureDB;
 
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.LugarDeRealizacion;
+import ClasesLogicas.Participante;
 import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
 
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.Vector;
+
 
 public class RondaGestor {
   
@@ -25,7 +27,7 @@ public class RondaGestor {
 
     public static Ronda crearRonda(LugarDeRealizacion[] lugares,int cantidadDeEncuentros, int idFixture, int numeroRonda){
         
-        
+        System.out.println("Cantidad de Encuentros:"+cantidadDeEncuentros);
         Ronda laRonda = new Ronda();
         laRonda.setNumeroDeRonda(numeroRonda);
         laRonda.setGanadores(RondaGestor.generarSubRondaLiga(lugares,cantidadDeEncuentros));
@@ -40,9 +42,10 @@ public class RondaGestor {
     
     public void actualizarRonda(){}
     
-    public static Ronda[] getRondas(int idFixture){
+    public static Ronda[] getRondas(int idFixture, Participante [] participantes){
             Ronda laRonda[] = null;
             Ronda unaRonda = new Ronda();
+            Vector <Ronda> datos=new Vector <Ronda>();
         ResultSet busqueda;
 
         try {
@@ -50,16 +53,21 @@ public class RondaGestor {
             while (busqueda.next()){
                 unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
                 unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
-                unaRonda.setGanadores(getSubRondas(unaRonda.getIdRonda()));
-
-
+                unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores"),  participantes));
+                System.out.println("Id Ronda"+unaRonda.getIdRonda()+" Numero de Ronda: "+ unaRonda.getNumeroDeRonda()+" tamaño de j: "+datos.size());
+                datos.add(unaRonda);
             
+            } 
+        laRonda= new Ronda[datos.size()];
+        for(int j=0;j<datos.size();j++){
+                laRonda[j]=datos.get(j);
             }
-        } catch (SQLException e) {
+    } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return laRonda;
         }
-    public static Subronda getSubRondas(int idSubRonda){
+    public static Subronda getSubRondas(int idSubRonda, Participante [] participantes){
             
             Subronda unaRonda = new Subronda();
             Vector<Subronda> subRonda=new Vector<Subronda>();
@@ -68,13 +76,16 @@ public class RondaGestor {
         try {
             busqueda = FixtureDB.buscarSubRonda(idSubRonda);
             while (busqueda.next()){
-                unaRonda.setIdSubronda(busqueda.getInt("id_ronda"));
-         //       unaRonda.busqueda.getInt("numeroronda"));
+                unaRonda.setIdSubronda(idSubRonda);
+                Encuentro[] encuentrosDeSubRonda =EncuentroGestor.encuentrosDeSubRonda(idSubRonda,participantes );
+                System.out.println("lonitud de  encuentros de la base: "+encuentrosDeSubRonda.length);
+            unaRonda.setEncuentros(encuentrosDeSubRonda);
    
             
             }
             
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return unaRonda;
         }
@@ -116,14 +127,16 @@ public class RondaGestor {
         while (repeticiones>0){
             
             random = 0 + (int)(Math.random()*lugaresAux.length);
-            System.out.println("random: "+random);
+            
             if (lugaresAux[random].getDisponibilidad()>0){
             
                 for(int i=0; i < cantidadDeEncuentros; i++){
                     
                    encuentros[i] = EncuentroGestor.crearEncuentro(lugaresAux[random],subronda.getIdSubronda() ); 
+                    lugaresAux[random].menosDisponibilidad();
+                    System.out.println("Encuentro id: "+encuentros[i].getIdEncuentro());
                 }
-                
+                System.out.println("Repeticiones: "+repeticiones);
                 repeticiones--;
         
             }

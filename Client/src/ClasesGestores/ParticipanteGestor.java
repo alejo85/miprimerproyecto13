@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.Date;
-
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -37,7 +36,7 @@ public class ParticipanteGestor {
         return resultado;
         }
     public static Participante agregarParticipante(String nombre, String correo, Competencia competencia){
-            System.out.println("llego a el gestor");
+           
         Participante resultado = new Participante();
         resultado.setNombre(nombre);
         resultado.setCorreo(correo);
@@ -104,5 +103,14 @@ public class ParticipanteGestor {
         
        
         return participantes; }
+    public static Participante buscarUnParticipante(int idParticipante,Participante [] participantes ){
+        for(int i=0; i<participantes.length;i++)
+        {
+            if(participantes[i].getIdParticipante()==idParticipante)
+                return participantes[i];
+            
+            }
+        return null;
+        }
     
 }

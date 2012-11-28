@@ -54,7 +54,7 @@ public class CompetenciaDB {
             String consultasql="";
    
                 consultasql="SELECT * FROM competencia where id_Competencia='"+idCompetencia+"';";
-                System.out.println(consultasql);
+               // System.out.println(consultasql);
                 ResultSet resultado = conexion.consultar(consultasql); 
                 resultado.next();
                 conexion.cerrarConexion();
