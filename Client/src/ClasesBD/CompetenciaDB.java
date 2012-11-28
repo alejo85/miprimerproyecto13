@@ -323,6 +323,23 @@ public class CompetenciaDB {
         
  
     }
+    
+    public static void actualizarEstado (int idCompetencia, String estado) throws SQLException {
+        
+        Conexion conexion = new Conexion();
+        ResultSet resultado=null;
+        conexion.conectar();
+        String consultasql;
+        
+        consultasql="UPDATE competencia\n" + 
+        "   SET estado='"+estado+"'\n" + 
+        " WHERE id_competencia='"+idCompetencia+"';";
+        System.out.println(consultasql);
+        resultado = conexion.consultar(consultasql);
+        
+        conexion.cerrarConexion();
+        
+    }
 
     public static boolean validadNombreParticipante(String nombreDelParticipante, int idCompetencia) throws SQLException {
             Conexion conexion = new Conexion();

@@ -23,7 +23,7 @@ public class FixtureGestor {
      */
  //todo borrar main de prueba
   
-   /*  public static  void main(String[] args) {
+     public static  void main(String[] args) {
     
         int i;
         LugarDeRealizacion[] lugares = new LugarDeRealizacion[3];
@@ -39,10 +39,10 @@ public class FixtureGestor {
             participantes[i]=new Participante(i+"");
         }
         
-        fixture = generarFixture(lugares, participantes, 6,8);    
+        fixture = generarFixture(lugares, participantes, 5,8);    
         System.out.println("");
      }
- */
+ 
     public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
         Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
         
@@ -59,16 +59,21 @@ public class FixtureGestor {
         }
            
         else{
-            participantesAux = new Participante[cantidadDeParticipantes+1];
-            int i;
             cantidadDeParticipantes++;
+            participantesAux = new Participante[cantidadDeParticipantes];
+            int i;
             
-            rondas = new Ronda[cantidadDeParticipantes];
             
-            for (i=0;i<cantidadDeParticipantes;i++)
+            
+            rondas = new Ronda[cantidadDeParticipantes-1];
+            
+            for (i=0;i<cantidadDeParticipantes-1;i++)
                 participantesAux[i] = participantes[i];
             
-            participantesAux[i+1] = new Participante("*");  //se agrega el participantes auxiliar
+            
+            Participante unParticipante = new Participante();//se agrega el participantes auxiliar
+            unParticipante.setIdParticipante(1);
+            participantesAux[i] = unParticipante;
         }
 
         //Fin de la decision, empieza el generar fixture

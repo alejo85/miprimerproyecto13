@@ -115,10 +115,7 @@ public class Central extends JFrame {
     }
 
     private void jbInit() throws Exception {
-        this.usuarioActual= new Usuario();
-        this.usuarioActual.setNombre("Alejandro");
-        this.usuarioActual.setApellido("Olivera");
-        this.usuarioActual.setCorreoElectronico("alejo@masfm.com");
+
         this.setJMenuBar( menuBar );
         this.getContentPane().setLayout( null );
         this.setSize(new Dimension(820, 570));
