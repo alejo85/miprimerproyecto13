@@ -227,8 +227,12 @@ public class CompetenciaGestor {
             System.out.println("antes del gestor Fixture");
             fixture = FixtureGestor.generarFixture(lugares, participantes, participantes.length, competencia.getIdCompetencia());
             competencia.setFixture(fixture);
-            CompetenciaDB.guardarFixture( obtenerEncuentros(obtenerSubRondas(competencia)));            
-            
+            CompetenciaDB.guardarFixture( obtenerEncuentros(obtenerSubRondas(competencia)));
+
+            try {
+                CompetenciaDB.actualizarEstado(competencia.getIdCompetencia(),"Planificada");
+            } catch (SQLException e) {
+            }
             break;
         
         case Simple:

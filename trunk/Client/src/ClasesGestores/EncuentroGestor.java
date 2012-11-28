@@ -90,7 +90,7 @@ public class EncuentroGestor {
                         retorno.setGanador(ParticipanteGestor.buscarUnParticipante(idParticipanteGanador, participantes));
                         retorno.setPerdedor(ParticipanteGestor.buscarUnParticipante(idParticipantePerdedor, participantes));
                         //TODO RecuperarResultado
-                        System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre());
+//                        System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre());
                         datos.add(retorno);
                  
                     }

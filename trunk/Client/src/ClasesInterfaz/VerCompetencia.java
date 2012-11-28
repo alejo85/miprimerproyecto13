@@ -253,21 +253,22 @@ public class VerCompetencia extends JDialog {
                 modelo.addRow(datos);
             }
            jTable1.setModel(modelo);
-            if(competencia.getFixture() != null)
+            if(competencia.getFixture().getIdFixture() != 0)
             {
+                    System.out.println("valor del fixture id: "+competencia.getFixture().getIdFixture());
                 //TODO CArgar fixture tabla en la pantalla
                     cargarFixture(competencia.getFixture().getRondas());
                 }
         }
 private void cargarFixture(Ronda [] rondas){
-        modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
+        modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
         for(int i=0; i<rondas.length;i++ ){
                 Subronda sub = rondas[i].getGanadores();
                 Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
                 System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
              for(int j=0;j<encuentrosDeSubRonda.length;j++)
                {
-                    //    System.out.println("Valor de I: "+i+" valor de j: "+j);
+                       System.out.println("Valor de I: "+i+" valor de j: "+j);
                     Vector <String> datos = new Vector <String>();
                     datos.add(""+rondas[i].getNumeroDeRonda());
                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
