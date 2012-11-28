@@ -27,7 +27,7 @@ public class RondaGestor {
 
     public static Ronda crearRonda(LugarDeRealizacion[] lugares,int cantidadDeEncuentros, int idFixture, int numeroRonda){
         
-        System.out.println("Cantidad de Encuentros:"+cantidadDeEncuentros);
+     
         Ronda laRonda = new Ronda();
         laRonda.setNumeroDeRonda(numeroRonda);
         laRonda.setGanadores(RondaGestor.generarSubRondaLiga(lugares,cantidadDeEncuentros));
@@ -45,6 +45,7 @@ public class RondaGestor {
     public static Ronda[] getRondas(int idFixture, Participante [] participantes){
             Ronda laRonda[] = null;
             Ronda unaRonda = new Ronda();
+            int h=0;
             Vector <Ronda> datos=new Vector <Ronda>();
         ResultSet busqueda;
 
@@ -54,13 +55,17 @@ public class RondaGestor {
                 unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
                 unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
                 unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores"),  participantes));
-                System.out.println("Id Ronda"+unaRonda.getIdRonda()+" Numero de Ronda: "+ unaRonda.getNumeroDeRonda()+" tamaño de j: "+datos.size()+" IdSubRonda: "+unaRonda.getGanadores().getIdSubronda() );
+                System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
+
                 datos.add(unaRonda);
-            
+                System.out.println("valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
+                h++;
             } 
         laRonda= new Ronda[datos.size()];
         for(int j=0;j<datos.size();j++){
+                
                 laRonda[j]=datos.get(j);
+                System.out.println("valor de jota"+j+"Valor de numero de ronda"+datos.get(j).getNumeroDeRonda());
             }
     } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -70,7 +75,7 @@ public class RondaGestor {
     public static Subronda getSubRondas(int idSubRonda, Participante [] participantes){
             
             Subronda unaRonda = new Subronda();
-            Vector<Subronda> subRonda=new Vector<Subronda>();
+        
         ResultSet busqueda;
 
         try {
@@ -87,6 +92,7 @@ public class RondaGestor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+            System.out.println("Id SUbRonda"+unaRonda.getIdSubronda());
         return unaRonda;
         }
     public void estadoRonda(){}
