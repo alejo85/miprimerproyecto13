@@ -95,7 +95,7 @@ public class Central extends JFrame {
                 }
         */
        // this.usuarioActual=null;
-     /*  usuarioActual=new Usuario();
+       /*usuarioActual=new Usuario();
        usuarioActual.setApellido("Olivera");
        usuarioActual.setNombre("Alejandro");
        usuarioActual.setCorreoElectronico("alejo@masfm.com");*/

@@ -43,7 +43,7 @@ public class AltaParticipante extends JDialog {
     private JButton aceptarJButton = new JButton();
     private Participante participanteNuevo=null;
     private Competencia competenciaSeleccionada=null;
-    private JDialog ventanaAnterior;
+    private ListarParticipantes ventanaAnterior=null;
 
     public AltaParticipante(Competencia competencia, ListarParticipantes ventana) {
         this(null, "", false, competencia, ventana);
@@ -136,10 +136,10 @@ public class AltaParticipante extends JDialog {
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
+        //dispose(); // cuando se cierra, se pierde los cambios realizados
         ventanaAnterior.setVisible(true);
     }
-
+    public Competencia getCompetencia(){return competenciaSeleccionada;}
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         String errores ="";
         if(!correoElectrónicoJTextArea.getText().equals("")){
@@ -148,10 +148,11 @@ public class AltaParticipante extends JDialog {
                  if(imagenJTextArea.getText().equals("")){
                         System.out.println("antes del gestor");
                         Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
-                        competenciaSeleccionada.agregarParticipante(unParticipante);
+                        //competenciaSeleccionada.agregarParticipante(unParticipante);
                         System.out.println("Despues del gestor");
                         setVisible(false);
-                        dispose(); // cuando se cierra, se pierde los cambios realizados
+                        //dispose(); // cuando se cierra, se pierde los cambios realizados
+                        ventanaAnterior.setCompetencia(unParticipante);
                         ventanaAnterior.setVisible(true);
                     }
                     
@@ -193,4 +194,5 @@ public class AltaParticipante extends JDialog {
     }
     });
     }
+    
 }
