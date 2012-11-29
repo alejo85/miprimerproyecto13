@@ -301,12 +301,15 @@ public class CompetenciaDB {
        // System.out.println("antes del guardar el fixture!!!");
         Conexion conexion = new Conexion();
         ResultSet resultado=null;
-        
+        try {
+            conexion.conectar();
+        } catch (SQLException e) {
+        }
+        String consultasql;
         try {
                for(int i=0;i<encuentros.size();i++)
                {
-                    conexion.conectar();
-                    String consultasql;
+                    
                     
                     consultasql="UPDATE encuentro\n" + 
                     "   SET id_participantea='"+encuentros.get(i).getParticipanteA().getIdParticipante()+"', \n" + 
@@ -314,11 +317,13 @@ public class CompetenciaDB {
                     " WHERE id_encuentro='"+encuentros.get(i).getIdEncuentro()+"' and id_lugar_de_realizacion='"+encuentros.get(i).getLocación().getIdLugar()+"'RETURNING *;";
                    // System.out.println(consultasql);
                     resultado = conexion.consultar(consultasql);
-                    conexion.cerrarConexion();
+                    
                }
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        conexion.cerrarConexion();
         
         
  
