@@ -22,7 +22,7 @@ public class FixtureGestor {
      * @return
      */
  //todo borrar main de prueba
-  
+  /*
    /*  public static  void main(String[] args) {
     
         int i;
@@ -42,6 +42,7 @@ public class FixtureGestor {
         fixture = generarFixture(lugares, participantes, 5,8);    
         System.out.println("");
      }*/
+*/
  
     public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
         Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
@@ -73,6 +74,8 @@ public class FixtureGestor {
             
             Participante unParticipante = new Participante();//se agrega el participantes auxiliar
             unParticipante.setIdParticipante(1);
+            unParticipante.setNombre("*");
+            unParticipante.setCorreo("nada@noexisto.com");
             participantesAux[i] = unParticipante;
         }
 
