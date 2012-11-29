@@ -65,12 +65,41 @@ public class RondaGestor {
         for(int j=0;j<datos.size();j++){
                 
                 laRonda[j]=datos.get(j);
+                laRonda[j].setNumeroDeRonda(j+1);
                 System.out.println("valor de jota"+j+"Valor de numero de ronda"+datos.get(j).getNumeroDeRonda());
             }
     } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return laRonda;
+        }
+    public static  Vector <Ronda> getRondasVector(int idFixture, Participante [] participantes){
+            Ronda laRonda[] = null;
+            Ronda unaRonda = new Ronda();
+            int h=0;
+            Vector <Ronda> datos=new Vector <Ronda>();
+        ResultSet busqueda;
+
+        try {
+            busqueda = FixtureDB.buscarRonda(idFixture);
+            while (busqueda.next()){
+                unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
+                unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
+                unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores"),  participantes));
+                System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
+
+                datos.add(unaRonda);
+                System.out.println(""+h+"   valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
+                h++;
+                
+            } 
+       
+ 
+         
+    } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return datos;
         }
     public static Subronda getSubRondas(int idSubRonda, Participante [] participantes){
             

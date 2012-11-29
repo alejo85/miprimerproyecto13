@@ -50,7 +50,17 @@ public class Competencia{
         
     }
 
-    public void agregarParticipante (Participante participante){}
+    public void agregarParticipante (Participante participante){
+            Participante[] parti=new Participante[this.participantes.length+1];
+            int i;
+            for(i=0; i<this.participantes.length;i++){
+                
+                    parti[i]=this.participantes[i];
+                
+                }
+            parti[i]=participante;
+            this.participantes=parti;
+        }
     public void eliminarParticipante (Participante participante){}
     public void modificarParticipante(Participante participante){}
 

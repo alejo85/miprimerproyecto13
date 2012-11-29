@@ -18,6 +18,9 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -40,15 +43,18 @@ public class AltaParticipante extends JDialog {
     private JButton aceptarJButton = new JButton();
     private Participante participanteNuevo=null;
     private Competencia competenciaSeleccionada=null;
+    private JDialog ventanaAnterior;
 
-    public AltaParticipante(Competencia competencia) {
-        this(null, "", false, competencia);
+    public AltaParticipante(Competencia competencia, ListarParticipantes ventana) {
+        this(null, "", false, competencia, ventana);
     }
 
-    public AltaParticipante(Frame parent, String title, boolean modal, Competencia competencia) {
+    public AltaParticipante(Frame parent, String title, boolean modal, Competencia competencia, ListarParticipantes ventana) {
         super(parent, title, modal);
         try {
-            competenciaSeleccionada=competencia;
+            this.competenciaSeleccionada=competencia;
+            this.ventanaAnterior=ventana;
+            
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,6 +62,7 @@ public class AltaParticipante extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        CerrarVentana();
         this.setSize(new Dimension(903, 332));
         this.getContentPane().setLayout( null );
         this.setTitle("Alta Participante");
@@ -128,7 +135,9 @@ public class AltaParticipante extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setVisible(true);
     }
 
     private void aceptarJButton_actionPerformed(ActionEvent e) {
@@ -139,8 +148,11 @@ public class AltaParticipante extends JDialog {
                  if(imagenJTextArea.getText().equals("")){
                         System.out.println("antes del gestor");
                         Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
-                    
+                        competenciaSeleccionada.agregarParticipante(unParticipante);
                         System.out.println("Despues del gestor");
+                        setVisible(false);
+                        dispose(); // cuando se cierra, se pierde los cambios realizados
+                        ventanaAnterior.setVisible(true);
                     }
                     
                       else
@@ -170,5 +182,15 @@ public class AltaParticipante extends JDialog {
             }
         if(!errores.equals(""))
             System.out.println(errores);
+    }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setVisible(true);
+        
+    }
+    });
     }
 }

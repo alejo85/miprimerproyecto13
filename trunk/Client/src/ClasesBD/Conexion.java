@@ -17,7 +17,7 @@ public class Conexion
     {
 
 
-        this.conexion = DriverManager.getConnection("jdbc:postgresql://10.15.150.27:5432/TP?user=postgres&password=Publica123");
+        this.conexion = DriverManager.getConnection("jdbc:postgresql://192.168.1.8:5432/TP?user=postgres&password=Publica123");
 
     }
 

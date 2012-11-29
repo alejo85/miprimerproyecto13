@@ -1,10 +1,13 @@
 package ClasesLogicas;
 
+import java.util.Vector;
+
 
 public class Fixture{
 
 	private int idFixture;
 	private Ronda[] rondas;
+        
 
     public Fixture(int idFixture, Ronda[] rondas) {
         super();
@@ -25,6 +28,16 @@ public class Fixture{
     }
 
     public void setRondas(Ronda[] rondas) {
+        
+ 
+        
+        
+        
+        
+        
+        
+        
+        
         this.rondas = rondas;
     }
 
@@ -65,4 +78,6 @@ public class Fixture{
        
        
         }
+
+   
 }
