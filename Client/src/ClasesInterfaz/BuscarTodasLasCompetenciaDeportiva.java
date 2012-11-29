@@ -171,8 +171,8 @@ public class BuscarTodasLasCompetenciaDeportiva extends JDialog {
     }
 
     private void mostrarTablaJButton_actionPerformed(ActionEvent e) {
-        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
-        ven.setVisible(true);
+        /*VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad, this);
+        ven.setVisible(true);*/
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {

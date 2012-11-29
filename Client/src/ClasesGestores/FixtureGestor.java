@@ -23,7 +23,7 @@ public class FixtureGestor {
      */
  //todo borrar main de prueba
   
-     public static  void main(String[] args) {
+   /*  public static  void main(String[] args) {
     
         int i;
         LugarDeRealizacion[] lugares = new LugarDeRealizacion[3];
@@ -41,7 +41,7 @@ public class FixtureGestor {
         
         fixture = generarFixture(lugares, participantes, 5,8);    
         System.out.println("");
-     }
+     }*/
  
     public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
         Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
@@ -141,11 +141,12 @@ public class FixtureGestor {
         try {
             fixture.setIdFixture(FixtureDB.getIdFixture(idCompetencia));
             fixture.setRondas(RondaGestor.getRondas(fixture.getIdFixture(), participantes));
-        
+            //fixture.setRonda1(RondaGestor.getRondasVector(fixture.getIdFixture(), participantes));
+            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-            System.out.println("antes de retornar el fixture");
+            //System.out.println("antes de retornar el fixture ronda 0= "+fixture.getRonda1().get(1).getNumeroDeRonda());
         return fixture;
         }
 }

@@ -22,8 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 
 public class Central extends JFrame {
@@ -58,7 +56,7 @@ public class Central extends JFrame {
     private JButton salirJButton = new JButton();
 
     public Central() {
-        
+    
         /// muestra los look and feel instalados
         
        /* UIManager.LookAndFeelInfo plaf[] = UIManager.getInstalledLookAndFeels();
@@ -96,8 +94,11 @@ public class Central extends JFrame {
                    // handle exception
                 }
         */
-        this.usuarioActual=null;
-       
+       // this.usuarioActual=null;
+     /*  usuarioActual=new Usuario();
+       usuarioActual.setApellido("Olivera");
+       usuarioActual.setNombre("Alejandro");
+       usuarioActual.setCorreoElectronico("alejo@masfm.com");*/
         try {
             jbInit();
         } catch (Exception e) {
@@ -316,7 +317,7 @@ public class Central extends JFrame {
         JOptionPane.showMessageDialog(this, new Central_AboutBoxPanel1(), "Acerca de", JOptionPane.PLAIN_MESSAGE);
     }
     void buscarCompetencia_ActionPerformed (ActionEvent e){
-           BuscarCompetenciaDeportiva nuevo= new BuscarCompetenciaDeportiva(usuarioActual);
+           BuscarCompetenciaDeportiva nuevo= new BuscarCompetenciaDeportiva(this, usuarioActual);
            nuevo.setVisible(true);
            }
     // ACCION BOTON BUSCAR TODAS LAS COMPETENCIAS DEPORTIVAS
@@ -366,7 +367,8 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar9_actionPerformed(ActionEvent e) {
-        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(usuarioActual);
+        this.setVisible(false);
+        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(this, usuarioActual);
         ven.setVisible(true);
     }
 

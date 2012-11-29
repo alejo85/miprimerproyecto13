@@ -23,6 +23,9 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import java.sql.SQLException;
 
 import java.util.Vector;
@@ -33,6 +36,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -106,9 +110,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private Color foreground = deporteJComboBox.getForeground();
     private boolean empate;
 
-    public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
 
-           this(null, "", false, usuarioLogueado);
+    public AltaCompetenciaDeportiva(Usuario usuarioLogueado, BuscarCompetenciaDeportiva ventanaAnterior) {
+
+           this(null, "", false, usuarioLogueado, ventanaAnterior);
        }
 
        public AltaCompetenciaDeportiva() {
@@ -116,10 +121,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
            this(null, "", false);
        }
 
-       public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal, Usuario usuarioLogueado) {
+       public AltaCompetenciaDeportiva(Frame parent, String title, boolean modal, Usuario usuarioLogueado, BuscarCompetenciaDeportiva ventanaAnterior) {
            super(parent, title, modal);
            try {
                this.ussuarioActual = usuarioLogueado;
+               this.ventanaAnterior=ventanaAnterior;
                jbInit();
            } catch (Exception e) {
                e.printStackTrace();
@@ -138,7 +144,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
 
     private void jbInit() throws Exception {
-        
+        CerrarVentana();
         this.setSize(new Dimension(1487, 765));
         this.getContentPane().setLayout(null);
         this.setTitle("Alta Competencia Deportiva");
@@ -289,7 +295,12 @@ public class AltaCompetenciaDeportiva extends JDialog {
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
 
-   
+
+        cancelarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    cancelarJButton_actionPerformed(e);
+                }
+            });
         quitarJButton.setText("Quitar");
         quitarJButton.setBounds(new Rectangle(500, 225, 110, 30));
         quitarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -667,5 +678,21 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private void listaLugaresJTable() {
         listaLugaresJTable.setBackground(Color.white);
         listaLugaresJTable.setForeground(Color.black);
+    }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setVisible(true);
+        
+    }
+    });
+    }
+
+    private void cancelarJButton_actionPerformed(ActionEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setVisible(true);
     }
 }

@@ -17,6 +17,9 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -56,19 +59,20 @@ public class VerCompetencia extends JDialog {
     private Usuario usuarioActual=null;
     private Competencia competencia;
     private JTable jTable1 = new JTable();
-
+    private JDialog ventanaAnterior;
     /**
      * @param usuario
      * @param competencia
      */
-    public VerCompetencia( Usuario usuario, Competencia competencia) {
+    public VerCompetencia( Usuario usuario, Competencia competencia,BuscarCompetenciaDeportiva ventanaAnterior) {
 
-        this(null, "", false, usuario, competencia);
+        this(null, "", false, usuario, competencia, ventanaAnterior);
     }
 
-    public VerCompetencia(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia) {
+    public VerCompetencia(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia, BuscarCompetenciaDeportiva ventanaAnterior) {
         super(parent, title, modal);
         try {
+            this.ventanaAnterior=ventanaAnterior;
             this.usuarioActual=usuario;
             this.competencia=competencia;
             
@@ -79,6 +83,7 @@ public class VerCompetencia extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        CerrarVentana();
         this.setSize(new Dimension(991, 567));
         this.getContentPane().setLayout( null );
         this.setTitle("Ver Competencia");
@@ -87,6 +92,7 @@ public class VerCompetencia extends JDialog {
         nombreDeLaCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreDeLaCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         nombreDeLaCompetenciaJTextArea.setNextFocusableComponent(this);
+        nombreDeLaCompetenciaJTextArea.setEditable(false);
         jLabelDeporte.setText("Deporte");
         jLabelDeporte.setBounds(new Rectangle(45, 110, 135, 25));
         jLabelDeporte.setFont(new Font("Tahoma", 0, 13));
@@ -97,10 +103,12 @@ public class VerCompetencia extends JDialog {
         deporteJTextArea.setFont(new Font("Tahoma", 0, 13));
         deporteJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         deporteJTextArea.setNextFocusableComponent(this);
+        deporteJTextArea.setEditable(false);
         modalidadJTextArea.setBounds(new Rectangle(235, 70, 375, 30));
         modalidadJTextArea.setFont(new Font("Tahoma", 0, 13));
         modalidadJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         modalidadJTextArea.setNextFocusableComponent(this);
+        modalidadJTextArea.setEditable(false);
         jLabelModalidad.setText("Modalidad");
         jLabelModalidad.setBounds(new Rectangle(45, 70, 135, 25));
         jLabelModalidad.setFont(new Font("Tahoma", 0, 13));
@@ -111,6 +119,7 @@ public class VerCompetencia extends JDialog {
         estadoJTextArea.setFont(new Font("Tahoma", 0, 13));
         estadoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         estadoJTextArea.setNextFocusableComponent(this);
+        estadoJTextArea.setEditable(false);
         jLabelParticipante.setText("Participantes");
         jLabelParticipante.setBounds(new Rectangle(45, 230, 135, 25));
         jLabelParticipante.setFont(new Font("Tahoma", 0, 13));
@@ -202,7 +211,9 @@ public class VerCompetencia extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setVisible(true);
     }
 
     private void modificarCompetenciaJButton_actionPerformed(ActionEvent e) {
@@ -220,8 +231,9 @@ public class VerCompetencia extends JDialog {
 
     private void gestionarParticipantesJButton_actionPerformed(ActionEvent e) {
         ListarParticipantes ven;
-        ven = new ListarParticipantes(usuarioActual, competencia);
+        ven = new ListarParticipantes(usuarioActual, competencia, this);
         ven.setVisible(true);
+        this.setVisible(false);
     }
 
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
@@ -260,7 +272,11 @@ public class VerCompetencia extends JDialog {
                     cargarFixture(competencia.getFixture().getRondas());
                 }
         }
-private void cargarFixture(Ronda [] rondas){
+
+    /**
+     * @param rondas
+     */
+    public void cargarFixture(Ronda [] rondas){
         modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
         for(int i=0; i<rondas.length;i++ ){
                 Subronda sub = rondas[i].getGanadores();
@@ -268,9 +284,9 @@ private void cargarFixture(Ronda [] rondas){
                 System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
              for(int j=0;j<encuentrosDeSubRonda.length;j++)
                {
-                       System.out.println("Valor de I: "+i+" valor de j: "+j);
+                 int aux=i+1;
                     Vector <String> datos = new Vector <String>();
-                    datos.add(""+rondas[i].getNumeroDeRonda());
+                    datos.add(""+aux);
                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
                     
@@ -279,5 +295,23 @@ private void cargarFixture(Ronda [] rondas){
                     }
             }
         tablaProximosEncuentosJTable.setModel(modelo2);
+        
     }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setVisible(true);
+        
+    }
+    });
+    }
+    public void setVisible(boolean b){
+            
+            modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
+ 
+            cargarDatos();
+            super.setVisible(b);
+        }
 }
