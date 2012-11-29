@@ -10,6 +10,7 @@ import ClasesLogicas.Fixture;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
 import ClasesLogicas.Posicion;
+import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
 import ClasesLogicas.Usuario;
 
@@ -82,9 +83,18 @@ public class CompetenciaGestor {
         }
 
     /**
-     * @param competenciaAEliminar
+     * @param competencia
      */
-    public void eliminarCompetencia(Competencia competenciaAEliminar){
+    public static void eliminarFixtureDeCompetencia(Competencia competencia){
+            Ronda [] rondas = competencia.getFixture().getRondas();
+            for(int i=0; i<rondas.length;i++ ){
+                Subronda sub = rondas[i].getGanadores();
+                Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
+                EncuentroGestor.eliminarEncuentros(encuentrosDeSubRonda);
+                RondaGestor.eliminarRonda(competencia.getFixture().getIdFixture());
+                FixtureGestor.eliminarFixture(competencia.getFixture().getIdFixture());
+                RondaGestor.eliminarSubRonda(sub.getIdSubronda());
+                }
 
         }
 
@@ -224,7 +234,7 @@ public class CompetenciaGestor {
             
         //todo definir EN TODOS LADOS modalidad como Simple y Doble    
         case Liga:
-            System.out.println("antes del gestor Fixture");
+            //System.out.println("antes del gestor Fixture");
             fixture = FixtureGestor.generarFixture(lugares, participantes, participantes.length, competencia.getIdCompetencia());
             competencia.setFixture(fixture);
             CompetenciaDB.guardarFixture( obtenerEncuentros(obtenerSubRondas(competencia)));
@@ -255,7 +265,7 @@ public class CompetenciaGestor {
             Vector<Subronda> retorno = new Vector<Subronda> ();
             for(int i=0; i<competencia.getFixture().getRondas().length;i++)
             {
-                    System.out.println("Valor de I: "+i+" IdGanadores: "+competencia.getFixture().getRondas()[i].getGanadores().getIdSubronda());
+                  //  System.out.println("Valor de I: "+i+" IdGanadores: "+competencia.getFixture().getRondas()[i].getGanadores().getIdSubronda());
                     retorno.add(competencia.getFixture().getRondas()[i].getGanadores());
                 }
             
@@ -269,12 +279,12 @@ public class CompetenciaGestor {
             for(int i=0; i<subrondas.size();i++)
             {
                 for(int j=0; j<subrondas.get(i).getEncuentros().length;j++){
-                    System.out.println("Valor de I: "+i+"Valor de J: "+j+" IdEncuentro: "+subrondas.get(i).getEncuentros()[j].getIdEncuentro());
+                  //  System.out.println("Valor de I: "+i+"Valor de J: "+j+" IdEncuentro: "+subrondas.get(i).getEncuentros()[j].getIdEncuentro());
                     retorno.add(subrondas.get(i).getEncuentros()[j]);
                     }
                 }
             
-            System.out.println("Tamaño del Retorno:"+retorno.size());
+            //System.out.println("Tamaño del Retorno:"+retorno.size());
             return retorno;
         
         }

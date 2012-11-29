@@ -25,11 +25,11 @@ public class LugarDeRealizaciónDB {
                            }
                            String consultasql;
                            consultasql="select L.* from LUGAR_DE_REALIZACION as L, CREA as C, ASOCIADO as A where C.Creador='"+correoElectronico+"' and C.id_Lugar_de_Realizacion=A.id_Lugar_de_Realizacion and A.id_Deporte='"+idDeporteSeleccionado+"' and C.id_Lugar_de_Realizacion=L.id_Lugar_de_Realizacion;";
-                            System.out.println(consultasql);
+                            //System.out.println(consultasql);
                            try {
                                resultado = conexion.consultar(consultasql);
                            } catch (SQLException e) {
-                               System.out.println(e.getMessage());
+								System.out.println(e.getMessage());
                            }
                            conexion.cerrarConexion();
                            return resultado;
@@ -108,7 +108,7 @@ public class LugarDeRealizaciónDB {
                            String consultasql;
                            consultasql="SELECT *\n" + 
                            "  FROM lugar_de_realizacion as L, juega as J where L.id_lugar_de_realizacion=J.id_lugar_de_realizacion and J.id_competencia='"+competencia+"';";
-                            System.out.println(consultasql);
+                           // System.out.println(consultasql);
                            try {
                            conexion.conectar();
                            resultado = conexion.consultar(consultasql);

@@ -60,7 +60,7 @@ public class EncuentroGestor {
     public static Encuentro[] encuentrosDeSubRonda(int idSubRonda, Participante [] participantes)
     {
         
-        System.out.println("encuentrosDeSubRonda");
+        //System.out.println("encuentrosDeSubRonda");
             Encuentro retorno=null;
                 Vector <Encuentro> datos=new Vector <Encuentro>();
                 Encuentro [] encuentros=null;
@@ -187,5 +187,18 @@ public class EncuentroGestor {
             else
                  unEncuentro.setGanador(participanteA);
        }
+    public static void eliminarEncuentros(Encuentro[] encuentrosAEliminar){
+        for(int i=0;i<encuentrosAEliminar.length;i++)
+        {
+            try {
+                EncuentroDB.eliminarEncuentros(encuentrosAEliminar[i].getIdEncuentro());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        }
+
+ 
 }
 

@@ -1,6 +1,7 @@
 package ClasesGestores;
 
 
+import ClasesBD.EncuentroDB;
 import ClasesBD.FixtureDB;
 
 import ClasesLogicas.Encuentro;
@@ -55,10 +56,10 @@ public class RondaGestor {
                 unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
                 unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
                 unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores"),  participantes));
-                System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
+                //System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
 
                 datos.add(unaRonda);
-                System.out.println("valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
+                //System.out.println("valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
                 h++;
             } 
         laRonda= new Ronda[datos.size()];
@@ -66,7 +67,7 @@ public class RondaGestor {
                 
                 laRonda[j]=datos.get(j);
                 laRonda[j].setNumeroDeRonda(j+1);
-                System.out.println("valor de jota"+j+"Valor de numero de ronda"+datos.get(j).getNumeroDeRonda());
+               // System.out.println("valor de jota"+j+"Valor de numero de ronda"+datos.get(j).getNumeroDeRonda());
             }
     } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -86,10 +87,10 @@ public class RondaGestor {
                 unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
                 unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
                 unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores"),  participantes));
-                System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
+                //System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
 
                 datos.add(unaRonda);
-                System.out.println(""+h+"   valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
+                //System.out.println(""+h+"   valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
                 h++;
                 
             } 
@@ -121,7 +122,7 @@ public class RondaGestor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-            System.out.println("Id SUbRonda"+unaRonda.getIdSubronda());
+            //System.out.println("Id SUbRonda"+unaRonda.getIdSubronda());
         return unaRonda;
         }
     public void estadoRonda(){}
@@ -169,9 +170,9 @@ public class RondaGestor {
                     
                    encuentros[i] = EncuentroGestor.crearEncuentro(lugaresAux[random],subronda.getIdSubronda() ); 
                     lugaresAux[random].menosDisponibilidad();
-                    System.out.println("Encuentro id: "+encuentros[i].getIdEncuentro());
+                   // System.out.println("Encuentro id: "+encuentros[i].getIdEncuentro());
                 }
-                System.out.println("Repeticiones: "+repeticiones);
+              //  System.out.println("Repeticiones: "+repeticiones);
                 repeticiones--;
         
             }
@@ -183,5 +184,21 @@ public class RondaGestor {
         
         
         
+    }
+    public static void eliminarRonda(int idFixture){
+
+        try {
+            FixtureDB.eliminarRonda(idFixture);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void eliminarSubRonda(int idSubRonda){
+
+        try {
+            FixtureDB.eliminarRonda(idSubRonda);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
