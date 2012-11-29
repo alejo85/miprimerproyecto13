@@ -314,20 +314,13 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                 
             }
         else{
-            ;
-            if (DeporteJComboBox.getSelectedIndex() <= 0) {
-            } else {
-                idDeporte=deporte.get(DeporteJComboBox.getSelectedIndex()-1).getIdDeporte();
-           
-            competenciasEncontradas =
-                    CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(), idDeporte,
-                                                         modalidadJComboBox.getSelectedItem().toString(),
-                                                         this.estadoJComboBox.getSelectedItem().toString(),
-                                                         this.usuarioActual.getCorreoElectronico());
-            }
-            competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte , modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
+            if(DeporteJComboBox.getSelectedIndex()>0){idDeporte=deporte.get(DeporteJComboBox.getSelectedIndex()-1).getIdDeporte();}
+                    competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte , modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
+
+            
         
-        cargarResultados();}
+        cargarResultados();
+            }
 /*
 
         try {

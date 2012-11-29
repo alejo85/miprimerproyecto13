@@ -5,6 +5,7 @@ import ClasesGestores.ParticipanteGestor;
 
 import ClasesLogicas.Competencia;
 import ClasesLogicas.ModeloTabla;
+import ClasesLogicas.Participante;
 import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
@@ -45,6 +46,7 @@ public class ListarParticipantes extends JDialog {
     private Competencia competenciaSeleccionada=null;
     private Usuario usuarioAcatual=null;
     private JDialog ventanaAnterior;
+    private AltaParticipante ven=null;
 
     public ListarParticipantes(Usuario usuario, Competencia competencia, VerCompetencia ventana) {
 
@@ -134,15 +136,15 @@ public class ListarParticipantes extends JDialog {
 
 
     private void altaParticipanteJButton_actionPerformed(ActionEvent e) {
-        AltaParticipante ven = new AltaParticipante(competenciaSeleccionada, this);
+        ven = new AltaParticipante(competenciaSeleccionada, this);
         ven.setVisible(true);
-        this.setVisible(false);
+        super.setVisible(false);
     }
-    public void setVisible(boolean b){
+    /*public void setVisible(boolean b){
             
             actualizar();
             super.setVisible(b);
-        }
+        }*/
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         super.setVisible(false);
         dispose(); // cuando se cierra, se pierde los cambios realizados
@@ -172,12 +174,29 @@ public class ListarParticipantes extends JDialog {
                     modelo.addRow(datos);
                 }
             nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
-           
+            tablaParticipantesJTable.setModel(modelo);
+        }
+    public void setCompetencia(Participante participante)
+    {
+        competenciaSeleccionada.agregarParticipante(participante);
+            Vector <String> datos;
+            modelo = new ModeloTabla(new String[] { "Nombre", "correo" }, 0);
+            for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
+                    datos = new Vector <String>();
+                    datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
+                    datos.add(competenciaSeleccionada.getParticipantes()[i].getCorreo());
+                
+                    modelo.addRow(datos);
+                }
+       
+            nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
+            tablaParticipantesJTable.setModel(modelo);
         }
     private void actualizar(){
-            modelo = new ModeloTabla(new String[] { "Nombre", "correo" }, 0);
-            competenciaSeleccionada.setParticipantes(ParticipanteGestor.instanciarParticipante(competenciaSeleccionada.getIdCompetencia()));
             
+            //competenciaSeleccionada.setParticipantes(ParticipanteGestor.instanciarParticipante(competenciaSeleccionada.getIdCompetencia()));
+
+            modelo = new ModeloTabla(new String[] { "Nombre", "correo" }, 0);
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
                     Vector <String> datos = new Vector <String>();
                     datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
