@@ -34,12 +34,12 @@ public class EncuentroDB {
             String consultasql;
             
             consultasql="INSERT INTO encuentro(id_lugar_de_realizacion, id_Subronda )VALUES ('"+encuentro.getLocación().getIdLugar()+"', '"+idSubRonda+"' )RETURNING id_encuentro;";
-            System.out.println(consultasql);
+           // System.out.println(consultasql);
             resultado=conexion.consultar(consultasql);
             resultado.next();
             
             idEncuentro = resultado.getInt("id_encuentro");
-            System.out.println("despues id_encuentro: "+idEncuentro);
+            //System.out.println("despues id_encuentro: "+idEncuentro);
             return idEncuentro;
         
         }
@@ -52,9 +52,23 @@ public class EncuentroDB {
             String consultasql;
             
             consultasql="SELECT *  FROM encuentro where id_subronda='"+idSubRonda+"';";
-            System.out.println(consultasql);
+           // System.out.println(consultasql);
             resultado=conexion.consultar(consultasql);
             return resultado;
+        
+        }
+    public static  void eliminarEncuentros(int idEncuentro) throws SQLException {
+            //System.out.println("llego a la base id_encuentro");
+
+            Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            conexion.conectar();
+            String consultasql;
+            
+            consultasql="DELETE FROM encuentro WHERE id_encuentro='"+idEncuentro+"';";
+           // System.out.println(consultasql);
+            resultado=conexion.consultar(consultasql);
+
         
         }
 }

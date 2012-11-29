@@ -93,7 +93,7 @@ public class FixtureGestor {
 
         cargarParticipantes(participantesAux, fixture);
 
-            System.out.println("antes de retonar fixture");
+            //System.out.println("antes de retonar fixture");
         return fixture;
         }
    
@@ -149,4 +149,11 @@ public class FixtureGestor {
             //System.out.println("antes de retornar el fixture ronda 0= "+fixture.getRonda1().get(1).getNumeroDeRonda());
         return fixture;
         }
+    public static void eliminarFixture( int idFixture){
+        try {
+            FixtureDB.eliminarFixture(idFixture);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

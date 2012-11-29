@@ -629,7 +629,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Errore lenght vale:" +errores.length());
+        //System.out.println("Errore lenght vale:" +errores.length());
         if(errores.length()>0){
             JOptionPane.showOptionDialog(null, "Tienes los siguientes errores:"+errores2+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
             return false;
@@ -666,7 +666,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
             
             else
                 puntosPorPartidoEmpatado=-1;
-            System.out.println(formaDePuntuaciónJComboBox.getSelectedItem().toString());
+          //  System.out.println(formaDePuntuaciónJComboBox.getSelectedItem().toString());
             resultado =  CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(), "Liga", formaDePuntuaciónJComboBox.getSelectedItem().toString(), "Creada", editor.getText(), this.deporte.get(deporte), lugaresSeleccionados, empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),puntosPorPartidoEmpatado,Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),  cantidadDeSets,  tantosPorPartidoAusenciaContrincante);
             
         }

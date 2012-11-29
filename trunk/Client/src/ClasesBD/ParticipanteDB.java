@@ -16,17 +16,17 @@ public class ParticipanteDB {
      * @return
      */
     public static int altaParticipante(Participante participante) throws SQLException {
-            System.out.println("llego a la base");
+           // System.out.println("llego a la base");
         int idParticipante=0;
             Conexion conexion = new Conexion();
             ResultSet resultado=null;
             conexion.conectar();
             String consultasql;
-        //INSERT INTO participante( nombre, correo)VALUES ('nombre', 'correo')RETURNING id_Participante;
+        
         consultasql="INSERT INTO participante( nombre, correo)VALUES ('"+participante.getNombre()+"', '"+participante.getCorreo()+"')RETURNING id_Participante;";
             resultado=conexion.consultar(consultasql);
             resultado.next();
-            System.out.println("despues del next");
+            //System.out.println("despues del next");
             idParticipante = resultado.getInt("id_Participante");
         return idParticipante;}
 
@@ -67,7 +67,7 @@ public class ParticipanteDB {
             
             consultasql="SELECT P.id_participante, P.nombre, P.correo, P.imagen\n" + 
             "  FROM participa as A, participante as P where A.id_competencia='"+idCompetencia+"' and P.id_participante=A.id_participante;";
-            System.out.println(consultasql);
+            //System.out.println(consultasql);
             resultado = conexion.consultar(consultasql);
             
             conexion.cerrarConexion();

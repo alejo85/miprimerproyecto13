@@ -239,8 +239,25 @@ public class VerCompetencia extends JDialog {
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
         int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea generar el fixture de la competencia Nombre Competencia?.", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
-            CompetenciaGestor.generarFixture(competencia);
-            JOptionPane.showOptionDialog(null, "Se ha generar el fixture de la  competencia Nombre Competencia "  , "Generar Fixture.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            System.out.println(""+competencia.getFixture().getIdFixture());
+            if(competencia.getFixture().getIdFixture()!=0){
+               
+                
+                
+                
+                    CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
+                    CompetenciaGestor.generarFixture(competencia);
+                    JOptionPane.showOptionDialog(null, "Se ha generar el fixture de la  competencia Nombre Competencia "  , "Generar Fixture.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+                    cargarDatos();
+                }
+            else
+            {
+                    CompetenciaGestor.generarFixture(competencia);
+                    JOptionPane.showOptionDialog(null, "Se ha generar el fixture de la  competencia Nombre Competencia "  , "Generar Fixture.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+                    cargarDatos();
+                
+                }
+            
         } 
     }
 
@@ -267,7 +284,7 @@ public class VerCompetencia extends JDialog {
            jTable1.setModel(modelo);
             if(competencia.getFixture().getIdFixture() != 0)
             {
-                    System.out.println("valor del fixture id: "+competencia.getFixture().getIdFixture());
+                  //  System.out.println("valor del fixture id: "+competencia.getFixture().getIdFixture());
                 //TODO CArgar fixture tabla en la pantalla
                     cargarFixture(competencia.getFixture().getRondas());
                 }
@@ -281,7 +298,7 @@ public class VerCompetencia extends JDialog {
         for(int i=0; i<rondas.length;i++ ){
                 Subronda sub = rondas[i].getGanadores();
                 Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
-                System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
+               // System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
              for(int j=0;j<encuentrosDeSubRonda.length;j++)
                {
                  int aux=i+1;

@@ -281,7 +281,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private void jButtonAceptar1_actionPerformed(ActionEvent e) {
         if(tablaResultadoJTable.getSelectedRow()>-1){
         competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
-        System.out.println(this.competenciaSelecionad.getNombreCompetencia());
+        //System.out.println(this.competenciaSelecionad.getNombreCompetencia());
         VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad, this);
         this.setVisible(false);
         ven.setVisible(true);}
@@ -347,7 +347,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         
         modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
         tablaResultadoJTable.setModel(modelo);
-        System.out.println("tamaño resultado: "+competenciasEncontradas.size());
+        //System.out.println("tamaño resultado: "+competenciasEncontradas.size());
         for(int i =0; i<competenciasEncontradas.size();i++)
         {
             Vector <String> datos = new Vector <String>();

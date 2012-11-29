@@ -111,10 +111,58 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="SELECT id_subronda, estado FROM subronda where id_subronda='"+idSubRonda+"';";
-            System.out.println(consultasql);
+       //    System.out.println(consultasql);
             resultado=conexion.consultar(consultasql);
             conexion.cerrarConexion();
             return resultado;
+        
+        }
+    public static void eliminarRonda(int idFixture) throws SQLException {
+        
+            //System.out.println("llego a la base id_ronda");
+
+            Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            conexion.conectar();
+            String consultasql;
+            
+            consultasql="DELETE FROM ronda WHERE id_fixture='"+idFixture+"';";
+       //    System.out.println(consultasql);
+            resultado=conexion.consultar(consultasql);
+            conexion.cerrarConexion();
+            
+        
+        }
+    public static void eliminarSubRonda(int idSubRonda) throws SQLException {
+        
+            //System.out.println("llego a la base id_ronda");
+
+            Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            conexion.conectar();
+            String consultasql;
+            
+            consultasql="DELETE FROM subronda WHERE id_subronda='"+idSubRonda+"';";
+       //    System.out.println(consultasql);
+            resultado=conexion.consultar(consultasql);
+            conexion.cerrarConexion();
+            
+        
+        }
+    public static void eliminarFixture(int idFixture) throws SQLException {
+        
+            //System.out.println("llego a la base id_ronda");
+
+            Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            conexion.conectar();
+            String consultasql;
+            
+            consultasql="DELETE FROM fixture WHERE id_fixture='"+idFixture+"';";
+       //    System.out.println(consultasql);
+            resultado=conexion.consultar(consultasql);
+            conexion.cerrarConexion();
+            
         
         }
 }
