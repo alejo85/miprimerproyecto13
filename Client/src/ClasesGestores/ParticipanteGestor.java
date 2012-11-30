@@ -103,6 +103,39 @@ public class ParticipanteGestor {
         
        
         return participantes; }
+    public static Participante instanciarUnParticipante(int idParticipante){
+        Participante retorno=null;
+           
+        ResultSet resultado;
+
+        try {
+            resultado = ParticipanteDB.buscarUnParticipante(idParticipante);
+            ParticipanteAnterior aux = null;
+
+           
+                while(resultado.next()){
+                    int id = resultado.getInt("id_participante");
+                    int i=0;
+                    String nombre = resultado.getString("nombre");
+                    String correo = resultado.getString("correo");
+                    Byte imagen = resultado.getByte("imagen");
+                    ImageIcon imag = new ImageIcon("");
+                   
+                    i=0;
+                  retorno= new Participante();
+                    retorno.setIdParticipante(idParticipante);
+                    retorno.setNombre(nombre);
+                    retorno.setCorreo(correo);
+                 
+                    //todo recuperarImagen
+                }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+       
+        return retorno; }
     public static Participante buscarUnParticipante(int idParticipante,Participante [] participantes ){
         for(int i=0; i<participantes.length;i++)
         {

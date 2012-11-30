@@ -57,7 +57,7 @@ public class EncuentroGestor {
      * @param participantes
      * @return
      */
-    public static Encuentro[] encuentrosDeSubRonda(int idSubRonda, Participante [] participantes)
+    public static Encuentro[] encuentrosDeSubRonda(int idSubRonda)
     {
         
         //System.out.println("encuentrosDeSubRonda");
@@ -84,19 +84,21 @@ public class EncuentroGestor {
                        
                         
                       retorno = new Encuentro();
-                        retorno.setIdEncuentro(id);
-                        retorno.setParticipanteA(ParticipanteGestor.buscarUnParticipante(idParticipanteA, participantes));
-                        retorno.setParticipanteB(ParticipanteGestor.buscarUnParticipante(idParticipanteB, participantes));
-                        retorno.setGanador(ParticipanteGestor.buscarUnParticipante(idParticipanteGanador, participantes));
-                        retorno.setPerdedor(ParticipanteGestor.buscarUnParticipante(idParticipantePerdedor, participantes));
+                        retorno.setIdEncuentro(id);//Participante Libre en la ronda
+                        retorno.setParticipanteA(ParticipanteGestor.instanciarUnParticipante(idParticipanteA));
+                        
+                        retorno.setParticipanteB(ParticipanteGestor.instanciarUnParticipante(idParticipanteB));
+                        retorno.setGanador(ParticipanteGestor.instanciarUnParticipante(idParticipanteGanador));
+                        retorno.setPerdedor(ParticipanteGestor.instanciarUnParticipante(idParticipantePerdedor));
                         //TODO RecuperarResultado
-//                        System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre());
+                      //System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre()+"Participante B: "+retorno.getParticipanteB().getNombre());
                         datos.add(retorno);
                  
                     }
                     encuentros= new Encuentro[datos.size()];
                     for(int j=0;j<datos.size();j++){
                             encuentros[j]=datos.get(j);
+                            System.out.println("id_encuentro: "+encuentros[j].getIdEncuentro()+"Participante A: "+encuentros[j].getParticipanteA().getNombre()+"Participante B: "+encuentros[j].getParticipanteB().getNombre());
                         }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());

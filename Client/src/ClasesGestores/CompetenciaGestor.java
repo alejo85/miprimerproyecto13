@@ -352,7 +352,7 @@ public class CompetenciaGestor {
             
             unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setLugares(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(unaCompetencia.getIdCompetencia()));
-            unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia, unaCompetencia.getParticipantes()));
+            unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia));
             
         } catch (SQLException e) {
             

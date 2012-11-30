@@ -52,7 +52,7 @@ public class EncuentroDB {
             String consultasql;
             
             consultasql="SELECT *  FROM encuentro where id_subronda='"+idSubRonda+"';";
-           // System.out.println(consultasql);
+           System.out.println(consultasql);
             resultado=conexion.consultar(consultasql);
             return resultado;
         

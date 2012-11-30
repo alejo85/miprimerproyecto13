@@ -315,7 +315,7 @@ public class CompetenciaDB {
                     "   SET id_participantea='"+encuentros.get(i).getParticipanteA().getIdParticipante()+"', \n" + 
                     "       id_participanteb='"+encuentros.get(i).getParticipanteB().getIdParticipante()+"'\n" + 
                     " WHERE id_encuentro='"+encuentros.get(i).getIdEncuentro()+"' and id_lugar_de_realizacion='"+encuentros.get(i).getLocación().getIdLugar()+"'RETURNING *;";
-                   // System.out.println(consultasql);
+                    System.out.println(consultasql);
                     resultado = conexion.consultar(consultasql);
                     
                }

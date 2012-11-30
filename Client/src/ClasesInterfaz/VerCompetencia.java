@@ -208,6 +208,7 @@ public class VerCompetencia extends JDialog {
         this.getContentPane().add(jScrollPaneParticipante, null);
         jScrollPaneProximoEncuentro.getViewport().add(tablaProximosEncuentosJTable, null);
         this.getContentPane().add(jScrollPaneProximoEncuentro, null);
+        cargarDatos();
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
@@ -234,6 +235,11 @@ public class VerCompetencia extends JDialog {
         ven = new ListarParticipantes(usuarioActual, competencia, this);
         ven.setVisible(true);
         this.setVisible(false);
+    }
+    public void setCompetencia(Competencia unaCompetencia) {
+
+        competencia=unaCompetencia;
+        cargarDatos();
     }
 
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
@@ -262,7 +268,8 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarFixtureJButton_actionPerformed(ActionEvent e) {
-        ModificarFixture ven = new ModificarFixture();
+        ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual, this);
+        this.setVisible(false);
         ven.setVisible(true);
     }
 
@@ -293,27 +300,28 @@ public class VerCompetencia extends JDialog {
     /**
      * @param rondas
      */
-    public void cargarFixture(Ronda [] rondas){
-        modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
-        for(int i=0; i<rondas.length;i++ ){
-                Subronda sub = rondas[i].getGanadores();
-                Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
-               // System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
-             for(int j=0;j<encuentrosDeSubRonda.length;j++)
-               {
-                 int aux=i+1;
-                    Vector <String> datos = new Vector <String>();
-                    datos.add(""+aux);
-                    datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
-                    datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
+     public void cargarFixture(Ronda [] rondas){
+         modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
+         for(int i=0; i<rondas.length;i++ ){
+                 Subronda sub = rondas[i].getGanadores();
+                 Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
+                // System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
+              for(int j=0;j<encuentrosDeSubRonda.length;j++)
+                {
+                  int aux=i+1;
+                     Vector <String> datos = new Vector <String>();
+                     datos.add(""+aux);
+                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
+                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
                     
-                
-                    modelo2.addRow(datos);
-                    }
-            }
-        tablaProximosEncuentosJTable.setModel(modelo2);
+                         System.out.println(datos);
+                     modelo2.addRow(datos);
+                     }
+             }
+         tablaProximosEncuentosJTable.setModel(modelo2);
         
-    }
+     }
+
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
@@ -324,11 +332,6 @@ public class VerCompetencia extends JDialog {
     }
     });
     }
-    public void setVisible(boolean b){
-            
-            modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
- 
-            cargarDatos();
-            super.setVisible(b);
-        }
+
+    
 }

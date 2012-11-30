@@ -45,7 +45,7 @@ public class ListarParticipantes extends JDialog {
     private JButton eliminarPrticipanteJButton = new JButton();
     private Competencia competenciaSeleccionada=null;
     private Usuario usuarioAcatual=null;
-    private JDialog ventanaAnterior;
+    private VerCompetencia ventanaAnterior;
     private AltaParticipante ven=null;
 
     public ListarParticipantes(Usuario usuario, Competencia competencia, VerCompetencia ventana) {
@@ -146,8 +146,9 @@ public class ListarParticipantes extends JDialog {
             super.setVisible(b);
         }*/
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        super.setVisible(false);
+        setVisible(false);
         dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setCompetencia(competenciaSeleccionada);
         ventanaAnterior.setVisible(true);
     }
 
