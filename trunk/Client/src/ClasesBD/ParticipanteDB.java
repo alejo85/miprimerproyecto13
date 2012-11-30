@@ -74,6 +74,20 @@ public class ParticipanteDB {
      
             
         return resultado;}
+     public static ResultSet buscarUnParticipante(int idParticipante) throws SQLException {
+             Conexion conexion = new Conexion();
+             ResultSet resultado=null;
+             conexion.conectar();
+             String consultasql;
+             
+             consultasql="SELECT *FROM participante where id_participante='"+idParticipante+"' ;";
+             //System.out.println(consultasql);
+             resultado = conexion.consultar(consultasql);
+             
+             conexion.cerrarConexion();
+      
+             
+         return resultado;}
      public static ResultSet buscarParticipanteAnterior(int idParticipante){
          ResultSet resultado = null;
          return resultado;}

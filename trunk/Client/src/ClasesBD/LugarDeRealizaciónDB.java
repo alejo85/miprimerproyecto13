@@ -25,7 +25,7 @@ public class LugarDeRealizaciónDB {
                            }
                            String consultasql;
                            consultasql="select L.* from LUGAR_DE_REALIZACION as L, CREA as C, ASOCIADO as A where C.Creador='"+correoElectronico+"' and C.id_Lugar_de_Realizacion=A.id_Lugar_de_Realizacion and A.id_Deporte='"+idDeporteSeleccionado+"' and C.id_Lugar_de_Realizacion=L.id_Lugar_de_Realizacion;";
-                            //System.out.println(consultasql);
+                            System.out.println(consultasql);
                            try {
                                resultado = conexion.consultar(consultasql);
                            } catch (SQLException e) {
@@ -38,22 +38,24 @@ public class LugarDeRealizaciónDB {
     
         Conexion conexion = new Conexion();
         ResultSet resultado=null;
-        int idLugarDeRealizacion;
+        int idLugarDeRealizacion=0;
         try {
             conexion.conectar();
         } catch (SQLException f) {
             System.out.println(f.getMessage());
         }
         String consultasql;
-        consultasql="INSERT INTO LUGAR_DE_REALIZACION(Codigo,Nombre, Descripcion) VALUES" +"('"+codigo+"','"+nombre+ "','" +descripcion +"');";
+        consultasql="INSERT INTO LUGAR_DE_REALIZACION(Codigo,Nombre, Descripcion) VALUES" +"('"+codigo+"','"+nombre+ "','" +descripcion +"')RETURNING id_lugar_de_realizacion;";
 
         try {
             resultado = conexion.consultar(consultasql);
+            resultado.next();
+            idLugarDeRealizacion= resultado.getInt("id_lugar_de_realizacion");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         conexion.cerrarConexion();
-        idLugarDeRealizacion= idLugar();
+
         // CREANDO LA CONSULTA
         consultasql="INSERT INTO CREA(Creador,id_Lugar_de_Realizacion, Fecha, Hora) VALUES" +"('"+creado+"','"+idLugarDeRealizacion+ "','"+dia+ "','" +hora +"');";
         // CONSULTA EN BD
@@ -61,6 +63,7 @@ public class LugarDeRealizaciónDB {
             conexion.conectar();
             resultado = conexion.consultar(consultasql);
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
 
         for(int i=0; i < dSeleccionados.size();i++){

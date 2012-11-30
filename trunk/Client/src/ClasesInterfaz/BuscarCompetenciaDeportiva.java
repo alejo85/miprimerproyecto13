@@ -290,6 +290,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
         AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual, this);
         ven.setVisible(true);
+        this.setVisible(false);
     }
 
     private void buscarJButton_actionPerformed(ActionEvent e) {

@@ -1,7 +1,11 @@
 package ClasesInterfaz;
 
 
-import ClasesLogicas.Fixture;
+import ClasesLogicas.Competencia;
+import ClasesLogicas.Encuentro;
+import ClasesLogicas.ModeloTabla;
+import ClasesLogicas.Ronda;
+import ClasesLogicas.Subronda;
 import ClasesLogicas.Usuario;
 
 import java.awt.Dimension;
@@ -10,48 +14,58 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 
 public class ModificarFixture extends JDialog {
+    private ModeloTabla modeloDeTablaDeFecha = new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Tipo de Ronda" , "Equipo A", "Equipo B", "Resultado" }, 0);
+    private ModeloTabla modeloDeFecha = new ModeloTabla(new String[] { "Fecha/Ronda Nº" }, 0);
     private JPanel fechaJPanel = new JPanel();
     private JScrollPane jScrollPane1 = new JScrollPane();
     private JScrollPane fechasJScrollPane = new JScrollPane();
-    private JScrollBar jScrollBar2 = new JScrollBar();
-    private JScrollBar jScrollBar3 = new JScrollBar();
     private JButton cancelarJButton = new JButton();
     private JLabel jLabelFechas = new JLabel();
     private JButton gestionarResultadoJButton = new JButton();
     private JButton anterioprJButton = new JButton();
     private JButton siguienteJButton = new JButton();
     private JTable tablaDeFechaJTable = new JTable();
-    private JList listaDeFechasJList = new JList();
-    private Fixture fixtureSeleccionada=null;
-    private Usuario usuarioActual=null;
+    private Competencia competenciaSeleccionada=null;
+    private Usuario usuarioAcatual=null;
+    private VerCompetencia ventanaAnterior=null;
+    private int nroRonda=0;
+    private JTable fechaJTable = new JTable();
 
 
     /**
      * @param fixture
      * @param usuario
      */
-    public ModificarFixture(Fixture fixture,Usuario usuario) {
-        this(null, "", false, fixture, usuario);
+    public ModificarFixture(Competencia unaCompetencia,Usuario usuario, VerCompetencia ventana) {
+        this(null, "", false, unaCompetencia, usuario, ventana);
     }
 
-    public ModificarFixture(Frame parent, String title, boolean modal, Fixture fixture,Usuario usuario) {
+    public ModificarFixture(Frame parent, String title, boolean modal, Competencia unaCompetencia,Usuario usuario, VerCompetencia ventana) {
         super(parent, title, modal);
         try {
-            fixtureSeleccionada=fixture;
-            usuarioActual=usuario;
+
+            usuarioAcatual=usuario;
+            competenciaSeleccionada=unaCompetencia;
+            ventanaAnterior=ventana;
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,6 +85,19 @@ public class ModificarFixture extends JDialog {
         }
     }
     private void jbInit() throws Exception {
+        CerrarVentana();
+        tablaDeFechaJTable.setModel(modeloDeTablaDeFecha);
+        fechaJTable.addFocusListener(new FocusAdapter() {
+                public void focusGained(FocusEvent e) {
+                    fechaJTable_focusGained(e);
+                }
+            });
+        fechaJTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    fechaJTable_mouseClicked(e);
+                }
+            });
+        fechaJTable.setModel(modeloDeFecha);
         this.setSize(new Dimension(1108, 544));
         this.getContentPane().setLayout( null );
         this.setTitle("Mostrar Fixture");
@@ -79,8 +106,6 @@ public class ModificarFixture extends JDialog {
         fechaJPanel.setBorder(BorderFactory.createTitledBorder("Fecha/Ronda Nº "));
         jScrollPane1.setBounds(new Rectangle(20, 25, 820, 270));
         fechasJScrollPane.setBounds(new Rectangle(930, 55, 140, 270));
-        jScrollBar2.setBounds(new Rectangle(1070, 55, 15, 270));
-        jScrollBar3.setBounds(new Rectangle(840, 25, 15, 270));
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(680, 440, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -102,34 +127,123 @@ public class ModificarFixture extends JDialog {
                     gestionarResultadoJButton_actionPerformed(e);
                 }
             });
+        cargarRondas(0);
+        cargarFixture(competenciaSeleccionada.getFixture().getRondas());
         anterioprJButton.setText("Anterior");
         anterioprJButton.setBounds(new Rectangle(480, 320, 110, 30));
         anterioprJButton.setFont(new Font("Tahoma", 0, 13));
+        anterioprJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    anterioprJButton_actionPerformed(e);
+                }
+            });
         siguienteJButton.setText("Siguiente");
         siguienteJButton.setBounds(new Rectangle(665, 320, 110, 30));
         siguienteJButton.setFont(new Font("Tahoma", 0, 13));
         siguienteJButton.setSize(new Dimension(110, 30));
 
+        siguienteJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    siguienteJButton_actionPerformed(e);
+                }
+            });
         jScrollPane1.getViewport().add(tablaDeFechaJTable, null);
         fechaJPanel.add(jScrollPane1, null);
-        fechaJPanel.add(jScrollBar3, null);
         fechaJPanel.add(gestionarResultadoJButton, null);
         fechaJPanel.add(anterioprJButton, null);
         fechaJPanel.add(siguienteJButton, null);
         this.getContentPane().add(jLabelFechas, null);
         this.getContentPane().add(cancelarJButton, null);
-        this.getContentPane().add(jScrollBar2, null);
-        fechasJScrollPane.getViewport().add(listaDeFechasJList, null);
+        fechasJScrollPane.getViewport().add(fechaJTable, null);
         this.getContentPane().add(fechasJScrollPane, null);
         this.getContentPane().add(fechaJPanel, null);
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         this.setVisible(false);
+        ventanaAnterior.setCompetencia(competenciaSeleccionada);
+        ventanaAnterior.setVisible(true);
+        
     }
 
     private void gestionarResultadoJButton_actionPerformed(ActionEvent e) {
-        GestionarResultados ven = new GestionarResultados();
-        ven.setVisible(true);
+        if(tablaDeFechaJTable.getSelectedRow()>-1)
+        {
+         //   GestionarResultados ven = new GestionarResultados( unaCompetencia, usuario,  this);
+         //   ven.setVisible(true);
+        }
+    }
+    private void cargarRondas(int nroRonda){
+            
+            Ronda[] rondas=competenciaSeleccionada.getFixture().getRondas();
+                modeloDeTablaDeFecha= new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Tipo de Ronda" , "Equipo A", "Equipo B", "Resultado" }, 0);
+   
+                        Subronda sub = rondas[nroRonda].getGanadores();
+                        Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
+                       // System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
+                     for(int j=0;j<encuentrosDeSubRonda.length;j++)
+                       {
+                         int aux=nroRonda+1;
+                            Vector <String> datos = new Vector <String>();
+                            datos.add(""+rondas[nroRonda].getNumeroDeRonda());
+                                datos.add("Liga");
+                            datos.add(rondas[nroRonda].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
+                            datos.add(rondas[nroRonda].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
+                                datos.add("");
+                            
+           
+                            modeloDeTablaDeFecha.addRow(datos);
+                            }
+              
+            tablaDeFechaJTable.setModel(modeloDeTablaDeFecha);
+                
+        }
+    public void cargarFixture(Ronda [] rondas){
+        modeloDeFecha =  new ModeloTabla(new String[] { "Fecha/Ronda Nº"}, 0);
+        for(int i=0; i<rondas.length;i++ ){
+
+                    Vector <String> datos = new Vector <String>();
+                        datos.add(""+rondas[i].getNumeroDeRonda());
+                    modeloDeFecha.addRow(datos);
+               
+            }
+        fechaJTable.setModel(modeloDeFecha);
+       
+    }
+    private void anterioprJButton_actionPerformed(ActionEvent e) {
+
+        if(nroRonda>0){
+                nroRonda--;
+                cargarRondas(nroRonda);
+            }
+    }
+
+    private void siguienteJButton_actionPerformed(ActionEvent e) {
+
+        if(nroRonda>=0&& nroRonda < competenciaSeleccionada.getFixture().getRondas().length-1){
+                nroRonda++;
+                cargarRondas(nroRonda);
+
+            }
+    }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        ventanaAnterior.setCompetencia(competenciaSeleccionada);
+        ventanaAnterior.setVisible(true);
+        
+    }
+    });
+    }
+
+    private void fechaJTable_focusGained(FocusEvent e) {
+
+                cargarRondas(fechaJTable.getSelectedRow());
+
+    }
+
+    private void fechaJTable_mouseClicked(MouseEvent e) {
+        cargarRondas(fechaJTable.getSelectedRow());
     }
 }

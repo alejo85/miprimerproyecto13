@@ -95,7 +95,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="SELECT id_ronda, numeroronda, id_subronda_ganadores, id_subronda_perdedores, id_fixture FROM ronda where id_fixture='"+idFixture+"' ;";
-            //System.out.println(consultasql);
+            System.out.println(consultasql);
             resultado=conexion.consultar(consultasql);
             conexion.cerrarConexion();
             return resultado;
@@ -111,7 +111,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="SELECT id_subronda, estado FROM subronda where id_subronda='"+idSubRonda+"';";
-       //    System.out.println(consultasql);
+      System.out.println(consultasql);
             resultado=conexion.consultar(consultasql);
             conexion.cerrarConexion();
             return resultado;
