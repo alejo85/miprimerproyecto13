@@ -11,42 +11,42 @@ public class DeportesDB {
     }
     public static ResultSet buscarDeporte(){
         
-        Conexion conexion = new Conexion();
+       // Conexion conexion = new Conexion();
         ResultSet resultado=null;
         String consultaSQL;
 
-        try {
+        /*try {
             conexion.conectar();
         } catch (SQLException e) {
-        }
+        }*/
         consultaSQL = "select * from deporte order by nombre";
         
         try {
-            resultado = conexion.consultar(consultaSQL);
+           resultado = Conexion.consulta.executeQuery(consultaSQL);
         } catch (SQLException e) {
         }
-        conexion.cerrarConexion();
+       // conexion.cerrarConexion();
         
         return resultado;
                        
                        }
     public static ResultSet buscarDeporte(int idDeporte){
         
-        Conexion conexion = new Conexion();
+        //Conexion conexion = new Conexion();
         ResultSet resultado=null;
         String consultaSQL;
 
-        try {
+        /*try {
             conexion.conectar();
         } catch (SQLException e) {
-        }
+        }*/
         consultaSQL = "select * from deporte where id_Deporte='"+idDeporte+"';";
         
         try {
-            resultado = conexion.consultar(consultaSQL);
+            resultado = Conexion.consulta.executeQuery(consultaSQL);
         } catch (SQLException e) {
         }
-        conexion.cerrarConexion();
+        //conexion.cerrarConexion();
         
         return resultado;
                        

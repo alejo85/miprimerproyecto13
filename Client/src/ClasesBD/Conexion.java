@@ -9,15 +9,16 @@ import java.sql.Statement;
 
 public class Conexion
 {
-    Connection conexion;
-    Object conectar;
+    static Connection conexion;
+    static Statement consulta;
 
     public Conexion(){}
-    public void conectar() throws SQLException 
+    public static void conectar() throws SQLException 
     {
 
 
-        this.conexion = DriverManager.getConnection("jdbc:postgresql://192.168.1.8:5432/TP?user=postgres&password=Publica123");
+        conexion = DriverManager.getConnection("jdbc:postgresql://192.168.229.128:5432/TP?user=postgres&password=Publica123");
+        consulta = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
     }
 
@@ -26,20 +27,41 @@ public class Conexion
      * @return
      * @throws SQLException
      */
-    public ResultSet consultar(String sqlConsulta) throws SQLException 
+   /* public ResultSet consultar(String sqlConsulta) throws SQLException 
     {
     
         Statement consulta;
         ResultSet resultado;
         /*La conexion Puede devolver una excepción
-                */
-        consulta = this.conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        resultado = consulta.executeQuery(sqlConsulta);
+                
+        consulta = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       
+       
+       //ESTO ES LO QUE HAY Q HACER EN CADA LLAMADA
+       // resultado = consulta.executeQuery(sqlConsulta);
 
         return resultado;
 
     }
-    public void cerrarConexion()
+    */
+    public void consultar() throws SQLException 
+    {
+    
+        
+        /*La conexion Puede devolver una excepción
+                */
+        consulta = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+       
+       
+       //ESTO ES LO QUE HAY Q HACER EN CADA LLAMADA
+       // resultado = consulta.executeQuery(sqlConsulta);
+
+        
+
+    }
+    
+    
+    public static void cerrarConexion()
     {
         /*La conexion Puede devolver una excepción
                 */
