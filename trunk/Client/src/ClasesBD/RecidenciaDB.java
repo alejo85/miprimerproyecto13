@@ -18,13 +18,13 @@ public class RecidenciaDB {
     
     
     public static Vector<Pais> obtenerPaises()  {
-        Conexion conexion = new Conexion();
+        //Conexion conexion = new Conexion();
         Vector<Pais> paises = new Vector <Pais>();
-        try {
+        /*try {
             conexion.conectar();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        }*/
         String consultasql;
         
         consultasql="select * from Pais";
@@ -32,7 +32,7 @@ public class RecidenciaDB {
         ResultSet resultado=null;
 
         try {
-            resultado = conexion.consultar(consultasql);
+            resultado = Conexion.consulta.executeQuery(consultasql);
         } catch (SQLException e) {
         }
         try {
@@ -46,17 +46,17 @@ public class RecidenciaDB {
         } catch (SQLException e) {
         }
        
-        conexion.cerrarConexion();
+        //conexion.cerrarConexion();
         return paises;
     }
     
     public Vector<Pais> obtenerPais(int idPais)  {
-        Conexion conexion = new Conexion();
+        //Conexion conexion = new Conexion();
         Vector<Pais> paises = new Vector <Pais>();
-        try {
+        /*try {
             conexion.conectar();
         } catch (SQLException e) {
-        }
+        }*/
         String consultasql;
         
         consultasql="select * from Pais";
@@ -64,7 +64,7 @@ public class RecidenciaDB {
         ResultSet resultado=null;
 
         try {
-            resultado = conexion.consultar(consultasql);
+            resultado = Conexion.consulta.executeQuery(consultasql);
         } catch (SQLException e) {
         }
         try {
@@ -78,19 +78,19 @@ public class RecidenciaDB {
         } catch (SQLException e) {
             //TODO
         }
-        conexion.cerrarConexion();
+        //conexion.cerrarConexion();
         return paises;
     }
     
     public static Vector<Regiones> obtenerRegiones(int idPais) throws SQLException {
-        Conexion conexion = new Conexion();
+        //Conexion conexion = new Conexion();
         Vector<Regiones> regiones = new Vector <Regiones>();
-        conexion.conectar();
+        //conexion.conectar();
         String consultasql;
         
         consultasql="select * from REGION where ID_PAIS = " +idPais;
         
-        ResultSet resultado = conexion.consultar(consultasql);
+        ResultSet  resultado = Conexion.consulta.executeQuery(consultasql);
 
         while (resultado.next()) 
         {
@@ -101,18 +101,18 @@ public class RecidenciaDB {
             regiones.add(p);
         }
       
-        conexion.cerrarConexion();
+        //conexion.cerrarConexion();
         return regiones;
     }
     public  static Vector<Localidad> obtenerLocalidades(int idRegion) throws SQLException {
-        Conexion conexion = new Conexion();
+        //Conexion conexion = new Conexion();
         Vector<Localidad> localidades = new Vector <Localidad>();
-        conexion.conectar();
+        //conexion.conectar();
         String consultasql;
         
         consultasql="select * from ciudad where ID_REGION = " +idRegion;
         
-        ResultSet resultado = conexion.consultar(consultasql);
+        ResultSet  resultado = Conexion.consulta.executeQuery(consultasql);
 
         while (resultado.next()) 
         {
@@ -121,7 +121,7 @@ public class RecidenciaDB {
             Localidad p = new Localidad(id, idRegion,nombre);
             localidades.add(p);
         }
-        conexion.cerrarConexion();
+        //conexion.cerrarConexion();
         return localidades;
     }
 }
