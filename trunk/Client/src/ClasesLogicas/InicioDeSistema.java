@@ -11,13 +11,21 @@ import java.sql.SQLException;
 
 
 public class InicioDeSistema {
+   
     public InicioDeSistema() {
         super();
     }
 
     public static  void main(String[] args) {
 
+
+        try {
+            Conexion.conectar();
+        } catch (SQLException e) {
+        }
         Principal ventana = new Principal();
+        
+       // Conexion.cerrarConexion();
 
         /*AltaCompetenciaDeportiva ven1 = new AltaCompetenciaDeportiva();
         AltaLugarDeRealizacion ven2 = new AltaLugarDeRealizacion();
