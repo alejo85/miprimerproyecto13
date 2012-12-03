@@ -458,7 +458,9 @@ private void cargarRegiones()
          JOptionPane.showOptionDialog(null, "El usuario se ha registrado con exito"  , "Registro exitoso", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
         
          //FIJARSE SI ESTA BIEN QUE CSE CIERRE ASI
-        this.setVisible(false);
+         setVisible(false);
+         dispose(); // cuando se cierra, se pierde los cambios realizados
+         new Principal();
         }
     }
 
