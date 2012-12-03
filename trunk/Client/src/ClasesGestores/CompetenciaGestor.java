@@ -333,10 +333,11 @@ public class CompetenciaGestor {
                     //System.out.println("Se ejecuta el while:"+i);
                 i++;
                 unaCompetencia=new Competencia();
-            int codigo = consulta.getInt("id_Competencia");
-            String nombreCompetencia = consulta.getString("Nombre_Competencia");
+                int codigo = consulta.getInt("id_Competencia");
+                String nombreCompetencia = consulta.getString("Nombre_Competencia");
                 int deporteDeLaCompetencia = consulta.getInt("id_Deporte");
                 String modalidadDeLaCompetencia = consulta.getString("Modalidad");
+                String formaDePuntuacion = consulta.getString("Forma_Puntuacion");
                 String estadoDeLaCompetencia = consulta.getString("Estado");
                 unDeporte=DeporteGestor.buscarDeporte(deporteDeLaCompetencia);
                 unaCompetencia.setIdCompetencia(codigo);

@@ -3,8 +3,11 @@ package ClasesInterfaz;
 
 import ClasesGestores.CompetenciaGestor;
 
+import ClasesGestores.ParticipanteGestor;
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Encuentro;
+import ClasesLogicas.Fixture;
 import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
@@ -252,6 +255,8 @@ public class VerCompetencia extends JDialog {
                 
                 
                     CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
+                    //competencia.setParticipantes(ParticipanteGestor.instanciarParticipante(competencia.getIdCompetencia()));
+                    competencia.setFixture(new Fixture());
                     CompetenciaGestor.generarFixture(competencia);
                     JOptionPane.showOptionDialog(null, "Se ha generar el fixture de la  competencia Nombre Competencia "  , "Generar Fixture.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
                     cargarDatos();

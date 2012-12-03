@@ -17,7 +17,7 @@ public class Conexion
     {
 
 
-        conexion = DriverManager.getConnection("jdbc:postgresql://192.168.229.128:5432/TP?user=postgres&password=Publica123");
+        conexion = DriverManager.getConnection("jdbc:postgresql://10.15.150.123:5432/TP?user=postgres&password=Publica123");
         consulta = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
     }
@@ -44,7 +44,7 @@ public class Conexion
 
     }
     
-    public void consultar() throws SQLException 
+    public static Statement consultar() throws SQLException 
     {
     
         
@@ -56,7 +56,7 @@ public class Conexion
        //ESTO ES LO QUE HAY Q HACER EN CADA LLAMADA
        // resultado = consulta.executeQuery(sqlConsulta);
 
-        
+        return consulta;
 
     }
     
@@ -70,6 +70,7 @@ public class Conexion
                 if(conexion != null ) 
                 {
                     conexion.close();
+                   
                 }
             } catch (SQLException e) {
                 // TODO

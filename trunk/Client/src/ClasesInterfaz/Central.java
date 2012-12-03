@@ -1,6 +1,8 @@
 package ClasesInterfaz;
 
 
+import ClasesBD.Conexion;
+
 import ClasesLogicas.Usuario;
 
 import java.awt.Color;
@@ -9,6 +11,9 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -94,11 +99,11 @@ public class Central extends JFrame {
                    // handle exception
                 }
         */
-       // this.usuarioActual=null;
-       /*usuarioActual=new Usuario();
-       usuarioActual.setApellido("Olivera");
-       usuarioActual.setNombre("Alejandro");
-       usuarioActual.setCorreoElectronico("alejo@masfm.com");*/
+        this.usuarioActual=null;
+      // usuarioActual=new Usuario();
+       //usuarioActual.setApellido("Olivera");
+       //usuarioActual.setNombre("Alejandro");
+       //usuarioActual.setCorreoElectronico("felix811@gmail.com");
         try {
             jbInit();
         } catch (Exception e) {
@@ -116,7 +121,7 @@ public class Central extends JFrame {
     }
 
     private void jbInit() throws Exception {
-
+        CerrarVentana();
         this.setJMenuBar( menuBar );
         this.getContentPane().setLayout( null );
         this.setSize(new Dimension(820, 570));
@@ -332,7 +337,9 @@ public class Central extends JFrame {
            }
    // ACCION BOTON SALIR
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
+        Conexion.cerrarConexion();
         System.exit(0);
+        
     }
     // ACCION BOTON MODIFICAR
     private void jButtonAceptar5_actionPerformed(ActionEvent e) {
@@ -380,6 +387,17 @@ public class Central extends JFrame {
     private void actualizarUsuarioActual(Usuario usuario){
         usuarioActual=usuario;
         
+    }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        Conexion.cerrarConexion();
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+
+        
+    }
+    });
     }
 }
 

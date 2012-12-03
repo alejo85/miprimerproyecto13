@@ -72,6 +72,7 @@ public class EncuentroGestor {
 
                
                     while(resultado.next()){
+                        System.out.println("empieza");
                         int id = resultado.getInt("id_encuentro");
                         int idParticipanteA= resultado.getInt("id_participantea");
                         int idParticipanteB= resultado.getInt("id_participanteb");
@@ -82,17 +83,18 @@ public class EncuentroGestor {
                         String horaResultado = resultado.getString("hora_resultado");
                        // int disponibilidad = resultado.getInt("disponibilidad");
                        
-                        
-                      retorno = new Encuentro();
+                       
+                        retorno = new Encuentro();
                         retorno.setIdEncuentro(id);//Participante Libre en la ronda
                         retorno.setParticipanteA(ParticipanteGestor.instanciarUnParticipante(idParticipanteA));
-                        
+                        System.out.println("entremedio");
                         retorno.setParticipanteB(ParticipanteGestor.instanciarUnParticipante(idParticipanteB));
                         retorno.setGanador(ParticipanteGestor.instanciarUnParticipante(idParticipanteGanador));
                         retorno.setPerdedor(ParticipanteGestor.instanciarUnParticipante(idParticipantePerdedor));
                         //TODO RecuperarResultado
                       //System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre()+"Participante B: "+retorno.getParticipanteB().getNombre());
                         datos.add(retorno);
+                        System.out.println("termina");
                  
                     }
                     encuentros= new Encuentro[datos.size()];
@@ -133,6 +135,7 @@ public class EncuentroGestor {
         try {
            temp.setIdEncuentro(EncuentroDB.guardarEncuentro(temp, idSubRonda));
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return temp;
         

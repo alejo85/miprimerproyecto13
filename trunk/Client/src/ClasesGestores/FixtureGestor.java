@@ -50,10 +50,11 @@ public class FixtureGestor {
         Fixture fixture = new Fixture();
         Ronda rondas[];
         Participante participantesAux[];
+        int cantidad = cantidadDeParticipantes;
            
         //Comienza decisicion para ver si el numero de participantes es impar, y si se debe
         //agregar un participante auxiliar
-        if((cantidadDeParticipantes % 2) == 0){
+        if((cantidad % 2) == 0){
             
             rondas = new Ronda[cantidadDeParticipantes-1];
             participantesAux = participantes;

@@ -36,6 +36,7 @@ public class RondaGestor {
         try {
             laRonda.setIdRonda(FixtureDB.guardarRonda(laRonda,idFixture));
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return laRonda;     
     }
@@ -152,6 +153,7 @@ public class RondaGestor {
         try {
             subronda.setIdSubronda(FixtureDB.guardarSubronda());
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         LugarDeRealizacion[] lugaresAux = lugares;
       
@@ -165,7 +167,7 @@ public class RondaGestor {
             
             random = 0 + (int)(Math.random()*lugaresAux.length);
             
-            if (lugaresAux[random].getDisponibilidad()>0){
+            //if (lugaresAux[random].getDisponibilidad()>0){
             
                 for(int i=0; i < cantidadDeEncuentros; i++){
                     
@@ -176,7 +178,7 @@ public class RondaGestor {
               //  System.out.println("Repeticiones: "+repeticiones);
                 repeticiones--;
         
-            }
+            //}
       //  }
         
         subronda.setEncuentros(encuentros);
