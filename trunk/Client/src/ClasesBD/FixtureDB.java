@@ -112,7 +112,7 @@ public class FixtureDB {
             
             consultasql="SELECT id_subronda, estado FROM subronda where id_subronda='"+idSubRonda+"';";
       System.out.println(consultasql);
-             resultado = Conexion.consulta.executeQuery(consultasql);;
+             resultado = Conexion.consultar(consultasql); 
             //conexion.cerrarConexion();
             return resultado;
         

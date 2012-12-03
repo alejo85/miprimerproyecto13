@@ -375,27 +375,32 @@ public class CompetenciaGestor {
         Vector <Competencia> competenciaEncontradas= new Vector <Competencia>();
         Competencia unaCompetencia=null;
         Deporte unDeporte;
-        int i=0;
+        int i=0, codigo, deporteDeLaCompetencia;
+        String modalidadDeLaCompetencia, estadoDeLaCompetencia, nombreCompetencia;
         
-
+        
+        
         ResultSet consulta=null;
 
         try {
             consulta = CompetenciaDB.buscarCompetencias( nombre,  deporte,  modalidad, estado, correo);
+           // consulta.next();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        
         try {
-            do
+            while(consulta.next())
             {
                    // System.out.println("Se ejecuta el while:"+i);
-                i++;
+                //i++;
                 unaCompetencia=new Competencia();
-            int codigo = consulta.getInt("id_Competencia");
-            String nombreCompetencia = consulta.getString("Nombre_Competencia");
-                int deporteDeLaCompetencia = consulta.getInt("id_Deporte");
-                String modalidadDeLaCompetencia = consulta.getString("Modalidad");
-                String estadoDeLaCompetencia = consulta.getString("Estado");
+                codigo = consulta.getInt("id_Competencia");
+                nombreCompetencia = consulta.getString("Nombre_Competencia");
+                deporteDeLaCompetencia = consulta.getInt("id_Deporte");
+                modalidadDeLaCompetencia = consulta.getString("Modalidad");
+                estadoDeLaCompetencia = consulta.getString("Estado");
                 unDeporte=DeporteGestor.buscarDeporte(deporteDeLaCompetencia);
                 unaCompetencia.setIdCompetencia(codigo);
                 unaCompetencia.setNombreCompetencia(nombreCompetencia);
@@ -403,14 +408,15 @@ public class CompetenciaGestor {
                 unaCompetencia.setModalidad(modalidadDeLaCompetencia);
                 unaCompetencia.setEstado(estadoDeLaCompetencia);
                 competenciaEncontradas.add(unaCompetencia);
-               
+                
                 
 
-            }while (consulta.next());
+            }//while (consulta.next());
         } catch (SQLException e) {
             
             //todo hacer la exepcion correspondiente
         }
+        System.out.println("");
         return competenciaEncontradas;
         }
     

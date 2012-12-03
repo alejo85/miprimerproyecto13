@@ -43,7 +43,7 @@ public class DeportesDB {
         consultaSQL = "select * from deporte where id_Deporte='"+idDeporte+"';";
         
         try {
-            resultado = Conexion.consulta.executeQuery(consultaSQL);
+            resultado = Conexion.consultar(consultaSQL); 
         } catch (SQLException e) {
         }
         //conexion.cerrarConexion();

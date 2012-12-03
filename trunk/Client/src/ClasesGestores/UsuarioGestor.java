@@ -58,9 +58,12 @@ public class UsuarioGestor {
         try {
             resultado = UsuarioDB.autentica(correoElectronico, contraseña);
             resultado.next();
-        } catch (SQLException e) {//todo
-        System.out.println(e.getMessage());
+        } catch (SQLException e) {
         }
+        
+       
+       
+        
         try {
             if(resultado.getString("correo").equals(correoElectronico)){
                 usuario= new Usuario();

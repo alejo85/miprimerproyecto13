@@ -27,23 +27,23 @@ public class Conexion
      * @return
      * @throws SQLException
      */
-   /* public ResultSet consultar(String sqlConsulta) throws SQLException 
+    public static ResultSet consultar(String sqlConsulta) throws SQLException 
     {
     
         Statement consulta;
         ResultSet resultado;
-        /*La conexion Puede devolver una excepción
+        /*La conexion Puede devolver una excepción*/
                 
         consulta = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
        
        
        //ESTO ES LO QUE HAY Q HACER EN CADA LLAMADA
-       // resultado = consulta.executeQuery(sqlConsulta);
+       resultado = consulta.executeQuery(sqlConsulta);
 
         return resultado;
 
     }
-    */
+    
     public void consultar() throws SQLException 
     {
     

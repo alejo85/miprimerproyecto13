@@ -42,7 +42,8 @@ public class CompetenciaDB {
             if(!estado.equals("Seleccione Un Estado"))where+="and C.estado='"+estado+"'";
                 consultasql="SELECT C.id_competencia, C.nombre_competencia, C.modalidad, C.estado,  C.creador, C.id_deporte FROM competencia as C where C.creador='"+correo+"'"+where+";";
                
-                ResultSet resultado = Conexion.consulta.executeQuery(consultasql); 
+                ResultSet resultado = Conexion.consultar(consultasql); 
+                
                 
                 //conexion.cerrarConexion();
         
