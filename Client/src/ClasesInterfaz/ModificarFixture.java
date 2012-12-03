@@ -169,8 +169,9 @@ public class ModificarFixture extends JDialog {
     private void gestionarResultadoJButton_actionPerformed(ActionEvent e) {
         if(tablaDeFechaJTable.getSelectedRow()>-1)
         {
-         //   GestionarResultados ven = new GestionarResultados( unaCompetencia, usuario,  this);
-         //   ven.setVisible(true);
+         GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,  this);
+         this.setVisible(false);
+       ven.setVisible(true);
         }
     }
     private void cargarRondas(int nroRonda){
@@ -244,6 +245,7 @@ public class ModificarFixture extends JDialog {
     }
 
     private void fechaJTable_mouseClicked(MouseEvent e) {
+        nroRonda=fechaJTable.getSelectedRow();
         cargarRondas(fechaJTable.getSelectedRow());
     }
 }

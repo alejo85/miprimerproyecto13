@@ -6,6 +6,7 @@ import ClasesLogicas.Ronda;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class FixtureDB {
     public FixtureDB() {
@@ -104,15 +105,15 @@ public class FixtureDB {
     public static ResultSet buscarSubRonda(int idSubRonda) throws SQLException {
         
             //System.out.println("llego a la base id_ronda");
-
+            Statement consulta = Conexion.consultar();
             //Conexion conexion = new Conexion();
             ResultSet resultado=null;
             //conexion.conectar();
             String consultasql;
             
             consultasql="SELECT id_subronda, estado FROM subronda where id_subronda='"+idSubRonda+"';";
-      System.out.println(consultasql);
-             resultado = Conexion.consultar(consultasql); 
+            System.out.println(consultasql);
+            resultado = consulta.executeQuery(consultasql); 
             //conexion.cerrarConexion();
             return resultado;
         
@@ -120,15 +121,15 @@ public class FixtureDB {
     public static void eliminarRonda(int idFixture) throws SQLException {
         
             //System.out.println("llego a la base id_ronda");
-
+            Statement consulta = Conexion.consultar();
             //Conexion conexion = new Conexion();
-            ResultSet resultado=null;
+            
             //conexion.conectar();
             String consultasql;
             
             consultasql="DELETE FROM ronda WHERE id_fixture='"+idFixture+"';";
        //    System.out.println(consultasql);
-            resultado = Conexion.consulta.executeQuery(consultasql);
+            consulta.executeUpdate(consultasql);
            // conexion.cerrarConexion();
             
         
@@ -136,15 +137,15 @@ public class FixtureDB {
     public static void eliminarSubRonda(int idSubRonda) throws SQLException {
         
             //System.out.println("llego a la base id_ronda");
-
+            Statement consulta = Conexion.consultar();
             //Conexion conexion = new Conexion();
-            ResultSet resultado=null;
+            
             //conexion.conectar();
             String consultasql;
             
             consultasql="DELETE FROM subronda WHERE id_subronda='"+idSubRonda+"';";
        //    System.out.println(consultasql);
-            resultado = Conexion.consulta.executeQuery(consultasql);
+            consulta.executeUpdate(consultasql);
             //conexion.cerrarConexion();
             
         
@@ -152,15 +153,15 @@ public class FixtureDB {
     public static void eliminarFixture(int idFixture) throws SQLException {
         
             //System.out.println("llego a la base id_ronda");
-
+            Statement consulta = Conexion.consultar();
             //Conexion conexion = new Conexion();
-            ResultSet resultado=null;
+            
             //conexion.conectar();
             String consultasql;
             
             consultasql="DELETE FROM fixture WHERE id_fixture='"+idFixture+"';";
        //    System.out.println(consultasql);
-            resultado = Conexion.consulta.executeQuery(consultasql);
+            consulta.executeUpdate(consultasql);
            // conexion.cerrarConexion();
             
         

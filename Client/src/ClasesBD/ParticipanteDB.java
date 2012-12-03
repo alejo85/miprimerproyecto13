@@ -5,6 +5,7 @@ import ClasesLogicas.Participante;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ParticipanteDB {
     public ParticipanteDB() {
@@ -75,14 +76,15 @@ public class ParticipanteDB {
             
         return resultado;}
      public static ResultSet buscarUnParticipante(int idParticipante) throws SQLException {
-             Conexion conexion = new Conexion();
+             //Conexion conexion = new Conexion();
              ResultSet resultado=null;
-             conexion.conectar();
+             Statement consulta = Conexion.consultar();
+             //conexion.conectar();
              String consultasql;
              
              consultasql="SELECT *FROM participante where id_participante='"+idParticipante+"' ;";
              //System.out.println(consultasql);
-             resultado = Conexion.consulta.executeQuery(consultasql);
+             resultado = consulta.executeQuery(consultasql); 
              
              //conexion.cerrarConexion();
       
