@@ -17,6 +17,7 @@ import ClasesLogicas.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.Collections;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -230,6 +231,7 @@ public class CompetenciaGestor {
         String modalidad = competencia.getModalidad();
         Fixture fixture;
         
+       
         switch (Modalidad.valueOf(modalidad)){
             
         //todo definir EN TODOS LADOS modalidad como Simple y Doble    

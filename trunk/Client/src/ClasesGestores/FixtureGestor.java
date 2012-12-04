@@ -88,7 +88,7 @@ public class FixtureGestor {
         }
         
         fixture.setRondas(rondas);
-
+            participantesAux=ParticipanteGestor.desordenar(participantesAux);
         cargarParticipantes(participantesAux, fixture);
 
             //System.out.println("antes de retonar fixture");
