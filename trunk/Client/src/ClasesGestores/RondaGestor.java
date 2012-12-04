@@ -1,12 +1,10 @@
 package ClasesGestores;
 
 
-import ClasesBD.EncuentroDB;
 import ClasesBD.FixtureDB;
 
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.LugarDeRealizacion;
-import ClasesLogicas.Participante;
 import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
 
@@ -163,7 +161,7 @@ public class RondaGestor {
                 
         //todo corregir el diagrama de secuencias!!! 17.1
             
-      //  while (repeticiones>0){
+      
             
             random = 0 + (int)(Math.random()*lugaresAux.length);
             
@@ -176,10 +174,9 @@ public class RondaGestor {
                    // System.out.println("Encuentro id: "+encuentros[i].getIdEncuentro());
                 }
               //  System.out.println("Repeticiones: "+repeticiones);
-                repeticiones--;
-        
+                repeticiones--;        
             }
-      //  }
+   
         
         subronda.setEncuentros(encuentros);
        
