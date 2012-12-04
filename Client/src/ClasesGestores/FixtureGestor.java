@@ -3,7 +3,6 @@ package ClasesGestores;
 
 import ClasesBD.FixtureDB;
 
-import ClasesLogicas.Deporte;
 import ClasesLogicas.Fixture;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
@@ -64,16 +63,11 @@ public class FixtureGestor {
             cantidadDeParticipantes++;
             participantesAux = new Participante[cantidadDeParticipantes];
             int i;
-            
-            
-            
-            rondas = new Ronda[cantidadDeParticipantes-1];
+           rondas = new Ronda[cantidadDeParticipantes-1];
             
             for (i=0;i<cantidadDeParticipantes-1;i++)
                 participantesAux[i] = participantes[i];
-            
-            
-            Participante unParticipante = new Participante();//se agrega el participantes auxiliar
+                        Participante unParticipante = new Participante();//se agrega el participantes auxiliar
             unParticipante.setIdParticipante(1);
             unParticipante.setNombre("*");
             unParticipante.setCorreo("nada@noexisto.com");
