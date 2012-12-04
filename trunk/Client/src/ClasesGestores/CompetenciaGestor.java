@@ -17,7 +17,6 @@ import ClasesLogicas.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.Collections;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -243,6 +242,7 @@ public class CompetenciaGestor {
 
             try {
                 CompetenciaDB.actualizarEstado(competencia.getIdCompetencia(),"Planificada");
+                
             } catch (SQLException e) {
             }
             break;
@@ -261,7 +261,20 @@ public class CompetenciaGestor {
                     
                     
     }
-            
+    public static void actualizarEstado(ClasesLogicas.Competencia competencia, String estado){
+        
+        
+
+
+            try {
+                CompetenciaDB.actualizarEstado(competencia.getIdCompetencia(),estado);
+            } catch (SQLException e) {
+            }
+
+           
+                    
+                    
+    }     
       
     private static Vector<Subronda> obtenerSubRondas(Competencia competencia){
             Vector<Subronda> retorno = new Vector<Subronda> ();

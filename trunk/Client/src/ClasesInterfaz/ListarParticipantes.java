@@ -177,26 +177,13 @@ public class ListarParticipantes extends JDialog {
             nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
             tablaParticipantesJTable.setModel(modelo);
         }
-    public void setCompetencia(Participante participante)
+    public void setCompetencia(Competencia competencia)
     {
-        competenciaSeleccionada.agregarParticipante(participante);
-            Vector <String> datos;
-            modelo = new ModeloTabla(new String[] { "Nombre", "correo" }, 0);
-            for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
-                    datos = new Vector <String>();
-                    datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
-                    datos.add(competenciaSeleccionada.getParticipantes()[i].getCorreo());
-                
-                    modelo.addRow(datos);
-                }
-       
-            nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
-            tablaParticipantesJTable.setModel(modelo);
+        competenciaSeleccionada=competencia;
+            actualizar();
         }
     private void actualizar(){
-            
-            //competenciaSeleccionada.setParticipantes(ParticipanteGestor.instanciarParticipante(competenciaSeleccionada.getIdCompetencia()));
-
+     
             modelo = new ModeloTabla(new String[] { "Nombre", "correo" }, 0);
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
                     Vector <String> datos = new Vector <String>();
@@ -212,6 +199,7 @@ public class ListarParticipantes extends JDialog {
     public void windowClosing(WindowEvent e) {
         setVisible(false);
         dispose(); // cuando se cierra, se pierde los cambios realizados
+        ventanaAnterior.setCompetencia(competenciaSeleccionada);
         ventanaAnterior.setVisible(true);
         
     }

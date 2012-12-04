@@ -1,12 +1,12 @@
 package ClasesInterfaz;
 
+
 import ClasesGestores.CompetenciaGestor;
 import ClasesGestores.ParticipanteGestor;
 
 import ClasesLogicas.Competencia;
+import ClasesLogicas.Fixture;
 import ClasesLogicas.Participante;
-
-import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
 
 import InterfazGrafica.CampoTexto.AreaTextoCorreo;
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
@@ -17,7 +17,6 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -148,12 +147,17 @@ public class AltaParticipante extends JDialog {
                  if(imagenJTextArea.getText().equals("")){
                         //System.out.println("antes del gestor");
                         Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
-                        //competenciaSeleccionada.agregarParticipante(unParticipante);
+                        competenciaSeleccionada.agregarParticipante(unParticipante);
+                        CompetenciaGestor.actualizarEstado(competenciaSeleccionada, "Creada");
+                        competenciaSeleccionada.setEstado("Creada");
+                        CompetenciaGestor.eliminarFixtureDeCompetencia(competenciaSeleccionada);
+                        competenciaSeleccionada.setFixture(new Fixture());
                        // System.out.println("Despues del gestor");
                         setVisible(false);
                         //dispose(); // cuando se cierra, se pierde los cambios realizados
-                        ventanaAnterior.setCompetencia(unParticipante);
+                        ventanaAnterior.setCompetencia(competenciaSeleccionada);
                         ventanaAnterior.setVisible(true);
+                        
                     }
                     
                       else
