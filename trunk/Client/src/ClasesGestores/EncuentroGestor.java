@@ -156,18 +156,20 @@ public class EncuentroGestor {
     /**
      * @param participanteGanador
      */
-    public void ganador(Encuentro unEncuentro,Participante participanteGanador){
+    public static void ganador(Encuentro unEncuentro,Participante participanteGanador){
         unEncuentro.setGanador(participanteGanador);
-        //TODO verificar si es un ganador
+            EncuentroDB.actualizarEncuentro(unEncuentro);
         }
 
     /**
      * @param participanteA
      * @param participanteB
      */
-    public void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB){
+    public static void ganadorEmpate(Encuentro unEncuentro){
         unEncuentro.setEmpate(true);
-        //TODO si se crean puntos
+        
+        
+        EncuentroDB.actualizarEncuentro(unEncuentro);
         }
 
     /**
@@ -176,7 +178,7 @@ public class EncuentroGestor {
      * @param puntoA
      * @param puntoB
      */
-    public void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB,int  puntoA,int  puntoB){
+    public static void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB,int  puntoA,int  puntoB){
         Puntos unPunto = new Puntos();
         unPunto.setPuntoA(puntoA);
         unPunto.setPuntoB(puntoB);

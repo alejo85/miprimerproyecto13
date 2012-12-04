@@ -23,7 +23,8 @@ public class EncuentroDB {
     /**j
      * @param encuentro
      */
-    public void actualizarEncuentro(Encuentro encuentro){
+    public static void actualizarEncuentro(Encuentro encuentro){
+        //TODO HACER EL GUARDAR
         }
     public static int guardarEncuentro(Encuentro encuentro, int idSubRonda) throws SQLException {
         

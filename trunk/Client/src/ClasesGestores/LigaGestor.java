@@ -24,7 +24,7 @@ public class LigaGestor {
      */
     public static Liga crearLiga(int idLiga, int puntosPorPartidoGanado, boolean empate, int puntosPorPartidoEmpatado, int puntosPorPartidoAsistido)
     {
-        return new Liga();
+        return new Liga( idLiga,  puntosPorPartidoGanado,  empate,  puntosPorPartidoEmpatado,  puntosPorPartidoAsistido);
     }
     public static Liga crearLiga( int puntosPorPartidoGanado, boolean empate, int puntosPorPartidoEmpatado, int puntosPorPartidoAsistido)
     {
