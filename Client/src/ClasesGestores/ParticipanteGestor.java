@@ -11,7 +11,9 @@ import ClasesLogicas.ParticipanteAnterior;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -145,5 +147,27 @@ public class ParticipanteGestor {
             }
         return null;
         }
+    public static Participante [] desordenar(Participante [] participantes){
+
+        int random;
+        Participante [] participantesDesordenado=new Participante[participantes.length];
+        Vector <Participante> datos=new Vector <Participante>();
+        for(int i=0;i<participantes.length;i++)
+        {
+
+            datos.add(participantes[i]);
+        }
+        
+        List <Participante> list =datos.subList(0, datos.size());
+        Collections.shuffle(list);
+        
+        for(int i=0;i<list.size();i++)
+        {
+        
+            participantesDesordenado[i]=list.get(i);
+            
+        }
+return participantesDesordenado;
+    } 
     
 }
