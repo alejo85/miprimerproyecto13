@@ -9,8 +9,6 @@ import ClasesLogicas.Deporte;
 import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
 
-import InterfazGrafica.CampoTexto.AreaTextoNombre;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -19,7 +17,6 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
@@ -220,23 +217,23 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         nuevaCompetenciaJButton.setText("Nueva Competencia");
         nuevaCompetenciaJButton.setBounds(new Rectangle(445, 310, 170, 40));
         nuevaCompetenciaJButton.setFont(new Font("Tahoma", 0, 15));
+    
+        //BOTON VER COMPETENCIA
         nuevaCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    jButtonAceptar2_actionPerformed(e);
+                    nuevaCompetenciaJButton_actionPerformed(e);
                 }
             });
-        
-        //BOTON VER COMPETENCIA
         verCompetenciaJButton.setText("Ver Competencia");
         verCompetenciaJButton.setBounds(new Rectangle(150, 310, 170, 40));
         verCompetenciaJButton.setFont(new Font("Tahoma", 0, 15));
-        tablaResultadoJTable.setModel(modelo);
         verCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    jButtonAceptar1_actionPerformed(e);
+                    verCompetenciaJButton_actionPerformed(e);
                 }
             });
-
+        tablaResultadoJTable.setModel(modelo);
+   
         
         //jScrollBar2.setBounds(new Rectangle(890, 30, 15, 230)); ¿ por que dos scrollbar ?
         
@@ -278,20 +275,8 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         this.setVisible(false);
     }
 
-    private void jButtonAceptar1_actionPerformed(ActionEvent e) {
-        if(tablaResultadoJTable.getSelectedRow()>-1){
-        competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
-        //System.out.println(this.competenciaSelecionad.getNombreCompetencia());
-        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad, this);
-        this.setVisible(false);
-        ven.setVisible(true);}
-    }
 
-    private void jButtonAceptar2_actionPerformed(ActionEvent e) {
-        AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual, this);
-        ven.setVisible(true);
-        this.setVisible(false);
-    }
+ 
 
     private void buscarJButton_actionPerformed(ActionEvent e) {
         int error=0, idDeporte=-1;
@@ -399,5 +384,20 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         modalidadJComboBox.setForeground(foreground);
         DeporteJComboBox.setBackground(background);
         DeporteJComboBox.setForeground(foreground);
+    }
+
+    private void verCompetenciaJButton_actionPerformed(ActionEvent e) {
+        if(tablaResultadoJTable.getSelectedRow()>-1){
+        competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
+        //System.out.println(this.competenciaSelecionad.getNombreCompetencia());
+        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad, this);
+        this.setVisible(false);
+        ven.setVisible(true);}
+    }
+
+    private void nuevaCompetenciaJButton_actionPerformed(ActionEvent e) {
+        AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual, this);
+        ven.setVisible(true);
+        this.setVisible(false);
     }
 }
