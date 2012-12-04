@@ -127,6 +127,7 @@ public class ModificarFixture extends JDialog {
                     gestionarResultadoJButton_actionPerformed(e);
                 }
             });
+        gestionarResultadoJButton.setEnabled(false);
         cargarRondas(0);
         cargarFixture(competenciaSeleccionada.getFixture().getRondas());
         anterioprJButton.setText("Anterior");
@@ -147,6 +148,12 @@ public class ModificarFixture extends JDialog {
                     siguienteJButton_actionPerformed(e);
                 }
             });
+        tablaDeFechaJTable.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    tablaDeFechaJTable_mouseClicked(e);
+                }
+            });
+     
         jScrollPane1.getViewport().add(tablaDeFechaJTable, null);
         fechaJPanel.add(jScrollPane1, null);
         fechaJPanel.add(gestionarResultadoJButton, null);
@@ -165,15 +172,37 @@ public class ModificarFixture extends JDialog {
         ventanaAnterior.setVisible(true);
         
     }
-
+    private Encuentro getEncuentro(int nroRonda, int encuentro){
+            
+            Ronda[] rondas=competenciaSeleccionada.getFixture().getRondas();
+    
+                        Subronda sub = rondas[nroRonda].getGanadores();
+                        
+           
+                            return rondas[nroRonda].getGanadores().getEncuentros()[encuentro];
+      
+                
+        }
     private void gestionarResultadoJButton_actionPerformed(ActionEvent e) {
         if(tablaDeFechaJTable.getSelectedRow()>-1)
         {
-         GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,  this);
-         this.setVisible(false);
-       ven.setVisible(true);
+            
+            if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getIdParticipante()!=1)
+            {
+                    if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getIdParticipante()!=1)
+                    {
+                    GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,  this, getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()));
+                    this.setVisible(false);
+                    ven.setVisible(true);
+                    }
+             
+            }
+         
         }
     }
+
+
+
     private void cargarRondas(int nroRonda){
             
             Ronda[] rondas=competenciaSeleccionada.getFixture().getRondas();
@@ -199,6 +228,7 @@ public class ModificarFixture extends JDialog {
             tablaDeFechaJTable.setModel(modeloDeTablaDeFecha);
                 
         }
+
     public void cargarFixture(Ronda [] rondas){
         modeloDeFecha =  new ModeloTabla(new String[] { "Fecha/Ronda Nº"}, 0);
         for(int i=0; i<rondas.length;i++ ){
@@ -248,4 +278,41 @@ public class ModificarFixture extends JDialog {
         nroRonda=fechaJTable.getSelectedRow();
         cargarRondas(fechaJTable.getSelectedRow());
     }
+
+    private void tablaDeFechaJTable_mouseClicked(MouseEvent e) {
+        int rondaAnterior=nroRonda-1;
+        Ronda[] rondas=competenciaSeleccionada.getFixture().getRondas();
+        
+        if(rondaAnterior>-1){
+                Subronda sub = rondas[rondaAnterior].getGanadores();
+                if(sub.getEstado())
+                {
+                        if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getIdParticipante()!=1)
+                        {
+                            if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getIdParticipante()!=1)
+                                gestionarResultadoJButton.setEnabled(true);
+                            else
+                                gestionarResultadoJButton.setEnabled(false);
+                         
+                        }
+                }
+                    
+                else
+                gestionarResultadoJButton.setEnabled(false);
+            }
+        else{
+                gestionarResultadoJButton.setEnabled(true);
+            }
+     
+            
+            
+         
+    }
+    public void setCompetencia(Competencia unaCompetencia) {
+
+        competenciaSeleccionada=unaCompetencia;
+        //TODO Actualizar datos
+    }
+
+ 
 }

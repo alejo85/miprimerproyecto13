@@ -184,7 +184,7 @@ public class ListarParticipantes extends JDialog {
         }
     private void actualizar(){
      
-            modelo = new ModeloTabla(new String[] { "Nombre", "correo" }, 0);
+            modelo = new ModeloTabla(new String[] { "Nombre", "Correo" }, 0);
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
                     Vector <String> datos = new Vector <String>();
                     datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
@@ -192,6 +192,7 @@ public class ListarParticipantes extends JDialog {
                     modelo.addRow(datos);
                 }
             nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
+            tablaParticipantesJTable.setModel(modelo);
            
         }
     private void CerrarVentana(){

@@ -114,6 +114,7 @@ public class RondaGestor {
             while (busqueda.next()){
                 unaRonda = new Subronda();
                 unaRonda.setIdSubronda(idSubRonda);
+                unaRonda.setEstado(busqueda.getBoolean("estado"));
                 Encuentro[] encuentrosDeSubRonda =EncuentroGestor.encuentrosDeSubRonda(idSubRonda );
                // System.out.println("lonitud de  encuentros de la base: "+encuentrosDeSubRonda.length);
             unaRonda.setEncuentros(encuentrosDeSubRonda);

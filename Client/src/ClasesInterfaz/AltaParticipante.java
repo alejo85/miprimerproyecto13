@@ -147,11 +147,15 @@ public class AltaParticipante extends JDialog {
                  if(imagenJTextArea.getText().equals("")){
                         //System.out.println("antes del gestor");
                         Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
+                        if(!competenciaSeleccionada.getEstado().equals("Creada"))
+                        {
+                            CompetenciaGestor.eliminarFixtureDeCompetencia(competenciaSeleccionada);
+                            competenciaSeleccionada.setFixture(new Fixture());
+                        }
                         competenciaSeleccionada.agregarParticipante(unParticipante);
                         CompetenciaGestor.actualizarEstado(competenciaSeleccionada, "Creada");
                         competenciaSeleccionada.setEstado("Creada");
-                        CompetenciaGestor.eliminarFixtureDeCompetencia(competenciaSeleccionada);
-                        competenciaSeleccionada.setFixture(new Fixture());
+
                        // System.out.println("Despues del gestor");
                         setVisible(false);
                         //dispose(); // cuando se cierra, se pierde los cambios realizados
