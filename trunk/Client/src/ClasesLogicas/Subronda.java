@@ -3,6 +3,7 @@ package ClasesLogicas;
 public class Subronda {
     private Encuentro [] encuentros;
     private int idSubronda;
+    private boolean estado;
     
     public Subronda() {
         super();
@@ -33,5 +34,13 @@ public class Subronda {
 
     public int getIdSubronda() {
         return idSubronda;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public boolean getEstado() {
+        return estado;
     }
 }

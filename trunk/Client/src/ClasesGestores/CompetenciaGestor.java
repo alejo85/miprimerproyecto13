@@ -360,6 +360,7 @@ public class CompetenciaGestor {
                 unaCompetencia.setDeporte(unDeporte);
                 unaCompetencia.setModalidad(modalidadDeLaCompetencia);
                 unaCompetencia.setEstado(estadoDeLaCompetencia);
+                unaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
   
                
                 
