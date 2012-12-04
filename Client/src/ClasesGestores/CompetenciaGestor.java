@@ -366,7 +366,7 @@ public class CompetenciaGestor {
                 
 
             }while (consulta.next());
-            
+            unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setLugares(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia));

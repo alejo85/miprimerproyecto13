@@ -17,13 +17,11 @@ public class LigaDB {
             // conexion.conectar();
             String consultasql="";
             
-                consultasql="SELECT id_liga, ptos_por_empate, ptos_partidos_g, empate, ptos_por_asistir,  id_competencia FROM liga whereid_competencia = '"+idCompetencia+"';";
-               // System.out.println(consultasql);
-                ResultSet resultado = Conexion.consulta.executeQuery(consultasql);
-                resultado.next();
-                //conexion.cerrarConexion();
-            
-            return resultado;
+                consultasql="SELECT * FROM liga where id_competencia = '"+idCompetencia+"';";
+                System.out.println(consultasql);
+                return Conexion.consulta.executeQuery(consultasql);
+                
+             
         
         }
 }
