@@ -250,7 +250,7 @@ public class VerCompetencia extends JDialog {
         int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea generar el fixture de la competencia Nombre Competencia?.", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
             System.out.println(""+competencia.getFixture().getIdFixture());
-            if(competencia.getFixture().getIdFixture()!=0){
+            if(competencia.getFixture().getIdFixture()!=0&&(competencia.getEstado().equals("Creada")||competencia.getEstado().equals("Planificada"))){
                
                 
                 
@@ -266,6 +266,7 @@ public class VerCompetencia extends JDialog {
             else
             {
                     CompetenciaGestor.generarFixture(competencia);
+                    competencia.setEstado("Planificada");
                     JOptionPane.showOptionDialog(null, "Se ha generar el fixture de la  competencia Nombre Competencia "  , "Generar Fixture.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
                     cargarDatos();
                 
@@ -296,19 +297,21 @@ public class VerCompetencia extends JDialog {
                 modelo.addRow(datos);
             }
            jTable1.setModel(modelo);
-            if(competencia.getFixture().getIdFixture() != 0)
+            modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
+            if(competencia.getFixture().getIdFixture() != 0||competencia.getFixture()==null)
             {
                   //  System.out.println("valor del fixture id: "+competencia.getFixture().getIdFixture());
                 //TODO CArgar fixture tabla en la pantalla
                     cargarFixture(competencia.getFixture().getRondas());
                 }
+            tablaProximosEncuentosJTable.setModel(modelo2);
         }
 
     /**
      * @param rondas
      */
      public void cargarFixture(Ronda [] rondas){
-         modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
+         
          for(int i=0; i<rondas.length;i++ ){
                  Subronda sub = rondas[i].getGanadores();
                  Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
@@ -325,7 +328,7 @@ public class VerCompetencia extends JDialog {
                      modelo2.addRow(datos);
                      }
              }
-         tablaProximosEncuentosJTable.setModel(modelo2);
+         
         
      }
 
