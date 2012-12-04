@@ -206,7 +206,7 @@ public class CompetenciaDB {
                                        consulta = Conexion.consultar();
                                        consultasql="INSERT INTO juega(id_competencia, id_lugar_de_realizacion, disponibilidad)VALUES ('"+competencia.getIdCompetencia()+"', '"+lugares[i].getIdLugar()+"', '"+lugares[i].getDisponibilidad()+"')RETURNING *";
                                        //System.out.println(consultasql);
-                                       resultado = Conexion.consulta.executeQuery(consultasql);
+                                       resultado = consulta.executeQuery(consultasql);
                                    
                                    
                                    }
