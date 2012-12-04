@@ -13,6 +13,8 @@ import ClasesLogicas.Subronda;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.sql.Statement;
+
 import java.util.Vector;
 
 
@@ -116,6 +118,9 @@ public class CompetenciaDB {
                                //Conexion conexion = new Conexion();
                             //   System.out.println("llega crea conexion");
                                ResultSet resultado=null;
+                               Statement reglamento = Conexion.consultar();
+                               Statement retornoEmpate = Conexion.consultar();
+                               Statement consulta = Conexion.consultar();
                                //conexion.conectar();
                              //  System.out.println("llega conecta conexion");
                              String consultasql;
@@ -128,7 +133,7 @@ public class CompetenciaDB {
                                                "','"+competencia.getFormaDePuntuacion()+"', '"+competencia.getEstado()+"', '"+competencia.getTantosPorPartidoGanado()+"', '"
                                                +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"')RETURNING id_Competencia;";
                                                //System.out.println(consultasql);
-                                               resultado = Conexion.consulta.executeQuery(consultasql);
+                                               resultado = reglamento.executeQuery(consultasql);
                                        }
                                else
                                        {
@@ -138,7 +143,7 @@ public class CompetenciaDB {
                                                "','"+competencia.getFormaDePuntuacion()+"', '"+competencia.getEstado()+"', '"+competencia.getTantosPorPartidoGanado()+"', '"
                                                +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"')RETURNING id_Competencia;";
                                                //System.out.println(consultasql);
-                                               resultado = Conexion.consulta.executeQuery(consultasql);
+                                               resultado = reglamento.executeQuery(consultasql);
                                                
                                                //System.out.println("llega al regla no null");
                                        }
@@ -159,19 +164,20 @@ public class CompetenciaDB {
                                                        //System.out.println("llega al empatesi");
                                                        consultasql="INSERT INTO liga(ptos_por_empate, ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoEmpatado()+"', '"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                                        //System.out.println(consultasql);
-                                                       resultado = Conexion.consulta.executeQuery(consultasql);
+                                                       resultado = retornoEmpate.executeQuery(consultasql);
                                                }
                                        else
                                                {
                                                        //System.out.println("llega al empateno");
                                                        consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                                        //System.out.println(consultasql);
-                                                       resultado = Conexion.consulta.executeQuery(consultasql);
+                                                       resultado = retornoEmpate.executeQuery(consultasql);
                                                }
                                        //System.out.println("llega al puntuacion");
                                        consultasql="INSERT INTO puntuacion(tantos_por_ausencia_contrincante, id_competencia)VALUES('"+competencia.getTantosPorPartidoAusenciaContrincante()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
                                        //System.out.println(consultasql);
-                                       resultado = Conexion.consulta.executeQuery(consultasql);
+                                       consulta = Conexion.consultar();
+                                       resultado = consulta.executeQuery(consultasql);
                                        //System.out.println("termina al puntuacion");
                                }
                                
@@ -192,10 +198,12 @@ public class CompetenciaDB {
                                                }
                                        consultasql="INSERT INTO set(id_competencia, cantidad_de_sets)VALUES('"+competencia.getIdCompetencia()+"', '"+competencia.getCantidadDeSets()+"')RETURNING *";
                                       // System.out.println(consultasql);
-                                      resultado = Conexion.consulta.executeQuery(consultasql);
+                                     consulta = Conexion.consultar();
+                                     resultado = consulta.executeQuery(consultasql);
                                }
                                LugarDeRealizacion lugares[]=competencia.getLugares();
                                for(int i=0; i<lugares.length;i++){
+                                       consulta = Conexion.consultar();
                                        consultasql="INSERT INTO juega(id_competencia, id_lugar_de_realizacion, disponibilidad)VALUES ('"+competencia.getIdCompetencia()+"', '"+lugares[i].getIdLugar()+"', '"+lugares[i].getDisponibilidad()+"')RETURNING *";
                                        //System.out.println(consultasql);
                                        resultado = Conexion.consulta.executeQuery(consultasql);
