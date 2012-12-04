@@ -167,7 +167,7 @@ public class RondaGestor {
             
             random = 0 + (int)(Math.random()*lugaresAux.length);
             
-            //if (lugaresAux[random].getDisponibilidad()>0){
+            if (lugaresAux[random].getDisponibilidad()>0){
             
                 for(int i=0; i < cantidadDeEncuentros; i++){
                     
@@ -178,7 +178,7 @@ public class RondaGestor {
               //  System.out.println("Repeticiones: "+repeticiones);
                 repeticiones--;
         
-            //}
+            }
       //  }
         
         subronda.setEncuentros(encuentros);

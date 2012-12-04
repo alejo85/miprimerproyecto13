@@ -89,7 +89,7 @@ public class FixtureGestor {
         catch (SQLException e) {
         }
         for (int i=0; i<cantidadDeParticipantes-1;i++){            
-            rondas[i] = RondaGestor.crearRonda(lugares,cantidadDeParticipantes/2, fixture.getIdFixture(), i+1);
+            rondas[i] = RondaGestor.crearRonda(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(idCompetencia),cantidadDeParticipantes/2, fixture.getIdFixture(), i+1);
             
         }
         
