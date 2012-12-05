@@ -108,7 +108,16 @@ public class CompetenciaDB {
        
        
                                }
-
+    public static ResultSet buscarCantidadMaximaDeSets(int idCompetencia) throws SQLException {
+                             //  Conexion conexion = new Conexion();
+        
+            //conexion.conectar();
+            String consultasql;
+                                   consultasql="SELECT id_set, id_competencia, cantidad_de_sets FROM set where id_competencia='"+idCompetencia+"'";
+                                   ResultSet resultado = Conexion.consulta.executeQuery(consultasql); 
+                                return resultado;
+       
+                               }
     /**
      * @param competencia
      * @return
@@ -211,25 +220,6 @@ public class CompetenciaDB {
    
     
    
-  
-    private static int idCompetencia(){
-            //Conexion conexion = new Conexion();
-            ResultSet resultado=null;
-            int id=0;
-            String consultasql;
-            consultasql="SELECT MAX(id_Competencia) FROM COMPETENCIA;";
-
-        try {
-            //conexion.conectar();
-            resultado = Conexion.consulta.executeQuery(consultasql);
-            resultado.next();
-
-            id = resultado.getInt("id_Competencia");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return id;
-        }
 
     /**
      * @param competencia

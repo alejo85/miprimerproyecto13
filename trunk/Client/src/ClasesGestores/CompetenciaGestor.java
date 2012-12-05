@@ -97,7 +97,25 @@ public class CompetenciaGestor {
                 }
 
         }
+    public static int getCantidadMaximaDeSets(int idCompetencia){
+           
+           ResultSet consulta=null;
+           int cantidadMaximaDeSet=0;
+        try {
+            consulta = CompetenciaDB.buscarCantidadMaximaDeSets(idCompetencia);
+        } catch (SQLException e) {
+        }
+        try {
+            while(consulta.next())
+            {
+                    cantidadMaximaDeSet=consulta.getInt("cantidad_de_sets");
+                 
+                }
+        } catch (SQLException e) {
+        }
+        return cantidadMaximaDeSet;
 
+        }
     /**
      * @param competenciaAModificar
      * @param nombreDeCompetencia
@@ -367,6 +385,9 @@ public class CompetenciaGestor {
 
             }while (consulta.next());
             unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
+            if(unaCompetencia.getFormaDePuntuacion().equals("Sets")){
+                    unaCompetencia.setCantidadDeSets(CompetenciaGestor.getCantidadMaximaDeSets(unaCompetencia.getIdCompetencia()));
+                }
             unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setLugares(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia));
