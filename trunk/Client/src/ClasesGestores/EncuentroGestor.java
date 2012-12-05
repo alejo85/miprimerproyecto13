@@ -15,6 +15,8 @@ import java.sql.SQLException;
 
 import java.util.Vector;
 
+import javax.swing.JTable;
+
 
 public class EncuentroGestor {
 
@@ -121,7 +123,11 @@ public class EncuentroGestor {
         
         
         }
-
+    public void guardarResultadoSets(Encuentro unEncuentro, JTable tablaDeSetsJTable, int cantidadPuntos){
+          
+        
+        
+        }
 
     /**
      * @param lugares se pasa por copia
@@ -144,7 +150,7 @@ public class EncuentroGestor {
     /**
      * @param puntos
      */
-    public void guardarResultado(Encuentro unEncuentro, Puntos puntos[], boolean asistencia){
+    public void guardarResultado(Encuentro unEncuentro, Puntos puntos[], int asistencia){
         Resultados unResultado = new Resultados();
         unResultado.setAsistencia(asistencia);
         unResultado.setPuntuacion(puntos);
@@ -171,7 +177,13 @@ public class EncuentroGestor {
         
         EncuentroDB.actualizarEncuentro(unEncuentro);
         }
-
+    public static void guardarResultado(Encuentro unEncuentro,int cantidadPuntos, JTable tablaDeSetsJTable, int asistencia){
+        unEncuentro.asignaResultado(ResultadoGestor.crearResultado(cantidadPuntos, tablaDeSetsJTable, asistencia));
+        
+        
+        EncuentroDB.actualizarEncuentro(unEncuentro);
+        
+        }
     /**
      * @param participanteA
      * @param participanteB

@@ -66,7 +66,11 @@ public class CompetenciaGestor {
         return lugaresDeRealizacion;
         }
     
+    public static  Competencia reemplazarEncuentro(Competencia unaCompetencia, Encuentro unEncuentro, int ronda){
+        unaCompetencia.getFixture().getRondas()[ronda].getGanadores().remplazarEncuentro(unEncuentro);
 
+        return unaCompetencia;
+        }
     /**
      * @param idCompetencia
      * @param usuarioCreador

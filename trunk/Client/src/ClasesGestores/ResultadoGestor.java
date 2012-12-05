@@ -6,6 +6,8 @@ import ClasesLogicas.Resultados;
 
 import java.util.Vector;
 
+import javax.swing.JTable;
+
 public class ResultadoGestor {
     public ResultadoGestor() {
         super();
@@ -27,46 +29,44 @@ public class ResultadoGestor {
      * @param puntos
      * @return
      */
-    public Resultados altaResultado(Puntos[] puntos, int nroRonda){
-        
-        
-        return new Resultados(nroRonda,true, puntos);
-                
-    }
+
 
     /**
      * @param puntos
      * @return
      */
-    public Resultados crearResultado(Puntos[] puntos){
+    public static Resultados crearResultado(Puntos[] puntos, int asistencia){
         
-        
-        return new Resultados();
+       Resultados unResultado=new Resultados();
+       unResultado.setAsistencia(asistencia);
+       unResultado.setPuntuacion(puntos);
+       
+        return unResultado;
           
    }
 
-    /**
-     * @param puntoA
-     * @param puntoB
-     * @return
-     */
-    public Resultados crearPunto(int puntoA, int puntoB, int nroRonda){
-        
-         return new Resultados(nroRonda,true, new Puntos(puntoA, puntoB));
-        }
+ 
+  
 
 
-    public Puntos[] crearPuntosSets (int cantidadPuntos){
+    public static Puntos[] crearPuntosSets (int cantidadPuntos, JTable tablaDeSetsJTable){
         
         
-        Puntos[] retorno=null;
-        
-        for(int i=0; i<cantidadPuntos; i++)            
-            retorno[i] = new Puntos();
-             
+        Puntos[] retorno=new Puntos[cantidadPuntos];
+        Puntos nuevo;
+        for(int i=0; i<cantidadPuntos; i++){            
+            nuevo = new Puntos();
+        nuevo.setPuntoA((Integer) tablaDeSetsJTable.getCellEditor(i, 1).getCellEditorValue());
+                nuevo.setPuntoB((Integer) tablaDeSetsJTable.getCellEditor(i, 2).getCellEditorValue());
+                retorno[i]=nuevo;
+            }
         return retorno;
     }
-
+    public static  Resultados crearResultado(int cantidadPuntos, JTable tablaDeSetsJTable, int asistencia){
+        Resultados unResultado=crearResultado(crearPuntosSets(cantidadPuntos, tablaDeSetsJTable), asistencia);
+       
+        return unResultado;
+    }
 
 
 
