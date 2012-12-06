@@ -10,6 +10,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.Vector;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -26,12 +28,30 @@ public class ModificarSet extends JDialog {
     private JButton cancelarJButton = new JButton();
     private JButton aceptarJButton = new JButton();
 
-    public ModificarSet() {
-        this(null, "", false);
+   
+    private int numeroSet;
+    private String equipoA;
+    private String equipoB;
+    private Vector <String> datos;
+
+    public ModificarSet(int numeroSet, String equipoA, String equipoB, Vector <String> datos ) {
+        this(null, "", false, numeroSet,  equipoA,  equipoB,  datos);
+
     }
 
-    public ModificarSet(Frame parent, String title, boolean modal) {
+
+    public ModificarSet(Frame parent, String title, boolean modal,int numeroSet, String equipoA, String equipoB, Vector <String> datos) {
+
+    
+
         super(parent, title, modal);
+
+        this.numeroSet=numeroSet;
+ 
+        this.equipoA=equipoA;
+        this.equipoB=equipoB;
+        this.datos=datos;
+
         try {
             jbInit();
         } catch (Exception e) {
@@ -79,4 +99,18 @@ public class ModificarSet extends JDialog {
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         this.setVisible(false);
     }
+
+
+    private void aceptarJButton_actionPerformed(ActionEvent e) {
+        if(puntosEquipoAJTextArea.esCorrecto()&&puntosEquiposBJTextArea.esCorrecto())
+        {
+            datos.add(""+numeroSet);
+                datos.add(puntosEquipoAJTextArea.getText());
+                datos.add(puntosEquiposBJTextArea.getText());
+                
+                this.setVisible(false);
+                
+            }
+    }
+
 }

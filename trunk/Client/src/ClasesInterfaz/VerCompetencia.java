@@ -68,15 +68,15 @@ public class VerCompetencia extends JDialog {
      * @param usuario
      * @param competencia
      */
-    public VerCompetencia( Usuario usuario, Competencia competencia,BuscarCompetenciaDeportiva ventanaAnterior) {
+    public VerCompetencia( Usuario usuario, Competencia competencia ) {
 
-        this(null, "", false, usuario, competencia, ventanaAnterior);
+        this(null, "", false, usuario, competencia );
     }
 
-    public VerCompetencia(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia, BuscarCompetenciaDeportiva ventanaAnterior) {
+    public VerCompetencia(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia  ) {
         super(parent, title, modal);
         try {
-            this.ventanaAnterior=ventanaAnterior;
+
             this.usuarioActual=usuario;
             this.competencia=competencia;
             
@@ -236,7 +236,7 @@ public class VerCompetencia extends JDialog {
 
     private void gestionarParticipantesJButton_actionPerformed(ActionEvent e) {
         ListarParticipantes ven;
-        ven = new ListarParticipantes(usuarioActual, competencia, this);
+        ven = new ListarParticipantes(usuarioActual, competencia);
         ven.setVisible(true);
         this.setVisible(false);
     }
@@ -276,7 +276,7 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarFixtureJButton_actionPerformed(ActionEvent e) {
-        ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual, this);
+        ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual);
         this.setVisible(false);
         ven.setVisible(true);
     }

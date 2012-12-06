@@ -14,7 +14,6 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -481,15 +480,14 @@ public class GestionarResultados extends JDialog {
     private void modificarSetJButton_actionPerformed(ActionEvent e) {
         if(tablaDeSetsJTable.getSelectedRow()>-1){
             Vector <String> datos = new Vector <String>();
-        ModificarSet ve = new ModificarSet(tablaDeSetsJTable.getSelectedRow()+1,encuentroSeleccionado.getParticipanteA().getNombre(),encuentroSeleccionado.getParticipanteB().getNombre() , datos, this);
+        ModificarSet ve = new ModificarSet(tablaDeSetsJTable.getSelectedRow()+1,encuentroSeleccionado.getParticipanteA().getNombre(),encuentroSeleccionado.getParticipanteB().getNombre() , datos);
         ve.setVisible(true);
         }
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
        setVisible(false);
-       ventanaAnterior.setCompetencia(competenciaActual);
-       ventanaAnterior.setVisible(true);
+
         
     }
     private void cargarDatos(){
@@ -558,30 +556,30 @@ public class GestionarResultados extends JDialog {
         {
                 if(presenteEquipoAmbosJRadioButton.isSelected())
                 {
-                    EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(), encuentroSeleccionado.getParticipanteB(), Integer.parseInt(puntosEquipoAJTextArea.getText()), Integer.parseInt(puntosEquipoBJTextArea.getText()));
+                    EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, 0);
                     }
                 else{
                         if(presenteEquipoAJRadioButton.isSelected())
                         {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA());
+                                EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, -1);
                             }
                         if(presenteEquipoBJRadioButton.isSelected())
                         {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB());
+                                EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, 1);
                             }
                     }
                 
             }
        //TODO SETEAR LA COMPETENCIA CON EL RESULTADO
        setVisible(false);
-       ventanaAnterior.setCompetencia(competenciaActual);
+  
        ventanaAnterior.setVisible(true);
     }
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
         setVisible(false);
-        ventanaAnterior.setCompetencia(competenciaActual);
+        
         ventanaAnterior.setVisible(true);
         
     }
