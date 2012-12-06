@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -83,8 +84,6 @@ public class BuscarLugareDeRealizacion extends JDialog {
     }
 
     private void jbInit() throws Exception {
-    	
-    	//EMPIEZO DE CERO
     	
     	// seteamos el layout
     	setLayout (new BorderLayout());
@@ -253,13 +252,31 @@ public class BuscarLugareDeRealizacion extends JDialog {
     	//int x= getLocationOnScreen().x;
     	//int y= getLocationOnScreen().y;
   
-        JOptionPane.showOptionDialog(cancelarJButton , "Por el momento esta funcionalidad no esta disponible"  , "Funcionalidad no disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-
+       // JOptionPane.showOptionDialog(cancelarJButton , "Por el momento esta funcionalidad no esta disponible"  , "Funcionalidad no disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        
+        JOptionPane pane = new JOptionPane("Por el momento esta funcionalidad no esta disponible", JOptionPane.INFORMATION_MESSAGE);  
+        JDialog dialog = pane.createDialog("Funcionalidad no disponible");
+        int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+        int posicion= this.getLocationOnScreen().x;
+        int anchoVentana= this.getHeight();
+      
+        if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+        {
+        	dialog.setLocation(getLocationOnScreen().x + getHeight() , getLocationOnScreen().y);
+        }
+        else
+        {
+        	dialog.setLocation(getLocationOnScreen().x - 380, getLocationOnScreen().y);
+        }
+        	
+        dialog.setVisible(true);
+        
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         this.setVisible(false);
         dispose();
+        new Principal();
     }
 
     private void buscarJButton_actionPerformed(ActionEvent e) {

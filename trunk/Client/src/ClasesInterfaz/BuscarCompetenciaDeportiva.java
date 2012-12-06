@@ -67,9 +67,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private Color backgroundText = nombreCompetenciaJTextArea.getBackground();
     private Color foregroundText = nombreCompetenciaJTextArea.getForeground();
 
-    public BuscarCompetenciaDeportiva(JFrame parent, Usuario usuariologueado) {
+    /**
+     * @wbp.parser.constructor
+     */
+    public BuscarCompetenciaDeportiva(Usuario usuariologueado) {
         
-        this(parent, "", false,usuariologueado);
+        this(null, "", false,usuariologueado);
         
         
     }
@@ -88,7 +91,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     private void jbInit() throws Exception {
         CerrarVentana();
         // DIMENSION DE LA VENTANA
-        this.setSize(new Dimension(820, 670));
+        this.setSize(new Dimension(820, 740));
         this.getContentPane().setLayout( null );
         
         //TITULO VENTANA
@@ -96,14 +99,13 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         
         //BOTON ACEPTAR
         aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(300, 690, 110, 30));
+        aceptarJButton.setBounds(new Rectangle(150, 650, 170, 40));
         aceptarJButton.setFont(new Font("Tahoma", 0, 15));
         
         //BOTON CANCELAR
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(595, 690, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(560, 650, 170, 40));
         cancelarJButton.setFont(new Font("Tahoma", 0, 15));
-        cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonCancelar_actionPerformed(e);
@@ -189,7 +191,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                 }
             });
         buscarJButton.setText("Buscar");
-        buscarJButton.setBounds(new Rectangle(270, 140, 170, 40));
+        buscarJButton.setBounds(new Rectangle(300, 140, 170, 40));
         buscarJButton.setFont(new Font("Tahoma", 0, 15));
         buscarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -242,7 +244,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
 
         resultadoJPanel.add(verCompetenciaJButton, null);
         resultadoJPanel.add(nuevaCompetenciaJButton, null);
-        jScrollPane2.getViewport().add(tablaResultadoJTable, null);
+        jScrollPane2.setViewportView(tablaResultadoJTable);
         resultadoJPanel.add(jScrollPane2, null);
         resultadoJPanel.add(nuevaCompetenciaJButton, null);
         resultadoJPanel.add(verCompetenciaJButton, null);
@@ -272,7 +274,8 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     }
 
     private void jButtonCancelar_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        this.dispose();
+        new Principal(usuarioActual);
     }
 
 
@@ -317,7 +320,15 @@ public class BuscarCompetenciaDeportiva extends JDialog {
 
 
 
-  
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        new Principal();
+    }
+    });
+    }  
 
     private void restablecerCampos(ActionEvent e) {
         nombreCompetenciaJTextArea.setBackground(backgroundText);
@@ -362,17 +373,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             
             super.setVisible(b);
         }
-    private void CerrarVentana(){
-    addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent e) {
-        
-        getParent().setVisible(true);
-        
-        setVisible(false);
-        dispose();
-    }
-    });
-    }
+
 
 
     private void nombreCompetenciaJTextArea_focusGained(FocusEvent e) {
@@ -390,13 +391,13 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         if(tablaResultadoJTable.getSelectedRow()>-1){
         competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
         //System.out.println(this.competenciaSelecionad.getNombreCompetencia());
-        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad, this);
+        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
         this.setVisible(false);
         ven.setVisible(true);}
     }
 
     private void nuevaCompetenciaJButton_actionPerformed(ActionEvent e) {
-        AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual, this);
+        AltaCompetenciaDeportiva ven = new AltaCompetenciaDeportiva(usuarioActual);
         ven.setVisible(true);
         this.setVisible(false);
     }

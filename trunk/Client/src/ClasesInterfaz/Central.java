@@ -1,19 +1,16 @@
 package ClasesInterfaz;
 
 
-import ClasesBD.Conexion;
-
 import ClasesLogicas.Usuario;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -27,6 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.*;
 
 
 public class Central extends JFrame {
@@ -40,7 +40,7 @@ public class Central extends JFrame {
     private JMenuItem modificar = new JMenuItem();
     private JMenuItem buscarCompetencia = new JMenuItem();
     private JMenuItem buscarTodasLasCompetencias = new JMenuItem();
-    private JMenuItem buscarLugarDeRealizacion = new JMenuItem();
+    private JMenuItem altaLugarDeRealizacion = new JMenuItem();
     private JMenuItem registrarse = new JMenuItem();
     private JMenu menuHelp = new JMenu();
     private JMenuItem menuHelpAbout = new JMenuItem();
@@ -48,62 +48,21 @@ public class Central extends JFrame {
     private JLabel logoJLabel = new JLabel();
     private JLabel jLabelSistemaDeGestiónDeCompetenciasDeportivas = new JLabel();
     private JTextArea usuarioJTextArea = new JTextArea();
-    private JLabel jLabelUsuario = new JLabel();
+    //private JLabel jLabelUsuario = new JLabel();
     private JPanel gestiónUsuarioJPanel = new JPanel();
     private JButton modificarUsuarioJButton = new JButton();
     private JButton iniciarSesiónJButton = new JButton();
     private JButton registrarseJButton = new JButton();
     private JPanel lugarDeRealizaciónJPanel = new JPanel();
-    private JButton listarLugarDeRealizaciónJButton = new JButton();
+    private JButton altaLugarDeRealizacionJButton = new JButton();
     private JPanel competenciaJPanel = new JPanel();
     private JButton buscarCompetenciaJButton = new JButton();
     private JButton buscarTodasLasCompetenciasJButton = new JButton();
     private JButton salirJButton = new JButton();
 
     public Central() {
-    
-        /// muestra los look and feel instalados
-        
-       /* UIManager.LookAndFeelInfo plaf[] = UIManager.getInstalledLookAndFeels();
-         
-        for (int i=0; i < plaf.length; i++){
-         
-              System.out.println("Nombre: " + plaf[i].getName());
-         
-              System.out.println("Nombre de la clase: "+ plaf[i].getClassName());
-         
-        }
-        
-        */
-        //// seteamos look and feel
-     /*  
-        try {
-                
-               UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //aca pasamos de parametro una funcion
-                                                                                    //que toma el look and feel del sistema, para pasar uno
-                                                                                    //especifico se pasa asi ("nombredellookandfeel")
-              
-    
-              
-                }
-                catch (UnsupportedLookAndFeelException e) {
-                   // handle exception
-                }
-                catch (ClassNotFoundException e) {
-                   // handle exception
-                }
-                catch (InstantiationException e) {
-                   // handle exception
-                }
-                catch (IllegalAccessException e) {
-                   // handle exception
-                }
-        */
+          
         this.usuarioActual=null;
-      // usuarioActual=new Usuario();
-       //usuarioActual.setApellido("Olivera");
-       //usuarioActual.setNombre("Alejandro");
-       //usuarioActual.setCorreoElectronico("felix811@gmail.com");
         try {
             jbInit();
         } catch (Exception e) {
@@ -121,9 +80,8 @@ public class Central extends JFrame {
     }
 
     private void jbInit() throws Exception {
-        CerrarVentana();
         this.setJMenuBar( menuBar );
-        this.getContentPane().setLayout( null );
+        this.getContentPane().setLayout(null);
         this.setSize(new Dimension(820, 570));
         this.setTitle( "Sistema De Gestión De Competencias" );
         // PESTAÑA GESTION MENU SUPERIOR
@@ -139,7 +97,7 @@ public class Central extends JFrame {
         usuarioJTextArea.setEditable(false);
         // PESTAÑA LUGAR DE REALIZACION
         lugar.setText("Lugar de Realización");
-        buscarLugarDeRealizacion.setText("Buscar Lugar de Realización");
+        altaLugarDeRealizacion.setText("Nuevo Lugar de Realización");
         // PESTAÑA AYUDA
         menuHelp.setText( "Ayuda" );
         menuHelpAbout.setText( "Acerca de..." );
@@ -154,39 +112,34 @@ public class Central extends JFrame {
         menuFileExit.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { jButtonAceptar2_actionPerformed( ae ); } } );
         
         menuHelpAbout.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { helpAbout_ActionPerformed( ae ); } } );
-        ImageIcon imagenCandado = new ImageIcon("Imagenes//bola8.png");
-       /* jLabelBienvenidos.setText("Bienvienido");
-        jLabelBienvenidos.setBounds(new Rectangle(35, 5, 250, 70));
-        jLabelBienvenidos.setFont(new Font("Tahoma", 0, 32));*/
-        logoJLabel.setBounds(new Rectangle(130, 95, 195, 160));
+        ImageIcon imagenCandado = new ImageIcon("src/Imagenes/Logo_mejorado.jpg");
+     
+        
+        logoJLabel.setBounds(new Rectangle(469, 67, 149, 103));
         logoJLabel.setIcon(imagenCandado);
         
-        
-        // TITULO SISTEMA DE GESTION
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setText("Sistema de Gestión de Competencias Deportivas");
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setBounds(new Rectangle(5, 5, 550, 80));
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setFont(new Font("Tahoma", 0, 22));
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalTextPosition(SwingConstants.CENTER);
-        
         usuarioJTextArea.setBounds(new Rectangle(45, 85, 300, 40));
-        usuarioJTextArea.setBackground(null);
+        usuarioJTextArea.setBackground(gestiónUsuarioJPanel.getBackground());//ver color
         usuarioJTextArea.setFont(new Font("Tahoma", 0, 16));
         usuarioJTextArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 1, 1));
         usuarioJTextArea.setForeground(Color.blue);
         
         if(usuarioActual==null){
         usuarioJTextArea.setText("Usted no esta autenticado");
+        buscarCompetencia.setEnabled(false);
+        modificar.setEnabled(false);
+        modificarUsuarioJButton.setEnabled(false);
+        lugar.setEnabled(false);
+        altaLugarDeRealizacionJButton.setEnabled(false);
         }
         else{
             usuarioJTextArea.setText("Bienvenido "+usuarioActual.getNombre()+" "+usuarioActual.getApellido());
+            registrarse.setEnabled(false);
+            registrarseJButton.setEnabled(false);
+            
         }
 
-        /*
-        jLabelUsuario.setText("Usuario:");
-         jLabelUsuario.setBounds(new Rectangle(5, 50, 550, 80));
-        jLabelUsuario.setFont(new Font("Tahoma", 0, 13));
-        jLabelUsuario.setText("Usuario:");*/
+     
         
         // CONTENEDOR BOTONES GESTION DE USUARIO
         gestiónUsuarioJPanel.setBounds(new Rectangle(5, 170, 250, 240));
@@ -198,6 +151,7 @@ public class Central extends JFrame {
         iniciarSesiónJButton.setBounds(new Rectangle(10, 30, 230, 55));
         iniciarSesiónJButton.setFont(new Font("Tahoma", 0, 13));
         iniciarSesiónJButton.setText("Cerrar Sesión");
+        iniciarSecion.setText("Cerrar Sesión");
         iniciarSesiónJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonAceptar6_actionPerformed(e);
@@ -240,10 +194,10 @@ public class Central extends JFrame {
         lugarDeRealizaciónJPanel.setLayout(null);
         lugarDeRealizaciónJPanel.setBorder(BorderFactory.createTitledBorder("Lugar de Realización"));
         lugarDeRealizaciónJPanel.setFont(new Font("Dialog", 0, 50));
-        listarLugarDeRealizaciónJButton.setBounds(new Rectangle(10, 90, 230, 55));
-        listarLugarDeRealizaciónJButton.setFont(new Font("Tahoma", 0, 13));
-        listarLugarDeRealizaciónJButton.setText("Listar Lugar De Realización");
-        listarLugarDeRealizaciónJButton.addActionListener(new ActionListener() {
+        altaLugarDeRealizacionJButton.setBounds(new Rectangle(10, 90, 230, 55));
+        altaLugarDeRealizacionJButton.setFont(new Font("Tahoma", 0, 13));
+        altaLugarDeRealizacionJButton.setText("Nuevo Lugar De Realización");
+        altaLugarDeRealizacionJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonAceptar8_actionPerformed(e);
                 }
@@ -255,16 +209,18 @@ public class Central extends JFrame {
         buscarCompetenciaJButton.setBounds(new Rectangle(560, 230, 230, 55));
         buscarCompetenciaJButton.setFont(new Font("Tahoma", 0, 13));
         buscarCompetenciaJButton.setText("Buscar Competencia");
-        buscarCompetenciaJButton.setActionCommand("");
+       // buscarCompetenciaJButton.setActionCommand("");
         buscarCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonAceptar9_actionPerformed(e);
                 }
             });
+        if(usuarioActual == null){buscarCompetenciaJButton.setEnabled(false);}
+        else{buscarCompetenciaJButton.setEnabled(true);}
         buscarTodasLasCompetenciasJButton.setBounds(new Rectangle(560, 300, 230, 55));
         buscarTodasLasCompetenciasJButton.setFont(new Font("Tahoma", 0, 13));
         buscarTodasLasCompetenciasJButton.setText("Buscar Todas Las Competencias");
-        buscarTodasLasCompetenciasJButton.setActionCommand("");
+       buscarTodasLasCompetenciasJButton.setActionCommand("");
         buscarTodasLasCompetenciasJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     jButtonAceptar10_actionPerformed(e);
@@ -282,7 +238,7 @@ public class Central extends JFrame {
             });
         buscarCompetencia.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarCompetencia_ActionPerformed( ae ); } });
         buscarTodasLasCompetencias.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarTodasLasCompetencias_ActionPerformed( ae ); } });
-        buscarLugarDeRealizacion.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarLugarDeRealizacion_ActionPerformed( ae ); } });
+        altaLugarDeRealizacion.addActionListener(new ActionListener() { public void actionPerformed( ActionEvent ae ) { buscarLugarDeRealizacion_ActionPerformed( ae ); } });
         
         // MENU SUPERIOR - AGREGANDO BOTONES
         menuFile.add(iniciarSecion);
@@ -291,7 +247,7 @@ public class Central extends JFrame {
         menuFile.add( menuFileExit );
         competencia.add(buscarCompetencia);
         competencia.add(buscarTodasLasCompetencias);
-        lugar.add(buscarLugarDeRealizacion);
+        lugar.add(altaLugarDeRealizacion);
         menuBar.add( menuFile );
         menuBar.add(competencia);
         menuBar.add(lugar);
@@ -299,21 +255,29 @@ public class Central extends JFrame {
         menuBar.add( menuHelp );
         
         // BOTONES DENTRO DE JPANELS
+        this.getContentPane().add(usuarioJTextArea, null);
+        
+        
+        // TITULO SISTEMA DE GESTION
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setText("Sistema de Gestión de Competencias Deportivas");
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setBounds(new Rectangle(5, 5, 795, 80));
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setFont(new Font("Tahoma", 0, 22));
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabelSistemaDeGestiónDeCompetenciasDeportivas.setHorizontalTextPosition(SwingConstants.CENTER);
+        this.getContentPane().add(jLabelSistemaDeGestiónDeCompetenciasDeportivas, null);
+        this.getContentPane().add(logoJLabel, null);
         this.getContentPane().add(salirJButton, null);
         this.getContentPane().add(buscarTodasLasCompetenciasJButton, null);
         this.getContentPane().add(buscarCompetenciaJButton, null);
         this.getContentPane().add(competenciaJPanel, null);
-        lugarDeRealizaciónJPanel.add(listarLugarDeRealizaciónJButton, null);
+        lugarDeRealizaciónJPanel.add(altaLugarDeRealizacionJButton, null);
         this.getContentPane().add(lugarDeRealizaciónJPanel, null);
         gestiónUsuarioJPanel.add(modificarUsuarioJButton, null);
         gestiónUsuarioJPanel.add(iniciarSesiónJButton, null);
         gestiónUsuarioJPanel.add(registrarseJButton, null);
         this.getContentPane().add(gestiónUsuarioJPanel, null);
-        this.getContentPane().add(jLabelUsuario, null);
-        this.getContentPane().add(usuarioJTextArea, null);
-        this.getContentPane().add(jLabelSistemaDeGestiónDeCompetenciasDeportivas, null);
-        this.getContentPane().add(logoJLabel, null);
-        //this.getContentPane().add(jLabelBienvenidos, null);
+        
+     
         
 
     }
@@ -322,30 +286,28 @@ public class Central extends JFrame {
         JOptionPane.showMessageDialog(this, new Central_AboutBoxPanel1(), "Acerca de", JOptionPane.PLAIN_MESSAGE);
     }
     void buscarCompetencia_ActionPerformed (ActionEvent e){
-           BuscarCompetenciaDeportiva nuevo= new BuscarCompetenciaDeportiva(this, usuarioActual);
-           nuevo.setVisible(true);
+        dispose();   
+    	BuscarCompetenciaDeportiva nuevo= new BuscarCompetenciaDeportiva(usuarioActual);
+        nuevo.setVisible(true);
+           
            }
     // ACCION BOTON BUSCAR TODAS LAS COMPETENCIAS DEPORTIVAS
     void buscarTodasLasCompetencias_ActionPerformed (ActionEvent e){
-           BuscarTodasLasCompetenciaDeportiva nuevo= new BuscarTodasLasCompetenciaDeportiva(usuarioActual);
-           nuevo.setVisible(true);
+    	 JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
            }
     // ACCION BOTON BUSCAR LUGAR DE REALIZACION
     void buscarLugarDeRealizacion_ActionPerformed (ActionEvent e){
-           BuscarLugareDeRealizacion nuevo= new BuscarLugareDeRealizacion(usuarioActual);
-           nuevo.setVisible(true);
+    	AltaLugarDeRealizacion ven = new AltaLugarDeRealizacion(usuarioActual);
+        ven.setVisible(true);
+        this.dispose();
            }
    // ACCION BOTON SALIR
     private void jButtonAceptar2_actionPerformed(ActionEvent e) {
-        Conexion.cerrarConexion();
         System.exit(0);
-        
     }
     // ACCION BOTON MODIFICAR
     private void jButtonAceptar5_actionPerformed(ActionEvent e) {
         JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-        /*ModificarUsuario ven = new ModificarUsuario(usuarioActual);
-        ven.setVisible(true);*/
     }
 // ACCION BOTON INICIAR SESION O CERRAR SESION DEPENDIENDO DEL OBJETO USUARIO
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
@@ -369,35 +331,23 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar8_actionPerformed(ActionEvent e) {
-        BuscarLugareDeRealizacion ven = new BuscarLugareDeRealizacion(usuarioActual);
+    	AltaLugarDeRealizacion ven = new AltaLugarDeRealizacion(usuarioActual);
         ven.setVisible(true);
+        this.dispose();
     }
 
     private void jButtonAceptar9_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(this, usuarioActual);
+        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(usuarioActual);
         ven.setVisible(true);
+        this.dispose();
     }
 
     private void jButtonAceptar10_actionPerformed(ActionEvent e) {
-        BuscarTodasLasCompetenciaDeportiva ven = new BuscarTodasLasCompetenciaDeportiva(usuarioActual);
-        ven.setVisible(true);
+    	JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
     
     private void actualizarUsuarioActual(Usuario usuario){
         usuarioActual=usuario;
         
     }
-    private void CerrarVentana(){
-    addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent e) {
-        setVisible(false);
-        Conexion.cerrarConexion();
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-
-        
-    }
-    });
-    }
 }
-

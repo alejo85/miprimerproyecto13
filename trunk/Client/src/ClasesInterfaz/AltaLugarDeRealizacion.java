@@ -12,10 +12,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import java.sql.SQLException;
 
@@ -74,6 +77,7 @@ public class AltaLugarDeRealizacion extends JDialog {
     }
 
     private void jbInit() throws Exception {
+    	CerrarVentana();
         this.setSize(new Dimension(1243, 471));
         this.getContentPane().setLayout( null );
         this.setTitle("Alta Lugar De Realización");
@@ -172,13 +176,24 @@ public class AltaLugarDeRealizacion extends JDialog {
         this.getContentPane().add(codigoJTextArea, null);
     }
 
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        new Principal();
+    }
+    });
+    }
+    
     private void buscarDeportes(){
         dDisponibles = DeporteGestor.instanciarDeportes();
             cargarDeportes();
         }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        this.dispose();
+        new Principal(usuarioActual);
     }
     private void cargarDeportes(){
 
@@ -249,6 +264,7 @@ public class AltaLugarDeRealizacion extends JDialog {
             try {
                 LugaresDeRealizacionGestores.altaLugar(this.codigoJTextArea.getText(), this.nombreLugarDeRealizaciónJTextArea.getText(), this.descripciónJTextArea.getText(), dSeleccionados, usuarioActual );
             } catch (SQLException f) {
+            	Toolkit.getDefaultToolkit().beep(); //TODO ver si va aca el sonido
                 System.out.println(f.getMessage());
             }
         }

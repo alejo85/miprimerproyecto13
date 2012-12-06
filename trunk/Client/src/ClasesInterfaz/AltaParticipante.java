@@ -1,12 +1,12 @@
 package ClasesInterfaz;
 
-
 import ClasesGestores.CompetenciaGestor;
 import ClasesGestores.ParticipanteGestor;
 
 import ClasesLogicas.Competencia;
-import ClasesLogicas.Fixture;
 import ClasesLogicas.Participante;
+
+import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
 
 import InterfazGrafica.CampoTexto.AreaTextoCorreo;
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
@@ -15,10 +15,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import java.io.File;
 
@@ -42,18 +41,15 @@ public class AltaParticipante extends JDialog {
     private JButton aceptarJButton = new JButton();
     private Participante participanteNuevo=null;
     private Competencia competenciaSeleccionada=null;
-    private ListarParticipantes ventanaAnterior=null;
 
-    public AltaParticipante(Competencia competencia, ListarParticipantes ventana) {
-        this(null, "", false, competencia, ventana);
+    public AltaParticipante(Competencia competencia) {
+        this(null, "", false, competencia);
     }
 
-    public AltaParticipante(Frame parent, String title, boolean modal, Competencia competencia, ListarParticipantes ventana) {
+    public AltaParticipante(Frame parent, String title, boolean modal, Competencia competencia) {
         super(parent, title, modal);
         try {
-            this.competenciaSeleccionada=competencia;
-            this.ventanaAnterior=ventana;
-            
+            competenciaSeleccionada=competencia;
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +57,6 @@ public class AltaParticipante extends JDialog {
     }
 
     private void jbInit() throws Exception {
-        CerrarVentana();
         this.setSize(new Dimension(903, 332));
         this.getContentPane().setLayout( null );
         this.setTitle("Alta Participante");
@@ -134,34 +129,16 @@ public class AltaParticipante extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        setVisible(false);
-        //dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setVisible(true);
+        this.setVisible(false);
     }
-    public Competencia getCompetencia(){return competenciaSeleccionada;}
+
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         String errores ="";
         if(!correoElectrónicoJTextArea.getText().equals("")){
             if(!nombreParticipanteJTextArea.getText().equals("")){
                if(CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
                  if(imagenJTextArea.getText().equals("")){
-                        //System.out.println("antes del gestor");
                         Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
-                        if(!competenciaSeleccionada.getEstado().equals("Creada"))
-                        {
-                            CompetenciaGestor.eliminarFixtureDeCompetencia(competenciaSeleccionada);
-                            competenciaSeleccionada.setFixture(new Fixture());
-                        }
-                        competenciaSeleccionada.agregarParticipante(unParticipante);
-                        CompetenciaGestor.actualizarEstado(competenciaSeleccionada, "Creada");
-                        competenciaSeleccionada.setEstado("Creada");
-
-                       // System.out.println("Despues del gestor");
-                        setVisible(false);
-                        //dispose(); // cuando se cierra, se pierde los cambios realizados
-                        ventanaAnterior.setCompetencia(competenciaSeleccionada);
-                        ventanaAnterior.setVisible(true);
-                        
                     }
                     
                       else
@@ -190,18 +167,7 @@ public class AltaParticipante extends JDialog {
                 errores+="          El correo electronico del participante no puede ser  nulo";
             }
         if(!errores.equals(""))
-			//TODO Mostrar los errores por pantalla
+        	Toolkit.getDefaultToolkit().beep(); //TODO controlar que este bien el pitido aca
             System.out.println(errores);
     }
-    private void CerrarVentana(){
-    addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setVisible(true);
-        
-    }
-    });
-    }
-    
 }
