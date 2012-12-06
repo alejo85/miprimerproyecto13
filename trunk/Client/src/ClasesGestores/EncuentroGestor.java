@@ -206,6 +206,7 @@ public class EncuentroGestor {
                  unEncuentro.setGanador(participanteB);
             else
                  unEncuentro.setGanador(participanteA);
+        unEncuentro.asignaResultado(unResultado);
        }
     public static void eliminarEncuentros(Encuentro[] encuentrosAEliminar){
         for(int i=0;i<encuentrosAEliminar.length;i++)

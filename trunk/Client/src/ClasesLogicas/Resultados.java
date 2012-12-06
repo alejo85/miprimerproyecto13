@@ -64,6 +64,7 @@ public class Resultados {
     }
 
     public void setPuntuacion(Puntos puntos) {
+        this.puntuacion=new Puntos[1];
         this.puntuacion[0]=puntos;
     }
 }
