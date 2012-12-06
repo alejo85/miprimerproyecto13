@@ -8,7 +8,7 @@ public class Encuentro {
     private Participante participanteB;
     private Participante ganador;
     private Participante perdedor;
-    private Boolean empate;
+    private Boolean empate=false;
     private Stack <Resultados> resultado;
     private LugarDeRealizacion locación;
 

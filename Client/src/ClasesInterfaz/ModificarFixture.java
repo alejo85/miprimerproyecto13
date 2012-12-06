@@ -167,7 +167,7 @@ public class ModificarFixture extends JDialog {
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         setVisible(false);
         
-        new VerCompetencia(usuarioAcatual, competenciaSeleccionada);
+        new VerCompetencia(usuarioAcatual, competenciaSeleccionada).setVisible(true);
         dispose();
        
     }
@@ -244,7 +244,9 @@ public class ModificarFixture extends JDialog {
                                                                if(competenciaSeleccionada.getFormaDePuntuacion().equals("Resultado Final"))
                                         {
                                             String resultado="";
-                                           
+                                                if(encuentrosDeSubRonda[j].getEmpate())
+                                                    resultado+="Empate ";
+                                                    else
                                                     resultado+="Ganador: "+encuentrosDeSubRonda[j].getGanador().getNombre();
                                                 
                                                 datos.add(""+resultado);
