@@ -11,7 +11,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class Principal {
     public Principal() {
-    	
+    	/*
         /// muestra los look and feel instalados
         
         UIManager.LookAndFeelInfo plaf[] = UIManager.getInstalledLookAndFeels();
@@ -24,7 +24,7 @@ public class Principal {
          
         }
        
-        
+        */
         
         //// seteamos look and feel
         
