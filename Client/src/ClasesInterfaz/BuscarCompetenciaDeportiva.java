@@ -325,7 +325,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
     public void windowClosing(WindowEvent e) {
         setVisible(false);
         dispose(); // cuando se cierra, se pierde los cambios realizados
-        new Principal();
+        new Principal(usuarioActual);
     }
     });
     }  
