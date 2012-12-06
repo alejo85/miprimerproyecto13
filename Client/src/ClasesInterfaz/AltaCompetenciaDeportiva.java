@@ -51,7 +51,6 @@ import oracle.jdeveloper.layout.XYLayout;
 
 
 public class AltaCompetenciaDeportiva extends JDialog {
-    
     private ModeloTabla modelo = new ModeloTabla(new String[] { "Lugar De Realizacion" }, 0);
     private ModeloTabla modelo2 = new ModeloTabla(new String[] { "Lugar De Realizacion","Disponibilidad" }, 0);
     private AreaTextoNombre nombreDeLaCompetenciaJTextArea = new AreaTextoNombre(60);
@@ -688,17 +687,16 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setVisible(true);
-        
+        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(ussuarioActual);
+        ven.setVisible(true);
+        dispose();
     }
     });
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setVisible(true);
+        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(ussuarioActual);
+        ven.setVisible(true);
+        this.dispose();
     }
 }
