@@ -24,6 +24,7 @@ public class EncuentroDB {
      * @param encuentro
      */
     public static void actualizarEncuentro(Encuentro encuentro){
+            System.out.println("lleho a la base");
         //TODO HACER EL GUARDAR
         }
     public static int guardarEncuentro(Encuentro encuentro, int idSubRonda) throws SQLException {

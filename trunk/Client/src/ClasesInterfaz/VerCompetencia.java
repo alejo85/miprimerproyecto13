@@ -3,9 +3,6 @@ package ClasesInterfaz;
 
 import ClasesGestores.CompetenciaGestor;
 
-import ClasesGestores.LugaresDeRealizacionGestores;
-import ClasesGestores.ParticipanteGestor;
-
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.Fixture;
@@ -20,7 +17,6 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -218,7 +214,7 @@ public class VerCompetencia extends JDialog {
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         setVisible(false);
         dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setVisible(true);
+        
     }
 
     private void modificarCompetenciaJButton_actionPerformed(ActionEvent e) {

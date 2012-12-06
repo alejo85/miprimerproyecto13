@@ -183,6 +183,7 @@ public class EncuentroGestor {
         
         EncuentroDB.actualizarEncuentro(unEncuentro);
         
+        
         }
     /**
      * @param participanteA

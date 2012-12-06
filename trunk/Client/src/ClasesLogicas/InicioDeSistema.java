@@ -4,6 +4,7 @@ package ClasesLogicas;
 import ClasesBD.Conexion;
 
 
+
 import ClasesInterfaz.AltaCompetenciaDeportiva;
 import ClasesInterfaz.Principal;
 
@@ -27,7 +28,7 @@ public class InicioDeSistema {
         
        // Conexion.cerrarConexion();
 
-        /*AltaCompetenciaDeportiva ven1 = new AltaCompetenciaDeportiva();
+        /*Alta ven1 = new Alta();
         AltaLugarDeRealizacion ven2 = new AltaLugarDeRealizacion();
         AltaParticipante ven3 = new AltaParticipante();
         BuscarCompetenciaDeportiva ven4 = new BuscarCompetenciaDeportiva();
