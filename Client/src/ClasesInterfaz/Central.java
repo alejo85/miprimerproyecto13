@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -91,7 +92,7 @@ public class Central extends JFrame {
         competencia.setText("Competencia");
         buscarCompetencia.setText("Buscar Competencias");
         buscarTodasLasCompetencias.setText("Buscar Todas las Competencias");
-        
+
         // PESTAÑA LUGAR DE REALIZACION
         lugar.setText("Lugar de Realización");
         altaLugarDeRealizacion.setText("Nuevo Lugar de Realización");
@@ -280,7 +281,8 @@ public class Central extends JFrame {
     }
 
     void helpAbout_ActionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, new Central_AboutBoxPanel1(), "Acerca de", JOptionPane.PLAIN_MESSAGE);
+    	Icon icono  =  new ImageIcon("src/Imagenes/qr_caratula.png");
+        JOptionPane.showMessageDialog(this, new Central_AboutBoxPanel1(), "Acerca de", JOptionPane.PLAIN_MESSAGE, icono);
     }
     void buscarCompetencia_ActionPerformed (ActionEvent e){
         dispose();   
