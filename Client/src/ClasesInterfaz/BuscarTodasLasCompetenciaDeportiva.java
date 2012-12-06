@@ -166,8 +166,8 @@ public class BuscarTodasLasCompetenciaDeportiva extends JDialog {
     }
 
     private void mostrarFixtureJButton_actionPerformed(ActionEvent e) {
-        ModificarFixture ven = new ModificarFixture();
-        ven.setVisible(true);
+       // ModificarFixture ven = new ModificarFixture();
+        //ven.setVisible(true);
     }
 
     private void mostrarTablaJButton_actionPerformed(ActionEvent e) {

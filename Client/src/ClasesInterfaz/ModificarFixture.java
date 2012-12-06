@@ -71,9 +71,7 @@ public class ModificarFixture extends JDialog {
             e.printStackTrace();
         }
     }
-    public ModificarFixture() {
-        this(null, "", false );
-    }
+
 
     public ModificarFixture(Frame parent, String title, boolean modal  ) {
         super(parent, title, modal);
@@ -167,9 +165,10 @@ public class ModificarFixture extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        ventanaAnterior.setCompetencia(competenciaSeleccionada);
-        ventanaAnterior.setVisible(true);
+        setVisible(false);
+        
+        new VerCompetencia(usuarioAcatual, competenciaSeleccionada);
+        dispose();
        
     }
     private Encuentro getEncuentro(int nroRonda, int encuentro){
@@ -191,7 +190,7 @@ public class ModificarFixture extends JDialog {
             {
                     if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getIdParticipante()!=1)
                     {
-                    GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()));
+                    GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()),nroRonda);
                     this.setVisible(false);
                     dispose();
                     ven.setVisible(true);
@@ -218,8 +217,40 @@ public class ModificarFixture extends JDialog {
                             Vector <String> datos = new Vector <String>();
                             datos.add(""+rondas[nroRonda].getNumeroDeRonda());
                                 datos.add("Liga");
-                            datos.add(rondas[nroRonda].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
-                            datos.add(rondas[nroRonda].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
+                            datos.add(encuentrosDeSubRonda[j].getParticipanteA().getNombre());
+                            datos.add(encuentrosDeSubRonda[j].getParticipanteB().getNombre());
+                         if(encuentrosDeSubRonda[j].getResultado()!=null)
+                         {
+                             if(competenciaSeleccionada.getFormaDePuntuacion().equals("Sets"))
+                             {
+                                 String resultado="";
+                                 for(int h=0; h<encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion().length-1;h++)
+                                 {
+                                         resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoB()+" ]";
+                                     }
+                                     datos.add(""+resultado);
+                                 }
+
+                                 if(competenciaSeleccionada.getFormaDePuntuacion().equals("Puntuación"))
+                                 {
+                                     String resultado="";
+                                     resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoB()+" ]";
+                                     datos.add(""+resultado);
+                                 }
+                                 
+                             }
+                                if(encuentrosDeSubRonda[j].getGanador()!=null)
+                                {
+                                                               if(competenciaSeleccionada.getFormaDePuntuacion().equals("Resultado Final"))
+                                        {
+                                            String resultado="";
+                                           
+                                                    resultado+="Ganador: "+encuentrosDeSubRonda[j].getGanador().getNombre();
+                                                
+                                                datos.add(""+resultado);
+                                            }
+                                    }
+                         
                                 datos.add("");
                            
            

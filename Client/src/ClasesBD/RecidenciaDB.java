@@ -34,6 +34,7 @@ public class RecidenciaDB {
         try {
             resultado = Conexion.consulta.executeQuery(consultasql);
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         try {
             while (resultado.next())
@@ -44,6 +45,7 @@ public class RecidenciaDB {
             paises.add(p);
         }
         } catch (SQLException e) {
+            
         }
        
         //conexion.cerrarConexion();

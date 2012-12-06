@@ -105,6 +105,7 @@ public class Encuentro {
         this.resultado.add(resultado);
     }
     public Stack<Resultados> getResultado() {
+        
         return resultado;
     }
 
@@ -120,6 +121,7 @@ public class Encuentro {
      * @param resultado
      */
     public void asignaResultado(Resultados resultado){
+        this.resultado=new Stack <Resultados>();
             this.resultado.add(resultado);
         }
 }
