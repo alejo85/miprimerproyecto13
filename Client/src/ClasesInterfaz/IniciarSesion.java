@@ -50,8 +50,6 @@ public class IniciarSesion extends JDialog {
     private Usuario usuarioActual = null;
     
 
-
-
     public IniciarSesion() {
         this(null, "", false);
     }
@@ -70,7 +68,7 @@ public class IniciarSesion extends JDialog {
        // getContentPane().setBackground(new java.awt.Color(58,58,58));
         CerrarVentana();
         // TAMAÑO VENTANA
-        this.setSize(new Dimension(604, 455));
+        this.setSize(new Dimension(530, 455));
         this.getContentPane().setLayout( null );
         this.setTitle("Iniciar Sesión");
         
@@ -140,7 +138,6 @@ public class IniciarSesion extends JDialog {
 
         jLabelLogo.setIcon(imagenCandado);
 
-      
         this.getContentPane().add(contraeñaJPasswordField, null);
         this.getContentPane().add(jLabelLogo, null);
         this.getContentPane().add(jLabelIngresoAlSistema, null);
@@ -163,7 +160,6 @@ public class IniciarSesion extends JDialog {
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
         setVisible(false);
-
         dispose(); // cuando se cierra, se pierde los cambios realizados
         new Principal();
     }
@@ -193,6 +189,8 @@ public class IniciarSesion extends JDialog {
        else{
            JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/check.png"));
            this.setVisible(false);
+           System.out.println(this.getUsuarioActual().getApellido());
+        
            new Principal(this.getUsuarioActual());
        }
        }

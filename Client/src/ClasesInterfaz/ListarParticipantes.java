@@ -1,11 +1,8 @@
 package ClasesInterfaz;
 
 
-import ClasesGestores.ParticipanteGestor;
-
 import ClasesLogicas.Competencia;
 import ClasesLogicas.ModeloTabla;
-import ClasesLogicas.Participante;
 import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
@@ -16,9 +13,6 @@ import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import java.util.Vector;
 
@@ -45,20 +39,17 @@ public class ListarParticipantes extends JDialog {
     private JButton eliminarPrticipanteJButton = new JButton();
     private Competencia competenciaSeleccionada=null;
     private Usuario usuarioAcatual=null;
-    private VerCompetencia ventanaAnterior;
-    private AltaParticipante ven=null;
 
-    public ListarParticipantes(Usuario usuario, Competencia competencia, VerCompetencia ventana) {
+    public ListarParticipantes(Usuario usuario, Competencia competencia) {
 
-        this(null, "", false, usuario, competencia, ventana);
+        this(null, "", false, usuario, competencia);
     }
 
-    public ListarParticipantes(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia,VerCompetencia ventana) {
+    public ListarParticipantes(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia) {
         super(parent, title, modal);
         try {
             this.usuarioAcatual=usuario;
             this.competenciaSeleccionada=competencia;
-            this.ventanaAnterior=ventana;
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +59,6 @@ public class ListarParticipantes extends JDialog {
 
 
     private void jbInit() throws Exception {
-        CerrarVentana();
         tablaParticipantesJTable.setModel(modelo);
         cargarParticipantes();
         this.setSize(new Dimension(808, 627));
@@ -136,74 +126,32 @@ public class ListarParticipantes extends JDialog {
 
 
     private void altaParticipanteJButton_actionPerformed(ActionEvent e) {
-        ven = new AltaParticipante(competenciaSeleccionada, this);
+        AltaParticipante ven = new AltaParticipante(competenciaSeleccionada);
         ven.setVisible(true);
-        super.setVisible(false);
     }
-    /*public void setVisible(boolean b){
-            
-            actualizar();
-            super.setVisible(b);
-        }*/
+
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setCompetencia(competenciaSeleccionada);
-        ventanaAnterior.setVisible(true);
+        this.setVisible(false);
     }
 
     private void modificarParticipanteJButton_actionPerformed(ActionEvent e) {
-        /*ModificarParticipante ven = new ModificarParticipante();
-        ven.setVisible(true);*/
-        JOptionPane.showOptionDialog(null, "Por el momento esta funcionalidad no esta disponible"  , "Funcionalidad no disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        ModificarParticipante ven = new ModificarParticipante();
+        ven.setVisible(true);
     }
 
     private void eliminarPrticipanteJButton_actionPerformed(ActionEvent e) {
-        /*int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea eliminar el Participante: Nombre Participante?.", "Eliminar Participante.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
+        int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea eliminar el Participante: Nombre Participante?.", "Eliminar Participante.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
         
             JOptionPane.showOptionDialog(null, "Se ha eliminado el participante nombre del participante de la competecnia Nombre Competencia "  , "Participante Eliminado.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-        }  */
-        JOptionPane.showOptionDialog(null, "Por el momento esta funcionalidad no esta disponible"  , "Funcionalidad no disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        }  
     }
     private void cargarParticipantes(){
-            
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
                     Vector <String> datos = new Vector <String>();
                     datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
-                    datos.add(competenciaSeleccionada.getParticipantes()[i].getCorreo());
-                    modelo.addRow(datos);
-                }
-            nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
-            tablaParticipantesJTable.setModel(modelo);
-        }
-    public void setCompetencia(Competencia competencia)
-    {
-        competenciaSeleccionada=competencia;
-            actualizar();
-        }
-    private void actualizar(){
-     
-            modelo = new ModeloTabla(new String[] { "Nombre", "Correo" }, 0);
-            for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
-                    Vector <String> datos = new Vector <String>();
                     datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
-                    datos.add(competenciaSeleccionada.getParticipantes()[i].getCorreo());
                     modelo.addRow(datos);
                 }
-            nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
-            tablaParticipantesJTable.setModel(modelo);
-           
         }
-    private void CerrarVentana(){
-    addWindowListener(new WindowAdapter() {
-    public void windowClosing(WindowEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setCompetencia(competenciaSeleccionada);
-        ventanaAnterior.setVisible(true);
-        
-    }
-    });
-    }
 }

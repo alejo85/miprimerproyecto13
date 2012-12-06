@@ -85,28 +85,7 @@ public class ModificarLaCompetencia extends JDialog {
         private JButton subrayadoJButton = new JButton();
             
         private Competencia competencia=null;
-            
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+  
         public ModificarLaCompetencia(Usuario usuario, Competencia competencia) {
 
             this(null, "", false, usuario, competencia);
@@ -274,6 +253,7 @@ public class ModificarLaCompetencia extends JDialog {
             disponibilidadJTextArea.setBounds(new Rectangle(500, 140, 110, 30));
             disponibilidadJTextArea.setFont(new Font("Tahoma", 0, 13));
             disponibilidadJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+            //TODO revisar metodo deprecado
             disponibilidadJTextArea.setNextFocusableComponent(this);
             jLabelDisponibilidad.setText("Disponibilidad");
             jLabelDisponibilidad.setBounds(new Rectangle(500, 110, 110, 25));
