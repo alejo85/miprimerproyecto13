@@ -64,19 +64,19 @@ public class GestionarResultados extends JDialog {
     private JRadioButton equipoAmbosSetJRadioButton = new JRadioButton();
 
 
-    public GestionarResultados(Competencia competenciaSeleccionada, Usuario usuario,  ModificarFixture ventana, Encuentro encuentro) {
+    public GestionarResultados(Competencia competenciaSeleccionada, Usuario usuario,   Encuentro encuentro) {
   
-            this(null, "", false,  competenciaSeleccionada,  usuario,   ventana,  encuentro);
+            this(null, "", false,  competenciaSeleccionada,  usuario,  encuentro);
        
     }
 
-    public GestionarResultados(Frame parent, String title, boolean modal,Competencia competenciaSeleccionada, Usuario usuario,  ModificarFixture ventana, Encuentro encuentro) {
+    public GestionarResultados(Frame parent, String title, boolean modal,Competencia competenciaSeleccionada, Usuario usuario, Encuentro encuentro) {
         super(parent, title, modal);
     
             competenciaActual=competenciaSeleccionada;
             encuentroSeleccionado=encuentro;
             usuarioAcatual=usuario;
-            ventanaAnterior=ventana;
+         
 
             if(competenciaActual.getFormaDePuntuacion().equals("Resultado Final"))
 
