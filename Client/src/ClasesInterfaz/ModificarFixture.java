@@ -1,6 +1,7 @@
 package ClasesInterfaz;
 
 
+import ClasesLogicas.Competencia;
 import ClasesLogicas.Fixture;
 import ClasesLogicas.Usuario;
 
@@ -37,21 +38,31 @@ public class ModificarFixture extends JDialog {
     private JList listaDeFechasJList = new JList();
     private Fixture fixtureSeleccionada=null;
     private Usuario usuarioActual=null;
-
+    private Competencia competenciaSeleccionada=null;
 
     /**
      * @param fixture
      * @param usuario
      */
-    public ModificarFixture(Fixture fixture,Usuario usuario) {
-        this(null, "", false, fixture, usuario);
+
+    public ModificarFixture(Competencia unaCompetencia,Usuario usuario) {
+        this(null, "", false, unaCompetencia, usuario);
+
     }
 
-    public ModificarFixture(Frame parent, String title, boolean modal, Fixture fixture,Usuario usuario) {
+
+    public ModificarFixture(Frame parent, String title, boolean modal, Competencia unaCompetencia,Usuario usuario ) {
+
         super(parent, title, modal);
         try {
-            fixtureSeleccionada=fixture;
+
+
             usuarioActual=usuario;
+            competenciaSeleccionada=unaCompetencia;
+           
+
+           
+
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
