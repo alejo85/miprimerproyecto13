@@ -189,7 +189,6 @@ public class IniciarSesion extends JDialog {
        else{
            JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/check.png"));
            this.setVisible(false);
-           System.out.println(this.getUsuarioActual().getApellido());
         
            new Principal(this.getUsuarioActual());
        }
