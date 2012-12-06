@@ -191,7 +191,7 @@ public class ModificarFixture extends JDialog {
             {
                     if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getIdParticipante()!=1)
                     {
-                    GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,  this, getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()));
+                    GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()));
                     this.setVisible(false);
                     ven.setVisible(true);
                     }
