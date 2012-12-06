@@ -1,9 +1,9 @@
 package ClasesLogicas;
 
 public class Resultados {
-    private Integer idResultado;
-    private Integer numeroDeRonda;
-    private Boolean asistencia;
+    private int idResultado;
+    private int numeroDeRonda;
+    private int asistencia;
     private Puntos[] puntuacion;
     
     public Resultados(){
@@ -11,7 +11,7 @@ public class Resultados {
     
     }
     
-    public Resultados(Integer idResultado, Integer numeroDeRonda, Boolean asistencia, Puntos[] puntuacion) {
+    public Resultados(int idResultado, int numeroDeRonda, int asistencia, Puntos[] puntuacion) {
         super();
         this.idResultado = idResultado;
         this.numeroDeRonda = numeroDeRonda;
@@ -19,13 +19,13 @@ public class Resultados {
         this.puntuacion = puntuacion;
     }
 
-    public Resultados(Integer numeroDeRonda, Boolean asistencia, Puntos[] puntuacion) {
+    public Resultados(int numeroDeRonda, int asistencia, Puntos[] puntuacion) {
         super();
         this.numeroDeRonda = numeroDeRonda;
         this.asistencia = asistencia;
         this.puntuacion = puntuacion;
     }
-    public Resultados(Integer numeroDeRonda, Boolean asistencia, Puntos puntuacion) {
+    public Resultados(int numeroDeRonda, int asistencia, Puntos puntuacion) {
         super();
         this.numeroDeRonda = numeroDeRonda;
         this.asistencia = asistencia;
@@ -47,11 +47,11 @@ public class Resultados {
         return numeroDeRonda;
     }
 
-    public void setAsistencia(Boolean asistencia) {
+    public void setAsistencia(int asistencia) {
         this.asistencia = asistencia;
     }
 
-    public Boolean getAsistencia() {
+    public int getAsistencia() {
         return asistencia;
     }
 
