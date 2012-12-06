@@ -193,6 +193,7 @@ public class ModificarFixture extends JDialog {
                     {
                     GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()));
                     this.setVisible(false);
+                    dispose();
                     ven.setVisible(true);
                     }
              
@@ -261,8 +262,8 @@ public class ModificarFixture extends JDialog {
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
         setVisible(false);
-        ventanaAnterior.setCompetencia(competenciaSeleccionada);
-        ventanaAnterior.setVisible(true);
+        dispose();
+        new VerCompetencia(usuarioAcatual, competenciaSeleccionada);
        
     }
     });

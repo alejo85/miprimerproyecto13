@@ -29,7 +29,7 @@ public class Principal {
         //// seteamos look and feel
         
         try {
-                UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel"); //aca pasamos de parametro una funcion
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel"); //aca pasamos de parametro una funcion
                                                                                     //que toma el look and feel del sistema, para pasar uno
                                                                                     //especifico se pasa asi ("nombredellookandfeel")
                 																	//UIManager.getSystemLookAndFeelClassName()

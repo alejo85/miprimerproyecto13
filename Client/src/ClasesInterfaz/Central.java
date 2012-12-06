@@ -3,10 +3,8 @@ package ClasesInterfaz;
 
 import ClasesLogicas.Usuario;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -22,11 +20,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.metal.*;
 
 
 public class Central extends JFrame {
@@ -47,7 +41,7 @@ public class Central extends JFrame {
     //private JLabel jLabelBienvenidos = new JLabel();
     private JLabel logoJLabel = new JLabel();
     private JLabel jLabelSistemaDeGestiónDeCompetenciasDeportivas = new JLabel();
-    private JTextArea usuarioJTextArea = new JTextArea();
+    private JLabel usuarioJTextArea = new JLabel();
     //private JLabel jLabelUsuario = new JLabel();
     private JPanel gestiónUsuarioJPanel = new JPanel();
     private JButton modificarUsuarioJButton = new JButton();
@@ -63,6 +57,9 @@ public class Central extends JFrame {
     public Central() {
           
         this.usuarioActual=null;
+
+       
+
         try {
             jbInit();
         } catch (Exception e) {
@@ -94,7 +91,7 @@ public class Central extends JFrame {
         competencia.setText("Competencia");
         buscarCompetencia.setText("Buscar Competencias");
         buscarTodasLasCompetencias.setText("Buscar Todas las Competencias");
-        usuarioJTextArea.setEditable(false);
+        
         // PESTAÑA LUGAR DE REALIZACION
         lugar.setText("Lugar de Realización");
         altaLugarDeRealizacion.setText("Nuevo Lugar de Realización");
