@@ -110,10 +110,10 @@ public class Central extends JFrame {
         menuFileExit.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { jButtonAceptar2_actionPerformed( ae ); } } );
         
         menuHelpAbout.addActionListener( new ActionListener() { public void actionPerformed( ActionEvent ae ) { helpAbout_ActionPerformed( ae ); } } );
-        ImageIcon imagenCandado = new ImageIcon("src/Imagenes/Logo_mejorado.jpg");
+        ImageIcon imagenCandado = new ImageIcon("src/Imagenes/Logo_mejorado.png");
      
         
-        logoJLabel.setBounds(new Rectangle(469, 67, 149, 103));
+        logoJLabel.setBounds(new Rectangle(469, 67, 103, 103));
         logoJLabel.setIcon(imagenCandado);
         
         usuarioJTextArea.setBounds(new Rectangle(45, 85, 300, 40));
