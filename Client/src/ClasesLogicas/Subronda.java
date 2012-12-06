@@ -43,4 +43,13 @@ public class Subronda {
     public boolean getEstado() {
         return estado;
     }
+    public void remplazarEncuentro(Encuentro unEncuentro){
+        
+        for(int i =0; i<this.encuentros.length;i++)
+        {
+            if(this.encuentros[i].getIdEncuentro()==unEncuentro.getIdEncuentro())
+                this.encuentros[i]=unEncuentro;
+            }
+        
+        }
 }
