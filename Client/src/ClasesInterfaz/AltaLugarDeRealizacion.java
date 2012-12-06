@@ -34,10 +34,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 public class AltaLugarDeRealizacion extends JDialog {
-    private JTextArea codigoJTextArea = new JTextArea();
+    private JTextField codigoJTextArea = new JTextField();
     private JLabel jLabelCodigo = new JLabel();
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel();
