@@ -151,7 +151,7 @@ public class EncuentroGestor {
         
         unResultado.setPuntuacion(puntos);
             unEncuentro.setResultado(unResultado);
-                unEncuentro.setAsistencia(asistencia);
+                //unEncuentro.setAsistencia(asistencia);
             
             
             
