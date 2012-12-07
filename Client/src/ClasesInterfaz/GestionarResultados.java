@@ -118,7 +118,6 @@ public class GestionarResultados extends JDialog {
 
     }
     private void jbInit() throws Exception {
-         
            CerrarVentana();
            this.setSize(new Dimension(596, 280));
                this.getContentPane().setLayout( null );
@@ -179,10 +178,6 @@ public class GestionarResultados extends JDialog {
            this.getContentPane().add(equipoAJLabel, null);
            this.getContentPane().add(aceptarJButton, null);
            this.getContentPane().add(cancelarJButton, null);
-
-           
-           
-           cargarDatos();
        }
 
 
@@ -565,16 +560,16 @@ public class GestionarResultados extends JDialog {
         {
                 if(empateJRadioButton.isSelected())
                 {
-                    EncuentroGestor.ganadorEmpate(encuentroSeleccionado);
+                    EncuentroGestor.ganadorEmpate(encuentroSeleccionado, "Resultado Final");
                     }
                 else{
                         if(ganadorEquipoAJRadioButton.isSelected())
                         {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA());
+                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(),encuentroSeleccionado.getParticipanteB(),"Resultado Final");
                             }
                         if(ganadorEquipoBJRadioButton.isSelected())
                         {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB());
+                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB(),encuentroSeleccionado.getParticipanteA(), "Resultado Final");
                             }
                     }
                
@@ -583,16 +578,16 @@ public class GestionarResultados extends JDialog {
         {
                 if(presenteEquipoAmbosJRadioButton.isSelected())
                 {
-                    EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(), encuentroSeleccionado.getParticipanteB(), Integer.parseInt(puntosEquipoAJTextArea.getText()), Integer.parseInt(puntosEquipoBJTextArea.getText()));
+                    EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(), encuentroSeleccionado.getParticipanteB(), Integer.parseInt(puntosEquipoAJTextArea.getText()), Integer.parseInt(puntosEquipoBJTextArea.getText()), "Puntuación");
                     }
                 else{
                         if(presenteEquipoAJRadioButton.isSelected())
                         {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA());
+                                EncuentroGestor.presente(encuentroSeleccionado, -1 ,"Puntuación");
                             }
                         if(presenteEquipoBJRadioButton.isSelected())
                         {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB());
+                                EncuentroGestor.presente(encuentroSeleccionado, 1, "Puntuación");
                             }
                     }
                
@@ -601,16 +596,16 @@ public class GestionarResultados extends JDialog {
         {
                 if(equipoAmbosSetJRadioButton.isSelected())
                 {
-                    EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, 0);
+                    EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, 0,"Sets" );
                     }
                 else{
                         if(equipoASetJRadioButton.isSelected())
                         {
-                                EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, -1);
+                                EncuentroGestor.presente(encuentroSeleccionado, -1,  "Sets");
                             }
                         if(equipoBSetJRadioButton.isSelected())
                         {
-                                EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, 1);
+                                EncuentroGestor.presente(encuentroSeleccionado, 1,   "Sets");
                             }
                     }
                
