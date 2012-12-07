@@ -558,6 +558,9 @@ public class GestionarResultados extends JDialog {
         }
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         //TODO VerificarDatos Resultado
+        
+        
+        
         if(competenciaActual.getFormaDePuntuacion().equals("Resultado Final"))
         {
                 if(empateJRadioButton.isSelected())
@@ -614,6 +617,11 @@ public class GestionarResultados extends JDialog {
             }
         //competenciaActual=CompetenciaGestor.reemplazarEncuentro(competenciaActual, encuentroSeleccionado, nroRonda);
        //TODO SETEAR LA COMPETENCIA CON EL RESULTADO
+        
+        competenciaActual.actualizarResultados(encuentroSeleccionado);
+        
+        
+        
        setVisible(false);
         dispose();
         new  ModificarFixture(competenciaActual, usuarioAcatual).setVisible(true);

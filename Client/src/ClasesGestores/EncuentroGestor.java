@@ -96,13 +96,13 @@ public class EncuentroGestor {
                         //TODO RecuperarResultado
                       //System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre()+"Participante B: "+retorno.getParticipanteB().getNombre());
                         datos.add(retorno);
-                        System.out.println("termina");
+                        System.out.println("terminaalalla");
                  
                     }
                     encuentros= new Encuentro[datos.size()];
                     for(int j=0;j<datos.size();j++){
                             encuentros[j]=datos.get(j);
-                            System.out.println("id_encuentro: "+encuentros[j].getIdEncuentro()+"Participante A: "+encuentros[j].getParticipanteA().getNombre()+"Participante B: "+encuentros[j].getParticipanteB().getNombre());
+                           // System.out.println("id_encuentro: "+encuentros[j].getIdEncuentro()+"Participante A: "+encuentros[j].getParticipanteA().getNombre()+"Participante B: "+encuentros[j].getParticipanteB().getNombre());
                         }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -150,14 +150,15 @@ public class EncuentroGestor {
     /**
      * @param puntos
      */
-    public void guardarResultado(Encuentro unEncuentro, Puntos puntos[], int asistencia){
+    public void guardarResultado(Encuentro unEncuentro, Puntos puntos[]){
         Resultados unResultado = new Resultados();
-        unResultado.setAsistencia(asistencia);
+
         unResultado.setPuntuacion(puntos);
-            unEncuentro.setResultado(unResultado);
+        unEncuentro.setResultado(unResultado);
             
             
-            }
+
+    }
 
     /**
      * @param participanteGanador

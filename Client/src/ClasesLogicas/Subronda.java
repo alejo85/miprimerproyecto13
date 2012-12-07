@@ -49,7 +49,7 @@ public class Subronda {
         {
             if(this.encuentros[i].getIdEncuentro()==unEncuentro.getIdEncuentro())
                 this.encuentros[i]=unEncuentro;
-            }
+}
         
         }
 }
