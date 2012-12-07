@@ -25,7 +25,7 @@ public class LugarDeRealizaciónDB {
                            }*/
                            String consultasql;
                            consultasql="select L.* from LUGAR_DE_REALIZACION as L, CREA as C, ASOCIADO as A where C.Creador='"+correoElectronico+"' and C.id_Lugar_de_Realizacion=A.id_Lugar_de_Realizacion and A.id_Deporte='"+idDeporteSeleccionado+"' and C.id_Lugar_de_Realizacion=L.id_Lugar_de_Realizacion;";
-                            System.out.println(consultasql);
+                            //System.out.println(consultasql);
                            try {
                                resultado = Conexion.consulta.executeQuery(consultasql);
                            } catch (SQLException e) {
