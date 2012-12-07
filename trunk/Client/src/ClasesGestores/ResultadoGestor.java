@@ -72,8 +72,10 @@ public class ResultadoGestor {
             }
         return retorno;
     }
-    public static  Resultados crearResultado(int cantidadPuntos, JTable tablaDeSetsJTable, int asistencia){
+
+    public static  Resultados crearResultado(int cantidadPuntos, JTable tablaDeSetsJTable ){
         Resultados unResultado=crearResultado(crearPuntosSets(cantidadPuntos, tablaDeSetsJTable));
+
        
         return unResultado;
     }
