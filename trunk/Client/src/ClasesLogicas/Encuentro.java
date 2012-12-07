@@ -9,9 +9,11 @@ public class Encuentro {
     private Participante ganador;
     private Participante perdedor;
     private Boolean empate=false;
+
     private int asistencia; //-1 ==> Asistio A: 0==> los dos; 1 ==> asistio B
     private String horaResultado;
     private String fechaResultado;
+
     private Stack <Resultados> resultado;
     private LugarDeRealizacion locación;
     
@@ -86,6 +88,33 @@ public class Encuentro {
     public void setGanador(Participante ganador) {
         this.ganador = ganador;
     }
+<<<<<<< .mine
+    public void setGanador() {
+
+            int puntosA=0;
+            int puntosB=0;
+            for(int i=0; i<this.resultado.pop().getPuntuacion().length;i++)
+            {
+                    puntosA+=this.resultado.pop().getPuntuacion()[i].getPuntoA();
+                    puntosB+=this.resultado.pop().getPuntuacion()[i].getPuntoB();
+                }
+            if(puntosA==puntosB)
+            {
+                this.empate=true;
+                }
+            else
+                if(puntosA>puntosB)
+                {
+                    this.ganador=this.participanteA;
+                    this.perdedor=this.participanteB;
+                    }
+                else
+                    this.ganador=this.participanteB;
+                    this.perdedor=this.participanteA;
+                
+
+    }
+
     public void setGanador() {
 
             int puntosA=0;
@@ -112,6 +141,7 @@ public class Encuentro {
 
     }
 
+
     public Participante getGanador() {
         return ganador;
     }
@@ -136,7 +166,7 @@ public class Encuentro {
         this.resultado = resultado;
     }
     public void setResultado(Resultados resultado) {
-        this.resultado.add(resultado);
+        this.resultado.push(resultado);
     }
     public Stack<Resultados> getResultado() {
         
