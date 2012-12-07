@@ -205,20 +205,21 @@ public class ModificarFixture extends JDialog {
 
     private void cargarRondas(int nroRonda){
            
-            Ronda[] rondas=competenciaSeleccionada.getFixture().getRondas();
-                modeloDeTablaDeFecha= new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Tipo de Ronda" , "Equipo A", "Equipo B", "Resultado" }, 0);
+                     Ronda[] rondas=competenciaSeleccionada.getFixture().getRondas();
+                     modeloDeTablaDeFecha= new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Tipo de Ronda" , "Equipo A", "Equipo B", "Resultado" }, 0);
    
-                        Subronda sub = rondas[nroRonda].getGanadores();
-                        Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
-                       // System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
+                     Subronda sub = rondas[nroRonda].getGanadores();
+                     Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
+                       
                      for(int j=0;j<encuentrosDeSubRonda.length;j++)
                        {
                          int aux=nroRonda+1;
-                            Vector <String> datos = new Vector <String>();
-                            datos.add(""+rondas[nroRonda].getNumeroDeRonda());
-                                datos.add("Liga");
-                            datos.add(encuentrosDeSubRonda[j].getParticipanteA().getNombre());
-                            datos.add(encuentrosDeSubRonda[j].getParticipanteB().getNombre());
+                         Vector <String> datos = new Vector <String>();
+                         datos.add(""+rondas[nroRonda].getNumeroDeRonda());
+                         datos.add("Liga");
+                         datos.add(encuentrosDeSubRonda[j].getParticipanteA().getNombre());
+                         datos.add(encuentrosDeSubRonda[j].getParticipanteB().getNombre());
+                         
                          if(encuentrosDeSubRonda[j].getResultado()!=null)
                          {
                              if(competenciaSeleccionada.getFormaDePuntuacion().equals("Sets"))
@@ -226,38 +227,36 @@ public class ModificarFixture extends JDialog {
                                  String resultado="";
                                  for(int h=0; h<encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion().length-1;h++)
                                  {
-                                         resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoB()+" ]";
-                                     }
-                                     datos.add(""+resultado);
+                                     resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoB()+" ]";
                                  }
+                                 datos.add(""+resultado);
+                            }
 
-                                 if(competenciaSeleccionada.getFormaDePuntuacion().equals("Puntuación"))
-                                 {
-                                     String resultado="";
-                                     resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoB()+" ]";
-                                     datos.add(""+resultado);
-                                 }
+                            if(competenciaSeleccionada.getFormaDePuntuacion().equals("Puntuación"))
+                            {
+                                 String resultado="";
+                                 resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoB()+" ]";
+                                 datos.add(""+resultado);
+                            }
                                  
-                             }
-                                if(encuentrosDeSubRonda[j].getGanador()!=null)
-                                {
-                                                               if(competenciaSeleccionada.getFormaDePuntuacion().equals("Resultado Final"))
-                                        {
-                                            String resultado="";
-                                                if(encuentrosDeSubRonda[j].getEmpate())
-                                                    resultado+="Empate ";
-                                                    else
-                                                    resultado+="Ganador: "+encuentrosDeSubRonda[j].getGanador().getNombre();
-                                                
-                                                datos.add(""+resultado);
-                                            }
-                                    }
+                        }
+                              
+                         if(competenciaSeleccionada.getFormaDePuntuacion().equals("Resultado Final"))
+                         {
+                                 String resultado="";
+                                 if(encuentrosDeSubRonda[j].getEmpate())
+                                 resultado+="Empate ";
+                                 else if(encuentrosDeSubRonda[j].getGanador()!=null)
+                                 resultado+="Ganador: "+encuentrosDeSubRonda[j].getGanador().getNombre();
+                                 datos.add(""+resultado);
+                        }
+                                  
                          
-                                datos.add("");
+                        datos.add("");
                            
            
-                            modeloDeTablaDeFecha.addRow(datos);
-                            }
+                       modeloDeTablaDeFecha.addRow(datos);
+                     }
              
             tablaDeFechaJTable.setModel(modeloDeTablaDeFecha);
                
@@ -267,11 +266,11 @@ public class ModificarFixture extends JDialog {
         modeloDeFecha =  new ModeloTabla(new String[] { "Fecha/Ronda Nº"}, 0);
         for(int i=0; i<rondas.length;i++ ){
 
-                    Vector <String> datos = new Vector <String>();
-                        datos.add(""+rondas[i].getNumeroDeRonda());
-                    modeloDeFecha.addRow(datos);
+                Vector <String> datos = new Vector <String>();
+                datos.add(""+rondas[i].getNumeroDeRonda());
+                modeloDeFecha.addRow(datos);
                
-            }
+        }
         fechaJTable.setModel(modeloDeFecha);
        
     }
@@ -280,7 +279,7 @@ public class ModificarFixture extends JDialog {
         if(nroRonda>0){
                 nroRonda--;
                 cargarRondas(nroRonda);
-            }
+        }
     }
 
     private void siguienteJButton_actionPerformed(ActionEvent e) {
@@ -289,7 +288,7 @@ public class ModificarFixture extends JDialog {
                 nroRonda++;
                 cargarRondas(nroRonda);
 
-            }
+        }
     }
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
@@ -333,10 +332,10 @@ public class ModificarFixture extends JDialog {
                    
                 else
                 gestionarResultadoJButton.setEnabled(false);
-            }
+        }
         else{
                 gestionarResultadoJButton.setEnabled(true);
-            }
+        }
      
            
            

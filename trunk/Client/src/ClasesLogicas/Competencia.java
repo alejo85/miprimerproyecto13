@@ -1,5 +1,7 @@
 package ClasesLogicas;
 
+import ClasesGestores.CompetenciaGestor;
+
 import java.util.Vector;
 
 public class Competencia{
@@ -191,5 +193,8 @@ public class Competencia{
 
     public Participante[] getParticipantes() {
         return participantes;
+    }
+    public void actualizarResultados(Encuentro encuentro){
+        CompetenciaGestor.actualizarResultados(this, encuentro);
     }
 }

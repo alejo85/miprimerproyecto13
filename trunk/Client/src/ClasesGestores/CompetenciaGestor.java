@@ -176,7 +176,27 @@ public class CompetenciaGestor {
     /**
      * @param IDcompetencia
      */
-    public void crearTabla(int IDcompetencia){
+    public static void crearTabla(int idCompetencia){
+        
+            Competencia competencia = buscarCompetencia(idCompetencia);
+            Vector <Posicion> tabla = new Vector <Posicion>();
+            int idTabla=0;
+            Participante[] participantes = competencia.getParticipantes();
+            Posicion unaPosicion;
+                
+            for(int i=0; i<participantes.length; i++){
+                unaPosicion = new Posicion(0,i+1,0,0,0,0,0,0,0,participantes[i]);
+            try {
+                idTabla = CompetenciaDB.guardarPosicion(unaPosicion,idCompetencia);
+            } catch (SQLException e) {
+            }
+            unaPosicion.setIdTabla(idTabla);
+            tabla.add(unaPosicion);
+        }
+            
+            competencia.setTablaDePosiciones(tabla);
+            
+            
         
         }
 
@@ -391,7 +411,9 @@ public class CompetenciaGestor {
             unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
             if(unaCompetencia.getFormaDePuntuacion().equals("Sets")){
                     unaCompetencia.setCantidadDeSets(CompetenciaGestor.getCantidadMaximaDeSets(unaCompetencia.getIdCompetencia()));
-                }
+            }
+            if(unaCompetencia.getModalidad().equals("Liga"))
+                unaCompetencia.setTablaDePosiciones(CompetenciaDB.getTablaDePosiciones(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setLugares(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia));
@@ -462,6 +484,43 @@ public class CompetenciaGestor {
         return competenciaEncontradas;
         }
     
+    public static void actualizarResultados(Competencia competencia,Encuentro encuentro){
+        
+        Participante participanteA = encuentro.getParticipanteA();
+        Participante participanteB = encuentro.getParticipanteB();
+        Vector <Posicion> tabla = competencia.getTablaDePosiciones();
+        int puntosEmpate=0;
+        
+        if (encuentro.getEmpate())
+            puntosEmpate = competencia.getLiga().getPuntosPorPartidoEmpatado();
+        
+        for(int i=0; i < competencia.getParticipantes().length; i++){
+            if (tabla.get(i).getParticipante()==participanteA){
+                   if ( participanteA==encuentro.getGanador() )
+                     tabla.get(i).setPuntos(tabla.get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
+                   
+                   if (encuentro.getAsistencia() == -1)
+                        tabla.get(i).setPuntos(tabla.get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
+            }
+            
+            else if (tabla.get(i).getParticipante()==participanteB){
+                   if (participanteA==encuentro.getGanador())
+                        tabla.get(i).setPuntos(tabla.get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
+                        
+                   
+                    if (encuentro.getAsistencia() == 1)
+                        tabla.get(i).setPuntos(tabla.get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
+           
+           }
+            
+            
+            
+        }
+        
+        
+        
+        
+    }
     
     public static enum Modalidad
     {

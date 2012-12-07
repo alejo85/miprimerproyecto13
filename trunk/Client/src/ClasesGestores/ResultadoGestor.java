@@ -35,10 +35,10 @@ public class ResultadoGestor {
      * @param puntos
      * @return
      */
-    public static Resultados crearResultado(Puntos[] puntos, int asistencia){
+    public static Resultados crearResultado(Puntos[] puntos){
         
        Resultados unResultado=new Resultados();
-       unResultado.setAsistencia(asistencia);
+       
        unResultado.setPuntuacion(puntos);
        
         return unResultado;
@@ -73,7 +73,7 @@ public class ResultadoGestor {
         return retorno;
     }
     public static  Resultados crearResultado(int cantidadPuntos, JTable tablaDeSetsJTable, int asistencia){
-        Resultados unResultado=crearResultado(crearPuntosSets(cantidadPuntos, tablaDeSetsJTable), asistencia);
+        Resultados unResultado=crearResultado(crearPuntosSets(cantidadPuntos, tablaDeSetsJTable));
        
         return unResultado;
     }

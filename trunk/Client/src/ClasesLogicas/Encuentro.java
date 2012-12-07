@@ -9,27 +9,19 @@ public class Encuentro {
     private Participante ganador;
     private Participante perdedor;
     private Boolean empate=false;
+    private int asistencia; //-1 ==> Asistio A: 0==> los dos; 1 ==> asistio B
+    private String horaResultado;
+    private String fechaResultado;
     private Stack <Resultados> resultado;
     private LugarDeRealizacion locación;
+    
 
 
     public Encuentro() {
         super();
     }
 
-    public Encuentro(Integer idEncuentro,Participante participanteA, Participante participanteB,
-                     Participante ganador, Participante perdedor, Boolean empate, Stack<Resultados> resultado,
-                     LugarDeRealizacion locación) {
-        super();
-        this.idEncuentro = idEncuentro;
-        this.participanteA = participanteA;
-        this.participanteB = participanteB;
-        this.ganador = ganador;
-        this.perdedor = perdedor;
-        this.empate = empate;
-        this.resultado = resultado;
-        this.locación = locación;
-    }
+
 
     public Encuentro(Participante participanteA, Participante participanteB, Participante ganador,
                      Participante perdedor, Boolean empate, Stack<Resultados> resultado, LugarDeRealizacion locación) {
@@ -45,6 +37,23 @@ public class Encuentro {
 
     public Encuentro(LugarDeRealizacion locación) {
         super();
+        this.locación = locación;
+    }
+
+    public Encuentro(Integer idEncuentro, Participante participanteA, Participante participanteB, Participante ganador,
+                     Participante perdedor, Boolean empate, int asistencia, String horaResultado,
+                     String fechaResultado, Stack<Resultados> resultado, LugarDeRealizacion locación) {
+        super();
+        this.idEncuentro = idEncuentro;
+        this.participanteA = participanteA;
+        this.participanteB = participanteB;
+        this.ganador = ganador;
+        this.perdedor = perdedor;
+        this.empate = empate;
+        this.asistencia = asistencia;
+        this.horaResultado = horaResultado;
+        this.fechaResultado = fechaResultado;
+        this.resultado = resultado;
         this.locación = locación;
     }
 
@@ -76,6 +85,31 @@ public class Encuentro {
 
     public void setGanador(Participante ganador) {
         this.ganador = ganador;
+    }
+    public void setGanador() {
+
+            int puntosA=0;
+            int puntosB=0;
+            for(int i=0; i<this.resultado.get(0).getPuntuacion().length;i++)
+            {
+                    puntosA+=this.resultado.get(0).getPuntuacion()[i].getPuntoA();
+                    puntosB+=this.resultado.get(0).getPuntuacion()[i].getPuntoB();
+                }
+            if(puntosA==puntosB)
+            {
+                this.empate=true;
+                }
+            else
+                if(puntosA>puntosB)
+                {
+                    this.ganador=this.participanteA;
+                    this.perdedor=this.participanteB;
+                    }
+                else
+                    this.ganador=this.participanteB;
+                    this.perdedor=this.participanteA;
+                
+
     }
 
     public Participante getGanador() {
@@ -124,4 +158,28 @@ public class Encuentro {
         this.resultado=new Stack <Resultados>();
             this.resultado.add(resultado);
         }
+
+    public void setAsistencia(int asistencia) {
+        this.asistencia = asistencia;
+    }
+
+    public int getAsistencia() {
+        return asistencia;
+    }
+
+    public void setHoraResultado(String horaResultado) {
+        this.horaResultado = horaResultado;
+    }
+
+    public String getHoraResultado() {
+        return horaResultado;
+    }
+
+    public void setFechaResultado(String fechaResultado) {
+        this.fechaResultado = fechaResultado;
+    }
+
+    public String getFechaResultado() {
+        return fechaResultado;
+    }
 }

@@ -3,12 +3,16 @@ package ClasesGestores;
 
 import ClasesBD.FixtureDB;
 
+import ClasesLogicas.Competencia;
 import ClasesLogicas.Fixture;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
+import ClasesLogicas.Posicion;
 import ClasesLogicas.Ronda;
 
 import java.sql.SQLException;
+
+import java.util.Vector;
 
 public class FixtureGestor {
     public FixtureGestor() {
@@ -20,27 +24,7 @@ public class FixtureGestor {
      * @param participantes
      * @return
      */
- //todo borrar main de prueba
-  /*
-   /*  public static  void main(String[] args) {
-    
-        int i;
-        LugarDeRealizacion[] lugares = new LugarDeRealizacion[3];
-        Deporte deporte[] = new Deporte[10];
-        Participante participantes[]=new Participante[6];  
-        Fixture fixture;
-          
-        for (i=0;i<3;i++){
-            lugares[i]=new LugarDeRealizacion("", "hola","lala", 99, deporte);
-        }
-        
-        for(i=0;i<6;i++){
-            participantes[i]=new Participante(i+"");
-        }
-        
-        fixture = generarFixture(lugares, participantes, 5,8);    
-        System.out.println("");
-     }*/
+ 
 
  
     public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
@@ -50,6 +34,7 @@ public class FixtureGestor {
         Ronda rondas[];
         Participante participantesAux[];
         int cantidad = cantidadDeParticipantes;
+        Competencia compe;
            
         //Comienza decisicion para ver si el numero de participantes es impar, y si se debe
         //agregar un participante auxiliar
@@ -88,10 +73,11 @@ public class FixtureGestor {
         }
         
         fixture.setRondas(rondas);
-            participantesAux=ParticipanteGestor.desordenar(participantesAux);
+        participantesAux=ParticipanteGestor.desordenar(participantesAux);
+        
         cargarParticipantes(participantesAux, fixture);
-
-            //System.out.println("antes de retonar fixture");
+        CompetenciaGestor.crearTabla(idCompetencia);
+    
         return fixture;
         }
    
@@ -154,4 +140,8 @@ public class FixtureGestor {
             System.out.println(e.getMessage());
         }
     }
+    
+   
+    
+    
 }

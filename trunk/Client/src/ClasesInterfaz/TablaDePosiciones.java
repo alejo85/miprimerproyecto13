@@ -42,7 +42,7 @@ public class TablaDePosiciones extends JDialog {
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+          }
     }
     public TablaDePosiciones(Frame parent, String title, boolean modal) {
         super(parent, title, modal);
@@ -80,6 +80,12 @@ public class TablaDePosiciones extends JDialog {
         this.getContentPane().add(jScrollPaneTablaDePosiciones, null);
         this.getContentPane().add(imprimirJButton, null);
         this.getContentPane().add(exportarJButton, null);
+        
+        
+        
+        
+        
+        
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {

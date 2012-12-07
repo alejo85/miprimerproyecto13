@@ -11,6 +11,7 @@ public class Puntos {
         this.puntoA = puntoA;
         this.puntoB = puntoB;
     }
+    
     public Puntos() {
         super();
 
