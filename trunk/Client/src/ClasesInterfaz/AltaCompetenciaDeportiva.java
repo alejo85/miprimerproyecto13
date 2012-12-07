@@ -677,18 +677,18 @@ public class AltaCompetenciaDeportiva extends JDialog {
          private void CerrarVentana(){
          addWindowListener(new WindowAdapter() {
          public void windowClosing(WindowEvent e) {
-             setVisible(false);
-             dispose(); // cuando se cierra, se pierde los cambios realizados
-             new BuscarCompetenciaDeportiva(ussuarioActual);
+             BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(ussuarioActual);
+             ven.setVisible(true);
+             dispose();
             
          }
          });
          }
 
          private void cancelarJButton_actionPerformed(ActionEvent e) {
-             setVisible(false);
-             dispose(); // cuando se cierra, se pierde los cambios realizados
-             new BuscarCompetenciaDeportiva(ussuarioActual);
+             BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(ussuarioActual);
+             ven.setVisible(true);
+             this.dispose();
          }
 
 }

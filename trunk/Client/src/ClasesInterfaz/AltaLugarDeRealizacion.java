@@ -6,7 +6,6 @@ import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Deporte;
 import ClasesLogicas.Usuario;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -193,7 +192,8 @@ public class AltaLugarDeRealizacion extends JDialog {
         }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.dispose();
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
         new Principal(usuarioActual);
     }
     private void cargarDeportes(){
