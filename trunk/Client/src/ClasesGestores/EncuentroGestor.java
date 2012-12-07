@@ -123,12 +123,8 @@ public class EncuentroGestor {
         
         
         }
-    public void guardarResultadoSets(Encuentro unEncuentro, JTable tablaDeSetsJTable, int cantidadPuntos){
           
         
-        
-        }
-
     /**
      * @param lugares se pasa por copia
      * @return
@@ -152,53 +148,85 @@ public class EncuentroGestor {
      */
     public void guardarResultado(Encuentro unEncuentro, Puntos puntos[]){
         Resultados unResultado = new Resultados();
-
+        
         unResultado.setPuntuacion(puntos);
-        unEncuentro.setResultado(unResultado);
+            unEncuentro.setResultado(unResultado);
+                unEncuentro.setAsistencia(asistencia);
             
             
-
-    }
+            
+            }
 
     /**
      * @param participanteGanador
      */
-    public static void ganador(Encuentro unEncuentro,Participante participanteGanador){
+    public static void ganador(Encuentro unEncuentro,Participante participanteGanador, Participante participantePerdedor, String modalidad){
         unEncuentro.setGanador(participanteGanador);
-            EncuentroDB.actualizarEncuentro(unEncuentro);
+        unEncuentro.setPerdedor(participantePerdedor);
+        try {
+            EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+    }
+    public static void ganador(Encuentro unEncuentro,Participante participanteGanador, String modalidad){
+        unEncuentro.setGanador(participanteGanador);
+
+        try {
+            EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void presente(Encuentro unEncuentro,int presente, String modalidad){
+        unEncuentro.setAsistencia(presente);
+        
+        try {
+            EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * @param participanteA
      * @param participanteB
      */
-    public static void ganadorEmpate(Encuentro unEncuentro){
+    public static void ganadorEmpate(Encuentro unEncuentro, String modalidad){
         unEncuentro.setEmpate(true);
         
         
-        EncuentroDB.actualizarEncuentro(unEncuentro);
+        try {
+            EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-    public static void guardarResultado(Encuentro unEncuentro,int cantidadPuntos, JTable tablaDeSetsJTable, int asistencia){
-        unEncuentro.asignaResultado(ResultadoGestor.crearResultado(cantidadPuntos, tablaDeSetsJTable, asistencia));
+    }
+    public static void guardarResultado(Encuentro unEncuentro,int cantidadPuntos, JTable tablaDeSetsJTable, int asistencia, String modalidad){
+        unEncuentro.setAsistencia(asistencia);
+        unEncuentro.asignaResultado(ResultadoGestor.crearResultado(cantidadPuntos, tablaDeSetsJTable));
+        unEncuentro.setGanador();
         
-        
-        EncuentroDB.actualizarEncuentro(unEncuentro);
-        
-        
+        try {
+            EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+    }
     /**
      * @param participanteA
      * @param participanteB
      * @param puntoA
      * @param puntoB
      */
-    public static void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB,int  puntoA,int  puntoB){
+    public static void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB,int  puntoA,int  puntoB, String modalidad){
         Puntos unPunto = new Puntos();
         unPunto.setPuntoA(puntoA);
         unPunto.setPuntoB(puntoB);
         Resultados unResultado = new Resultados();
         unResultado.setPuntuacion(unPunto);
      
+        
         
         if (puntoA==puntoB)
             unEncuentro.setEmpate(true);
@@ -208,6 +236,8 @@ public class EncuentroGestor {
             else
                  unEncuentro.setGanador(participanteA);
         unEncuentro.asignaResultado(unResultado);
+        unEncuentro.setAsistencia(0);
+        
        }
     public static void eliminarEncuentros(Encuentro[] encuentrosAEliminar){
         for(int i=0;i<encuentrosAEliminar.length;i++)
