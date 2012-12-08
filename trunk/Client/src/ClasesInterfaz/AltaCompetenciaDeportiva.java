@@ -92,6 +92,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JButton quitarJButton = new JButton();
     private AreaTextoNumerico disponibilidadJTextArea = new AreaTextoNumerico(4);
     private JLabel jLabelDisponibilidad = new JLabel();
+    private JLabel aclaracionSeleccionDeportes = new JLabel();
     private JTable tablaLugarDisponibilidadJTable = new JTable();
     private JButton agregarJButton = new JButton();
     private int tamaño = 10;
@@ -103,13 +104,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private  Vector<LugarDeRealizacion> lugaresSeleccionados=new Vector<LugarDeRealizacion> ();
     private RichTextBox box = new RichTextBox();
     private JPanel reglamentoJPanel = new JPanel();
-    private JButton jButton1 = new JButton();
     private JScrollPane panel;
     private XYLayout xYLayout1 = new XYLayout();
 
     private JTable listaLugaresJTable = new JTable();
     private JScrollPane jScrollPane2 = new JScrollPane();
-    private JDialog ventanaAnterior=null;
     private Color background = deporteJComboBox.getBackground();
     private Color foreground = deporteJComboBox.getForeground();
     private boolean empate;
@@ -119,6 +118,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JButton cancelarJButton = new JButton();
     private JScrollPane jScrollPane3 = null;
     private XYLayout xYLayout3 = new XYLayout();
+    private JLabel errorDeLugarSelect = new JLabel();
 
 
     public AltaCompetenciaDeportiva(Usuario usuarioLogueado) {
@@ -161,6 +161,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         CerrarVentana();
         this.setTitle("Alta Competencia Deportiva");
         this.setSize(new Dimension(900, 700));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout(xYLayout2);
         panelAlta.setSize(new Dimension(871, 1255));
         panelAlta.setLayout(xYLayout4);
@@ -295,7 +296,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
             });
         disponibilidadJTextArea.setFont(new Font("Tahoma", 0, 13));
         disponibilidadJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        disponibilidadJTextArea.setNextFocusableComponent(this);
+        disponibilidadJTextArea.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    agregarJButton_actionPerformed(e);
+                }
+            });
         jLabelDisponibilidad.setText("Disponibilidad");
         jLabelDisponibilidad.setFont(new Font("Tahoma", 0, 13));
         
@@ -317,7 +322,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         
         
         reglamentoJPanel.setLayout(xYLayout1);
-        jButton1.setText("jButton1");
+       
 
         //   panel.setPreferredSize(new Dimension(350, 270));
 
@@ -348,6 +353,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
             });
         jScrollPane3=new JScrollPane(panelAlta);
         jScrollPane3.getViewport().setLayout(xYLayout3);
+        errorDeLugarSelect.setText("Si desea cambiar el deporte seleccionado, debe primero eliminar los lugares de realización a los que le ha asignado disponibilidad");
+
+        errorDeLugarSelect.setForeground(new Color(231, 0, 0));
+        errorDeLugarSelect.setVisible(false);
         listarDeportes();
         box.setelementos();
 
@@ -365,6 +374,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         panel.setSize(350, 270);
         reglamentoJPanel.setPreferredSize(new Dimension(350,270));
         jScrollPane2.getViewport().add(tablaLugarDisponibilidadJTable, null);
+        panelAlta.add(errorDeLugarSelect, new XYConstraints(70, 305, 675, 40));
         panelAlta.add(jScrollPane2, new XYConstraints(485, 165, 270, 135));
         jScrollPane1.getViewport().add(listaLugaresJTable, null);
         panelAlta.add(jScrollPane1, new XYConstraints(50, 165, 245, 140));
@@ -447,26 +457,33 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
          }
 
-        
+        // SI SE SELECCIONA UN DEPORTE
          private void deporteJComboBox_actionPerformed(ActionEvent e) {
              deporteJComboBox.setBackground(background);
              deporteJComboBox.setForeground(foreground);
              listaLugaresJTable();
-             if(deporteJComboBox.getSelectedIndex()>0)
-             {
-              cargarLugaresDeRealizacion();
+             
+             if(deporteJComboBox.getSelectedIndex()>0){
+                 if(lugaresSeleccionados.size()>0){
+                     deporteJComboBox.setEnabled(false);
+                 }
+                 cargarLugaresDeRealizacion();
              }
-            
          }
+         
+         
          private void cargarLugaresDeRealizacion() {
              int deporte = this.deporteJComboBox.getSelectedIndex();
              deporte--;
+             
+             //ID DEL DEPORTE
              int codigo = this.deporte.get(deporte).getIdDeporte();
-            
+             
              try {
                  lugares = LugaresDeRealizacionGestores.lugaresDeRealizaciónAsociadosAlDeporte(ussuarioActual.getCorreoElectronico(),codigo );
+                 System.out.println("Tamaño lugares despues de buscar:"+lugares.size());
                  cargarLugares();
-                 removerSelecionados();
+                removerSelecionados();
              }
              catch (SQLException f) {
                  System.out.println(f.getMessage());
@@ -475,27 +492,26 @@ public class AltaCompetenciaDeportiva extends JDialog {
          }
         
          private void cargarLugares(){
-            
-             modelo = new ModeloTabla(new String[] { "Lugar De Realizacion" }, 0);
-             listaLugaresJTable.setModel(modelo);
-            TableRowSorter<DefaultTableModel> elQueOrdena1 = new TableRowSorter<DefaultTableModel>(modelo);
-            listaLugaresJTable.setRowSorter(elQueOrdena1);
-             for(int i =0; i<lugares.size();i++)
+            modelo = new ModeloTabla(new String[] { "Lugar De Realizacion" }, 0);
+            listaLugaresJTable.setModel(modelo);
+            //TableRowSorter<DefaultTableModel> elQueOrdena1 = new TableRowSorter<DefaultTableModel>(modelo);
+            //listaLugaresJTable.setRowSorter(elQueOrdena1);
+            System.out.println("TAMAÑO DE VECTOR LUGARES"+lugares.size());
+             for(int i=0; i<lugares.size();i++)
              {
                  Vector <String> datos = new Vector <String>();
                  datos.add(lugares.get(i).getNombre());
+                  System.out.println("NOMBRE LR: "+lugares.get(i).getNombre());
                  modelo.addRow(datos);
-                
-                    
              }
-            
-             }
+        }
          private void cargarLugaresSeleccionados(){
             
              modelo2 = new ModeloTabla(new String[] { "Lugar De Realizacion","Disponibilidad" }, 0);
                  tablaLugarDisponibilidadJTable.setModel(modelo2);
                  TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo2);
                  tablaLugarDisponibilidadJTable.setRowSorter(elQueOrdena);
+                 System.out.println("TAMAÑO DE VECTOR LUGARES SEL"+lugaresSeleccionados.size());
              for(int i =0; i<lugaresSeleccionados.size();i++)
              {
                  Vector <String> datos = new Vector <String>();
@@ -508,10 +524,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
             
              }
          private void removerSelecionados(){
-            
-             modelo2 = new ModeloTabla(new String[] { "Lugar De Realizacion","Disponibilidad" }, 0);
+                modelo2 = new ModeloTabla(new String[] { "Lugar De Realizacion","Disponibilidad" }, 0);
                  tablaLugarDisponibilidadJTable.setModel(modelo2);
                  lugaresSeleccionados.removeAllElements();
+                 System.out.println("Tamaño lugaressel luego de remover:"+lugaresSeleccionados.size());
             
              }
          private void agregarJButton_actionPerformed(ActionEvent e) {
@@ -527,6 +543,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
                      disponibilidadJTextArea.setText("");
                      cargarLugaresSeleccionados();
                  }
+             deporteJComboBox.setEnabled(false);
+             errorDeLugarSelect.setVisible(true);
          }
 
          private void quitarJButton_actionPerformed(ActionEvent e) {
@@ -541,6 +559,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
                      cargarLugares();
                     
                      cargarLugaresSeleccionados();
+                 }
+             if(lugaresSeleccionados.size()==0){
+                     deporteJComboBox.setEnabled(true);
+                     errorDeLugarSelect.setVisible(false);
                  }
          }
 
