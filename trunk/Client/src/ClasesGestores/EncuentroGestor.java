@@ -163,6 +163,7 @@ public class EncuentroGestor {
     public static void ganador(Encuentro unEncuentro,Participante participanteGanador, Participante participantePerdedor, String modalidad){
         unEncuentro.setGanador(participanteGanador);
         unEncuentro.setPerdedor(participantePerdedor);
+        unEncuentro.setAsistencia(0);
         try {
             EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
         } catch (SQLException e) {
