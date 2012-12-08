@@ -85,6 +85,7 @@ public class ModificarFixture extends JDialog {
         }
     }
     private void jbInit() throws Exception {
+        setResizable(false);
         CerrarVentana();
         tablaDeFechaJTable.setModel(modeloDeTablaDeFecha);
         fechaJTable.addFocusListener(new FocusAdapter() {
