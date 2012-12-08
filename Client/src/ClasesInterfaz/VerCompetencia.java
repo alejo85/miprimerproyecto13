@@ -11,6 +11,7 @@ import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
 import ClasesLogicas.Usuario;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -36,14 +37,19 @@ import javax.swing.JTextArea;
 public class VerCompetencia extends JDialog {
     private ModeloTabla modelo = new ModeloTabla(new String[] { "Nombre" }, 0);
     private ModeloTabla modelo2 = new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
-    private JTextArea nombreDeLaCompetenciaJTextArea = new JTextArea();
+    
     private JLabel jLabelDeporte = new JLabel();
     private JLabel jLabelnombreDeLaCompetencia = new JLabel();
-    private JTextArea deporteJTextArea = new JTextArea();
-    private JTextArea modalidadJTextArea = new JTextArea();
+    
+    // DATOS DE LA COMPETENCIA A MOSTRAR
+    private JLabel nombreDeLaCompetenciaJLabel = new JLabel();
+    private JLabel modalidadJLabel = new JLabel();
+    private JLabel deporteJLabel = new JLabel();
+    private JLabel estadoJLabel = new JLabel();
+    
     private JLabel jLabelModalidad = new JLabel();
     private JLabel jLabelEstado = new JLabel();
-    private JTextArea estadoJTextArea = new JTextArea();
+    
     private JLabel jLabelParticipante = new JLabel();
     private JTable tablaProximosEncuentosJTable = new JTable();
     private JLabel jLabelProximosEncuentros = new JLabel();
@@ -83,50 +89,76 @@ public class VerCompetencia extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        
+        // PARA QUE NO SE PUEDA REDIMENSIONAR
         setResizable(false);
+        
+        // CAPTURA EVENTO DE CERRAR VENTANA PARA ABRIR LA ANTERIOR
         CerrarVentana();
+        
+        // TAMAÑO VENTANA
         this.setSize(new Dimension(991, 567));
-        this.getContentPane().setLayout( null );
+        
+        // TITULO VENTANA 
         this.setTitle("Ver Competencia");
+        
+        this.getContentPane().setLayout( null );
+        
         cargarDatos();
-        nombreDeLaCompetenciaJTextArea.setBounds(new Rectangle(235, 30, 375, 30));
-        nombreDeLaCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
-        nombreDeLaCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        nombreDeLaCompetenciaJTextArea.setNextFocusableComponent(this);
-        nombreDeLaCompetenciaJTextArea.setEditable(false);
-        jLabelDeporte.setText("Deporte");
-        jLabelDeporte.setBounds(new Rectangle(45, 110, 135, 25));
-        jLabelDeporte.setFont(new Font("Tahoma", 0, 13));
-        jLabelnombreDeLaCompetencia.setText("Nombre De La Competencia");
-        jLabelnombreDeLaCompetencia.setBounds(new Rectangle(45, 25, 175, 25));
+        nombreDeLaCompetenciaJLabel.setBounds(new Rectangle(235, 30, 375, 30));
+        nombreDeLaCompetenciaJLabel.setFont(new Font("Tahoma", 0, 15));
+        nombreDeLaCompetenciaJLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+    
+    // LETRA AZUL EN DATOS DE LA COMPETENCIA
+        nombreDeLaCompetenciaJLabel.setForeground(Color.blue);
+        modalidadJLabel.setForeground(Color.blue);
+       deporteJLabel.setForeground(Color.blue);
+       estadoJLabel.setForeground(Color.blue);
+       
+        jLabelnombreDeLaCompetencia.setText("Nombre De La Competencia:");
+        jLabelnombreDeLaCompetencia.setBounds(new Rectangle(45, 33, 175, 25));
         jLabelnombreDeLaCompetencia.setFont(new Font("Tahoma", 0, 13));
-        deporteJTextArea.setBounds(new Rectangle(235, 110, 375, 30));
-        deporteJTextArea.setFont(new Font("Tahoma", 0, 13));
-        deporteJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        deporteJTextArea.setNextFocusableComponent(this);
-        deporteJTextArea.setEditable(false);
-        modalidadJTextArea.setBounds(new Rectangle(235, 70, 375, 30));
-        modalidadJTextArea.setFont(new Font("Tahoma", 0, 13));
-        modalidadJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        modalidadJTextArea.setNextFocusableComponent(this);
-        modalidadJTextArea.setEditable(false);
-        jLabelModalidad.setText("Modalidad");
-        jLabelModalidad.setBounds(new Rectangle(45, 70, 135, 25));
+        
+        
+        jLabelDeporte.setText("Deporte:");
+        jLabelDeporte.setBounds(new Rectangle(45, 113, 135, 25));
+        jLabelDeporte.setFont(new Font("Tahoma", 0, 13));
+        
+        
+        deporteJLabel.setBounds(new Rectangle(235, 110, 375, 30));
+        deporteJLabel.setFont(new Font("Tahoma", 0, 15));
+        deporteJLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        
+        
+        
+        modalidadJLabel.setBounds(new Rectangle(235, 70, 375, 30));
+        modalidadJLabel.setFont(new Font("Tahoma", 0, 15));
+        modalidadJLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+   
+        jLabelModalidad.setText("Modalidad:");
+        jLabelModalidad.setBounds(new Rectangle(45, 73, 135, 25));
         jLabelModalidad.setFont(new Font("Tahoma", 0, 13));
-        jLabelEstado.setText("Estado");
-        jLabelEstado.setBounds(new Rectangle(45, 150, 135, 25));
+        
+        
+        jLabelEstado.setText("Estado:");
+        jLabelEstado.setBounds(new Rectangle(45, 153, 135, 25));
         jLabelEstado.setFont(new Font("Tahoma", 0, 13));
-        estadoJTextArea.setBounds(new Rectangle(235, 150, 375, 30));
-        estadoJTextArea.setFont(new Font("Tahoma", 0, 13));
-        estadoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        estadoJTextArea.setNextFocusableComponent(this);
-        estadoJTextArea.setEditable(false);
+        
+        
+        estadoJLabel.setBounds(new Rectangle(235, 150, 375, 30));
+        estadoJLabel.setFont(new Font("Tahoma", 0, 15));
+        estadoJLabel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+   
         jLabelParticipante.setText("Participantes");
         jLabelParticipante.setBounds(new Rectangle(45, 230, 135, 25));
         jLabelParticipante.setFont(new Font("Tahoma", 0, 13));
+        
+        
         jLabelProximosEncuentros.setText("Proximos Encuentros");
         jLabelProximosEncuentros.setBounds(new Rectangle(45, 355, 135, 25));
         jLabelProximosEncuentros.setFont(new Font("Tahoma", 0, 13));
+        
+        
         modificarCompetenciaJButton.setText("Modificar Competencia");
         modificarCompetenciaJButton.setBounds(new Rectangle(710, 15, 175, 30));
         modificarCompetenciaJButton.setFont(new Font("Tahoma", 0, 13));
@@ -197,14 +229,14 @@ public class VerCompetencia extends JDialog {
         this.getContentPane().add(modificarCompetenciaJButton, null);
         this.getContentPane().add(jLabelProximosEncuentros, null);
         this.getContentPane().add(jLabelParticipante, null);
-        this.getContentPane().add(estadoJTextArea, null);
+        this.getContentPane().add(estadoJLabel, null);
         this.getContentPane().add(jLabelEstado, null);
         this.getContentPane().add(jLabelModalidad, null);
-        this.getContentPane().add(modalidadJTextArea, null);
-        this.getContentPane().add(deporteJTextArea, null);
+        this.getContentPane().add(modalidadJLabel, null);
+        this.getContentPane().add(deporteJLabel, null);
         this.getContentPane().add(jLabelnombreDeLaCompetencia, null);
         this.getContentPane().add(jLabelDeporte, null);
-        this.getContentPane().add(nombreDeLaCompetenciaJTextArea, null);
+        this.getContentPane().add(nombreDeLaCompetenciaJLabel, null);
         jScrollPaneParticipante.getViewport().add(jTable1, null);
         this.getContentPane().add(jScrollPaneParticipante, null);
         jScrollPaneProximoEncuentro.getViewport().add(tablaProximosEncuentosJTable, null);
@@ -286,10 +318,10 @@ public class VerCompetencia extends JDialog {
         ven.setVisible(true);
     }
     private void cargarDatos(){
-        nombreDeLaCompetenciaJTextArea.setText(competencia.getNombreCompetencia());
-        deporteJTextArea.setText(competencia.getDeporte().getNombre());
-        modalidadJTextArea.setText(competencia.getModalidad());
-        estadoJTextArea.setText(competencia.getEstado());
+        nombreDeLaCompetenciaJLabel.setText(competencia.getNombreCompetencia());
+        deporteJLabel.setText(competencia.getDeporte().getNombre());
+        modalidadJLabel.setText(competencia.getModalidad());
+        estadoJLabel.setText(competencia.getEstado());
         modelo = new ModeloTabla(new String[] { "Nombre" }, 0);
         for(int i=0; i<competencia.getParticipantes().length;i++ ){
                 Vector <String> datos = new Vector <String>();

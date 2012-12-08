@@ -38,6 +38,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -482,7 +483,7 @@ private void cargarRegiones()
          idLocalidad--;
          int doc = Integer.parseInt(numeroDocumentoJTextArea.getTexto());
          UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
-         JOptionPane.showOptionDialog(null, "El usuario se ha registrado con exito"  , "Registro exitoso", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            JOptionPane.showMessageDialog(null, "Has sido registrado con éxito", "Registro de usuario",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/correcto2.png"));
          //FIJARSE SI ESTA BIEN QUE CSE CIERRE ASI
          dispose();
         new Principal();
