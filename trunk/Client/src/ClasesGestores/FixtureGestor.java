@@ -76,7 +76,7 @@ public class FixtureGestor {
         participantesAux=ParticipanteGestor.desordenar(participantesAux);
         
         cargarParticipantes(participantesAux, fixture);
-        CompetenciaGestor.crearTabla(idCompetencia);
+        
     
         return fixture;
         }

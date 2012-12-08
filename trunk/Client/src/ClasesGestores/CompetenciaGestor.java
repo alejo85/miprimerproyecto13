@@ -41,7 +41,14 @@ public class CompetenciaGestor {
                 Competencia unaCompetencia = new Competencia();
                 unaCompetencia.setUsuarioCreador(usuarioCreador);
                 unaCompetencia.setNombreCompetencia(nombreDeCompetencia);
-                unaCompetencia.setModalidad(modalidad);
+               
+                if (modalidad.equals("Sistema de Liga"))
+                    unaCompetencia.setModalidad("Liga");
+                else if (modalidad.equals("Sistema de Eliminatoria Simple"))
+                    unaCompetencia.setModalidad("Simple");
+                else 
+                    unaCompetencia.setModalidad("Doble");
+                
                 unaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
                 unaCompetencia.setEstado(estado);
                 unaCompetencia.setReglamento(reglamento);
@@ -57,7 +64,7 @@ public class CompetenciaGestor {
             }
             return unaCompetencia;
         }
-        public static Competencia altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado, int cantidadDeSets, int tantosPorPartidoAusenciaContrincante){
+     public static Competencia altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado, int cantidadDeSets, int tantosPorPartidoAusenciaContrincante){
                 Competencia unaCompetencia = new Competencia();
                 unaCompetencia.setUsuarioCreador(usuarioCreador);
                 unaCompetencia.setNombreCompetencia(nombreDeCompetencia);
@@ -194,7 +201,7 @@ public class CompetenciaGestor {
     /**
      * @param IDcompetencia
      */
-    public static void crearTabla(int idCompetencia){
+    public static Vector<Posicion> crearTabla(int idCompetencia){
         
             Competencia competencia = buscarCompetencia(idCompetencia);
             Vector <Posicion> tabla = new Vector <Posicion>();
@@ -212,7 +219,7 @@ public class CompetenciaGestor {
             tabla.add(unaPosicion);
         }
             
-            competencia.setTablaDePosiciones(tabla);
+            return tabla;
             
             
         
@@ -317,6 +324,7 @@ public class CompetenciaGestor {
             break;
             
         }
+        competencia.setTablaDePosiciones(crearTabla(competencia.getIdCompetencia()));
            
                     
                     
@@ -440,12 +448,7 @@ public class CompetenciaGestor {
             
             //todo hacer la exepcion correspondiente
         }
-        
-        
-        
-        
-        
-        
+       
         
        
         return unaCompetencia;
@@ -506,43 +509,95 @@ public class CompetenciaGestor {
         
         Participante participanteA = encuentro.getParticipanteA();
         Participante participanteB = encuentro.getParticipanteB();
-        Vector <Posicion> tabla = competencia.getTablaDePosiciones();
+        
         int puntosEmpate=0;
         
         if (encuentro.getEmpate())
             puntosEmpate = competencia.getLiga().getPuntosPorPartidoEmpatado();
         
         for(int i=0; i < competencia.getParticipantes().length; i++){
-            if (competencia.getTablaDePosiciones().get(i).getParticipante()==participanteA){
-                   if ( participanteA==encuentro.getGanador() )
+            if (competencia.getTablaDePosiciones().get(i).getParticipante().getIdParticipante()==participanteA.getIdParticipante()){
+                if (  (encuentro.getGanador()!=null) && (participanteA.getIdParticipante()==encuentro.getGanador().getIdParticipante())){
                      competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
-                   
-                   if (encuentro.getAsistencia() == -1)
-                        competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
+                     competencia.getTablaDePosiciones().get(i).setPartidosGanados(competencia.getTablaDePosiciones().get(i).getPartidosGanados()+1);
+                    if (competencia.getModalidad().equals("Puntuacion") || competencia.getModalidad().equals("Sets")){
+                        competencia.getTablaDePosiciones().get(i).setTantosAFavor(competencia.getTablaDePosiciones().get(i).getTantosAFavor() + encuentro.getResultado().pop().getPuntosA());
+                        competencia.getTablaDePosiciones().get(i).setTantosEncontra(competencia.getTablaDePosiciones().get(i).getTantosEncontra() + encuentro.getResultado().pop().getPuntosB());
+                    }
+                    
+                    
+                     
+                }
+                else {
+                    
+                    if (encuentro.getAsistencia() == -1)
+                       competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
+                    else
+                        competencia.getTablaDePosiciones().get(i).setPartidosPerdidos(competencia.getTablaDePosiciones().get(i).getPartidosPerdidos()+1);
+                }
             }
             
-            else if (competencia.getTablaDePosiciones().get(i).getParticipante()==participanteB){
-                   if (participanteA==encuentro.getGanador())
+            else if (competencia.getTablaDePosiciones().get(i).getParticipante().getIdParticipante()==participanteB.getIdParticipante()){
+                if ((encuentro.getGanador()!=null) && (participanteB.getIdParticipante()==encuentro.getGanador().getIdParticipante())){
                         competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
-                        
-                   
+                        competencia.getTablaDePosiciones().get(i).setPartidosGanados(competencia.getTablaDePosiciones().get(i).getPartidosGanados()+1);
+                         if (competencia.getModalidad().equals("Puntuacion") || competencia.getModalidad().equals("Sets")){
+                             competencia.getTablaDePosiciones().get(i).setTantosAFavor(competencia.getTablaDePosiciones().get(i).getTantosAFavor() + encuentro.getResultado().pop().getPuntosB());
+                             competencia.getTablaDePosiciones().get(i).setTantosEncontra(competencia.getTablaDePosiciones().get(i).getTantosEncontra() + encuentro.getResultado().pop().getPuntosA());
+                        }   
+                    
+                }
+                else {
+                    
                     if (encuentro.getAsistencia() == 1)
                         competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
-           
+                    else
+                        competencia.getTablaDePosiciones().get(i).setPartidosPerdidos(competencia.getTablaDePosiciones().get(i).getPartidosPerdidos()+1);
+                }
            }
+            
+        
+            
+        }
+        
+        if (competencia.getModalidad().equals("Puntuacion")){
             
             
             
         }
-        
-        
-        
-        
+
+
+        try {
+            CompetenciaDB.eliminarPosiciones(competencia.getIdCompetencia());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        setTabla(competencia.getTablaDePosiciones(), competencia.getIdCompetencia());
     }
     
     public static enum Modalidad
     {
         Liga, Simple, Doble; 
     }
+    
+    public static void setTabla(Vector <Posicion> tabla, int idCompetencia){
+        int idTabla=0;
+      
+                
+            for(int i=0; i<tabla.size(); i++){
+                
+            try {
+                idTabla = CompetenciaDB.guardarPosicion(tabla.get(i),idCompetencia);
+            } catch (SQLException e) {
+            }
+            tabla.get(i).setIdTabla(idTabla);
+            
+        }
+            
+         
+            
+            
+        
+        }
 
 }

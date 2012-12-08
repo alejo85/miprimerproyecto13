@@ -3,7 +3,6 @@ package ClasesLogicas;
 public class Resultados {
     private int idResultado;
     private int numeroDeRonda;
-    
     private Puntos[] puntuacion;
     
     public Resultados(){
@@ -46,8 +45,28 @@ public class Resultados {
     public Integer getNumeroDeRonda() {
         return numeroDeRonda;
     }
-
+    
+    public int getPuntosA(){
+        
+        int puntosA=0;
+        
+        for(int i=0; i<this.puntuacion.length;i++)            
+            puntosA+= this.puntuacion[i].getPuntoA();
+            
+        return puntosA;
+        
+    }
  
+    public int getPuntosB(){
+        
+        int puntosB=0;
+        
+        for(int i=0; i<this.puntuacion.length;i++)            
+            puntosB+= this.puntuacion[i].getPuntoB();
+            
+        return puntosB;
+        
+    }
 
 
     public void setPuntuacion(Puntos[] puntuacion) {
