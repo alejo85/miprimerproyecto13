@@ -38,14 +38,14 @@ import javax.swing.JTextField;
 
 
 public class AltaLugarDeRealizacion extends JDialog {
-    private JTextField codigoJTextArea = new JTextField();
     private JLabel jLabelCodigo = new JLabel();
+    private JTextField codigoJTextField = new JTextField();
     private DefaultListModel listModel = new DefaultListModel();
     private DefaultListModel listModel2 = new DefaultListModel();
-    private JTextArea nombreLugarDeRealizaciónJTextArea = new JTextArea();
+    private JTextField nombreLugarDeRealizacionJTextField = new JTextField();
     private JLabel jLabelNombreLugarDeRealización = new JLabel();
     private JScrollPane jScrollPane1 = new JScrollPane();
-    private JTextArea descripciónJTextArea = new JTextArea();
+    private JTextArea descripcionJTextArea = new JTextArea();
     private JLabel jLabelDescripción = new JLabel();
     private JList listaDeportesJList = new JList(listModel);
     private JList listaDeportesSeleccionadosJList = new JList(listModel2);
@@ -78,35 +78,53 @@ public class AltaLugarDeRealizacion extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        
+        // PARA QUE LA VENTANA NO SE PEUDA REDIMENSIONAR
         setResizable(false);
+        // CAPTURA EVENTO DE "X" PARA ABRIR VENTANA ANTERIOR
     	CerrarVentana();
+        
+        // TITULO VENTANA
+        this.setTitle("Alta Lugar De Realización");
+        
+        
         this.setSize(new Dimension(1243, 471));
         this.getContentPane().setLayout( null );
-        this.setTitle("Alta Lugar De Realización");
-        codigoJTextArea.setBounds(new Rectangle(235, 30, 210, 30));
-        codigoJTextArea.setFont(new Font("Tahoma", 0, 13));
-        codigoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-  
-        codigoJTextArea.addFocusListener(new FocusAdapter() {
+        
+        jLabelCodigo.setText("Codigo");
+        jLabelCodigo.setBounds(new Rectangle(50, 25, 175, 25));
+        jLabelCodigo.setFont(new Font("Tahoma", 0, 13));
+        
+        codigoJTextField.setBounds(new Rectangle(235, 30, 210, 30));
+        codigoJTextField.setFont(new Font("Tahoma", 0, 13));
+        codigoJTextField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        codigoJTextField.addFocusListener(new FocusAdapter() {
                 public void focusGained(FocusEvent e) {
                     codigoJTextArea_focusGained(e);
                 }
             });
-        jLabelCodigo.setText("Codigo");
-        jLabelCodigo.setBounds(new Rectangle(50, 25, 175, 25));
-        jLabelCodigo.setFont(new Font("Tahoma", 0, 13));
-        nombreLugarDeRealizaciónJTextArea.setBounds(new Rectangle(235, 75, 210, 30));
-        nombreLugarDeRealizaciónJTextArea.setFont(new Font("Tahoma", 0, 13));
-        nombreLugarDeRealizaciónJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
- 
-        nombreLugarDeRealizaciónJTextArea.addFocusListener(new FocusAdapter() {
+        
+        //LIMITAR ENTRADA CODIGO A 6 CARACTERES
+        codigoJTextField.setDocument(new LimitadorCaracteres(codigoJTextField,6));
+        
+        
+        jLabelNombreLugarDeRealización.setText("Nombre");
+        jLabelNombreLugarDeRealización.setBounds(new Rectangle(45, 70, 120, 25));
+        jLabelNombreLugarDeRealización.setFont(new Font("Tahoma", 0, 13));
+        
+        
+        nombreLugarDeRealizacionJTextField.setBounds(new Rectangle(235, 75, 210, 30));
+        nombreLugarDeRealizacionJTextField.setFont(new Font("Tahoma", 0, 13));
+        nombreLugarDeRealizacionJTextField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nombreLugarDeRealizacionJTextField.addFocusListener(new FocusAdapter() {
                 public void focusGained(FocusEvent e) {
                     nombreLugarDeRealizaciónJTextArea_focusGained(e);
                 }
             });
-        jLabelNombreLugarDeRealización.setText("Nombre");
-        jLabelNombreLugarDeRealización.setBounds(new Rectangle(45, 70, 120, 25));
-        jLabelNombreLugarDeRealización.setFont(new Font("Tahoma", 0, 13));
+        
+        //LIMITAR ENTRADA NOMBRE A 60 CARACTERES
+        nombreLugarDeRealizacionJTextField.setDocument(new LimitadorCaracteres(nombreLugarDeRealizacionJTextField,60));
+        
         jScrollPane1.setBounds(new Rectangle(250, 145, 265, 150));
         jLabelDescripción.setText("Descripción");
         jLabelDescripción.setBounds(new Rectangle(50, 140, 115, 25));
@@ -116,24 +134,21 @@ public class AltaLugarDeRealizacion extends JDialog {
                     listaDeportesJList_focusGained(e);
                 }
             });
-        cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(685, 365, 110, 30));
-        cancelarJButton.setFont(new Font("Tahoma", 0, 13));
-        cancelarJButton.setSize(new Dimension(110, 30));
-        cancelarJButton.addActionListener(new ActionListener() {
+        
+        // LIMITAR ENTRADA DESCRIPCION A 1000 CARACTERES
+        nombreLugarDeRealizacionJTextField.setDocument(new LimitadorCaracteres(nombreLugarDeRealizacionJTextField,60));
+        
+        // BOTON AGREGAR
+        agregarJButton.setText("Agregar");
+        agregarJButton.setBounds(new Rectangle(770, 120, 110, 30));
+        agregarJButton.setFont(new Font("Tahoma", 0, 13));
+        agregarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    cancelarJButton_actionPerformed(e);
+                    agregarJButton_actionPerformed(e);
                 }
             });
-        buscarDeportes();
-        aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(495, 365, 110, 30));
-        aceptarJButton.setFont(new Font("Tahoma", 0, 13));
-        aceptarJButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    aceptarJButton_actionPerformed(e);
-                }
-            });
+        
+        //BOTON QUITAR
         quitarJButton.setText("Quitar");
         quitarJButton.setBounds(new Rectangle(770, 190, 110, 30));
         quitarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -143,14 +158,31 @@ public class AltaLugarDeRealizacion extends JDialog {
                     quitarJButton_actionPerformed(e);
                 }
             });
-        agregarJButton.setText("Agregar");
-        agregarJButton.setBounds(new Rectangle(770, 120, 110, 30));
-        agregarJButton.setFont(new Font("Tahoma", 0, 13));
-        agregarJButton.addActionListener(new ActionListener() {
+        
+        //BOTON ACEPTAR
+        aceptarJButton.setText("Aceptar");
+        aceptarJButton.setBounds(new Rectangle(495, 365, 110, 30));
+        aceptarJButton.setFont(new Font("Tahoma", 0, 13));
+        aceptarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    agregarJButton_actionPerformed(e);
+                    aceptarJButton_actionPerformed(e);
                 }
             });
+        
+        //BOTON CANCELAR
+        cancelarJButton.setText("Cancelar");
+        cancelarJButton.setBounds(new Rectangle(685, 365, 110, 30));
+        cancelarJButton.setFont(new Font("Tahoma", 0, 13));
+        cancelarJButton.setSize(new Dimension(110, 30));
+        cancelarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    cancelarJButton_actionPerformed(e);
+                }
+            });
+        
+        // CARGAR DEPORTES
+        buscarDeportes();
+    
         jLabelDeportesSeleccionados.setText("Deportes Seleccionados");
         jLabelDeportesSeleccionados.setBounds(new Rectangle(895, 10, 175, 25));
         jLabelDeportesSeleccionados.setFont(new Font("Tahoma", 0, 13));
@@ -170,14 +202,15 @@ public class AltaLugarDeRealizacion extends JDialog {
         this.getContentPane().add(aceptarJButton, null);
         this.getContentPane().add(cancelarJButton, null);
         this.getContentPane().add(jLabelDescripción, null);
-        jScrollPane1.getViewport().add(descripciónJTextArea, null);
+        jScrollPane1.getViewport().add(descripcionJTextArea, null);
         this.getContentPane().add(jScrollPane1, null);
         this.getContentPane().add(jLabelNombreLugarDeRealización, null);
-        this.getContentPane().add(nombreLugarDeRealizaciónJTextArea, null);
+        this.getContentPane().add(nombreLugarDeRealizacionJTextField, null);
         this.getContentPane().add(jLabelCodigo, null);
-        this.getContentPane().add(codigoJTextArea, null);
+        this.getContentPane().add(codigoJTextField, null);
     }
 
+    // METODO CAPTURAR VENTANA
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
@@ -188,26 +221,16 @@ public class AltaLugarDeRealizacion extends JDialog {
     });
     }
     
+    
+    //BUSCAR DEPORTES
     private void buscarDeportes(){
         dDisponibles = DeporteGestor.instanciarDeportes();
             cargarDeportes();
         }
 
-    private void cancelarJButton_actionPerformed(ActionEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        new Principal(usuarioActual);
-    }
-    private void cargarDeportes(){
 
-        for(int i =0; i<dDisponibles.size();i++)
-        {
-            listModel.addElement(dDisponibles.get(i).getNombre());
-                
-            }
-        
-        }
 
+//BOTON AGREGAR
     private void agregarJButton_actionPerformed(ActionEvent e) {
         int indices []=listaDeportesJList.getSelectedIndices();
             for(int i =0; i<indices.length;i++)
@@ -224,6 +247,8 @@ public class AltaLugarDeRealizacion extends JDialog {
         cargarDeportesSeleccionados();
     }
 
+
+// BOTON QUITAR
     private void quitarJButton_actionPerformed(ActionEvent e) {
         
         int indices []=listaDeportesSeleccionadosJList.getSelectedIndices();
@@ -260,12 +285,13 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         }}
 
+// BOTON ACEPTAR
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         
         if(datosValidosRegistro()){
 
             try {
-                LugaresDeRealizacionGestores.altaLugar(this.codigoJTextArea.getText(), this.nombreLugarDeRealizaciónJTextArea.getText(), this.descripciónJTextArea.getText(), dSeleccionados, usuarioActual );
+                LugaresDeRealizacionGestores.altaLugar(this.codigoJTextField.getText(), this.nombreLugarDeRealizacionJTextField.getText(), this.descripcionJTextArea.getText(), dSeleccionados, usuarioActual );
             } catch (SQLException f) {
             	Toolkit.getDefaultToolkit().beep(); //TODO ver si va aca el sonido
                 System.out.println(f.getMessage());
@@ -277,19 +303,35 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         
     }
-    
+    // BOTON CANCELAR
+    private void cancelarJButton_actionPerformed(ActionEvent e) {
+        setVisible(false);
+        dispose(); // cuando se cierra, se pierde los cambios realizados
+        new Principal(usuarioActual);
+    }
+    private void cargarDeportes(){
+
+        for(int i =0; i<dDisponibles.size();i++)
+        {
+            listModel.addElement(dDisponibles.get(i).getNombre());
+                
+            }
+        
+        }
+
+// VALIDACION DE DATOS    
     private Boolean datosValidosRegistro(){
         String errores="";
        
-        if(this.codigoJTextArea.getText().equals("")){
-            this.codigoJTextArea.setForeground(Color.white);
-            this.codigoJTextArea.setBackground(Color.red);
+        if(this.codigoJTextField.getText().equals("")){
+            this.codigoJTextField.setForeground(Color.white);
+            this.codigoJTextField.setBackground(Color.red);
 
             errores="\n\tEl codigo no puede ser vacio ";
         }
-        if(this.nombreLugarDeRealizaciónJTextArea.getText().equals("")){
-            this.nombreLugarDeRealizaciónJTextArea.setForeground(Color.white);
-            this.nombreLugarDeRealizaciónJTextArea.setBackground(Color.red);
+        if(this.nombreLugarDeRealizacionJTextField.getText().equals("")){
+            this.nombreLugarDeRealizacionJTextField.setForeground(Color.white);
+            this.nombreLugarDeRealizacionJTextField.setBackground(Color.red);
             errores=errores +"\n\tEl nombre del Lugar de realizacion no puede ser vacio ";
         }
         if(this.dSeleccionados.size()<1){
@@ -309,18 +351,14 @@ public class AltaLugarDeRealizacion extends JDialog {
 
     }
 
-  
-
-
-
     private void codigoJTextArea_focusGained(FocusEvent e) {
-        this.codigoJTextArea.setForeground(Color.BLACK);
-        this.codigoJTextArea.setBackground(Color.white);
+        this.codigoJTextField.setForeground(Color.BLACK);
+        this.codigoJTextField.setBackground(Color.white);
     }
 
     private void nombreLugarDeRealizaciónJTextArea_focusGained(FocusEvent e) {
-        this.nombreLugarDeRealizaciónJTextArea.setForeground(Color.BLACK);
-        this.nombreLugarDeRealizaciónJTextArea.setBackground(Color.white);
+        this.nombreLugarDeRealizacionJTextField.setForeground(Color.BLACK);
+        this.nombreLugarDeRealizacionJTextField.setBackground(Color.white);
     }
 
     private void listaDeportesJList_focusGained(FocusEvent e) {
