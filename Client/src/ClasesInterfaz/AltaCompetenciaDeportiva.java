@@ -656,7 +656,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
                      puntosPorPartidoEmpatado=-1;
                  
                  Competencia nuevaCompetencia = new Competencia(); 
-               nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(), modalidadJComboBox.getSelectedObjects().toString() , formaDePuntuaciónJComboBox.getSelectedItem().toString(), "Creada", editor.getText(), this.deporte.get(deporte), lugaresSeleccionados, empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),puntosPorPartidoEmpatado,Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),  cantidadDeSets,  tantosPorPartidoAusenciaContrincante);
+               nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(), modalidadJComboBox.getSelectedItem().toString() , formaDePuntuaciónJComboBox.getSelectedItem().toString(), "Creada", editor.getText(), this.deporte.get(deporte), lugaresSeleccionados, empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),puntosPorPartidoEmpatado,Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),  cantidadDeSets,  tantosPorPartidoAusenciaContrincante);
                  
            
             
