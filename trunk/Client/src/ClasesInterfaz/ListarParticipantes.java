@@ -29,6 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class ListarParticipantes extends JDialog {
@@ -71,7 +73,7 @@ public class ListarParticipantes extends JDialog {
         this.setSize(new Dimension(770, 610));
         this.getContentPane().setLayout( null );
         this.setTitle("Listado de Participantes");
-        nombreCompetenciaJTextArea.setBounds(new Rectangle(225, 22, 375, 30));
+        nombreCompetenciaJTextArea.setBounds(new Rectangle(245, 22, 375, 30));
         nombreCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 15));
         nombreCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         
@@ -80,7 +82,7 @@ public class ListarParticipantes extends JDialog {
         nombreCompetenciaJTextArea.setForeground(Color.blue);
         
         jLabelNombreCompetencia.setText("Nombre De La Competencia:");
-        jLabelNombreCompetencia.setBounds(new Rectangle(45, 25, 175, 25));
+        jLabelNombreCompetencia.setBounds(new Rectangle(45, 25, 255, 25));
         jLabelNombreCompetencia.setFont(new Font("Tahoma", 0, 15));
         participantesJPanel.setBounds(new Rectangle(45, 90, 490, 410));
         participantesJPanel.setLayout(null);
@@ -172,6 +174,9 @@ public class ListarParticipantes extends JDialog {
                     datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
                     modelo.addRow(datos);
                 }
+            // ORDENA SEGUN COLUMNA SELECCIONADA
+            TableRowSorter<DefaultTableModel> elQueOrdena1 = new TableRowSorter<DefaultTableModel>(modelo);
+            tablaParticipantesJTable.setRowSorter(elQueOrdena1);
         }
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
