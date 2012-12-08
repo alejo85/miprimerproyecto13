@@ -327,7 +327,7 @@ public class VerCompetencia extends JDialog {
             TableRowSorter<DefaultTableModel> elQueOrdena1 = new TableRowSorter<DefaultTableModel>(modelo);
             jTable1.setRowSorter(elQueOrdena1);
             
-            modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
+            modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
             if(competencia.getFixture().getIdFixture() != 0||competencia.getFixture()==null)
             {
                   //  System.out.println("valor del fixture id: "+competencia.getFixture().getIdFixture());
