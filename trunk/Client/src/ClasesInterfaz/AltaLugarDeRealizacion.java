@@ -88,14 +88,14 @@ public class AltaLugarDeRealizacion extends JDialog {
         this.setTitle("Alta Lugar De Realización");
         
         
-        this.setSize(new Dimension(1243, 471));
+        this.setSize(new Dimension(1005, 440));
         this.getContentPane().setLayout( null );
         
         jLabelCodigo.setText("Codigo");
-        jLabelCodigo.setBounds(new Rectangle(50, 25, 175, 25));
+        jLabelCodigo.setBounds(new Rectangle(20, 25, 175, 25));
         jLabelCodigo.setFont(new Font("Tahoma", 0, 13));
         
-        codigoJTextField.setBounds(new Rectangle(235, 30, 210, 30));
+        codigoJTextField.setBounds(new Rectangle(110, 25, 230, 30));
         codigoJTextField.setFont(new Font("Tahoma", 0, 13));
         codigoJTextField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         codigoJTextField.addFocusListener(new FocusAdapter() {
@@ -109,11 +109,11 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         
         jLabelNombreLugarDeRealización.setText("Nombre");
-        jLabelNombreLugarDeRealización.setBounds(new Rectangle(45, 70, 120, 25));
+        jLabelNombreLugarDeRealización.setBounds(new Rectangle(20, 70, 120, 25));
         jLabelNombreLugarDeRealización.setFont(new Font("Tahoma", 0, 13));
         
         
-        nombreLugarDeRealizacionJTextField.setBounds(new Rectangle(235, 75, 210, 30));
+        nombreLugarDeRealizacionJTextField.setBounds(new Rectangle(110, 75, 230, 30));
         nombreLugarDeRealizacionJTextField.setFont(new Font("Tahoma", 0, 13));
         nombreLugarDeRealizacionJTextField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         nombreLugarDeRealizacionJTextField.addFocusListener(new FocusAdapter() {
@@ -125,22 +125,19 @@ public class AltaLugarDeRealizacion extends JDialog {
         //LIMITAR ENTRADA NOMBRE A 60 CARACTERES
         nombreLugarDeRealizacionJTextField.setDocument(new LimitadorCaracteres(nombreLugarDeRealizacionJTextField,60));
         
-        jScrollPane1.setBounds(new Rectangle(250, 145, 265, 150));
-        jLabelDescripción.setText("Descripción");
-        jLabelDescripción.setBounds(new Rectangle(50, 140, 115, 25));
-        jLabelDescripción.setFont(new Font("Tahoma", 0, 13));
-        listaDeportesJList.addFocusListener(new FocusAdapter() {
-                public void focusGained(FocusEvent e) {
-                    listaDeportesJList_focusGained(e);
-                }
-            });
         
+        jLabelDescripción.setText("Descripción");
+        jLabelDescripción.setBounds(new Rectangle(20, 120, 115, 25));
+        jLabelDescripción.setFont(new Font("Tahoma", 0, 13));
+
+        
+        jScrollPane1.setBounds(new Rectangle(110, 120, 230, 250));
         // LIMITAR ENTRADA DESCRIPCION A 1000 CARACTERES
         nombreLugarDeRealizacionJTextField.setDocument(new LimitadorCaracteres(nombreLugarDeRealizacionJTextField,60));
         
         // BOTON AGREGAR
         agregarJButton.setText("Agregar");
-        agregarJButton.setBounds(new Rectangle(770, 120, 110, 30));
+        agregarJButton.setBounds(new Rectangle(660, 130, 110, 30));
         agregarJButton.setFont(new Font("Tahoma", 0, 13));
         agregarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -150,7 +147,7 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         //BOTON QUITAR
         quitarJButton.setText("Quitar");
-        quitarJButton.setBounds(new Rectangle(770, 190, 110, 30));
+        quitarJButton.setBounds(new Rectangle(660, 200, 110, 30));
         quitarJButton.setFont(new Font("Tahoma", 0, 13));
         quitarJButton.setSize(new Dimension(110, 30));
         quitarJButton.addActionListener(new ActionListener() {
@@ -161,7 +158,7 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         //BOTON ACEPTAR
         aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(495, 365, 110, 30));
+        aceptarJButton.setBounds(new Rectangle(635, 365, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
         aceptarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -171,7 +168,7 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         //BOTON CANCELAR
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(685, 365, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(835, 365, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
@@ -182,16 +179,26 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         // CARGAR DEPORTES
         buscarDeportes();
-    
-        jLabelDeportesSeleccionados.setText("Deportes Seleccionados");
-        jLabelDeportesSeleccionados.setBounds(new Rectangle(895, 10, 175, 25));
-        jLabelDeportesSeleccionados.setFont(new Font("Tahoma", 0, 13));
+        
         jLabelDeportes.setText("Deportes");
-        jLabelDeportes.setBounds(new Rectangle(560, 15, 175, 25));
+        jLabelDeportes.setBounds(new Rectangle(515, 15, 175, 25));
         jLabelDeportes.setFont(new Font("Tahoma", 0, 13));
-        jScrollPane2.setBounds(new Rectangle(555, 45, 195, 275));
-        jScrollPane3.setBounds(new Rectangle(895, 45, 195, 275));
+        
+        
+        jLabelDeportesSeleccionados.setText("Deportes Seleccionados");
+        jLabelDeportesSeleccionados.setBounds(new Rectangle(810, 15, 175, 25));
+        jLabelDeportesSeleccionados.setFont(new Font("Tahoma", 0, 13));
+        
+        listaDeportesJList.addFocusListener(new FocusAdapter() {
+                public void focusGained(FocusEvent e) {
+                    listaDeportesJList_focusGained(e);
+                }
+            });
+        
+        jScrollPane2.setBounds(new Rectangle(450, 45, 195, 275));
+        jScrollPane3.setBounds(new Rectangle(785, 45, 195, 275));
         jScrollPane2.getViewport().add(listaDeportesJList, null);
+        
         jScrollPane3.getViewport().add(listaDeportesSeleccionadosJList, null);
         this.getContentPane().add(jScrollPane3, null);
         this.getContentPane().add(jScrollPane2, null);
