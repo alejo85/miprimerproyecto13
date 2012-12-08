@@ -89,6 +89,7 @@ public class AltaLugarDeRealizacion extends JDialog {
         
         
         this.setSize(new Dimension(1005, 440));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         
         jLabelCodigo.setText("Codigo");

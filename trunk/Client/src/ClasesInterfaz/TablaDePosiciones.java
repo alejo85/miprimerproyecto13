@@ -55,6 +55,7 @@ public class TablaDePosiciones extends JDialog {
     }
     private void jbInit() throws Exception {
         this.setSize(new Dimension(1002, 615));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Tabla De Posiciones");
         exportarJButton.setText("Exportar");

@@ -71,6 +71,7 @@ public class ListarParticipantes extends JDialog {
         tablaParticipantesJTable.setModel(modelo);
         cargarParticipantes();
         this.setSize(new Dimension(770, 610));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Listado de Participantes");
         nombreCompetenciaJTextArea.setBounds(new Rectangle(245, 22, 375, 30));

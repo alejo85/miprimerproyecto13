@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -70,6 +72,7 @@ public class IniciarSesion extends JDialog {
         CerrarVentana();
         // TAMAÑO VENTANA
         this.setSize(new Dimension(530, 455));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Iniciar Sesión");
         
@@ -184,6 +187,7 @@ public class IniciarSesion extends JDialog {
            Toolkit.getDefaultToolkit().beep();
            JOptionPane pane = new JOptionPane("El correo electronico o la contraseña son incorrectos " , JOptionPane.ERROR_MESSAGE);  
            JDialog dialog = pane.createDialog("Error al Autencicar");
+           
            int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
            int posicion= this.getLocationOnScreen().x;
            int anchoVentana= this.getHeight();
@@ -202,7 +206,7 @@ public class IniciarSesion extends JDialog {
            this.contraeñaJPasswordField.error();
        }
        else{
-           JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/correcto2.png"));
+           JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
            dispose();
         
            new Principal(this.getUsuarioActual());

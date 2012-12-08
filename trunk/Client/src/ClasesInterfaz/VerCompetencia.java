@@ -100,6 +100,7 @@ public class VerCompetencia extends JDialog {
         
         // TAMAÑO VENTANA
         this.setSize(new Dimension(940, 567));
+        this.setLocationRelativeTo(null);
         
         // TITULO VENTANA 
         this.setTitle("Ver Competencia");

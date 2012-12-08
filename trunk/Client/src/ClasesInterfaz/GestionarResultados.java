@@ -120,6 +120,7 @@ public class GestionarResultados extends JDialog {
     private void jbInit() throws Exception {
            CerrarVentana();
            this.setSize(new Dimension(596, 280));
+           this.setLocationRelativeTo(null);
                this.getContentPane().setLayout( null );
                this.setTitle("Gestionar Resultados");
                cancelarJButton.setText("Cancelar");

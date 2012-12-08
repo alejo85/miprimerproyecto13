@@ -80,6 +80,7 @@ public class Central extends JFrame {
         this.setJMenuBar( menuBar );
         this.getContentPane().setLayout(null);
         this.setSize(new Dimension(820, 570));
+        this.setLocationRelativeTo(null);
         this.setTitle( "Sistema De Gestión De Competencias" );
         // PESTAÑA GESTION MENU SUPERIOR
         menuFile.setText( "Gestión" );

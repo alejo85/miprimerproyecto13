@@ -100,6 +100,7 @@ public class RegistrarUsuario extends JDialog{
         setResizable(false);
         CerrarVentana();
         this.setSize(new Dimension(540, 600));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Registrar Usuario");
         correoElectrónicoJTextArea.setBounds(new Rectangle(130, 20, 375, 30));

@@ -57,6 +57,7 @@ public class ModificarSet extends JDialog {
 
     private void jbInit() throws Exception {
         this.setSize(new Dimension(448, 202));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Puntuación del Set Nº: "+numeroSet);
         puntosEquipoAJTextArea.setBounds(new Rectangle(35, 55, 130, 30));

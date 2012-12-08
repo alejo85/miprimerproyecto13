@@ -69,6 +69,7 @@ public class AltaParticipante extends JDialog {
         CerrarVentana();
         setResizable(false);
         this.setSize(new Dimension(500, 257));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Alta Participante");
         nombreParticipanteJTextArea.setBounds(new Rectangle(140, 15, 305, 30));
