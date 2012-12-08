@@ -430,8 +430,6 @@ public class CompetenciaDB {
         
     public static int guardarPosicion(Posicion unaPosicion, int idCompetencia) throws SQLException {
         
-       
-        
         
         ResultSet resultado=null;
         
@@ -448,4 +446,23 @@ public class CompetenciaDB {
         
         
     }
+    
+    
+    
+    public static void eliminarPosiciones(int idCompetencia) throws SQLException {
+        
+        
+        ResultSet resultado=null;
+        
+        String consultasql;
+        consultasql="DELETE FROM fila_tabla_de_posiciones WHERE id_competencia='"+idCompetencia+"';";
+        System.out.println(consultasql);
+        resultado = Conexion.consulta.executeQuery(consultasql);
+        
+        resultado.next();
+    }
+    
+    
+    
+    
 }

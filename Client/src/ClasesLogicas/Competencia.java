@@ -49,7 +49,7 @@ public class Competencia{
 
     public Competencia() {
         super();
-        
+        this.participantes=new Participante[0];
     }
 
     public void agregarParticipante (Participante participante){

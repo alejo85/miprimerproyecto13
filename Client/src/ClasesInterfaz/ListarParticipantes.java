@@ -69,7 +69,10 @@ public class ListarParticipantes extends JDialog {
         setResizable(false);
         CerrarVentana();
         tablaParticipantesJTable.setModel(modelo);
-        cargarParticipantes();
+        
+        if(competenciaSeleccionada.getParticipantes()!=null)
+            cargarParticipantes();
+        
         this.setSize(new Dimension(770, 610));
         this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
@@ -169,6 +172,7 @@ public class ListarParticipantes extends JDialog {
         JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Eliminar participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
     private void cargarParticipantes(){
+           
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
                     Vector <String> datos = new Vector <String>();
                     datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
