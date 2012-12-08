@@ -495,21 +495,21 @@ public class CompetenciaGestor {
             puntosEmpate = competencia.getLiga().getPuntosPorPartidoEmpatado();
         
         for(int i=0; i < competencia.getParticipantes().length; i++){
-            if (tabla.get(i).getParticipante()==participanteA){
+            if (competencia.getTablaDePosiciones().get(i).getParticipante()==participanteA){
                    if ( participanteA==encuentro.getGanador() )
-                     tabla.get(i).setPuntos(tabla.get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
+                     competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
                    
                    if (encuentro.getAsistencia() == -1)
-                        tabla.get(i).setPuntos(tabla.get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
+                        competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
             }
             
-            else if (tabla.get(i).getParticipante()==participanteB){
+            else if (competencia.getTablaDePosiciones().get(i).getParticipante()==participanteB){
                    if (participanteA==encuentro.getGanador())
-                        tabla.get(i).setPuntos(tabla.get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
+                        competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
                         
                    
                     if (encuentro.getAsistencia() == 1)
-                        tabla.get(i).setPuntos(tabla.get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
+                        competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos() + competencia.getLiga().getPuntosPorPartidoAsistido()+ puntosEmpate);
            
            }
             

@@ -88,7 +88,6 @@ public class Encuentro {
     public void setGanador(Participante ganador) {
         this.ganador = ganador;
     }
-<<<<<<< .mine
     public void setGanador() {
 
             int puntosA=0;
@@ -115,31 +114,7 @@ public class Encuentro {
 
     }
 
-    public void setGanador() {
 
-            int puntosA=0;
-            int puntosB=0;
-            for(int i=0; i<this.resultado.get(0).getPuntuacion().length;i++)
-            {
-                    puntosA+=this.resultado.get(0).getPuntuacion()[i].getPuntoA();
-                    puntosB+=this.resultado.get(0).getPuntuacion()[i].getPuntoB();
-                }
-            if(puntosA==puntosB)
-            {
-                this.empate=true;
-                }
-            else
-                if(puntosA>puntosB)
-                {
-                    this.ganador=this.participanteA;
-                    this.perdedor=this.participanteB;
-                    }
-                else
-                    this.ganador=this.participanteB;
-                    this.perdedor=this.participanteA;
-                
-
-    }
 
 
     public Participante getGanador() {

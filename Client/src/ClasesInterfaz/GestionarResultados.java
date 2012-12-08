@@ -613,8 +613,8 @@ public class GestionarResultados extends JDialog {
         //competenciaActual=CompetenciaGestor.reemplazarEncuentro(competenciaActual, encuentroSeleccionado, nroRonda);
        //TODO SETEAR LA COMPETENCIA CON EL RESULTADO
         
-        competenciaActual.actualizarResultados(encuentroSeleccionado);
         
+        CompetenciaGestor.actualizarResultados(competenciaActual, encuentroSeleccionado);
         
         
        setVisible(false);

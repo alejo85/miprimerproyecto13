@@ -376,10 +376,10 @@ public class CompetenciaDB {
         
         String consultasql;
         consultasql="INSERT INTO fila_tabla_de_posiciones(id_competencia, posicion, puntos, diferencia, pg, pe, pp, tantos_a_favor, tantos_en_contra, id_participante)\n" + 
-        "VALUES ('"+idCompetencia+"', '"+unaPosicion.getPosicion()+",'"+unaPosicion.getPuntos()+"','"+unaPosicion.getDiferencia()+"'," +
+        "VALUES ('"+idCompetencia+"', '"+unaPosicion.getPosicion()+"', '"+unaPosicion.getPuntos()+"','"+unaPosicion.getDiferencia()+"'," +
             "'"+unaPosicion.getPartidosGanados()+"','"+unaPosicion.getPartidosEmpatados()+"','"+unaPosicion.getPartidosPerdidos()+"'," +
             "'"+unaPosicion.getTantosAFavor()+"','"+unaPosicion.getTantosEncontra()+"','"+unaPosicion.getParticipante().getIdParticipante()+"')RETURNING id_tabla;";
-        
+        System.out.println(consultasql);
         resultado = Conexion.consulta.executeQuery(consultasql);
         
         resultado.next();
