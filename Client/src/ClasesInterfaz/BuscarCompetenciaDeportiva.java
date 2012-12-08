@@ -406,7 +406,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             ven.setVisible(true);
         }
         else{
-            JOptionPane.showOptionDialog(null, "Debes seleccionar un resultado de la búsqueda"  , "Ver competencia", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
         }
     }
 

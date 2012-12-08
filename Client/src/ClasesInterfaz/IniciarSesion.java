@@ -195,7 +195,7 @@ public class IniciarSesion extends JDialog {
        if(usuarioActual==null){
            Toolkit.getDefaultToolkit().beep();
            JOptionPane pane = new JOptionPane("El correo electronico o la contraseña son incorrectos " , JOptionPane.ERROR_MESSAGE);  
-           pane.setIcon(new ImageIcon("src/Imagenes/logueado.png"));
+           pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
            JDialog dialog = pane.createDialog("Error al Autencicar");
            
            int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
