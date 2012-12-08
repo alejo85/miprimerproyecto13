@@ -83,6 +83,7 @@ public class VerCompetencia extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        setResizable(false);
         CerrarVentana();
         this.setSize(new Dimension(991, 567));
         this.getContentPane().setLayout( null );
@@ -134,7 +135,7 @@ public class VerCompetencia extends JDialog {
                     modificarCompetenciaJButton_actionPerformed(e);
                 }
             });
-        eliminarCompetenciaJButton.setText("Emiminar Competencia");
+        eliminarCompetenciaJButton.setText("Eliminar Competencia");
         eliminarCompetenciaJButton.setBounds(new Rectangle(710, 50, 175, 30));
         eliminarCompetenciaJButton.setFont(new Font("Tahoma", 0, 13));
         eliminarCompetenciaJButton.addActionListener(new ActionListener() {
@@ -212,22 +213,25 @@ public class VerCompetencia extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
+        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(usuarioActual);
+        ven.setVisible(true);
+        dispose();
         
     }
 
     private void modificarCompetenciaJButton_actionPerformed(ActionEvent e) {
-        ModificarLaCompetencia ven = new ModificarLaCompetencia(usuarioActual, competencia);
-        ven.setVisible(true);
+        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Modificar competencia", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
 
     private void eliminarCompetenciaJButton_actionPerformed(ActionEvent e) {
-        int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea eliminar la competencia Nombre Competencia?.", "Eliminar la Competencia.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
+        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Eliminar competencia", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        /*
+         * int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea eliminar la competencia Nombre Competencia?.", "Eliminar la Competencia.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
             ImageIcon imagenCandado = new ImageIcon("Imagenes//candado.gif");
             JOptionPane.showOptionDialog(null, "Se ha eliminado la  competencia Nombre Competencia "  , "Competencia Eliminada.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, imagenCandado, new Object[]{"Aceptar"},"Aceptar");
         } 
+        */
     }
 
     private void gestionarParticipantesJButton_actionPerformed(ActionEvent e) {
@@ -331,13 +335,11 @@ public class VerCompetencia extends JDialog {
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
-        ventanaAnterior.setVisible(true);
-        
+        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(usuarioActual);
+        ven.setVisible(true);
+        dispose();
     }
     });
     }
-
     
 }

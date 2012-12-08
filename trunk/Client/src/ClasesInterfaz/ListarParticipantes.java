@@ -7,12 +7,16 @@ import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import java.util.Vector;
 
@@ -28,7 +32,7 @@ import javax.swing.JTable;
 
 public class ListarParticipantes extends JDialog {
     private ModeloTabla modelo = new ModeloTabla(new String[] { "Nombre", "Correo" }, 0);
-    private AreaTextoNombre nombreCompetenciaJTextArea = new AreaTextoNombre(60);
+    private JLabel nombreCompetenciaJTextArea = new JLabel();
     private JLabel jLabelNombreCompetencia = new JLabel();
     private JPanel participantesJPanel = new JPanel();
     private JButton cancelarJButton = new JButton();
@@ -59,16 +63,22 @@ public class ListarParticipantes extends JDialog {
 
 
     private void jbInit() throws Exception {
+        setResizable(false);
+        CerrarVentana();
         tablaParticipantesJTable.setModel(modelo);
         cargarParticipantes();
         this.setSize(new Dimension(808, 627));
         this.getContentPane().setLayout( null );
         this.setTitle("Listado de Participantes");
-        nombreCompetenciaJTextArea.setBounds(new Rectangle(235, 30, 375, 30));
-        nombreCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
+        nombreCompetenciaJTextArea.setBounds(new Rectangle(225, 22, 375, 30));
+        nombreCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 15));
         nombreCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        nombreCompetenciaJTextArea.setEnabled(false);
-        jLabelNombreCompetencia.setText("Nombre De La Competencia");
+        
+        // CARGAR NOMBRE DE LA COMPETENCIA
+        nombreCompetenciaJTextArea.setText(competenciaSeleccionada.getNombreCompetencia());
+        nombreCompetenciaJTextArea.setForeground(Color.blue);
+        
+        jLabelNombreCompetencia.setText("Nombre De La Competencia:");
         jLabelNombreCompetencia.setBounds(new Rectangle(45, 25, 175, 25));
         jLabelNombreCompetencia.setFont(new Font("Tahoma", 0, 13));
         participantesJPanel.setBounds(new Rectangle(45, 90, 490, 410));
@@ -131,7 +141,9 @@ public class ListarParticipantes extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        VerCompetencia ven =new VerCompetencia(usuarioAcatual, competenciaSeleccionada);
+        dispose();
+        ven.setVisible(true);
     }
 
     private void modificarParticipanteJButton_actionPerformed(ActionEvent e) {
@@ -154,4 +166,13 @@ public class ListarParticipantes extends JDialog {
                     modelo.addRow(datos);
                 }
         }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        VerCompetencia ven =new VerCompetencia(usuarioAcatual, competenciaSeleccionada);
+        dispose();
+        ven.setVisible(true);
+    }
+    });
+    }
 }
