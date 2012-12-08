@@ -140,12 +140,73 @@ public class CompetenciaDB {
             return resultado;
        
   }
+    public static Competencia registrarCompetencia(Competencia competencia) throws SQLException {
+                                   ResultSet resultado=null;
+                                   Statement reglamento = Conexion.consultar();
+                                   Statement retornoEmpate = Conexion.consultar();
+                                   Statement consulta = Conexion.consultar();
+                                 String consultasql;
+                                   int id;
+                                   if(competencia.getReglamento().equals("")){
+                                                   consultasql="INSERT INTO competencia( nombre_competencia, modalidad, forma_puntuacion, estado, tantos_por_partido_ganado, creador, id_deporte)" +
+                                                   "VALUES ('"+competencia.getNombreCompetencia()+"', '"+competencia.getModalidad()+
+                                                   "','"+competencia.getFormaDePuntuacion()+"', '"+competencia.getEstado()+"', '"+competencia.getTantosPorPartidoGanado()+"', '"
+                                                   +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"')RETURNING id_Competencia;";
+                                                   resultado = reglamento.executeQuery(consultasql);
+                                   }
+                                   else{
+
+                                                   consultasql="INSERT INTO competencia( nombre_competencia, reglamento, modalidad, forma_puntuacion, estado, tantos_por_partido_ganado, creador, id_deporte)" +
+                                                   "VALUES ('"+competencia.getNombreCompetencia()+"', '"+competencia.getReglamento()+"', '"+competencia.getModalidad()+
+                                                   "','"+competencia.getFormaDePuntuacion()+"', '"+competencia.getEstado()+"', '"+competencia.getTantosPorPartidoGanado()+"', '"
+                                                   +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"')RETURNING id_Competencia;";
+                                                   resultado = reglamento.executeQuery(consultasql);
+                                           }
+                                   resultado.next();
+                                   id = resultado.getInt("id_Competencia");
+                                   competencia.setIdCompetencia(id);
+                                   
+                                   if(competencia.getLiga().getEmpate())
+                                           {
+                                                   consultasql="INSERT INTO liga(ptos_por_empate, ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoEmpatado()+"', '"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
+                                                   resultado = retornoEmpate.executeQuery(consultasql);
+                                           }
+                                   else
+                                           {
+                                                   consultasql="INSERT INTO liga(ptos_partidos_g, empate, ptos_por_asistir, id_competencia)VALUES('"+competencia.getLiga().getPuntosPorPartidoGanado()+"', '"+competencia.getLiga().getEmpate()+"', '"+competencia.getLiga().getPuntosPorPartidoAsistido()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
+                                                   resultado = retornoEmpate.executeQuery(consultasql);
+                                           }
+                                   
+                                   if (competencia.getFormaDePuntuacion().equals("Puntuación"))
+                                   {
+                                           consultasql="INSERT INTO puntuacion(tantos_por_ausencia_contrincante, id_competencia)VALUES('"+competencia.getTantosPorPartidoAusenciaContrincante()+"', '"+competencia.getIdCompetencia()+"')RETURNING *;";
+                                           consulta = Conexion.consultar();
+                                           resultado = consulta.executeQuery(consultasql);
+                                   }
+                                   
+                                   if (competencia.getFormaDePuntuacion().equals("Sets"))
+                                   {
+                                           
+                             
+                                           consultasql="INSERT INTO set(id_competencia, cantidad_de_sets)VALUES('"+competencia.getIdCompetencia()+"', '"+competencia.getCantidadDeSets()+"')RETURNING *";
+                                         consulta = Conexion.consultar();
+                                         resultado = consulta.executeQuery(consultasql);
+                                   }
+                                   LugarDeRealizacion lugares[]=competencia.getLugares();
+                                   for(int i=0; i<lugares.length;i++){
+                                           consulta = Conexion.consultar();
+                                           consultasql="INSERT INTO juega(id_competencia, id_lugar_de_realizacion, disponibilidad)VALUES ('"+competencia.getIdCompetencia()+"', '"+lugares[i].getIdLugar()+"', '"+lugares[i].getDisponibilidad()+"')RETURNING *";
+                                           resultado = consulta.executeQuery(consultasql);
+     
+                                       }
+                               return competencia;
+                               }
     
     /**
      * @param competencia
      * @return
      */
-    public static boolean registrarCompetencia(Competencia competencia) throws SQLException {
+   /* public static boolean registrarCompetencia(Competencia competencia) throws SQLException {
          
             ResultSet resultado=null;
             Statement reglamento = Conexion.consultar();
@@ -203,7 +264,7 @@ public class CompetenciaDB {
     }
                                
                                
-                               
+                    */           
    
    
     
