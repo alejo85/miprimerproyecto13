@@ -3,6 +3,10 @@ package ClasesBD;
 
 import ClasesLogicas.Participante;
 
+import java.io.File;
+import java.io.FileInputStream;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -52,4 +56,5 @@ public class ParticipanteDB {
      public static ResultSet buscarParticipanteAnterior(int idParticipante){
          ResultSet resultado = null;
          return resultado;}
+     
  }
