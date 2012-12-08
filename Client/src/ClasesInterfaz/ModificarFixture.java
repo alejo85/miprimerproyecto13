@@ -100,6 +100,7 @@ public class ModificarFixture extends JDialog {
             });
         fechaJTable.setModel(modeloDeFecha);
         this.setSize(new Dimension(1108, 544));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Mostrar Fixture");
         fechaJPanel.setBounds(new Rectangle(35, 30, 870, 365));

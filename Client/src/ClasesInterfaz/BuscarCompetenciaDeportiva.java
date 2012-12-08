@@ -96,6 +96,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         setResizable(false);
         // DIMENSION DE LA VENTANA
         this.setSize(new Dimension(820, 740));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         
         //TITULO VENTANA

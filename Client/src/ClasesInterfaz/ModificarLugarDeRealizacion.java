@@ -70,6 +70,7 @@ public class ModificarLugarDeRealizacion extends JDialog {
 
     private void jbInit() throws Exception {
         this.setSize(new Dimension(1243, 471));
+            this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Modificar Lugar De Realización");
         codigoJTextArea.setBounds(new Rectangle(235, 30, 375, 30));
