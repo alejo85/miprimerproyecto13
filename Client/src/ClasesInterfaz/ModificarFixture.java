@@ -30,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class ModificarFixture extends JDialog {
@@ -259,6 +261,10 @@ public class ModificarFixture extends JDialog {
                      }
              
             tablaDeFechaJTable.setModel(modeloDeTablaDeFecha);
+            
+            // ORDENA SEGUN COLUMNA SELECCIONADA
+            TableRowSorter<DefaultTableModel> elQueOrdena1 = new TableRowSorter<DefaultTableModel>(modeloDeTablaDeFecha);
+            tablaDeFechaJTable.setRowSorter(elQueOrdena1);
                
         }
 
