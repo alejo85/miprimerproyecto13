@@ -351,7 +351,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         DeporteJComboBox.setForeground(foreground);
     }
     private void cargarResultados(){
-        jLabelResultadosObtenidos.setText("Resultados obtenidos:" +competenciasEncontradas.size());
+        jLabelResultadosObtenidos.setText("Resultados obtenidos: " +competenciasEncontradas.size());
         modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
         tablaResultadoJTable.setModel(modelo);
         TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo);
