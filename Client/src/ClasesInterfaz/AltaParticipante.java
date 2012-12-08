@@ -6,6 +6,8 @@ import ClasesGestores.ParticipanteGestor;
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Participante;
 
+import ClasesLogicas.Usuario;
+
 import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
 
 import InterfazGrafica.CampoTexto.AreaTextoCorreo;
@@ -19,9 +21,13 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import java.io.File;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -40,16 +46,18 @@ public class AltaParticipante extends JDialog {
     private JLabel jLabelImagen = new JLabel();
     private JButton cancelarJButton = new JButton();
     private JButton aceptarJButton = new JButton();
+    private Usuario usuarioActual=null;
     private Participante participanteNuevo=null;
     private Competencia competenciaSeleccionada=null;
 
-    public AltaParticipante(Competencia competencia) {
-        this(null, "", false, competencia);
+    public AltaParticipante(Usuario usuario,Competencia competencia) {
+        this(null, "", false, usuario,competencia);
     }
 
-    public AltaParticipante(Frame parent, String title, boolean modal, Competencia competencia) {
+    public AltaParticipante(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia) {
         super(parent, title, modal);
         try {
+            usuarioActual=usuario;
             competenciaSeleccionada=competencia;
             jbInit();
         } catch (Exception e) {
@@ -58,6 +66,7 @@ public class AltaParticipante extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        CerrarVentana();
         setResizable(false);
         this.setSize(new Dimension(500, 257));
         this.getContentPane().setLayout( null );
@@ -131,48 +140,27 @@ public class AltaParticipante extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        /*ListarParticipantes ven;
-        ven = new ListarParticipantes(usuarioActual, competencia);
+        ListarParticipantes ven;
+        ven = new ListarParticipantes(usuarioActual, competenciaSeleccionada);
         ven.setVisible(true);
-        this.setVisible(false);
-*/
+        dispose();
     }
 
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         String errores ="";
-        if(!correoElectrónicoJTextArea.getText().equals("")){
-            if(!nombreParticipanteJTextArea.getText().equals("")){
-               if(CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
-                 if(imagenJTextArea.getText().equals("")){
-                        Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
-                    }
-                    
-                      else
-                      {
-                              //Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), imagenJTextArea.getText());
-                          }
-                  }
-                else{
-                        errores+="\n\tEl nombre del participante ya esta registrado";
-                    
-                    
-                    }
-                
-                
-                }
-            else{
-                    nombreParticipanteJTextArea.error();
-                    errores+="\n\tEl nombre del participante no puede ser  nulo";
-                
-                }
-            
-            }
-        else
-        {
-                correoElectrónicoJTextArea.error();
-                errores+="\n\tEl correo electronico del participante no puede ser  nulo";
-            }
-        if(!errores.equals(""))
+        if(correoElectrónicoJTextArea.getText().equals("")){
+            errores="\n\t Debes ingresar un correo";
+            this.correoElectrónicoJTextArea.error();
+        }
+        if(nombreParticipanteJTextArea.getText().equals("")){
+            errores=errores+"\n\t Debes ingresar un nombre";
+            this.nombreParticipanteJTextArea.error();
+        }
+        if(!CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
+            errores+="\n\tEl nombre del participante ya esta registrado";
+            this.nombreParticipanteJTextArea.error();
+        }
+        if(!errores.equals("")){
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE);  
                 JDialog dialog = pane.createDialog("Errores en los campos");
@@ -189,6 +177,23 @@ public class AltaParticipante extends JDialog {
                         dialog.setLocation(getLocationOnScreen().x - 400, getLocationOnScreen().y);
                 }
                 dialog.setVisible(true);
-            System.out.println(errores);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El participante ha sido de alta con éxito", "Alta de participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/correcto2.png"));
+            ListarParticipantes ven;
+            ven = new ListarParticipantes(usuarioActual, competenciaSeleccionada);
+            ven.setVisible(true);
+            dispose();
+        }
+    }
+    private void CerrarVentana(){
+    addWindowListener(new WindowAdapter() {
+    public void windowClosing(WindowEvent e) {
+        ListarParticipantes ven;
+        ven = new ListarParticipantes(usuarioActual, competenciaSeleccionada);
+        ven.setVisible(true);
+        dispose();
+    }
+    });
     }
 }

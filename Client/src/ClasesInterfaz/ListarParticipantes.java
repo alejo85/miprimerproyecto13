@@ -136,8 +136,9 @@ public class ListarParticipantes extends JDialog {
 
 
     private void altaParticipanteJButton_actionPerformed(ActionEvent e) {
-        AltaParticipante ven = new AltaParticipante(competenciaSeleccionada);
+        AltaParticipante ven = new AltaParticipante(usuarioAcatual, competenciaSeleccionada);
         ven.setVisible(true);
+        dispose();
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {

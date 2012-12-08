@@ -303,7 +303,7 @@ public class AltaLugarDeRealizacion extends JDialog {
             	Toolkit.getDefaultToolkit().beep(); //TODO ver si va aca el sonido
                 System.out.println(f.getMessage());
             }
-            JOptionPane.showMessageDialog(null, "El lugar de realización ha sido creado con éxito", "Alta lugar de realización",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/check.png"));
+            JOptionPane.showMessageDialog(null, "El lugar de realización ha sido creado con éxito", "Alta lugar de realización",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/correcto2.png"));
             dispose(); // cuando se cierra, se pierde los cambios realizados
             new Principal(usuarioActual);
         }
