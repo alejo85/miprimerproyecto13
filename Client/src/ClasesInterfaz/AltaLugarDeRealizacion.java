@@ -25,6 +25,7 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -77,6 +78,7 @@ public class AltaLugarDeRealizacion extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        setResizable(false);
     	CerrarVentana();
         this.setSize(new Dimension(1243, 471));
         this.getContentPane().setLayout( null );
@@ -268,6 +270,9 @@ public class AltaLugarDeRealizacion extends JDialog {
             	Toolkit.getDefaultToolkit().beep(); //TODO ver si va aca el sonido
                 System.out.println(f.getMessage());
             }
+            JOptionPane.showMessageDialog(null, "El lugar de realización ha sido creado con éxito", "Alta lugar de realización",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/check.png"));
+            dispose(); // cuando se cierra, se pierde los cambios realizados
+            new Principal(usuarioActual);
         }
         
         

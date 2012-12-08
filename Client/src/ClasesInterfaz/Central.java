@@ -59,8 +59,6 @@ public class Central extends JFrame {
           
         this.usuarioActual=null;
 
-       
-
         try {
             jbInit();
         } catch (Exception e) {
@@ -78,6 +76,7 @@ public class Central extends JFrame {
     }
 
     private void jbInit() throws Exception {
+        setResizable(false);
         this.setJMenuBar( menuBar );
         this.getContentPane().setLayout(null);
         this.setSize(new Dimension(820, 570));
@@ -292,7 +291,7 @@ public class Central extends JFrame {
            }
     // ACCION BOTON BUSCAR TODAS LAS COMPETENCIAS DEPORTIVAS
     void buscarTodasLasCompetencias_ActionPerformed (ActionEvent e){
-    	 JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+    	 JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Modificar usuario", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
            }
     // ACCION BOTON BUSCAR LUGAR DE REALIZACION
     void buscarLugarDeRealizacion_ActionPerformed (ActionEvent e){
@@ -342,7 +341,7 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar10_actionPerformed(ActionEvent e) {
-    	JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+    	JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Buscar todas las competencias", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
     
     private void actualizarUsuarioActual(Usuario usuario){

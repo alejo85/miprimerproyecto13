@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 
@@ -57,37 +58,38 @@ public class AltaParticipante extends JDialog {
     }
 
     private void jbInit() throws Exception {
-        this.setSize(new Dimension(903, 332));
+        setResizable(false);
+        this.setSize(new Dimension(500, 257));
         this.getContentPane().setLayout( null );
         this.setTitle("Alta Participante");
-        nombreParticipanteJTextArea.setBounds(new Rectangle(245, 50, 375, 30));
+        nombreParticipanteJTextArea.setBounds(new Rectangle(140, 15, 305, 30));
         nombreParticipanteJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreParticipanteJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelNombreParticipante.setText("Nombre");
-        jLabelNombreParticipante.setBounds(new Rectangle(60, 45, 175, 25));
+        jLabelNombreParticipante.setBounds(new Rectangle(10, 15, 175, 25));
         jLabelNombreParticipante.setFont(new Font("Tahoma", 0, 13));
-        correoElectrónicoJTextArea.setBounds(new Rectangle(245, 95, 375, 30));
+        correoElectrónicoJTextArea.setBounds(new Rectangle(140, 60, 305, 30));
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelCorreoElectrónico.setText("Correo Electronico");
-        jLabelCorreoElectrónico.setBounds(new Rectangle(60, 90, 175, 25));
+        jLabelCorreoElectrónico.setBounds(new Rectangle(10, 60, 175, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 13));
-        examinarJButton.setText("Examinar");
-        examinarJButton.setBounds(new Rectangle(650, 145, 175, 30));
-        examinarJButton.setFont(new Font("Tahoma", 0, 13));
+        examinarJButton.setText("...");
+        examinarJButton.setBounds(new Rectangle(450, 113, 35, 25));
+        examinarJButton.setFont(new Font("Tahoma", 0, 15));
         examinarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     examinarJButton_actionPerformed(e);
                 }
             });
-        imagenJTextArea.setBounds(new Rectangle(245, 145, 375, 30));
+        imagenJTextArea.setBounds(new Rectangle(140, 110, 305, 30));
         imagenJTextArea.setFont(new Font("Tahoma", 0, 13));
         imagenJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jLabelImagen.setText("Imagen (Opcional)");
-        jLabelImagen.setBounds(new Rectangle(60, 140, 175, 25));
+        jLabelImagen.setBounds(new Rectangle(10, 110, 175, 25));
         jLabelImagen.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(510, 240, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(300, 175, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
@@ -96,7 +98,7 @@ public class AltaParticipante extends JDialog {
                 }
             });
         aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(320, 240, 110, 30));
+        aceptarJButton.setBounds(new Rectangle(90, 175, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
         aceptarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -129,7 +131,11 @@ public class AltaParticipante extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
+        /*ListarParticipantes ven;
+        ven = new ListarParticipantes(usuarioActual, competencia);
+        ven.setVisible(true);
         this.setVisible(false);
+*/
     }
 
     private void aceptarJButton_actionPerformed(ActionEvent e) {
@@ -147,7 +153,7 @@ public class AltaParticipante extends JDialog {
                           }
                   }
                 else{
-                        errores+="          El nombre del participante ya esta registrado";
+                        errores+="\n\tEl nombre del participante ya esta registrado";
                     
                     
                     }
@@ -156,7 +162,7 @@ public class AltaParticipante extends JDialog {
                 }
             else{
                     nombreParticipanteJTextArea.error();
-                    errores+="          El nombre del participante no puede ser  nulo";
+                    errores+="\n\tEl nombre del participante no puede ser  nulo";
                 
                 }
             
@@ -164,10 +170,25 @@ public class AltaParticipante extends JDialog {
         else
         {
                 correoElectrónicoJTextArea.error();
-                errores+="          El correo electronico del participante no puede ser  nulo";
+                errores+="\n\tEl correo electronico del participante no puede ser  nulo";
             }
         if(!errores.equals(""))
-        	Toolkit.getDefaultToolkit().beep(); //TODO controlar que este bien el pitido aca
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE);  
+                JDialog dialog = pane.createDialog("Errores en los campos");
+                int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+                int posicion= this.getLocationOnScreen().x;
+                int anchoVentana= this.getHeight();
+                
+                if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+                {
+                        dialog.setLocation(getLocationOnScreen().x + getHeight()+200 , getLocationOnScreen().y);
+                }
+                else
+                {
+                        dialog.setLocation(getLocationOnScreen().x - 400, getLocationOnScreen().y);
+                }
+                dialog.setVisible(true);
             System.out.println(errores);
     }
 }

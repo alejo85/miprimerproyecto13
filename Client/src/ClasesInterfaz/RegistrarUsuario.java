@@ -28,6 +28,8 @@ import java.awt.event.FocusAdapter;
 
 import java.awt.event.FocusEvent;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -46,8 +48,7 @@ import javax.swing.JTextArea;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
-public class RegistrarUsuario extends JDialog {
+public class RegistrarUsuario extends JDialog{
     private AreaTextoCorreo correoElectrónicoJTextArea = new AreaTextoCorreo(40);
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JLabel jLabelContraseña = new JLabel();
@@ -95,6 +96,7 @@ public class RegistrarUsuario extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        setResizable(false);
         CerrarVentana();
         this.setSize(new Dimension(540, 600));
         this.getContentPane().setLayout( null );
@@ -102,6 +104,9 @@ public class RegistrarUsuario extends JDialog {
         correoElectrónicoJTextArea.setBounds(new Rectangle(130, 20, 375, 30));
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        //LIMITAR LONGITUD DE CAMPOS
+        //correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
+        // TODO TRANSFORMAR TODO A MAYUSCULA EN INGRESO DE CORREO
         jLabelCorreoElectrónico.setText("Correo electrónico");
         jLabelCorreoElectrónico.setBounds(new Rectangle(15, 20, 135, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 13));
@@ -344,90 +349,112 @@ private void cargarRegiones()
             }}
         }
 
-
-
     private Boolean datosValidosRegistro(){
         String errores="";
-        String errores2="";
-
-     
-  
-       
-       
-       
-       
-      
-          if(correoElectrónicoJTextArea.getText().equals("")){
-              this.correoElectrónicoJTextArea.error();
-              errores2=errores2 +"\n        Correo electrónico vacio ";
-          }
-          if(this.contraseñaJPasswordField.getPass().equals("") || this.repetirContraseñaJPasswordField.getPass().equals("")){
-          
-              errores= errores +"\n        Las contraseñas no deben ser vacias ";
-              this.contraseñaJPasswordField.error();
-              this.repetirContraseñaJPasswordField.error();
-          }
-          else
-          {
-                  if(this.contraseñaJPasswordField.getPass().length()<6 || this.contraseñaJPasswordField.getPass().length()<6){
-                        this.contraseñaJPasswordField.error();
-                        this.repetirContraseñaJPasswordField.error();
-                        errores="\n        La longitud mínima para las contraseñas es de 6 carácteres ";
-                    }
-              }
-          if(!this.contraseñaJPasswordField.getPass().equals(this.repetirContraseñaJPasswordField.getPass())){
-              errores= errores +"\n        Las contraseñas no coinciden ";
-                   this.contraseñaJPasswordField.error();
-                   this.repetirContraseñaJPasswordField.error();
-          }
-        if(apellidoJTextArea.getText().equals("")){
-            this.apellidoJTextArea.error();
-            errores=errores +"\n        Apellido no puede ser vacio ";
-        }
-        if(nombreJTextArea.getText().equals("")){
-            this.nombreJTextArea.error();
-            errores=errores +"\n        Nombre no puede ser vacio ";
-        }
         
-       
-        if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
-            errores=errores + "\n        No has seleccionado un tipo de documento ";
-            tipoDeDocumentoJComboBox.setBackground(Color.red);
-            tipoDeDocumentoJComboBox.setForeground(Color.white);
-        }
-        if(!numeroDocumentoJTextArea.esCorrecto()){
-            numeroDocumentoJTextArea.error();
-            errores=errores + "\n        Número de documento inválido ";
-        }
-        if(this.paisJComboBox.getSelectedIndex()<1){
-            errores=errores + "\n        Debe Seleccionar Un Pais ";
-            paisJComboBox.setBackground(Color.red);
-            paisJComboBox.setForeground(Color.white);
-        }
-        if(this.provinciaJComboBox.getSelectedIndex()<1){
-            errores=errores + "\n        Debe Seleccionar Una Provincia ";
-            provinciaJComboBox.setBackground(Color.red);
-            provinciaJComboBox.setForeground(Color.white);
-        }
-        if(this.localidadJComboBox.getSelectedIndex()<1){
-            errores=errores + "\n        Debe Seleccionar Una Localidad ";
-            localidadJComboBox.setBackground(Color.red);
-            localidadJComboBox.setForeground(Color.white);
-        }
-
+        // EXISTE USUARIO
         try {
             if(UsuarioGestor.existeUsuario(correoElectrónicoJTextArea.getText())){
-                errores2= errores2 +"\n        El correo ya se encuentra en uso ";
+                errores= "\n\tEl correo ya se encuentra en uso ";
                 this.correoElectrónicoJTextArea.error();
             }
         } catch (SQLException e) {//todo
             System.out.println(e.getMessage());
         }
+        // CORREO ELECTRONICO VACIO
+        if(correoElectrónicoJTextArea.getText().equals("")){
+              this.correoElectrónicoJTextArea.error();
+              errores= errores +"\n\tCorreo electrónico vacio ";
+          }
+        
+        // CONTRASEÑAS VACIAS
+        if(this.contraseñaJPasswordField.getPass().equals("") || this.repetirContraseñaJPasswordField.getPass().equals("")){
+              errores= errores +"\n\tLas contraseñas no deben ser vacias ";
+              this.contraseñaJPasswordField.error();
+              this.repetirContraseñaJPasswordField.error();
+        }
+        
+        // CONTRASEÑAS CON TAMAÑO MENOR QUE SEIS
+        else{
+            if(this.contraseñaJPasswordField.getPass().length()<6){
+                        this.contraseñaJPasswordField.error();
+                        this.repetirContraseñaJPasswordField.error();
+                        errores="\n\tLa longitud mínima para las contraseñas es de 6 carácteres ";
+                    }
+              }
+        
+        // CONTRASEÑAS IGUALES
+          if(!this.contraseñaJPasswordField.getPass().equals(this.repetirContraseñaJPasswordField.getPass())){
+              errores= errores +"\n\tLas contraseñas no coinciden ";
+                   this.contraseñaJPasswordField.error();
+                   this.repetirContraseñaJPasswordField.error();
+          }
+          
+          // APELLIDO VACIO
+        if(apellidoJTextArea.getText().equals("")){
+            this.apellidoJTextArea.error();
+            errores=errores +"\n\tApellido no puede ser vacio ";
+        }
+        
+        // NOMBRE VACIO
+        if(nombreJTextArea.getText().equals("")){
+            this.nombreJTextArea.error();
+            errores=errores +"\n\tNombre no puede ser vacio ";
+        }
+        
+       // NO SE SELECCIONO TIPO DE DOCUMENTO
+        if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
+            errores=errores + "\n\tDebe seleccionar un tipo de documento ";
+            tipoDeDocumentoJComboBox.setBackground(Color.red);
+            tipoDeDocumentoJComboBox.setForeground(Color.white);
+        }
+        
+        // Nº DOCUMENTO VALIDO
+        if(!numeroDocumentoJTextArea.esCorrecto()){
+            numeroDocumentoJTextArea.error();
+            errores=errores + "\n\tNúmero de documento inválido ";
+        }
+        
+        // NO SE SELECCIONO PAIS
+        if(this.paisJComboBox.getSelectedIndex()<1){
+            errores=errores + "\n\tDebe Seleccionar Un Pais ";
+            paisJComboBox.setBackground(Color.red);
+            paisJComboBox.setForeground(Color.white);
+        }
+        
+        // NO SE SELECCIONO PROVINCIA
+        if(this.provinciaJComboBox.getSelectedIndex()<1){
+            errores=errores + "\n\tDebe Seleccionar Una Provincia ";
+            provinciaJComboBox.setBackground(Color.red);
+            provinciaJComboBox.setForeground(Color.white);
+        }
+        
+        // NO SE SELECCIONO LOCALIDAD
+        if(this.localidadJComboBox.getSelectedIndex()<1){
+            errores=errores + "\n\tDebe Seleccionar Una Localidad ";
+            localidadJComboBox.setBackground(Color.red);
+            localidadJComboBox.setForeground(Color.white);
+        }
+
+
 
         if(errores.length()>0){
-
-        	Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showOptionDialog(null, "Tienes los siguientes errores:"+errores2+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE);  
+            JDialog dialog = pane.createDialog("Errores en campos");
+            int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+            int posicion= this.getLocationOnScreen().x;
+            int anchoVentana= this.getHeight();
+            
+            if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+            {
+                    dialog.setLocation(getLocationOnScreen().x + getHeight() , getLocationOnScreen().y);
+            }
+            else
+            {
+                    dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+            }
+            dialog.setVisible(true);
             return false;
         }
         else{
@@ -457,7 +484,8 @@ private void cargarRegiones()
          UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
          JOptionPane.showOptionDialog(null, "El usuario se ha registrado con exito"  , "Registro exitoso", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
          //FIJARSE SI ESTA BIEN QUE CSE CIERRE ASI
-        this.setVisible(false);
+         dispose();
+        new Principal();
         }
     }
 

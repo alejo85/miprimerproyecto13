@@ -64,6 +64,7 @@ public class IniciarSesion extends JDialog {
     }
 
     private void jbInit() throws Exception {
+        setResizable(false);
         // CAMBIAR COLOR DE FONDO
        // getContentPane().setBackground(new java.awt.Color(58,58,58));
         CerrarVentana();
@@ -159,8 +160,7 @@ public class IniciarSesion extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        setVisible(false);
-        dispose(); // cuando se cierra, se pierde los cambios realizados
+        dispose();
         new Principal();
     }
     private void CerrarVentana(){
@@ -182,13 +182,28 @@ public class IniciarSesion extends JDialog {
        usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
        if(usuarioActual==null){
            Toolkit.getDefaultToolkit().beep();
-           JOptionPane.showOptionDialog(null, "El correo electronico o la contraseña son incorrectos "  , "Error al Autencicar", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+           JOptionPane pane = new JOptionPane("El correo electronico o la contraseña son incorrectos " , JOptionPane.ERROR_MESSAGE);  
+           JDialog dialog = pane.createDialog("Error al Autencicar");
+           int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+           int posicion= this.getLocationOnScreen().x;
+           int anchoVentana= this.getHeight();
+           
+           if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+           {
+                   dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
+           }
+           else
+           {
+                   dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+           }
+           dialog.setVisible(true);
+           
            this.correoElectronicoJTextArea.error();
            this.contraeñaJPasswordField.error();
        }
        else{
            JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/check.png"));
-           this.setVisible(false);
+           dispose();
         
            new Principal(this.getUsuarioActual());
        }

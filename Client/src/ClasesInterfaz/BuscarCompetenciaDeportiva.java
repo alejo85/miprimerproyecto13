@@ -25,6 +25,7 @@ import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -35,6 +36,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class BuscarCompetenciaDeportiva extends JDialog {
@@ -90,6 +93,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
 
     private void jbInit() throws Exception {
         CerrarVentana();
+        setResizable(false);
         // DIMENSION DE LA VENTANA
         this.setSize(new Dimension(820, 740));
         this.getContentPane().setLayout( null );
@@ -219,13 +223,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         nuevaCompetenciaJButton.setText("Nueva Competencia");
         nuevaCompetenciaJButton.setBounds(new Rectangle(445, 310, 170, 40));
         nuevaCompetenciaJButton.setFont(new Font("Tahoma", 0, 15));
-    
-        //BOTON VER COMPETENCIA
         nuevaCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     nuevaCompetenciaJButton_actionPerformed(e);
                 }
             });
+        //BOTON VER COMPETENCIA
         verCompetenciaJButton.setText("Ver Competencia");
         verCompetenciaJButton.setBounds(new Rectangle(150, 310, 170, 40));
         verCompetenciaJButton.setFont(new Font("Tahoma", 0, 15));
@@ -234,7 +237,10 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                     verCompetenciaJButton_actionPerformed(e);
                 }
             });
+        verCompetenciaJButton.setEnabled(false);
+        
         tablaResultadoJTable.setModel(modelo);
+        
    
         
         //jScrollBar2.setBounds(new Rectangle(890, 30, 15, 230)); ¿ por que dos scrollbar ?
@@ -309,6 +315,10 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             
         
         cargarResultados();
+            if(competenciasEncontradas.size()>0){
+                verCompetenciaJButton.setEnabled(true);
+            }
+        
             }
 /*
 
@@ -344,6 +354,8 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         
         modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
         tablaResultadoJTable.setModel(modelo);
+        TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo);
+        tablaResultadoJTable.setRowSorter(elQueOrdena);
         //System.out.println("tamaño resultado: "+competenciasEncontradas.size());
         for(int i =0; i<competenciasEncontradas.size();i++)
         {
@@ -389,11 +401,14 @@ public class BuscarCompetenciaDeportiva extends JDialog {
 
     private void verCompetenciaJButton_actionPerformed(ActionEvent e) {
         if(tablaResultadoJTable.getSelectedRow()>-1){
-        competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
-        //System.out.println(this.competenciaSelecionad.getNombreCompetencia());
-        VerCompetencia ven = new VerCompetencia(usuarioActual, competenciaSelecionad);
-        this.setVisible(false);
-        ven.setVisible(true);}
+            competenciaSelecionad = CompetenciaGestor.buscarCompetencia(competenciasEncontradas.get(tablaResultadoJTable.getSelectedRow()).getIdCompetencia());
+            VerCompetencia ven =new VerCompetencia(usuarioActual, competenciaSelecionad);
+            dispose();
+            ven.setVisible(true);
+        }
+        else{
+            JOptionPane.showOptionDialog(null, "Debes seleccionar un resultado de la búsqueda"  , "Ver competencia", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        }
     }
 
     private void nuevaCompetenciaJButton_actionPerformed(ActionEvent e) {
