@@ -37,27 +37,45 @@ public class CompetenciaGestor {
      * @param deporte
      * @param lugares
      */
-    public static boolean altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado,boolean empate, int puntosPorPartidoGanados, int puntosPorPartidoEmpatado, int puntosPorPartidoAsistido, int cantidadDeSets, int tantosPorPartidoAusenciaContrincante){
-            Competencia unaCompetencia = new Competencia();
-            unaCompetencia.setUsuarioCreador(usuarioCreador);
-            unaCompetencia.setNombreCompetencia(nombreDeCompetencia);
-            unaCompetencia.setModalidad(modalidad);
-            unaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
-            unaCompetencia.setEstado(estado);
-            unaCompetencia.setReglamento(reglamento);
-            unaCompetencia.setDeporte(deporte);
-            unaCompetencia.setLugares(lugaresDeRealizacion(lugaresSeleccionado));
-            unaCompetencia.setLiga(LigaGestor.crearLiga(puntosPorPartidoGanados, empate, puntosPorPartidoEmpatado, puntosPorPartidoAsistido));
-            unaCompetencia.setCantidadDeSets(cantidadDeSets);
-            unaCompetencia.setTantosPorPartidoAusenciaContrincante(tantosPorPartidoAusenciaContrincante);
-   //     System.out.println("crea la competencia");
-        try {
-            return CompetenciaDB.registrarCompetencia(unaCompetencia);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+     public static Competencia altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado,boolean empate, int puntosPorPartidoGanados, int puntosPorPartidoEmpatado, int puntosPorPartidoAsistido, int cantidadDeSets, int tantosPorPartidoAusenciaContrincante){
+                Competencia unaCompetencia = new Competencia();
+                unaCompetencia.setUsuarioCreador(usuarioCreador);
+                unaCompetencia.setNombreCompetencia(nombreDeCompetencia);
+                unaCompetencia.setModalidad(modalidad);
+                unaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
+                unaCompetencia.setEstado(estado);
+                unaCompetencia.setReglamento(reglamento);
+                unaCompetencia.setDeporte(deporte);
+                unaCompetencia.setLugares(lugaresDeRealizacion(lugaresSeleccionado));
+                unaCompetencia.setLiga(LigaGestor.crearLiga(puntosPorPartidoGanados, empate, puntosPorPartidoEmpatado, puntosPorPartidoAsistido));
+                unaCompetencia.setCantidadDeSets(cantidadDeSets);
+                unaCompetencia.setTantosPorPartidoAusenciaContrincante(tantosPorPartidoAusenciaContrincante);
+            try {
+                return CompetenciaDB.registrarCompetencia(unaCompetencia);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return unaCompetencia;
         }
-        return false;
-    }
+        public static Competencia altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado, int cantidadDeSets, int tantosPorPartidoAusenciaContrincante){
+                Competencia unaCompetencia = new Competencia();
+                unaCompetencia.setUsuarioCreador(usuarioCreador);
+                unaCompetencia.setNombreCompetencia(nombreDeCompetencia);
+                unaCompetencia.setModalidad(modalidad);
+                unaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
+                unaCompetencia.setEstado(estado);
+                unaCompetencia.setReglamento(reglamento);
+                unaCompetencia.setDeporte(deporte);
+                unaCompetencia.setLugares(lugaresDeRealizacion(lugaresSeleccionado));
+                unaCompetencia.setCantidadDeSets(cantidadDeSets);
+                unaCompetencia.setTantosPorPartidoAusenciaContrincante(tantosPorPartidoAusenciaContrincante);
+            try {
+                return CompetenciaDB.registrarCompetencia(unaCompetencia);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            return unaCompetencia;
+        }
     private static  LugarDeRealizacion[] lugaresDeRealizacion(Vector<LugarDeRealizacion> lugaresSeleccionado){
            LugarDeRealizacion[] lugaresDeRealizacion= new LugarDeRealizacion[lugaresSeleccionado.size()];
         for(int i=0;i<lugaresSeleccionado.size(); i++){
