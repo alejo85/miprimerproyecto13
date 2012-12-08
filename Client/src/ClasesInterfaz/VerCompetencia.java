@@ -32,6 +32,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 
 public class VerCompetencia extends JDialog {
@@ -320,7 +322,11 @@ public class VerCompetencia extends JDialog {
                 datos.add(competencia.getParticipantes()[i].getNombre());
                 modelo.addRow(datos);
             }
+        // ORDENAR SEGUN COLUMNA SELECCIONADA
            jTable1.setModel(modelo);
+            TableRowSorter<DefaultTableModel> elQueOrdena1 = new TableRowSorter<DefaultTableModel>(modelo);
+            jTable1.setRowSorter(elQueOrdena1);
+            
             modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo b" }, 0);
             if(competencia.getFixture().getIdFixture() != 0||competencia.getFixture()==null)
             {
@@ -329,6 +335,9 @@ public class VerCompetencia extends JDialog {
                     cargarFixture(competencia.getFixture().getRondas());
                 }
             tablaProximosEncuentosJTable.setModel(modelo2);
+            // ORDENAR SEGUN COLUMNA SELECCIONADA
+            TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo2);
+            tablaProximosEncuentosJTable.setRowSorter(elQueOrdena);
         }
 
     /**
