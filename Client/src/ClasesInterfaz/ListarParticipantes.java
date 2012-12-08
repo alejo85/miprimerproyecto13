@@ -21,6 +21,7 @@ import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -67,7 +68,7 @@ public class ListarParticipantes extends JDialog {
         CerrarVentana();
         tablaParticipantesJTable.setModel(modelo);
         cargarParticipantes();
-        this.setSize(new Dimension(808, 627));
+        this.setSize(new Dimension(770, 610));
         this.getContentPane().setLayout( null );
         this.setTitle("Listado de Participantes");
         nombreCompetenciaJTextArea.setBounds(new Rectangle(225, 22, 375, 30));
@@ -80,45 +81,55 @@ public class ListarParticipantes extends JDialog {
         
         jLabelNombreCompetencia.setText("Nombre De La Competencia:");
         jLabelNombreCompetencia.setBounds(new Rectangle(45, 25, 175, 25));
-        jLabelNombreCompetencia.setFont(new Font("Tahoma", 0, 13));
+        jLabelNombreCompetencia.setFont(new Font("Tahoma", 0, 15));
         participantesJPanel.setBounds(new Rectangle(45, 90, 490, 410));
         participantesJPanel.setLayout(null);
         participantesJPanel.setBorder(BorderFactory.createTitledBorder("Participantes"));
-        cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(440, 535, 110, 30));
-        cancelarJButton.setFont(new Font("Tahoma", 0, 13));
-        cancelarJButton.setSize(new Dimension(110, 30));
-        cancelarJButton.setActionCommand("Cancelar");
-        cancelarJButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    cancelarJButton_actionPerformed(e);
-                }
-            });
+    
+        jScrollPane1.setBounds(new Rectangle(35, 25, 425, 345));
+        
+        //BOTON ALTA
         altaParticipanteJButton.setText("Alta Participante");
-        altaParticipanteJButton.setBounds(new Rectangle(600, 205, 165, 30));
+        altaParticipanteJButton.setBounds(new Rectangle(570, 205, 165, 40));
         altaParticipanteJButton.setFont(new Font("Tahoma", 0, 13));
         altaParticipanteJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     altaParticipanteJButton_actionPerformed(e);
                 }
             });
-        jScrollPane1.setBounds(new Rectangle(35, 25, 425, 345));
+        
+        
+        //BOTON MODIFICAR
         modificarParticipanteJButton.setText("Modificar Participante");
-        modificarParticipanteJButton.setBounds(new Rectangle(600, 250, 165, 30));
+        modificarParticipanteJButton.setBounds(new Rectangle(570, 255, 165, 40));
         modificarParticipanteJButton.setFont(new Font("Tahoma", 0, 13));
         modificarParticipanteJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     modificarParticipanteJButton_actionPerformed(e);
                 }
             });
+        
+        // BOTON ELIMINAR
         eliminarPrticipanteJButton.setText("Eliminar Participante");
-        eliminarPrticipanteJButton.setBounds(new Rectangle(600, 300, 165, 30));
+        eliminarPrticipanteJButton.setBounds(new Rectangle(570, 305, 165, 40));
         eliminarPrticipanteJButton.setFont(new Font("Tahoma", 0, 13));
         eliminarPrticipanteJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     eliminarPrticipanteJButton_actionPerformed(e);
                 }
             });
+        
+        //BOTON CANCELAR
+        cancelarJButton.setText("Cancelar");
+        cancelarJButton.setBounds(new Rectangle(570, 520, 165, 40));
+        cancelarJButton.setFont(new Font("Tahoma", 0, 13));
+        cancelarJButton.setActionCommand("Cancelar");
+        cancelarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    cancelarJButton_actionPerformed(e);
+                }
+            });
+        
         this.getContentPane().add(eliminarPrticipanteJButton, null);
         this.getContentPane().add(modificarParticipanteJButton, null);
         this.getContentPane().add(altaParticipanteJButton, null);
@@ -148,11 +159,11 @@ public class ListarParticipantes extends JDialog {
     }
 
     private void modificarParticipanteJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Modificar participante", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Modificar participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 
     private void eliminarPrticipanteJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Eliminar participante", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Eliminar participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
     private void cargarParticipantes(){
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
