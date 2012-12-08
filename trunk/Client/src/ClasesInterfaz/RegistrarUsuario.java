@@ -101,11 +101,17 @@ public class RegistrarUsuario extends JDialog{
         CerrarVentana();
         this.setSize(new Dimension(540, 600));
         this.setLocationRelativeTo(null);
+        
         this.getContentPane().setLayout( null );
         this.setTitle("Registrar Usuario");
         correoElectrónicoJTextArea.setBounds(new Rectangle(130, 20, 375, 30));
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        correoElectrónicoJTextArea.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         //LIMITAR LONGITUD DE CAMPOS
         //correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
         // TODO TRANSFORMAR TODO A MAYUSCULA EN INGRESO DE CORREO
@@ -119,22 +125,46 @@ public class RegistrarUsuario extends JDialog{
         contraseñaJPasswordField.setMinimumSize(new Dimension(5, 22));
         contraseñaJPasswordField.setFont(new Font("Tahoma", 0, 13));
         contraseñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        contraseñaJPasswordField.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
+        
         repetirContraseñaJPasswordField.setBounds(new Rectangle(130, 110, 375, 30));
         repetirContraseñaJPasswordField.setMinimumSize(new Dimension(5, 22));
         repetirContraseñaJPasswordField.setFont(new Font("Tahoma", 0, 13));
         repetirContraseñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        repetirContraseñaJPasswordField.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
+        
         jLabelRepetirContraseña.setText("Repetir Contraseña");
         jLabelRepetirContraseña.setBounds(new Rectangle(15, 110, 135, 25));
         jLabelRepetirContraseña.setFont(new Font("Tahoma", 0, 13));
         apellidoJTextArea.setBounds(new Rectangle(130, 155, 375, 30));
         apellidoJTextArea.setFont(new Font("Tahoma", 0, 13));
         apellidoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        apellidoJTextArea.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
+        
         jLabelApellido.setText("Apellido");
         jLabelApellido.setBounds(new Rectangle(15, 155, 135, 25));
         jLabelApellido.setFont(new Font("Tahoma", 0, 13));
         nombreJTextArea.setBounds(new Rectangle(130, 195, 375, 30));
         nombreJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nombreJTextArea.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
+        
         jLabelNombre.setText("Nombre");
         jLabelNombre.setBounds(new Rectangle(15, 195, 135, 25));
         jLabelNombre.setFont(new Font("Tahoma", 0, 13));
@@ -159,6 +189,12 @@ public class RegistrarUsuario extends JDialog{
         numeroDocumentoJTextArea.setBounds(new Rectangle(360, 245, 145, 30));
         numeroDocumentoJTextArea.setFont(new Font("Tahoma", 0, 13));
         numeroDocumentoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        numeroDocumentoJTextArea.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
+        
         jLabelNDocumento.setText("Nº De Documento");
         jLabelNDocumento.setBounds(new Rectangle(245, 245, 135, 25));
         jLabelNDocumento.setFont(new Font("Tahoma", 0, 13));
@@ -466,9 +502,7 @@ private void cargarRegiones()
     }
    
     private void aceptoTérminosCondicionesUsoJCheckBox_stateChanged(ChangeEvent e) {
-       
-       
-        if (aceptoTérminosCondicionesUsoJCheckBox.isSelected()==true) {
+       if (aceptoTérminosCondicionesUsoJCheckBox.isSelected()==true) {
                    aceptarJButton.setEnabled(true);
                }
         else {

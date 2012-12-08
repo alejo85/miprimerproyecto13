@@ -104,7 +104,11 @@ public class AltaLugarDeRealizacion extends JDialog {
                     codigoJTextArea_focusGained(e);
                 }
             });
-        
+        codigoJTextField.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         //LIMITAR ENTRADA CODIGO A 6 CARACTERES
         codigoJTextField.setDocument(new LimitadorCaracteres(codigoJTextField,6));
         
@@ -122,7 +126,11 @@ public class AltaLugarDeRealizacion extends JDialog {
                     nombreLugarDeRealizaciónJTextArea_focusGained(e);
                 }
             });
-        
+        nombreLugarDeRealizacionJTextField.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         //LIMITAR ENTRADA NOMBRE A 60 CARACTERES
         nombreLugarDeRealizacionJTextField.setDocument(new LimitadorCaracteres(nombreLugarDeRealizacionJTextField,60));
         
