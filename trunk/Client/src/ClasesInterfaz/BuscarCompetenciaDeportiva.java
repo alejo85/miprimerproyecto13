@@ -304,7 +304,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                 estadoJComboBox.setForeground(Color.white);
                 
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showOptionDialog(null, "Tiene que Seleccionar al menor uno de los campos:"  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+                    JOptionPane.showOptionDialog(null, "Tienes que seleccionar al menos uno de los campos:"  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
                     
                 
             }
