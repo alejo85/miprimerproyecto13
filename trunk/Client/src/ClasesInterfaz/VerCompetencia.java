@@ -97,7 +97,7 @@ public class VerCompetencia extends JDialog {
         CerrarVentana();
         
         // TAMAÑO VENTANA
-        this.setSize(new Dimension(991, 567));
+        this.setSize(new Dimension(940, 567));
         
         // TITULO VENTANA 
         this.setTitle("Ver Competencia");
@@ -160,7 +160,7 @@ public class VerCompetencia extends JDialog {
         
         
         modificarCompetenciaJButton.setText("Modificar Competencia");
-        modificarCompetenciaJButton.setBounds(new Rectangle(710, 15, 175, 30));
+        modificarCompetenciaJButton.setBounds(new Rectangle(710, 15, 175, 40));
         modificarCompetenciaJButton.setFont(new Font("Tahoma", 0, 13));
         modificarCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -168,7 +168,7 @@ public class VerCompetencia extends JDialog {
                 }
             });
         eliminarCompetenciaJButton.setText("Eliminar Competencia");
-        eliminarCompetenciaJButton.setBounds(new Rectangle(710, 50, 175, 30));
+        eliminarCompetenciaJButton.setBounds(new Rectangle(710, 65, 175, 40));
         eliminarCompetenciaJButton.setFont(new Font("Tahoma", 0, 13));
         eliminarCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -176,7 +176,7 @@ public class VerCompetencia extends JDialog {
                 }
             });
         gestionarParticipantesJButton.setText("Gestionar Participantes");
-        gestionarParticipantesJButton.setBounds(new Rectangle(710, 200, 175, 30));
+        gestionarParticipantesJButton.setBounds(new Rectangle(710, 180, 175, 40));
         gestionarParticipantesJButton.setFont(new Font("Tahoma", 0, 13));
         gestionarParticipantesJButton.setActionCommand("Gestionar Participantes");
         gestionarParticipantesJButton.addActionListener(new ActionListener() {
@@ -185,7 +185,7 @@ public class VerCompetencia extends JDialog {
                 }
             });
         mostrarFixtureJButton.setText("Mostrar Fixture");
-        mostrarFixtureJButton.setBounds(new Rectangle(710, 370, 175, 30));
+        mostrarFixtureJButton.setBounds(new Rectangle(710, 350, 175, 40));
         mostrarFixtureJButton.setFont(new Font("Tahoma", 0, 13));
         mostrarFixtureJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -193,7 +193,7 @@ public class VerCompetencia extends JDialog {
                 }
             });
         generarFixtureJButton.setText("Generar Fixture");
-        generarFixtureJButton.setBounds(new Rectangle(710, 335, 175, 30));
+        generarFixtureJButton.setBounds(new Rectangle(710, 295, 175, 40));
         generarFixtureJButton.setFont(new Font("Tahoma", 0, 13));
         generarFixtureJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -201,7 +201,7 @@ public class VerCompetencia extends JDialog {
                 }
             });
         mostrarTablaDePosicionesJButton.setText("Mostrar Tabla");
-        mostrarTablaDePosicionesJButton.setBounds(new Rectangle(710, 400, 175, 30));
+        mostrarTablaDePosicionesJButton.setBounds(new Rectangle(710, 400, 175, 40));
         mostrarTablaDePosicionesJButton.setFont(new Font("Tahoma", 0, 13));
         mostrarTablaDePosicionesJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -211,9 +211,8 @@ public class VerCompetencia extends JDialog {
         jScrollPaneParticipante.setBounds(new Rectangle(235, 200, 375, 125));
         jScrollPaneProximoEncuentro.setBounds(new Rectangle(235, 340, 375, 120));
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(650, 475, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(710, 495, 175, 40));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
-        cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     cancelarJButton_actionPerformed(e);
@@ -252,18 +251,11 @@ public class VerCompetencia extends JDialog {
     }
 
     private void modificarCompetenciaJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Modificar competencia", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Modificar competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 
     private void eliminarCompetenciaJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Eliminar competencia", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-        /*
-         * int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea eliminar la competencia Nombre Competencia?.", "Eliminar la Competencia.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
-        if (respuesta == 0){
-            ImageIcon imagenCandado = new ImageIcon("Imagenes//candado.gif");
-            JOptionPane.showOptionDialog(null, "Se ha eliminado la  competencia Nombre Competencia "  , "Competencia Eliminada.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, imagenCandado, new Object[]{"Aceptar"},"Aceptar");
-        } 
-        */
+        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Eliminar competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 
     private void gestionarParticipantesJButton_actionPerformed(ActionEvent e) {
