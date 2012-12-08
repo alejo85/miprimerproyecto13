@@ -43,7 +43,6 @@ import javax.swing.table.TableRowSorter;
 public class BuscarCompetenciaDeportiva extends JDialog {
     
     private ModeloTabla modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
-    private JButton aceptarJButton = new JButton();
     private JButton cancelarJButton = new JButton();
     private JPanel resultadoJPanel = new JPanel();
     private JButton nuevaCompetenciaJButton = new JButton();
@@ -102,11 +101,6 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         //TITULO VENTANA
         this.setTitle("Buscar Competencia");
         
-        //BOTON ACEPTAR
-        aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(150, 650, 170, 40));
-        aceptarJButton.setFont(new Font("Tahoma", 0, 15));
-        
         //BOTON CANCELAR
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(560, 650, 170, 40));
@@ -139,6 +133,11 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         nombreCompetenciaJTextArea.addFocusListener(new FocusAdapter() {
                 public void focusGained(FocusEvent e) {
                     nombreCompetenciaJTextArea_focusGained(e);
+                }
+            });
+        nombreCompetenciaJTextArea.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    buscarJButton_actionPerformed(e);
                 }
             });
         jLabelDeporte.setText("Deporte");
@@ -268,8 +267,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         this.getContentPane().add(busqueadaJPanel, null);
         this.getContentPane().add(resultadoJPanel, null);
         this.getContentPane().add(cancelarJButton, null);
-        this.getContentPane().add(aceptarJButton, null);
-       
+
     }
     // CARGAR DEPORTES
     private void listarDeportes() {

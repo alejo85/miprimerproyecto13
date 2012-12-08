@@ -88,6 +88,11 @@ public class IniciarSesion extends JDialog {
         correoElectronicoJTextArea.setBounds(new Rectangle(135, 100, 365, 30));
         correoElectronicoJTextArea.setFont(new Font("Tahoma", 0, 15));
         correoElectronicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        correoElectronicoJTextArea.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         
         // CONTRASEÑA TEXTO Y CAMPO
         jLabelContraseña.setText("Contraseña");
@@ -95,7 +100,11 @@ public class IniciarSesion extends JDialog {
         jLabelContraseña.setFont(new Font("Tahoma", 0, 15));
         contraeñaJPasswordField.setBounds(new Rectangle(135, 155, 365, 30));
         contraeñaJPasswordField.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        
+        contraeñaJPasswordField.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    aceptarJButton_actionPerformed(e);
+                }
+            });
         // RECUADRO TEXTO Y BOTON
         panelRegistrarseJPanel.setBounds(new Rectangle(100, 260, 360, 105));
         panelRegistrarseJPanel.setLayout(null);
