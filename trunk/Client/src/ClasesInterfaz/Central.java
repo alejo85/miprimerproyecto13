@@ -205,7 +205,7 @@ public class Central extends JFrame {
         competenciaJPanel.setFont(new Font("Dialog", 0, 50));
         buscarCompetenciaJButton.setBounds(new Rectangle(560, 230, 230, 55));
         buscarCompetenciaJButton.setFont(new Font("Tahoma", 0, 13));
-        buscarCompetenciaJButton.setText("Buscar Competencia");
+        buscarCompetenciaJButton.setText("Buscar Competencias");
        // buscarCompetenciaJButton.setActionCommand("");
         buscarCompetenciaJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
