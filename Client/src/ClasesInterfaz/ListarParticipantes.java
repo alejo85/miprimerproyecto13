@@ -148,16 +148,11 @@ public class ListarParticipantes extends JDialog {
     }
 
     private void modificarParticipanteJButton_actionPerformed(ActionEvent e) {
-        ModificarParticipante ven = new ModificarParticipante();
-        ven.setVisible(true);
+        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Modificar participante", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
 
     private void eliminarPrticipanteJButton_actionPerformed(ActionEvent e) {
-        int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea eliminar el Participante: Nombre Participante?.", "Eliminar Participante.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
-        if (respuesta == 0){
-        
-            JOptionPane.showOptionDialog(null, "Se ha eliminado el participante nombre del participante de la competecnia Nombre Competencia "  , "Participante Eliminado.", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-        }  
+        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Eliminar participante", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
     }
     private void cargarParticipantes(){
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){

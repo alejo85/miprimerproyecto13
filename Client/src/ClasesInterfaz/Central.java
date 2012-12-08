@@ -305,7 +305,7 @@ public class Central extends JFrame {
     }
     // ACCION BOTON MODIFICAR
     private void jButtonAceptar5_actionPerformed(ActionEvent e) {
-        JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Funcionalidad No disponible", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Modificar usuario",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 // ACCION BOTON INICIAR SESION O CERRAR SESION DEPENDIENDO DEL OBJETO USUARIO
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
@@ -341,7 +341,7 @@ public class Central extends JFrame {
     }
 
     private void jButtonAceptar10_actionPerformed(ActionEvent e) {
-    	JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Buscar todas las competencias", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Buscar todas las competencias",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
     
     private void actualizarUsuarioActual(Usuario usuario){
