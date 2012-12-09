@@ -274,7 +274,7 @@ public class ModificarFixture extends JDialog {
                                  datos.add(""+resultado);
                             }
 
-                            if(competenciaSeleccionada.getFormaDePuntuacion().equals("Puntuación"))
+                            if(competenciaSeleccionada.getFormaDePuntuacion().equals("Puntuación")&&encuentrosDeSubRonda[j].getResultado().size()!=0)
                             {
                                  String resultado="";
                                  resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoB()+" ]";
@@ -292,6 +292,15 @@ public class ModificarFixture extends JDialog {
                                  resultado+="Ganador: "+encuentrosDeSubRonda[j].getGanador().getNombre();
                                  datos.add(""+resultado);
                         }
+                         if(encuentrosDeSubRonda[j].getGanador()!=null)
+                         {
+                                 String resultado="";
+                                 if(encuentrosDeSubRonda[j].getEmpate())
+                                 resultado+="Empate ";
+                                 else if(encuentrosDeSubRonda[j].getGanador()!=null)
+                                 resultado+="Ganador: "+encuentrosDeSubRonda[j].getGanador().getNombre();
+                                 datos.add(""+resultado);
+                         }
                                   
                          
                         datos.add("");
