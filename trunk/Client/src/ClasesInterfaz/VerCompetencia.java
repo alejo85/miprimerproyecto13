@@ -254,11 +254,11 @@ public class VerCompetencia extends JDialog {
     }
 
     private void modificarCompetenciaJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Modificar competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+        JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento</h4><html>", "Modificar competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 
     private void eliminarCompetenciaJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Eliminar competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+        JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento</h4></html>", "Eliminar competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 
     private void gestionarParticipantesJButton_actionPerformed(ActionEvent e) {
@@ -276,7 +276,7 @@ public class VerCompetencia extends JDialog {
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
         int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
-            if(competencia.getParticipantes().length>2){
+            if(competencia.getParticipantes().length>=2){
             System.out.println(""+competencia.getFixture().getIdFixture());
             if(competencia.getFixture().getIdFixture()!=0&&(competencia.getEstado().equals("Creada")||competencia.getEstado().equals("Planificada"))){
                     CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
@@ -284,21 +284,21 @@ public class VerCompetencia extends JDialog {
                     competencia.setFixture(new Fixture());
                  
                     CompetenciaGestor.generarFixture(competencia);
-                    JOptionPane.showMessageDialog(null, "El fixture de "+competencia.getNombreCompetencia()+"se genero exitosamente", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+"se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
                     cargarDatos();
                 }
             else
             {
                     CompetenciaGestor.generarFixture(competencia);
                     competencia.setEstado("Planificada");
-                    JOptionPane.showMessageDialog(null, "El fixture de "+competencia.getNombreCompetencia()+"se genero exitosamente", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+"se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
                     cargarDatos();
                 
                 }
             
         }
             else{
-                JOptionPane.showMessageDialog(null, "Debes dar de alta participantes para generar el fixture", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
+                JOptionPane.showMessageDialog(null, "<html><h4>Debes dar de alta participantes para generar el fixture</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
             }
         }
     }

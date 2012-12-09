@@ -272,7 +272,7 @@ public class IniciarSesion extends JDialog {
                    // SI EL USUARIO EXISTE Y LA CONTRASEÑA CORRESPONDE AL MISMO
                    else{
                        dispose();
-                       JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
+                       JOptionPane.showMessageDialog(null, "<html><h4>Has sido autenticado con éxito</h4></html>", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
                        new Principal(this.getUsuarioActual());
                    }
             }

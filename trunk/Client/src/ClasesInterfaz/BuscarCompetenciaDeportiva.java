@@ -212,7 +212,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         resultadoJPanel.setBorder(BorderFactory.createLineBorder(borde,2));
         
         jLabelResultadosObtenidos.setText("Resultados obtenidos");
-        jLabelResultadosObtenidos.setBounds(new Rectangle(15, 15, 205, 25));
+        jLabelResultadosObtenidos.setBounds(new Rectangle(15, 15, 400, 25));
         jLabelResultadosObtenidos.setFont(new Font("Tahoma", 0, 15));
         
         jScrollPane2.setBounds(new Rectangle(20, 50, 720, 230));
@@ -303,8 +303,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                 estadoJComboBox.setForeground(Color.white);
                 
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showOptionDialog(null, "Tienes que seleccionar al menos uno de los campos:"  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
-                    
+                JOptionPane.showMessageDialog(null, "<html><h4>Tienes que seleccionar al menos uno de los campos</h4></html>", "Errores en los campos",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/error.png"));
                 
             }
         else{
@@ -365,7 +364,12 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         DeporteJComboBox.setForeground(foreground);
     }
     private void cargarResultados(){
+        if(competenciasEncontradas.size()==0){
+            jLabelResultadosObtenidos.setText("Resultados obtenidos: no se ha encontrado ningún resultado");
+        }
+        else{
         jLabelResultadosObtenidos.setText("Resultados obtenidos: " +competenciasEncontradas.size());
+        }
         modelo = new ModeloTabla(new String[] { "Nombre", "Deporte","Modalidad" ,"Estado" }, 0);
         tablaResultadoJTable.setModel(modelo);
         TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo);
@@ -421,7 +425,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             ven.setVisible(true);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
+            JOptionPane.showMessageDialog(null, "<html><h4>Debes seleccionar un resultado de la búsqueda</h4></html>", "Ver competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
         }
     }
 

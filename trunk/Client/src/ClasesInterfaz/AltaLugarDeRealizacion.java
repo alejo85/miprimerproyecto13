@@ -313,7 +313,7 @@ public class AltaLugarDeRealizacion extends JDialog {
                 System.out.println(f.getMessage());
             }
             dispose();
-            JOptionPane.showMessageDialog(null, "El lugar de realización ha sido creado con éxito", "Alta lugar de realización",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+            JOptionPane.showMessageDialog(null, "<html><h4>El lugar de realización ha sido creado con éxito</h4></html>", "Alta lugar de realización",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
             new Principal(usuarioActual);
         }
         
