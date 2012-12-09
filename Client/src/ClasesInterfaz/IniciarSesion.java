@@ -216,27 +216,18 @@ public class IniciarSesion extends JDialog {
     private void aceptarJButton_actionPerformed(ActionEvent e) {
            String errores="";
             // VALIDA CORREO ELECTRONICO
-            if(isEmail(correoElectronicoJTextArea.getText())){
-                    // VALIDA CONTRASEÑA VACIA
-                    if((contraeñaJPasswordField.getPass()).equals("")){
-                        errores=errores+"<li>Contraseña vacia</li>";
-                    }
-                    // VALIDA LONGITUD MINIMA CONTRASEÑA
-                    else if((contraeñaJPasswordField.getPass()).length()<6){
-                        errores=errores+"<li>Longitud mínima para contraseña es de 6 carácteres</li>";
-                    }
-                }
-            else{
+            if(!isEmail(correoElectronicoJTextArea.getText())){
                     errores=errores+"<li>Correo electrónico invalido</li>";
-                    // VALIDA CONTRASEÑA VACIA
-                    if((contraeñaJPasswordField.getPass()).equals("")){
-                        errores=errores+"<li>Contraseña vacia</li>";
-                    }
-                    // VALIDA LONGITUD MINIMA CONTRASEÑA
-                    else if((contraeñaJPasswordField.getPass()).length()<6){
-                        errores=errores+"<li>Longitud mínima para contraseña es de 6 carácteres</li>";
-                    }
                 }
+            // VALIDA CONTRASEÑA VACIA
+            if((contraeñaJPasswordField.getPass()).equals("")){
+                        errores=errores+"<li>Contraseña vacia</li>";
+             }
+            // VALIDA LONGITUD MINIMA CONTRASEÑA
+            else if((contraeñaJPasswordField.getPass()).length()<6){
+                 errores=errores+"<li>Longitud mínima para contraseña es de 6 carácteres</li>";
+            }
+            
             if(errores.length()==0){
                   //BUSCA USUARIO
                    usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getText(), this.contraeñaJPasswordField.getPass());
@@ -269,7 +260,7 @@ public class IniciarSesion extends JDialog {
                    else{
                        JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
                        dispose();
-                        new Principal(this.getUsuarioActual());
+                       new Principal(this.getUsuarioActual());
                    }
             }
             else{
