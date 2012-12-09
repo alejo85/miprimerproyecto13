@@ -308,8 +308,23 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                 
             }
         else{
+            
             if(DeporteJComboBox.getSelectedIndex()>0){idDeporte=deporte.get(DeporteJComboBox.getSelectedIndex()-1).getIdDeporte();}
-                    competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte , modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
+            
+            if(modalidadJComboBox.getSelectedIndex()>0){
+                if(modalidadJComboBox.getSelectedItem().equals("Eliminación simple")){
+                    competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte ,"Simple", this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
+                }
+                else if(modalidadJComboBox.getSelectedItem().equals("Eliminación doble")){
+                        competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte ,"Doble", this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
+                    }
+                else{
+                        competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte , "Liga", this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
+                    }
+            }
+            else{
+                competenciasEncontradas = CompetenciaGestor.buscarCompetencias(this.nombreCompetenciaJTextArea.getText(),idDeporte ,modalidadJComboBox.getSelectedItem().toString(), this.estadoJComboBox.getSelectedItem().toString(), this.usuarioActual.getCorreoElectronico());
+            }
 
             
         
