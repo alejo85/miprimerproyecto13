@@ -46,7 +46,7 @@ import javax.swing.JTextField;
 
 
 public class AltaParticipante extends JDialog {
-    private AreaTextoNombre nombreParticipanteJTextArea = new AreaTextoNombre(50);
+    private JTextField nombreParticipanteJTextArea = new JTextField();
     private JLabel jLabelNombreParticipante = new JLabel();
     private JTextField correoElectrónicoJTextArea = new JTextField();
     private JLabel jLabelCorreoElectrónico = new JLabel();
@@ -84,6 +84,12 @@ public class AltaParticipante extends JDialog {
         nombreParticipanteJTextArea.setBounds(new Rectangle(140, 15, 305, 30));
         nombreParticipanteJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreParticipanteJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nombreParticipanteJTextArea.setDocument(new LimitadorCaracteres(nombreParticipanteJTextArea,50));
+        nombreParticipanteJTextArea.addFocusListener(new FocusAdapter() { 
+            public void focusGained(FocusEvent evt) {     
+                nombreParticipanteJTextArea.setForeground(Color.black);
+                 nombreParticipanteJTextArea.setBackground(Color.white);
+     } });
         jLabelNombreParticipante.setText("Nombre");
         jLabelNombreParticipante.setBounds(new Rectangle(10, 15, 175, 25));
         jLabelNombreParticipante.setFont(new Font("Tahoma", 0, 13));
@@ -91,7 +97,11 @@ public class AltaParticipante extends JDialog {
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
-        correoElectrónicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
+        correoElectrónicoJTextArea.addFocusListener(new FocusAdapter() { 
+            public void focusGained(FocusEvent evt) { 
+                correoElectrónicoJTextArea.setForeground(Color.black);
+                correoElectrónicoJTextArea.setBackground(Color.white);
+                    } });
         // TRANSFORMA EN MAYUSCULA
          correoElectrónicoJTextArea.addKeyListener(new KeyAdapter(){
             public void keyTyped(KeyEvent e){
@@ -169,21 +179,25 @@ public class AltaParticipante extends JDialog {
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         String errores ="";
         // VALIDA CORREO ELECTRONICO
-        if(!isEmail(correoElectrónicoJTextArea.getText())){
-            errores=errores+"<li>Correo electrónico invalido</li>";
-            this.correoElectrónicoJTextArea.setBackground(Color.red);
-        }
         if(correoElectrónicoJTextArea.getText().equals("")){
             errores="<li>Debes ingresar un correo</li>";
             this.correoElectrónicoJTextArea.setBackground(Color.red);
         }
+        else if(!isEmail(correoElectrónicoJTextArea.getText())){
+            errores=errores+"<li>Correo electrónico invalido</li>";
+            this.correoElectrónicoJTextArea.setBackground(Color.red);
+        }
         if(nombreParticipanteJTextArea.getText().equals("")){
             errores=errores+"<li>Debes ingresar un nombre</li>";
-            this.nombreParticipanteJTextArea.error();
+            this.nombreParticipanteJTextArea.setBackground(Color.red);
+        }
+        else if(nombreParticipanteJTextArea.getText().length()<6){
+            errores=errores+"<li>La longitud minima para el nombre es de 6</li>";
+            this.nombreParticipanteJTextArea.setBackground(Color.red);
         }
         if(!CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
             errores+="<li>El nombre del participante ya esta registrado</li>";
-            this.nombreParticipanteJTextArea.error();
+            this.correoElectrónicoJTextArea.setBackground(Color.red);
         }
         if(errores.length()>0){
                 Toolkit.getDefaultToolkit().beep();
@@ -216,10 +230,7 @@ public class AltaParticipante extends JDialog {
            
         }
     }
-    public void reescribir(FocusEvent evt) {
-     correoElectrónicoJTextArea.setForeground(Color.black);
-     correoElectrónicoJTextArea.setBackground(Color.white);
-    }
+  
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
