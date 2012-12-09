@@ -26,6 +26,9 @@ import java.awt.event.WindowEvent;
 
 import java.io.File;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -149,21 +152,25 @@ public class AltaParticipante extends JDialog {
 
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         String errores ="";
+        // VALIDA CORREO ELECTRONICO
+        if(!isEmail(correoElectrónicoJTextArea.getTexto())){
+            errores=errores+"<li>Correo electrónico invalido</li>";
+        }
         if(correoElectrónicoJTextArea.getText().equals("")){
-            errores="\n\t Debes ingresar un correo";
+            errores="<li>Debes ingresar un correo</li>";
             this.correoElectrónicoJTextArea.error();
         }
         if(nombreParticipanteJTextArea.getText().equals("")){
-            errores=errores+"\n\t Debes ingresar un nombre";
+            errores=errores+"<li>Debes ingresar un nombre</li>";
             this.nombreParticipanteJTextArea.error();
         }
         if(!CompetenciaGestor.validadNombreParticipante(nombreParticipanteJTextArea.getText(),competenciaSeleccionada.getIdCompetencia())){
-            errores+="\n\tEl nombre del participante ya esta registrado";
+            errores+="<li>El nombre del participante ya esta registrado</li>";
             this.nombreParticipanteJTextArea.error();
         }
         if(!errores.equals("")){
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE); 
+                JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE); 
                 pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
                 JDialog dialog = pane.createDialog("Errores en los campos");
                 int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
@@ -191,7 +198,6 @@ public class AltaParticipante extends JDialog {
             ven.setVisible(true);
             dispose();
         }
-        System.out.println(errores);
     }
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
@@ -203,4 +209,17 @@ public class AltaParticipante extends JDialog {
     }
     });
     }
+    public boolean isEmail(String correo) {
+           Pattern pat = null;
+           Matcher mat = null;
+           pat = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+           //otra expresion regular /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/
+           //^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$ 
+           mat = pat.matcher(correo);
+           if (mat.find()) {
+               return true;
+           }else{
+               return false;
+           }
+       }
 }
