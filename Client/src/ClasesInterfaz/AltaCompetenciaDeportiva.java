@@ -749,6 +749,9 @@ public class AltaCompetenciaDeportiva extends JDialog {
         if (modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")) {
             modalidadLigaJPanel.setVisible(true);
         }
+        else{
+            modalidadLigaJPanel.setVisible(false);
+        }
     }
 
 }
