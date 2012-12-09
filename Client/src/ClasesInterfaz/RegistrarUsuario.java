@@ -393,7 +393,7 @@ private void cargarRegiones()
         // EXISTE USUARIO
         try {
             if(UsuarioGestor.existeUsuario(correoElectrónicoJTextArea.getText())){
-                errores= "\n\tEl correo ya se encuentra en uso ";
+                errores= "<li>El correo ya se encuentra en uso</li>";
                 this.correoElectrónicoJTextArea.error();
             }
         } catch (SQLException e) {//todo
@@ -402,12 +402,12 @@ private void cargarRegiones()
         // CORREO ELECTRONICO VACIO
         if(correoElectrónicoJTextArea.getText().equals("")){
               this.correoElectrónicoJTextArea.error();
-              errores= errores +"\n\tCorreo electrónico vacio ";
+              errores= errores +"<li>Correo electrónico vacio</li>";
           }
         
         // CONTRASEÑAS VACIAS
         if(this.contraseñaJPasswordField.getPass().equals("") || this.repetirContraseñaJPasswordField.getPass().equals("")){
-              errores= errores +"\n\tLas contraseñas no deben ser vacias ";
+              errores= errores +"<li>Las contraseñas no deben ser vacias</li>";
               this.contraseñaJPasswordField.error();
               this.repetirContraseñaJPasswordField.error();
         }
@@ -417,13 +417,13 @@ private void cargarRegiones()
             if(this.contraseñaJPasswordField.getPass().length()<6){
                         this.contraseñaJPasswordField.error();
                         this.repetirContraseñaJPasswordField.error();
-                        errores="\n\tLa longitud mínima para las contraseñas es de 6 carácteres ";
+                        errores="<li>La longitud mínima para las contraseñas\n es de 6 carácteres</li>";
                     }
               }
         
         // CONTRASEÑAS IGUALES
           if(!this.contraseñaJPasswordField.getPass().equals(this.repetirContraseñaJPasswordField.getPass())){
-              errores= errores +"\n\tLas contraseñas no coinciden ";
+              errores= errores +"<li>Las contraseñas no coinciden</li>";
                    this.contraseñaJPasswordField.error();
                    this.repetirContraseñaJPasswordField.error();
           }
@@ -431,18 +431,18 @@ private void cargarRegiones()
           // APELLIDO VACIO
         if(apellidoJTextArea.getText().equals("")){
             this.apellidoJTextArea.error();
-            errores=errores +"\n\tApellido no puede ser vacio ";
+            errores=errores +"<li>Apellido no puede ser vacio</li>";
         }
         
         // NOMBRE VACIO
         if(nombreJTextArea.getText().equals("")){
             this.nombreJTextArea.error();
-            errores=errores +"\n\tNombre no puede ser vacio ";
+            errores=errores +"<li>Nombre no puede ser vacio</li>";
         }
         
        // NO SE SELECCIONO TIPO DE DOCUMENTO
         if(this.tipoDeDocumentoJComboBox.getSelectedItem().equals("Tipo")){
-            errores=errores + "\n\tDebe seleccionar un tipo de documento ";
+            errores=errores + "<li>Debe seleccionar un tipo de documento</li>";
             tipoDeDocumentoJComboBox.setBackground(Color.red);
             tipoDeDocumentoJComboBox.setForeground(Color.white);
         }
@@ -450,35 +450,35 @@ private void cargarRegiones()
         // Nº DOCUMENTO VALIDO
         if(!numeroDocumentoJTextArea.esCorrecto()){
             numeroDocumentoJTextArea.error();
-            errores=errores + "\n\tNúmero de documento inválido ";
+            errores=errores + "<li>Número de documento inválido</li>";
         }
         
         // NO SE SELECCIONO PAIS
         if(this.paisJComboBox.getSelectedIndex()<1){
-            errores=errores + "\n\tDebe Seleccionar Un Pais ";
+            errores=errores + "<li>Debe Seleccionar Un Pais</li>";
             paisJComboBox.setBackground(Color.red);
             paisJComboBox.setForeground(Color.white);
         }
         
         // NO SE SELECCIONO PROVINCIA
         if(this.provinciaJComboBox.getSelectedIndex()<1){
-            errores=errores + "\n\tDebe Seleccionar Una Provincia ";
+            errores=errores + "<li>Debe Seleccionar Una Provincia</li>";
             provinciaJComboBox.setBackground(Color.red);
             provinciaJComboBox.setForeground(Color.white);
         }
         
         // NO SE SELECCIONO LOCALIDAD
         if(this.localidadJComboBox.getSelectedIndex()<1){
-            errores=errores + "\n\tDebe Seleccionar Una Localidad ";
+            errores=errores + "<li>Debe Seleccionar Una Localidad</li>";
             localidadJComboBox.setBackground(Color.red);
             localidadJComboBox.setForeground(Color.white);
         }
 
 
-
         if(errores.length()>0){
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE);  
+            JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
+            pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
             JDialog dialog = pane.createDialog("Errores en campos");
             int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
             int posicion= this.getLocationOnScreen().x;
@@ -518,7 +518,7 @@ private void cargarRegiones()
          idLocalidad--;
          int doc = Integer.parseInt(numeroDocumentoJTextArea.getTexto());
          UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
-            JOptionPane.showMessageDialog(null, "Has sido registrado con éxito", "Registro de usuario",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/correcto2.png"));
+            JOptionPane.showMessageDialog(null, "Has sido registrado con éxito", "Registro de usuario",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
          //FIJARSE SI ESTA BIEN QUE CSE CIERRE ASI
          dispose();
         new Principal();
