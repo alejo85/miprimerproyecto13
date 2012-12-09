@@ -20,6 +20,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -38,10 +40,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 public class IniciarSesion extends JDialog {
-    private AreaTextoCorreo correoElectronicoJTextArea = new AreaTextoCorreo(40);
+    private JTextField correoElectronicoJTextArea = new JTextField();
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JLabel jLabelContraseña = new JLabel();
     private JLabel jLabelAclaracionErrores = new JLabel();
@@ -96,7 +99,8 @@ public class IniciarSesion extends JDialog {
                     aceptarJButton_actionPerformed(e);
                 }
             });
-        
+        correoElectronicoJTextArea.setDocument(new LimitadorCaracteres(correoElectronicoJTextArea,40));
+        correoElectronicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
         // CONTRASEÑA TEXTO Y CAMPO
         jLabelContraseña.setText("Contraseña");
         jLabelContraseña.setBounds(new Rectangle(10, 158, 175, 25));
@@ -205,10 +209,14 @@ public class IniciarSesion extends JDialog {
                return false;
            }
        }
+    public void reescribir(FocusEvent evt) {
+     correoElectronicoJTextArea.setForeground(Color.black);
+     correoElectronicoJTextArea.setBackground(Color.white);
+    }
     private void aceptarJButton_actionPerformed(ActionEvent e) {
            String errores="";
             // VALIDA CORREO ELECTRONICO
-            if(isEmail(correoElectronicoJTextArea.getTexto())){
+            if(isEmail(correoElectronicoJTextArea.getText())){
                     // VALIDA CONTRASEÑA VACIA
                     if((contraeñaJPasswordField.getPass()).equals("")){
                         errores=errores+"<li>Contraseña vacia</li>";
@@ -231,7 +239,7 @@ public class IniciarSesion extends JDialog {
                 }
             if(errores.length()==0){
                   //BUSCA USUARIO
-                   usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
+                   usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getText(), this.contraeñaJPasswordField.getPass());
                    
                    //SI NO EXISTE USUARIO
                    if(usuarioActual==null){
@@ -254,7 +262,7 @@ public class IniciarSesion extends JDialog {
                        }
                        dialog.setVisible(true);
                        
-                       this.correoElectronicoJTextArea.error();
+                       this.correoElectronicoJTextArea.setBackground(Color.red);
                        this.contraeñaJPasswordField.error();
                    }
                    // SI EL USUARIO EXISTE Y LA CONTRASEÑA CORRESPONDE AL MISMO
@@ -284,7 +292,7 @@ public class IniciarSesion extends JDialog {
                 }
                 dialog.setVisible(true);
                 
-                this.correoElectronicoJTextArea.error();
+                this.correoElectronicoJTextArea.setBackground(Color.red);
                 this.contraeñaJPasswordField.error();
             }
         }
