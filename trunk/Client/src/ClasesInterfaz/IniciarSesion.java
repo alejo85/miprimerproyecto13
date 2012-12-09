@@ -208,7 +208,6 @@ public class IniciarSesion extends JDialog {
        }
     private void aceptarJButton_actionPerformed(ActionEvent e) {
            String errores="";
-        System.out.print(isEmail("cristian@test.com"));
             // VALIDA CORREO ELECTRONICO
             if(isEmail(correoElectronicoJTextArea.getTexto())){
                     // VALIDA CONTRASEÑA VACIA
