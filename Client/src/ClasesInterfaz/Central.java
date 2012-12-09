@@ -292,7 +292,7 @@ public class Central extends JFrame {
            }
     // ACCION BOTON BUSCAR TODAS LAS COMPETENCIAS DEPORTIVAS
     void buscarTodasLasCompetencias_ActionPerformed (ActionEvent e){
-    	 JOptionPane.showOptionDialog(null, "Funcionalidad No disponible"  , "Modificar usuario", JOptionPane.INFORMATION_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+               JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Buscar todas las competencias",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
            }
     // ACCION BOTON BUSCAR LUGAR DE REALIZACION
     void buscarLugarDeRealizacion_ActionPerformed (ActionEvent e){
