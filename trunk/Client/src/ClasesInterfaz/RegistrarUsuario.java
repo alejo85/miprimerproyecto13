@@ -433,7 +433,7 @@ private void cargarRegiones()
             if(this.contraseñaJPasswordField.getPass().length()<6){
                         this.contraseñaJPasswordField.error();
                         this.repetirContraseñaJPasswordField.error();
-                        errores=errores+"<li>La longitud mínima para las contraseñas\n es de 6 carácteres</li>";
+                        errores=errores+"<li>La longitud mínima para las contraseñas es de 6 carácteres</li>";
                     }
               }
         
@@ -493,6 +493,7 @@ private void cargarRegiones()
 
         if(errores.length()>0){
             Toolkit.getDefaultToolkit().beep();
+            System.out.println(errores);
             JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
             pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
             JDialog dialog = pane.createDialog("Errores en campos");
