@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -101,6 +103,17 @@ public class IniciarSesion extends JDialog {
             });
         correoElectronicoJTextArea.setDocument(new LimitadorCaracteres(correoElectronicoJTextArea,40));
         correoElectronicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
+        
+        // TRANSFORMA EN MAYUSCULA
+         correoElectronicoJTextArea.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z'){
+                     e.setKeyChar((char)(((int)e.getKeyChar()) - 32));
+                }
+            }
+        });
+         
+         
         // CONTRASEÑA TEXTO Y CAMPO
         jLabelContraseña.setText("Contraseña");
         jLabelContraseña.setBounds(new Rectangle(10, 158, 175, 25));
@@ -230,7 +243,7 @@ public class IniciarSesion extends JDialog {
             
             if(errores.length()==0){
                   //BUSCA USUARIO
-                   usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getText().toUpperCase(), this.contraeñaJPasswordField.getPass());
+                   usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getText(), this.contraeñaJPasswordField.getPass());
                    
                    //SI NO EXISTE USUARIO
                    if(usuarioActual==null){
@@ -258,8 +271,8 @@ public class IniciarSesion extends JDialog {
                    }
                    // SI EL USUARIO EXISTE Y LA CONTRASEÑA CORRESPONDE AL MISMO
                    else{
-                       JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
                        dispose();
+                       JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
                        new Principal(this.getUsuarioActual());
                    }
             }

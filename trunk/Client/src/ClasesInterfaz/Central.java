@@ -316,8 +316,8 @@ public class Central extends JFrame {
             this.dispose();
         }
         else{
-            JOptionPane.showMessageDialog(null, "Has sido desconectado con éxito", "Cerrar sesión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/no-logueado.png"));
             this.dispose();
+            JOptionPane.showMessageDialog(null, "Se ha cerrado tu sesión exitosamente", "Cerrar sesión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/no-logueado.png"));
             new Principal();
         }
     }
