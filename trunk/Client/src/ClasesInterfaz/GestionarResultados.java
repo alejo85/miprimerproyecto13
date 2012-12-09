@@ -620,7 +620,7 @@ public class GestionarResultados extends JDialog {
         }
     private void cargarSets(){
             modeloDeTablaDeSets = new ModeloTabla(new String[] { "Nº", encuentroSeleccionado.getParticipanteA().getNombre(), encuentroSeleccionado.getParticipanteB().getNombre(), }, 0);
-            for(int i=0;i<competenciaActual.getCantidadDeSets();i++)
+            for(int i=0;i<competenciaActual.getSet().getCantidadSet();i++)
             {
                     Vector <String> datos = new Vector <String>();
                 int aux=i+1;
@@ -677,7 +677,7 @@ public class GestionarResultados extends JDialog {
         {
                 if(equipoAmbosSetJRadioButton.isSelected())
                 {
-                    EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getCantidadDeSets(), tablaDeSetsJTable, 0,"Sets" );
+                    EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getSet().getCantidadSet(), tablaDeSetsJTable, 0,"Sets" );
                     }
                 else{
                         if(equipoASetJRadioButton.isSelected())
