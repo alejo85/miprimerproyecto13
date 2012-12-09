@@ -200,7 +200,6 @@ public class IniciarSesion extends JDialog {
            //^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$ 
            mat = pat.matcher(correo);
            if (mat.find()) {
-               System.out.println("[" + mat.group() + "]");
                return true;
            }else{
                return false;
