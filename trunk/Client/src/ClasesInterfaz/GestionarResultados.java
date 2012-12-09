@@ -4,9 +4,13 @@ package ClasesInterfaz;
 import ClasesGestores.CompetenciaGestor;
 import ClasesGestores.EncuentroGestor;
 
+import ClasesGestores.FixtureGestor;
+import ClasesGestores.RondaGestor;
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.ModeloTabla;
+import ClasesLogicas.Participante;
 import ClasesLogicas.Usuario;
 
 import InterfazGrafica.CampoTexto.AreaTextoNumerico;
@@ -637,70 +641,23 @@ public class GestionarResultados extends JDialog {
         
         
         
-        if(competenciaActual.getFormaDePuntuacion().equals("Resultado Final"))
-        {
-                if(empateJRadioButton.isSelected())
-                {
-                    EncuentroGestor.ganadorEmpate(encuentroSeleccionado, "Resultado Final");
-                    }
-                else{
-                        if(ganadorEquipoAJRadioButton.isSelected())
-                        {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(),encuentroSeleccionado.getParticipanteB(),"Resultado Final");
-                            }
-                        if(ganadorEquipoBJRadioButton.isSelected())
-                        {
-                                EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB(),encuentroSeleccionado.getParticipanteA(), "Resultado Final");
-                            }
-                    }
-               
-            }
-        if(competenciaActual.getFormaDePuntuacion().equals("Puntuación"))
-        {
-                if(presenteEquipoAmbosJRadioButton.isSelected())
-                {
-                    EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(), encuentroSeleccionado.getParticipanteB(), Integer.parseInt(puntosEquipoAJTextArea.getText()), Integer.parseInt(puntosEquipoBJTextArea.getText()), "Puntuación");
-                    }
-                else{
-                        if(presenteEquipoAJRadioButton.isSelected())
-                        {
-                                EncuentroGestor.presente(encuentroSeleccionado, -1 ,"Puntuación");
-                            }
-                        if(presenteEquipoBJRadioButton.isSelected())
-                        {
-                                EncuentroGestor.presente(encuentroSeleccionado, 1, "Puntuación");
-                            }
-                    }
-               
-            }
-        if(competenciaActual.getFormaDePuntuacion().equals("Sets"))
-        {
-                if(equipoAmbosSetJRadioButton.isSelected())
-                {
-                    EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getSet().getCantidadSet(), tablaDeSetsJTable, 0,"Sets" );
-                    }
-                else{
-                        if(equipoASetJRadioButton.isSelected())
-                        {
-                                EncuentroGestor.presente(encuentroSeleccionado, -1,  "Sets");
-                            }
-                        if(equipoBSetJRadioButton.isSelected())
-                        {
-                                EncuentroGestor.presente(encuentroSeleccionado, 1,   "Sets");
-                            }
-                    }
-               
-            }
+
+        if(verificarDatos()){
+                CompetenciaGestor.actualizarResultados(competenciaActual, encuentroSeleccionado);
+                
+                
+                setVisible(false);
+                dispose();
+                competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().setEstado(RondaGestor.actualizarRonda(nroRonda, competenciaActual));
+                FixtureGestor.actualizarSubRonda(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getIdSubronda(), true);
+                new  ModificarFixture(competenciaActual, usuarioAcatual).setVisible(true);
+        }
+
         //competenciaActual=CompetenciaGestor.reemplazarEncuentro(competenciaActual, encuentroSeleccionado, nroRonda);
        //TODO SETEAR LA COMPETENCIA CON EL RESULTADO
         
         
-        CompetenciaGestor.actualizarResultados(competenciaActual, encuentroSeleccionado);
-        
-        
-       setVisible(false);
-        dispose();
-        new  ModificarFixture(competenciaActual, usuarioAcatual).setVisible(true);
+
  
        
     }
@@ -750,4 +707,110 @@ public class GestionarResultados extends JDialog {
         resultaoFinalAsistenciaAJRadioButton.setSelected(false);
         resultadoFinalJPanel.setVisible(true);
     }
+    private boolean verificarDatos(){
+        
+            if(competenciaActual.getFormaDePuntuacion().equals("Resultado Final"))
+            {
+                    if(resultaoFinalAsistenciaAmbosJRadioButton.isSelected())
+                    {
+                            if(empateJRadioButton.isSelected())
+                            {
+                                EncuentroGestor.ganadorEmpate(encuentroSeleccionado, "Resultado Final");
+                                    return true;
+                                }
+                            else{
+                                    if(resultaoFinalAsistenciaAJRadioButton.isSelected())
+                                    {
+                                            EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(),encuentroSeleccionado.getParticipanteB(),"Resultado Final");
+                                            return true;
+                                        }
+                                else
+                                    {
+                                    if(resultaoFinalAsistenciaBJRadioButton.isSelected())
+                                    {
+                                            EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB(),encuentroSeleccionado.getParticipanteA(), "Resultado Final");
+                                            return true;
+                                        }
+                                        else 
+                                return false;
+                                        //TODO mesaje error no selelos datos
+                            }
+                                }
+                        }
+                    else{
+                            if(resultaoFinalAsistenciaAJRadioButton.isSelected())
+                            {
+                                    EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(),encuentroSeleccionado.getParticipanteB(),"Resultado Final");
+                                    return true;
+                                }
+                        else
+                            {
+                            if(resultaoFinalAsistenciaBJRadioButton.isSelected())
+                            {
+                                    EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB(),encuentroSeleccionado.getParticipanteA(), "Resultado Final");
+                                    return true;
+                                }
+                                else
+                                    return false;
+                                    //TODO mesaje error no selelos datos
+                                }
+                        }
+                    
+                   
+                }
+            if(competenciaActual.getFormaDePuntuacion().equals("Puntuación"))
+            {
+                    if(presenteEquipoAmbosJRadioButton.isSelected())
+                    {
+                        EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(), encuentroSeleccionado.getParticipanteB(), Integer.parseInt(puntosEquipoAJTextArea.getText()), Integer.parseInt(puntosEquipoBJTextArea.getText()), "Puntuación");
+                            return true;
+                        }
+                    else{
+                            if(presenteEquipoAJRadioButton.isSelected())
+                            {
+                                    EncuentroGestor.unGanador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(),encuentroSeleccionado.getParticipanteB(), -1 ,"Puntuación");
+                                    return true;
+                                }
+                            else{
+                            if(presenteEquipoBJRadioButton.isSelected())
+                            {
+                                    EncuentroGestor.unGanador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB(), encuentroSeleccionado.getParticipanteA(), 1 ,"Puntuación");
+                                    return true;
+                                }
+                                else
+                            return false;
+                            //TODO mesaje error no selelos datos
+                        }
+                    }
+                }
+            if(competenciaActual.getFormaDePuntuacion().equals("Sets"))
+            {
+                    if(equipoAmbosSetJRadioButton.isSelected())
+                    {
+                        EncuentroGestor.guardarResultado(encuentroSeleccionado, competenciaActual.getSet().getCantidadSet(), tablaDeSetsJTable, 0,"Sets" );
+                            return true;
+                        }
+                    else{
+                            if(equipoASetJRadioButton.isSelected())
+                            {
+                                    EncuentroGestor.presente(encuentroSeleccionado,encuentroSeleccionado.getParticipanteA(), encuentroSeleccionado.getParticipanteB(), -1, "Sets");
+                                    return true;
+            
+                                }
+                            else{
+                            if(equipoBSetJRadioButton.isSelected())
+                            {
+                                    EncuentroGestor.presente(encuentroSeleccionado,encuentroSeleccionado.getParticipanteB(), encuentroSeleccionado.getParticipanteA(), 1, "Sets");
+                                    return true;
+                                }
+                                else
+                                return false;
+                                //TODO mesaje error no selelos datos
+                            }
+                        }
+                   
+                }
+        
+        return false;
+        }
 }
