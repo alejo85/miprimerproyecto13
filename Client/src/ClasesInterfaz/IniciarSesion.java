@@ -24,6 +24,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -188,39 +191,103 @@ public class IniciarSesion extends JDialog {
     public Usuario getUsuarioActual() {
         return usuarioActual;
     }
-
+    // VALIDA CORREO
+    public boolean isEmail(String correo) {
+           Pattern pat = null;
+           Matcher mat = null;
+           pat = Pattern.compile("^([0-9a-zA-Z]([_.w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-w]*[0-9a-zA-Z].)+([a-zA-Z]{2,9}.)+[a-zA-Z]{2,3})$");
+           mat = pat.matcher(correo);
+           if (mat.find()) {
+               System.out.println("[" + mat.group() + "]");
+               return true;
+           }else{
+               return false;
+           }
+       }
     private void aceptarJButton_actionPerformed(ActionEvent e) {
+           String errores="";
         
-       usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
-       if(usuarioActual==null){
-           Toolkit.getDefaultToolkit().beep();
-           JOptionPane pane = new JOptionPane("El correo electronico o la contraseña son incorrectos " , JOptionPane.ERROR_MESSAGE);  
-           pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
-           JDialog dialog = pane.createDialog("Error al Autencicar");
-           
-           int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
-           int posicion= this.getLocationOnScreen().x;
-           int anchoVentana= this.getHeight();
-           
-           if ((anchoPantalla-(posicion+anchoVentana) > posicion))
-           {
-                   dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
-           }
-           else
-           {
-                   dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
-           }
-           dialog.setVisible(true);
-           
-           this.correoElectronicoJTextArea.error();
-           this.contraeñaJPasswordField.error();
-       }
-       else{
-           JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
-           dispose();
-        
-           new Principal(this.getUsuarioActual());
-       }
-       }
+            // VALIDA CORREO ELECTRONICO
+            if(isEmail(correoElectronicoJTextArea.getTexto())){
+                    // VALIDA CONTRASEÑA VACIA
+                    if((contraeñaJPasswordField.getPass()).equals("")){
+                        errores=errores+"<li>Contraseña vacia</li>";
+                    }
+                    // VALIDA LONGITUD MINIMA CONTRASEÑA
+                    else if((contraeñaJPasswordField.getPass()).length()<6){
+                        errores=errores+"<li>Longitud mínima para contraseña es de 6 carácteres</li>";
+                    }
+                }
+            else{
+                    errores=errores+"<li>Correo electrónico invalido</li>";
+                    // VALIDA CONTRASEÑA VACIA
+                    if((contraeñaJPasswordField.getPass()).equals("")){
+                        errores=errores+"<li>Contraseña vacia</li>";
+                    }
+                    // VALIDA LONGITUD MINIMA CONTRASEÑA
+                    else if((contraeñaJPasswordField.getPass()).length()<6){
+                        errores=errores+"<li>Longitud mínima para contraseña es de 6 carácteres</li>";
+                    }
+                }
+            if(errores.length()==0){
+                  //BUSCA USUARIO
+                   usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getTexto(), this.contraeñaJPasswordField.getPass());
+                   
+                   //SI NO EXISTE USUARIO
+                   if(usuarioActual==null){
+                       Toolkit.getDefaultToolkit().beep();
+                       JOptionPane pane = new JOptionPane("El correo electronico o la contraseña son incorrectos" , JOptionPane.ERROR_MESSAGE);  
+                       pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+                       JDialog dialog = pane.createDialog("Error al Autencicar");
+                       
+                       int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+                       int posicion= this.getLocationOnScreen().x;
+                       int anchoVentana= this.getHeight();
+                       
+                       if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+                       {
+                               dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
+                       }
+                       else
+                       {
+                               dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+                       }
+                       dialog.setVisible(true);
+                       
+                       this.correoElectronicoJTextArea.error();
+                       this.contraeñaJPasswordField.error();
+                   }
+                   // SI EL USUARIO EXISTE Y LA CONTRASEÑA CORRESPONDE AL MISMO
+                   else{
+                       JOptionPane.showMessageDialog(null, "Has sido autenticado con éxito", "Ingreso al sistema",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/logueado.png"));
+                       dispose();
+                        new Principal(this.getUsuarioActual());
+                   }
+            }
+            else{
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
+                pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+                JDialog dialog = pane.createDialog("Error al Autencicar");
+                
+                int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+                int posicion= this.getLocationOnScreen().x;
+                int anchoVentana= this.getHeight();
+                
+                if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+                {
+                        dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
+                }
+                else
+                {
+                        dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+                }
+                dialog.setVisible(true);
+                
+                this.correoElectronicoJTextArea.error();
+                this.contraeñaJPasswordField.error();
+            }
+        }
+
         
 }
