@@ -141,7 +141,12 @@ public class FixtureGestor {
         }
     }
     
-   
+    public static void actualizarSubRonda(int idSubRonda, boolean estado){
+        try {
+            FixtureDB.actualizarSubRonda( idSubRonda,  estado);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     
-    
+    }
 }

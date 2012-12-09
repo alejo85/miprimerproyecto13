@@ -42,7 +42,7 @@ public class ResultadodB {
             //System.out.println("sale al regla no null");
             resultado.next();
             //System.out.println("despues del next");
-            id = resultado.getInt("id_Competencia");
+            id = resultado.getInt("id_punto");
             return id;
         }
 }

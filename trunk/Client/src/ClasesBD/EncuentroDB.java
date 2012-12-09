@@ -3,6 +3,8 @@ package ClasesBD;
 
 import ClasesGestores.EncuentroGestor;
 
+import ClasesGestores.PuntoGestor;
+
 import ClasesLogicas.Encuentro;
 
 import ClasesLogicas.Puntos;
@@ -13,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.Date;
+import java.util.Stack;
 
 
 public class EncuentroDB {
@@ -69,8 +72,7 @@ public class EncuentroDB {
                     else
                     {
                         
-                            if(encuentro.getAsistencia()==0)
-                            {
+                          
                                     consultasql="UPDATE encuentro\n" + 
                                     "   SET  id_participante_ganador='"+encuentro.getGanador().getIdParticipante()+"', id_participante_perdedor='"+encuentro.getPerdedor().getIdParticipante()+"', \n" + 
                                     "       fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"'" + 
@@ -78,16 +80,7 @@ public class EncuentroDB {
                                     System.out.println(consultasql);
                                     resultado = Conexion.consulta.executeQuery(consultasql);
                                 
-                                }
-                            else
-                            {
-                                    consultasql="UPDATE encuentro\n" + 
-                                    "   SET fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"'\n" + 
-                                    " WHERE id_encuentro='"+encuentro.getIdEncuentro()+"'RETURNING *;";
-                                    System.out.println(consultasql);
-                                    resultado = Conexion.consulta.executeQuery(consultasql);
-                                
-                                }
+                           
                         }
                       
                         
@@ -98,16 +91,23 @@ public class EncuentroDB {
                 {
                         if(encuentro.getAsistencia()==0)
                         {
-                            
-                                    encuentro.getResultado().get(0).setIdResultado(ResultadodB.guardarResultado( encuentro.getResultado().get(0), dias, horas));
+                                Stack <Resultados> rsult= encuentro.getResultado();
+                                
+                                    int idResultado =(ResultadodB.guardarResultado( encuentro.getResultado().get(0), dias, horas));
+                                rsult.get(0).setIdResultado(idResultado);
+                                encuentro.setResultado(rsult);
+                                encuentro.setHoraResultado(horas);
+                                encuentro.setFechaResultado(dias);
                                     for(int i=0;i<encuentro.getResultado().get(0).getPuntuacion().length;i++){
-                                            encuentro.getResultado().get(0).getPuntuacion()[i].setIdPunto(ResultadodB.guardarPunto(encuentro.getResultado().get(0).getPuntuacion()[i], encuentro.getResultado().get(0).getIdResultado()));
+                                        Puntos unPuntos[]= encuentro.getResultado().get(0).getPuntuacion();
+                                        int idResultado3 =encuentro.getResultado().get(0).getIdResultado();
+                                            encuentro.getResultado().get(0).getPuntuacion()[i]=PuntoGestor.crearPunto(unPuntos[i],idResultado3 );
                                         }
                                
                             
                                 consultasql="UPDATE encuentro\n" + 
                                 "   SET  id_participante_ganador='"+encuentro.getGanador().getIdParticipante()+"', id_participante_perdedor='"+encuentro.getPerdedor().getIdParticipante()+"', \n" + 
-                                "       fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"'" + 
+                                "       fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"', id_resultado='" +idResultado+"'"+ 
                                 " WHERE id_encuentro='"+encuentro.getIdEncuentro()+"'RETURNING *;";
                                 System.out.println(consultasql);
                                 resultado = Conexion.consulta.executeQuery(consultasql);
@@ -117,7 +117,8 @@ public class EncuentroDB {
                         else
                         {
                                 consultasql="UPDATE encuentro\n" + 
-                                "   SET fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"'\n" + 
+                                "   SET  id_participante_ganador='"+encuentro.getGanador().getIdParticipante()+"', id_participante_perdedor='"+encuentro.getPerdedor().getIdParticipante()+"', \n" + 
+                                "       fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"'" + 
                                 " WHERE id_encuentro='"+encuentro.getIdEncuentro()+"'RETURNING *;";
                                 System.out.println(consultasql);
                                 resultado = Conexion.consulta.executeQuery(consultasql);
@@ -149,10 +150,12 @@ public class EncuentroDB {
                         else
                         {
                                 consultasql="UPDATE encuentro\n" + 
-                                "   SET fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"'\n" + 
+                                "   SET  id_participante_ganador='"+encuentro.getGanador().getIdParticipante()+"', id_participante_perdedor='"+encuentro.getPerdedor().getIdParticipante()+"', \n" + 
+                                "       fecha_resultado='"+dias+"', hora_resultado='"+horas+"',asistencia='"+encuentro.getAsistencia()+"'" + 
                                 " WHERE id_encuentro='"+encuentro.getIdEncuentro()+"'RETURNING *;";
                                 System.out.println(consultasql);
                                 resultado = Conexion.consulta.executeQuery(consultasql);
+                                
                             
                             }
                        

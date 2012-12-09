@@ -13,6 +13,7 @@ import ClasesLogicas.Resultados;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.Stack;
 import java.util.Vector;
 
 import javax.swing.JTable;
@@ -80,10 +81,11 @@ public class EncuentroGestor {
                         int idParticipanteB= resultado.getInt("id_participanteb");
                         int idParticipanteGanador= resultado.getInt("id_participante_ganador");
                         int idParticipantePerdedor= resultado.getInt("id_participante_perdedor");
+                        boolean empate = resultado.getBoolean("empate");
                         int idResultado= resultado.getInt("id_resultado");
                         String fechaResultado = resultado.getString("fecha_resultado");
                         String horaResultado = resultado.getString("hora_resultado");
-                       // int disponibilidad = resultado.getInt("disponibilidad");
+
                        
                        
                         retorno = new Encuentro();
@@ -93,6 +95,12 @@ public class EncuentroGestor {
                         retorno.setParticipanteB(ParticipanteGestor.instanciarUnParticipante(idParticipanteB));
                         retorno.setGanador(ParticipanteGestor.instanciarUnParticipante(idParticipanteGanador));
                         retorno.setPerdedor(ParticipanteGestor.instanciarUnParticipante(idParticipantePerdedor));
+                        retorno.setEmpate(empate);
+                        retorno.setFechaResultado(fechaResultado);
+                        retorno.setHoraResultado(horaResultado);
+                        if(idResultado!=0){
+                            retorno.setResultado(ResultadoGestor.getResultado(idResultado));
+                            }
                         //TODO RecuperarResultado
                       //System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre()+"Participante B: "+retorno.getParticipanteB().getNombre());
                         datos.add(retorno);
@@ -179,8 +187,10 @@ public class EncuentroGestor {
             System.out.println(e.getMessage());
         }
     }
-    public static void presente(Encuentro unEncuentro,int presente, String modalidad){
+    public static void presente(Encuentro unEncuentro,Participante participanteGanador, Participante participantePerdedor, int presente, String modalidad){
         unEncuentro.setAsistencia(presente);
+        unEncuentro.setGanador(participanteGanador);
+        unEncuentro.setPerdedor(participantePerdedor);
         
         try {
             EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
@@ -232,12 +242,38 @@ public class EncuentroGestor {
         if (puntoA==puntoB)
             unEncuentro.setEmpate(true);
         else
-            if(puntoA<puntoB)
+        if(puntoA<puntoB){
                  unEncuentro.setGanador(participanteB);
-            else
+                unEncuentro.setPerdedor(participanteA);
+        }
+        else{
                  unEncuentro.setGanador(participanteA);
-        unEncuentro.asignaResultado(unResultado);
+                unEncuentro.setPerdedor(participanteB);
+        }
+          Stack <Resultados> rsult= new Stack <Resultados>();
+           rsult.add(unResultado);
+        unEncuentro.setResultado(rsult);
         unEncuentro.setAsistencia(0);
+           try {
+               EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
+           } catch (SQLException e) {
+               System.out.println(e.getMessage());
+           }
+        
+       }
+    public static void unGanador(Encuentro unEncuentro, Participante participanteGanador,Participante participantePerdedor,  int asistencia, String modalidad ){
+
+ 
+                 unEncuentro.setGanador(participanteGanador);
+
+                 unEncuentro.setPerdedor(participantePerdedor);
+
+        unEncuentro.setAsistencia(asistencia);
+           try {
+               EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
+           } catch (SQLException e) {
+               System.out.println(e.getMessage());
+           }
         
        }
     public static void eliminarEncuentros(Encuentro[] encuentrosAEliminar){

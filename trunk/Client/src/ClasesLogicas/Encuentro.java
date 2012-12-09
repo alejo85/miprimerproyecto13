@@ -160,8 +160,9 @@ public class Encuentro {
      * @param resultado
      */
     public void asignaResultado(Resultados resultado){
-        this.resultado=new Stack <Resultados>();
+        this.resultado= new Stack <Resultados>();
             this.resultado.add(resultado);
+            
         }
 
     public void setAsistencia(int asistencia) {
