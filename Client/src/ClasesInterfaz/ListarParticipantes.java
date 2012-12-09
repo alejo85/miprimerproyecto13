@@ -176,7 +176,7 @@ public class ListarParticipantes extends JDialog {
             for(int i=0; i<competenciaSeleccionada.getParticipantes().length;i++ ){
                     Vector <String> datos = new Vector <String>();
                     datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
-                    datos.add(competenciaSeleccionada.getParticipantes()[i].getNombre());
+                    datos.add(competenciaSeleccionada.getParticipantes()[i].getCorreo());
                     modelo.addRow(datos);
                 }
             // ORDENA SEGUN COLUMNA SELECCIONADA
