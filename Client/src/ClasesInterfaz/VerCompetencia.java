@@ -277,7 +277,7 @@ public class VerCompetencia extends JDialog {
         int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
             if(competencia.getParticipantes().length>=2){
-            System.out.println(""+competencia.getFixture().getIdFixture());
+            
             if(competencia.getFixture().getIdFixture()!=0&&(competencia.getEstado().equals("Creada")||competencia.getEstado().equals("Planificada"))){
                     CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
                     //competencia.setParticipantes(ParticipanteGestor.instanciarParticipante(competencia.getIdCompetencia()));
@@ -330,7 +330,7 @@ public class VerCompetencia extends JDialog {
             jTable1.setRowSorter(elQueOrdena1);
             
             modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
-            if(competencia.getFixture().getIdFixture() != 0 && competencia.getFixture()!=null)
+            if(competencia.getFixture()!=null && competencia.getFixture().getIdFixture() != 0)
             {
                   //  System.out.println("valor del fixture id: "+competencia.getFixture().getIdFixture());
                 //TODO CArgar fixture tabla en la pantalla
@@ -359,7 +359,7 @@ public class VerCompetencia extends JDialog {
                      datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
                      datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
                     
-                         System.out.println(datos);
+                         
                      modelo2.addRow(datos);
                      }
              }
