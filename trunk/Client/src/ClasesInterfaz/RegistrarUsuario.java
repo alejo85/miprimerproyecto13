@@ -534,9 +534,10 @@ private void cargarRegiones()
          idLocalidad--;
          int doc = Integer.parseInt(numeroDocumentoJTextArea.getTexto());
          UsuarioGestor.crearUsuario(correoElectrónicoJTextArea.getText(),apellidoJTextArea.getText(),nombreJTextArea.getText(),(String)tipoDeDocumentoJComboBox.getSelectedItem(),doc,this.localidades.get(idLocalidad),this.contraseñaJPasswordField.getPass());
+            dispose();
             JOptionPane.showMessageDialog(null, "<html><h4>Has sido registrado con éxito</h4></html>", "Registro de usuario",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
          //FIJARSE SI ESTA BIEN QUE CSE CIERRE ASI
-         dispose();
+         
         new Principal();
         }
     }
