@@ -65,12 +65,13 @@ public class CompetenciaGestor {
         nuevaCompetencia.setLugares(lugaresDeRealizacion(lugaresSeleccionado));
         nuevaCompetencia.setFixture(null);
 
-
+        System.out.println("KAKA");
         try {
             CompetenciaDB.registrarCompetencia(nuevaCompetencia);
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-        
+        System.out.println("KAKA2");
         if(formaDePuntuacion.equals("Sets")){
             Set set= new Set();
             set.setCantidadSet(valor);
@@ -83,7 +84,7 @@ public class CompetenciaGestor {
             CompetenciaDB.agregarFormaPuntuacionPuntuacion(punt, nuevaCompetencia.getIdCompetencia());
             nuevaCompetencia.setFormaDePuntuacionPunt(punt);
         }
-        
+        System.out.println("KAKA2");
         //DISTINTOS CAMINOS EN FUNCION DE MODALIDAD
         nuevaLiga=LigaGestor.crearLiga(ptos_partido_ganado, empate, ptos_partido_empatado, ptos_por_asistido);
         try {
