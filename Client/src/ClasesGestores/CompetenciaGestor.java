@@ -3,14 +3,19 @@ package ClasesGestores;
 
 import ClasesBD.CompetenciaDB;
 
+import ClasesBD.LigaDB;
+
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Deporte;
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.Fixture;
+import ClasesLogicas.Liga;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Participante;
 import ClasesLogicas.Posicion;
+import ClasesLogicas.Puntuacion;
 import ClasesLogicas.Ronda;
+import ClasesLogicas.Set;
 import ClasesLogicas.Subronda;
 import ClasesLogicas.Usuario;
 
@@ -37,6 +42,96 @@ public class CompetenciaGestor {
      * @param deporte
      * @param lugares
      */
+    // CONSTRUCTOR LIGA 
+    // LIGA : 
+    // PUNTOS POR PARTIDO GANADO
+    // EMPATE -> PTOS POR PARTIDO EMPATADO
+    // PTOS POR PRESENTARSE
+    
+    // FORMA DE PUNTUACION
+    //  - SET --> MAXIMO DE SET
+    // - PUNTUACION --> PTOS POR AUSENSIA DE CONTRINCANTE
+    // - RESULTADO FINAL 
+    public static Competencia altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion,String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado,boolean empate,int ptos_partido_ganado,int ptos_partido_empatado,int ptos_por_asistido,int valor) throws SQLException {
+        Competencia nuevaCompetencia = new Competencia();
+        Liga nuevaLiga = new Liga();
+        nuevaCompetencia.setUsuarioCreador(usuarioCreador);
+        nuevaCompetencia.setNombreCompetencia(nombreDeCompetencia);
+        nuevaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
+        nuevaCompetencia.setEstado("Creada");
+        nuevaCompetencia.setModalidad(modalidad);
+        nuevaCompetencia.setReglamento(reglamento);
+        nuevaCompetencia.setDeporte(deporte);
+        nuevaCompetencia.setLugares(lugaresDeRealizacion(lugaresSeleccionado));
+        nuevaCompetencia.setFixture(null);
+
+
+        try {
+            CompetenciaDB.registrarCompetencia(nuevaCompetencia);
+        } catch (SQLException e) {
+        }
+        
+        if(formaDePuntuacion.equals("Sets")){
+            Set set= new Set();
+            set.setCantidadSet(valor);
+            CompetenciaDB.agregarFormaPuntuacionSet(set, nuevaCompetencia.getIdCompetencia());
+            nuevaCompetencia.setFormaDePuntuacionSet(set);
+        }
+        else if(formaDePuntuacion.equals("Puntuación")){
+            Puntuacion punt= new Puntuacion();
+            punt.setPtosAusencia(valor);
+            CompetenciaDB.agregarFormaPuntuacionPuntuacion(punt, nuevaCompetencia.getIdCompetencia());
+            nuevaCompetencia.setFormaDePuntuacionPunt(punt);
+        }
+        
+        //DISTINTOS CAMINOS EN FUNCION DE MODALIDAD
+        nuevaLiga=LigaGestor.crearLiga(ptos_partido_ganado, empate, ptos_partido_empatado, ptos_por_asistido);
+        try {
+            LigaDB.registrarliga(nuevaLiga,nuevaCompetencia.getIdCompetencia());
+        } catch (SQLException e) {//TODO
+        }
+        nuevaCompetencia.setLiga(nuevaLiga);
+        return nuevaCompetencia;
+        
+    }
+    
+    
+    
+    // CONSTRUCTOR PARA ELIMINACION SIMPLE O DOBLE
+    public static Competencia altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion,String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado,int valor) throws SQLException {
+        Competencia nuevaCompetencia = new Competencia();
+        nuevaCompetencia.setUsuarioCreador(usuarioCreador);
+        nuevaCompetencia.setNombreCompetencia(nombreDeCompetencia);
+        nuevaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
+        nuevaCompetencia.setEstado("Creada");
+        nuevaCompetencia.setReglamento(reglamento);
+        nuevaCompetencia.setModalidad(modalidad);
+        nuevaCompetencia.setDeporte(deporte);
+        nuevaCompetencia.setLugares(lugaresDeRealizacion(lugaresSeleccionado));
+        nuevaCompetencia.setFixture(null);
+        System.out.println("MODALIDAD SIMPLE O DOBLE");
+        try {
+            CompetenciaDB.registrarCompetencia(nuevaCompetencia);
+        } catch (SQLException e) {
+        }
+        if(formaDePuntuacion.equals("Sets")){
+            Set set= new Set();
+            set.setCantidadSet(valor);
+            CompetenciaDB.agregarFormaPuntuacionSet(set, nuevaCompetencia.getIdCompetencia());
+            nuevaCompetencia.setFormaDePuntuacionSet(set);
+        }
+        else if(formaDePuntuacion.equals("Puntuación")){
+            Puntuacion punt= new Puntuacion();
+            punt.setPtosAusencia(valor);
+            CompetenciaDB.agregarFormaPuntuacionPuntuacion(punt, nuevaCompetencia.getIdCompetencia());
+            nuevaCompetencia.setFormaDePuntuacionPunt(punt);
+        }
+        return nuevaCompetencia;
+    }
+    
+    
+    
+    /*
      public static Competencia altaCompetencia(Usuario usuarioCreador, String nombreDeCompetencia, String modalidad, String formaDePuntuacion, String estado, String reglamento,Deporte deporte, Vector<LugarDeRealizacion> lugaresSeleccionado,boolean empate, int puntosPorPartidoGanados, int puntosPorPartidoEmpatado, int puntosPorPartidoAsistido, int cantidadDeSets, int tantosPorPartidoAusenciaContrincante){
                 Competencia unaCompetencia = new Competencia();
                 unaCompetencia.setUsuarioCreador(usuarioCreador);
@@ -49,14 +144,23 @@ public class CompetenciaGestor {
                 else 
                     unaCompetencia.setModalidad("Doble");
                 
+                if(unaCompetencia.getModalidad().equals("Liga")){
+                    unaCompetencia.setLiga(LigaGestor.crearLiga(puntosPorPartidoGanados, empate, puntosPorPartidoEmpatado, puntosPorPartidoAsistido));
+                }
+                
                 unaCompetencia.setFormaDePuntuacion(formaDePuntuacion);
                 unaCompetencia.setEstado(estado);
                 unaCompetencia.setReglamento(reglamento);
                 unaCompetencia.setDeporte(deporte);
                 unaCompetencia.setLugares(lugaresDeRealizacion(lugaresSeleccionado));
-                unaCompetencia.setLiga(LigaGestor.crearLiga(puntosPorPartidoGanados, empate, puntosPorPartidoEmpatado, puntosPorPartidoAsistido));
-                unaCompetencia.setCantidadDeSets(cantidadDeSets);
-                unaCompetencia.setTantosPorPartidoAusenciaContrincante(tantosPorPartidoAusenciaContrincante);
+                
+                if(formaDePuntuacion.equals("Puntuación")){
+                    unaCompetencia.setTantosPorPartidoAusenciaContrincante(tantosPorPartidoAusenciaContrincante);
+                }
+                else if(formaDePuntuacion.equals("Sets")){
+                    unaCompetencia.setCantidadDeSets(cantidadDeSets);
+                }
+                
             try {
                 return CompetenciaDB.registrarCompetencia(unaCompetencia);
             } catch (SQLException e) {
@@ -83,6 +187,7 @@ public class CompetenciaGestor {
             }
             return unaCompetencia;
         }
+     */
     private static  LugarDeRealizacion[] lugaresDeRealizacion(Vector<LugarDeRealizacion> lugaresSeleccionado){
            LugarDeRealizacion[] lugaresDeRealizacion= new LugarDeRealizacion[lugaresSeleccionado.size()];
         for(int i=0;i<lugaresSeleccionado.size(); i++){
@@ -92,7 +197,7 @@ public class CompetenciaGestor {
         }
     
     public static  Competencia reemplazarEncuentro(Competencia unaCompetencia, Encuentro unEncuentro, int ronda){
-        unaCompetencia.getFixture().getRondas()[ronda].getGanadores().remplazarEncuentro(unEncuentro);
+        //unaCompetencia.getFixture().getRondas()[ronda].getGanadores().remplazarEncuentro(unEncuentro);
 
         return unaCompetencia;
         }
@@ -436,7 +541,7 @@ public class CompetenciaGestor {
             }while (consulta.next());
             unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
             if(unaCompetencia.getFormaDePuntuacion().equals("Sets")){
-                    unaCompetencia.setCantidadDeSets(CompetenciaGestor.getCantidadMaximaDeSets(unaCompetencia.getIdCompetencia()));
+                    //unaCompetencia.setCantidadDeSets(CompetenciaGestor.getCantidadMaximaDeSets(unaCompetencia.getIdCompetencia()));
             }
             if(unaCompetencia.getModalidad().equals("Liga"))
                 unaCompetencia.setTablaDePosiciones(CompetenciaDB.getTablaDePosiciones(unaCompetencia.getIdCompetencia()));
@@ -481,18 +586,20 @@ public class CompetenciaGestor {
                    // System.out.println("Se ejecuta el while:"+i);
                 //i++;
                 unaCompetencia=new Competencia();
-                codigo = consulta.getInt("id_Competencia");
-                nombreCompetencia = consulta.getString("Nombre_Competencia");
-                deporteDeLaCompetencia = consulta.getInt("id_Deporte");
-                modalidadDeLaCompetencia = consulta.getString("Modalidad");
-                estadoDeLaCompetencia = consulta.getString("Estado");
-                unDeporte=DeporteGestor.buscarDeporte(deporteDeLaCompetencia);
-                unaCompetencia.setIdCompetencia(codigo);
-                unaCompetencia.setNombreCompetencia(nombreCompetencia);
-                unaCompetencia.setDeporte(unDeporte);
-                unaCompetencia.setModalidad(modalidadDeLaCompetencia);
-                unaCompetencia.setEstado(estadoDeLaCompetencia);
-                competenciaEncontradas.add(unaCompetencia);
+                if(!consulta.getString("Estado").equals("Eliminada")){
+                        codigo = consulta.getInt("id_Competencia");
+                        nombreCompetencia = consulta.getString("Nombre_Competencia");
+                        deporteDeLaCompetencia = consulta.getInt("id_Deporte");
+                        modalidadDeLaCompetencia = consulta.getString("Modalidad");
+                        estadoDeLaCompetencia = consulta.getString("Estado");
+                        unDeporte=DeporteGestor.buscarDeporte(deporteDeLaCompetencia);
+                        unaCompetencia.setIdCompetencia(codigo);
+                        unaCompetencia.setNombreCompetencia(nombreCompetencia);
+                        unaCompetencia.setDeporte(unDeporte);
+                        unaCompetencia.setModalidad(modalidadDeLaCompetencia);
+                        unaCompetencia.setEstado(estadoDeLaCompetencia);
+                        competenciaEncontradas.add(unaCompetencia);
+                }
                 
                 
 

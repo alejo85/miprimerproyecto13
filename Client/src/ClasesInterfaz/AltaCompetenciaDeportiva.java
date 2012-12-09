@@ -1,8 +1,12 @@
 package ClasesInterfaz;
 
 
+import ClasesBD.CompetenciaDB;
+import ClasesBD.LigaDB;
+
 import ClasesGestores.CompetenciaGestor;
 import ClasesGestores.DeporteGestor;
+import ClasesGestores.LigaGestor;
 import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Competencia;
@@ -662,35 +666,55 @@ public class AltaCompetenciaDeportiva extends JDialog {
          }
          private void aceptarJButton_actionPerformed(ActionEvent e) {
              if(datosValidosRegistro()){
+                 int valor=0;
                  int deporte = this.deporteJComboBox.getSelectedIndex();
                  int cantidadDeSets =-1, tantosPorPartidoAusenciaContrincante=-1,puntosPorPartidoEmpatado=-1;
                  deporte--;
                  JEditorPane editor = box.textPane();
                 if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets")){
-                     cantidadDeSets = Integer.parseInt(cantidadMaximaDeSetsJTextArea.getText());
-                     tantosPorPartidoAusenciaContrincante=-1;
+                     valor=Integer.parseInt(cantidadMaximaDeSetsJTextArea.getText());
                  }
                  if(formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")) {
-                     tantosPorPartidoAusenciaContrincante = Integer.parseInt(tantosPorPartidosGanadosJTextArea.getText());
-                     cantidadDeSets=-1;
+                     valor=Integer.parseInt(tantosPorPartidosGanadosJTextArea.getText());
                  }
-                 if(empate){puntosPorPartidoEmpatado=Integer.parseInt(puntosPorPartidoEmpatadoJTextArea.getText());
+                 
+                 // MENSAJES PARA LA CREACION DE LA COMPETENCIA
+                 Competencia nuevaCompetencia = new Competencia();
+                 
+                 if (modalidadJComboBox.getSelectedItem().toString().equals("Sistema de Liga")){
+                     nuevaCompetencia.setModalidad("Liga");
+                try {
+                    nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(),"Liga" , formaDePuntuaciónJComboBox.getSelectedItem().toString(),editor.getText(), this.deporte.get(deporte), lugaresSeleccionados,empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),Integer.parseInt(puntosPorPartidoEmpatadoJTextArea.getText()),Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),valor);
+                } catch (SQLException f) {//todo
                 }
-                 else
-                     puntosPorPartidoEmpatado=-1;
+            }
+                 else if(modalidadJComboBox.getSelectedItem().toString().equals("Sistema de Eliminatoria Simple")){
+                     nuevaCompetencia.setModalidad("Simple");
+                try {
+                    nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(),"Simple" , formaDePuntuaciónJComboBox.getSelectedItem().toString(),editor.getText(), this.deporte.get(deporte), lugaresSeleccionados,valor);
+                } catch (SQLException f) {//todo
+                }
+            }   
+                 else{
+                try {
+                    nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(), "Doble" , formaDePuntuaciónJComboBox.getSelectedItem().toString(),editor.getText(), this.deporte.get(deporte), lugaresSeleccionados,valor);
+                } catch (SQLException f) {//todo
+                }
+            }
                  
-                 Competencia nuevaCompetencia = new Competencia(); 
-               nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(), modalidadJComboBox.getSelectedItem().toString() , formaDePuntuaciónJComboBox.getSelectedItem().toString(), "Creada", editor.getText(), this.deporte.get(deporte), lugaresSeleccionados, empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),puntosPorPartidoEmpatado,Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),  cantidadDeSets,  tantosPorPartidoAusenciaContrincante);
                  
-           
-            
+               System.out.println("Nombre: "+nuevaCompetencia.getNombreCompetencia()); 
+               System.out.println("Deporte: "+nuevaCompetencia.getDeporte().getNombre()); 
+               System.out.println("ID "+nuevaCompetencia.getIdCompetencia()); 
+               System.out.println("Forma de puntuacion "+nuevaCompetencia.getFormaDePuntuacion()); 
+                // System.out.println("LIGA DATOS "+nuevaCompetencia.getLiga().getEmpate() + nuevaCompetencia.getLiga().getPuntosPorPartidoAsistido()); 
+                 
                  setVisible(false);
                  JOptionPane.showMessageDialog(null, "La competencia se ha creado con éxito", "Alta competencia deportiva",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/exito.png"));
                  ListarParticipantes ven;
                  ven = new ListarParticipantes(ussuarioActual, nuevaCompetencia);
                  ven.setVisible(true);
-                 dispose();
-                    
+                 dispose();  
              }
          }
 
