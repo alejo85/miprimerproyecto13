@@ -211,7 +211,7 @@ public class AltaParticipante extends JDialog {
             dispose();
             ListarParticipantes ven;
             ven = new ListarParticipantes(usuarioActual, competenciaSeleccionada);
-            JOptionPane.showMessageDialog(null, "El participante ha sido de alta con éxito", "Alta de participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+            JOptionPane.showMessageDialog(null, "<html><h4>El participante ha sido de alta con éxito</h4></html>", "Alta de participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
             ven.setVisible(true);
            
         }

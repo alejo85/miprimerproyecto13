@@ -292,7 +292,7 @@ public class Central extends JFrame {
            }
     // ACCION BOTON BUSCAR TODAS LAS COMPETENCIAS DEPORTIVAS
     void buscarTodasLasCompetencias_ActionPerformed (ActionEvent e){
-               JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Buscar todas las competencias",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+               JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento</h4></html>", "Buscar todas las competencias",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
            }
     // ACCION BOTON BUSCAR LUGAR DE REALIZACION
     void buscarLugarDeRealizacion_ActionPerformed (ActionEvent e){
@@ -306,7 +306,7 @@ public class Central extends JFrame {
     }
     // ACCION BOTON MODIFICAR
     private void jButtonAceptar5_actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Modificar usuario",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+        JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento</h4></html>", "Modificar usuario",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 // ACCION BOTON INICIAR SESION O CERRAR SESION DEPENDIENDO DEL OBJETO USUARIO
     private void jButtonAceptar6_actionPerformed(ActionEvent e) {
@@ -317,7 +317,7 @@ public class Central extends JFrame {
         }
         else{
             this.dispose();
-            JOptionPane.showMessageDialog(null, "Se ha cerrado tu sesión exitosamente", "Cerrar sesión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/no-logueado.png"));
+            JOptionPane.showMessageDialog(null, "<html><h4>Se ha cerrado tu sesión exitosamente</h4></html>", "Cerrar sesión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/no-logueado.png"));
             new Principal();
         }
     }
@@ -341,9 +341,9 @@ public class Central extends JFrame {
         ven.setVisible(true);
         this.dispose();
     }
-
+    
     private void jButtonAceptar10_actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Buscar todas las competencias",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+        JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento</h4></html>", "Buscar todas las competencias",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
     
     private void actualizarUsuarioActual(Usuario usuario){
