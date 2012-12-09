@@ -28,6 +28,7 @@ import java.awt.event.FocusAdapter;
 
 import java.awt.event.FocusEvent;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -46,11 +47,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class RegistrarUsuario extends JDialog{
-    private AreaTextoCorreo correoElectrónicoJTextArea = new AreaTextoCorreo(40);
+    private JTextField correoElectrónicoJTextArea = new JTextField();
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JLabel jLabelContraseña = new JLabel();
     private AreaTextoPassword contraseñaJPasswordField = new AreaTextoPassword(10);
@@ -107,13 +109,24 @@ public class RegistrarUsuario extends JDialog{
         correoElectrónicoJTextArea.setBounds(new Rectangle(130, 20, 375, 30));
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        
+        //LIMITA CARACTERES
+        correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
         correoElectrónicoJTextArea.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     aceptarJButton_actionPerformed(e);
                 }
             });
-        //LIMITAR LONGITUD DE CAMPOS
-        //correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
+        // TRANSFORMA EN MAYUSCULA
+         correoElectrónicoJTextArea.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z'){
+                     e.setKeyChar((char)(((int)e.getKeyChar()) - 32));
+                }
+            }
+        });
+        
+       
         // TODO TRANSFORMAR TODO A MAYUSCULA EN INGRESO DE CORREO
         jLabelCorreoElectrónico.setText("Correo electrónico");
         jLabelCorreoElectrónico.setBounds(new Rectangle(15, 20, 135, 25));
@@ -394,14 +407,14 @@ private void cargarRegiones()
         try {
             if(UsuarioGestor.existeUsuario(correoElectrónicoJTextArea.getText())){
                 errores= "<li>El correo ya se encuentra en uso</li>";
-                this.correoElectrónicoJTextArea.error();
+                this.correoElectrónicoJTextArea.setBackground(Color.red);
             }
         } catch (SQLException e) {//todo
             System.out.println(e.getMessage());
         }
         // CORREO ELECTRONICO VACIO
         if(correoElectrónicoJTextArea.getText().equals("")){
-              this.correoElectrónicoJTextArea.error();
+              this.correoElectrónicoJTextArea.setBackground(Color.red);
               errores= errores +"<li>Correo electrónico vacio</li>";
           }
         
