@@ -312,7 +312,7 @@ public class AltaLugarDeRealizacion extends JDialog {
             	Toolkit.getDefaultToolkit().beep(); //TODO ver si va aca el sonido
                 System.out.println(f.getMessage());
             }
-            JOptionPane.showMessageDialog(null, "El lugar de realización ha sido creado con éxito", "Alta lugar de realización",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/correcto2.png"));
+            JOptionPane.showMessageDialog(null, "El lugar de realización ha sido creado con éxito", "Alta lugar de realización",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
             dispose(); // cuando se cierra, se pierde los cambios realizados
             new Principal(usuarioActual);
         }
@@ -343,22 +343,38 @@ public class AltaLugarDeRealizacion extends JDialog {
             this.codigoJTextField.setForeground(Color.white);
             this.codigoJTextField.setBackground(Color.red);
 
-            errores="\n\tEl codigo no puede ser vacio ";
+            errores="<li>El codigo no puede ser vacio</li>";
         }
         if(this.nombreLugarDeRealizacionJTextField.getText().equals("")){
             this.nombreLugarDeRealizacionJTextField.setForeground(Color.white);
             this.nombreLugarDeRealizacionJTextField.setBackground(Color.red);
-            errores=errores +"\n\tEl nombre del Lugar de realizacion no puede ser vacio ";
+            errores=errores +"<li>El nombre del Lugar de realizacion no puede ser vacio</li>";
         }
         if(this.dSeleccionados.size()<1){
-            errores= errores +"\n\tSe debe seleccionar al menos un deporte";
+            errores= errores +"<li>Se debe seleccionar al menos un deporte</li>";
             listaDeportesSeleccionadosJList.setBackground(Color.red);
             listaDeportesSeleccionadosJList.setForeground(Color.white);
         }
       
        
         if(errores.length()>0){
-            JOptionPane.showOptionDialog(null, "Tienes los siguientes errores: \n"+errores  , "Errores en campos", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null, new Object[]{"Aceptar"},"Aceptar");
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
+            pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+            JDialog dialog = pane.createDialog("Error al Autencicar");
+            int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+            int posicion= this.getLocationOnScreen().x;
+            int anchoVentana= this.getHeight();
+            
+            if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+            {
+                    dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
+            }
+            else
+            {
+                    dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+            }
+            dialog.setVisible(true);
             return false;
         }
         else{
