@@ -674,11 +674,9 @@ public class CompetenciaGestor {
         }
 
 
-        try {
+     
             CompetenciaDB.eliminarPosiciones(competencia.getIdCompetencia());
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+      
         setTabla(competencia.getTablaDePosiciones(), competencia.getIdCompetencia());
     }
     
