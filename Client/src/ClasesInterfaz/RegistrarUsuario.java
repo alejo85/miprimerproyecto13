@@ -433,7 +433,7 @@ private void cargarRegiones()
             if(this.contraseñaJPasswordField.getPass().length()<6){
                         this.contraseñaJPasswordField.error();
                         this.repetirContraseñaJPasswordField.error();
-                        errores="<li>La longitud mínima para las contraseñas\n es de 6 carácteres</li>";
+                        errores=errores+"<li>La longitud mínima para las contraseñas\n es de 6 carácteres</li>";
                     }
               }
         
