@@ -7,9 +7,7 @@ import java.util.Vector;
 public class Competencia{
 
 	private int idCompetencia;
-	private int tantosPorPartidoGanado;
-	private int tantosPorPartidoAusenciaContrincante;
-	private int cantidadDeSets;
+
 	private String nombreCompetencia;
 	private String modalidad;
 	private String formaDePuntuacion;
@@ -18,21 +16,19 @@ public class Competencia{
 	private Deporte deporte;
 	private Fixture fixture;
 	private Liga liga;
+        private Set formaPuntuacionSet;
+        private Puntuacion formaPuntuacionPunt;
 	private Usuario usuarioCreador;
 	private Vector <Posicion> tablaDePosiciones;
 	private LugarDeRealizacion[] lugares;
 	private Participante[] participantes;
 
-    public Competencia(int idCompetencia, int tantosPorPartidoGanado, int tantosPorPartidoAusenciaContrincante,
-                       int cantidadDeSets, String nombreCompetencia, String modalidad, String formaDePuntuacion,
+    public Competencia(int idCompetencia, String nombreCompetencia, String modalidad, String formaDePuntuacion,
                        String estado, String reglamento, Deporte deporte, Fixture fixture, Liga liga,
                        Usuario usuarioCreador, Vector<Posicion> tablaDePosiciones, LugarDeRealizacion[] lugares,
                        Participante[] participantes) {
         super();
         this.idCompetencia = idCompetencia;
-        this.tantosPorPartidoGanado = tantosPorPartidoGanado;
-        this.tantosPorPartidoAusenciaContrincante = tantosPorPartidoAusenciaContrincante;
-        this.cantidadDeSets = cantidadDeSets;
         this.nombreCompetencia = nombreCompetencia;
         this.modalidad = modalidad;
         this.formaDePuntuacion = formaDePuntuacion;
@@ -75,29 +71,6 @@ public class Competencia{
         return idCompetencia;
     }
 
-    public void setTantosPorPartidoGanado(int tantosPorPartidoGanado) {
-        this.tantosPorPartidoGanado = tantosPorPartidoGanado;
-    }
-
-    public int getTantosPorPartidoGanado() {
-        return tantosPorPartidoGanado;
-    }
-
-    public void setTantosPorPartidoAusenciaContrincante(int tantosPorPartidoAusenciaContrincante) {
-        this.tantosPorPartidoAusenciaContrincante = tantosPorPartidoAusenciaContrincante;
-    }
-
-    public int getTantosPorPartidoAusenciaContrincante() {
-        return tantosPorPartidoAusenciaContrincante;
-    }
-
-    public void setCantidadDeSets(int cantidadDeSets) {
-        this.cantidadDeSets = cantidadDeSets;
-    }
-
-    public int getCantidadDeSets() {
-        return cantidadDeSets;
-    }
 
     public void setNombreCompetencia(String nombreCompetencia) {
         this.nombreCompetencia = nombreCompetencia;
@@ -126,6 +99,8 @@ public class Competencia{
     public void setEstado(String estado) {
         this.estado = estado;
     }
+    
+
 
     public String getEstado() {
         return estado;
@@ -162,6 +137,12 @@ public class Competencia{
     public Liga getLiga() {
         return liga;
     }
+    public Set getSet() {
+        return formaPuntuacionSet;
+    }
+    public Puntuacion getPuntuacion() {
+        return formaPuntuacionPunt;
+    }
 
     public void setUsuarioCreador(Usuario usuarioCreador) {
         this.usuarioCreador = usuarioCreador;
@@ -197,4 +178,12 @@ public class Competencia{
     public void actualizarResultados(Encuentro encuentro){
         CompetenciaGestor.actualizarResultados(this, encuentro);
     }
+    // SETEA OBJETO PUNTUACION
+    public void setFormaDePuntuacionPunt(Puntuacion puntuacion) {
+        this.formaPuntuacionPunt = puntuacion;
+    }
+    // SETEA OBJETO SET
+    public void setFormaDePuntuacionSet(Set set) {
+          this.formaPuntuacionSet = set;
+      }
 }
