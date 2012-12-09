@@ -4,6 +4,7 @@ package ClasesGestores;
 import ClasesLogicas.Puntos;
 import ClasesLogicas.Resultados;
 
+import java.util.Stack;
 import java.util.Vector;
 
 import javax.swing.JTable;
@@ -25,16 +26,7 @@ public class ResultadoGestor {
           
     }
 
-    /**
-     * @param puntos
-     * @return
-     */
 
-
-    /**
-     * @param puntos
-     * @return
-     */
     public static Resultados crearResultado(Puntos[] puntos){
         
        Resultados unResultado=new Resultados();
@@ -79,7 +71,16 @@ public class ResultadoGestor {
        
         return unResultado;
     }
-
+    public static Stack <Resultados> getResultado(int idResultado){
+            Stack <Resultados> resultado=new Stack <Resultados>();
+            Resultados unResultado = new Resultados();
+            unResultado.setIdResultado(idResultado);
+            unResultado.setPuntuacion(PuntoGestor.getPuntos(idResultado));
+            
+            
+            
+            return resultado;
+        }
 
 
 }

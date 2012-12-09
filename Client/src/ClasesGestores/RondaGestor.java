@@ -3,6 +3,7 @@ package ClasesGestores;
 
 import ClasesBD.FixtureDB;
 
+import ClasesLogicas.Competencia;
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.Ronda;
@@ -40,7 +41,29 @@ public class RondaGestor {
     }
 
     
-    public void actualizarRonda(){}
+    public static boolean actualizarRonda(int ronda, Competencia laCompetencia){
+        Encuentro losEncuentros[]=laCompetencia.getFixture().getRondas()[ronda].getGanadores().getEncuentros();
+        int size=losEncuentros.length;
+        int aux=0;
+        for(int i =0;i<losEncuentros.length ;i++)
+        {
+            if(losEncuentros[i].getGanador()!=null )
+                aux++;
+            if(losEncuentros[i].getEmpate()!=null)
+                  aux++;
+    
+          
+        }
+        if(aux==size)
+        {
+            
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     
     public static Ronda[] getRondas(int idFixture){
             Ronda laRonda[] = null;

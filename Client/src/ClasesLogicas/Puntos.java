@@ -23,27 +23,27 @@ public class Puntos {
         this.puntoB = puntoB;
     }
 
-    public void setIdPunto(Integer idPunto) {
+    public void setIdPunto(int idPunto) {
         this.idPunto = idPunto;
     }
 
-    public Integer getIdPunto() {
+    public int getIdPunto() {
         return idPunto;
     }
 
-    public void setPuntoA(Integer puntoA) {
+    public void setPuntoA(int puntoA) {
         this.puntoA = puntoA;
     }
 
-    public Integer getPuntoA() {
+    public int getPuntoA() {
         return puntoA;
     }
 
-    public void setPuntoB(Integer puntoB) {
+    public void setPuntoB(int puntoB) {
         this.puntoB = puntoB;
     }
 
-    public Integer getPuntoB() {
+    public int getPuntoB() {
         return puntoB;
     }
 

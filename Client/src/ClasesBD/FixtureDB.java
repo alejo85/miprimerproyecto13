@@ -166,4 +166,20 @@ public class FixtureDB {
             
         
         }
+    public static void actualizarSubRonda(int idSubRonda, boolean estado) throws SQLException {
+        
+           // System.out.println("llego a la base idSubRonda");
+      
+            //Conexion conexion = new Conexion();
+            ResultSet resultado=null;
+            //conexion.conectar();
+            String consultasql;
+            
+            consultasql="UPDATE subronda\n" + 
+            "   SET estado='"+estado+"'\n" + 
+            " WHERE id_subronda='"+idSubRonda+"';";
+            resultado = Conexion.consulta.executeQuery(consultasql);
+         
+        
+        }
 }
