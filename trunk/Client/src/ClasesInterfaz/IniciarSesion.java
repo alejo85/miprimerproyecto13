@@ -256,14 +256,14 @@ public class IniciarSesion extends JDialog {
                        int posicion= this.getLocationOnScreen().x;
                        int anchoVentana= this.getHeight();
                        
-                       if ((anchoPantalla-(posicion+anchoVentana) > posicion))
-                       {
-                               dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
-                       }
-                       else
-                       {
-                               dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
-                       }
+                           if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+                           {
+                                   dialog.setLocation(getLocationOnScreen().x + getWidth()+23 , getLocationOnScreen().y);
+                           }
+                           else
+                           {
+                               dialog.setLocation(getLocationOnScreen().x - pane.getWidth()-23, getLocationOnScreen().y);
+                           }
                        dialog.setVisible(true);
                        
                        this.correoElectronicoJTextArea.setBackground(Color.red);
@@ -288,11 +288,11 @@ public class IniciarSesion extends JDialog {
                 
                 if ((anchoPantalla-(posicion+anchoVentana) > posicion))
                 {
-                        dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
+                        dialog.setLocation(getLocationOnScreen().x + getWidth()+23 , getLocationOnScreen().y);
                 }
                 else
                 {
-                        dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+                    dialog.setLocation(getLocationOnScreen().x - pane.getWidth()-23, getLocationOnScreen().y);
                 }
                 dialog.setVisible(true);
                 

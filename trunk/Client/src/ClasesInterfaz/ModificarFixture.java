@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -24,9 +25,11 @@ import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -109,7 +112,7 @@ public class ModificarFixture extends JDialog {
         jScrollPane1.setBounds(new Rectangle(20, 25, 820, 270));
         fechasJScrollPane.setBounds(new Rectangle(930, 55, 140, 270));
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(680, 440, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(700, 440, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
 
@@ -187,6 +190,9 @@ public class ModificarFixture extends JDialog {
                
         }
     private void gestionarResultadoJButton_actionPerformed(ActionEvent e) {
+        
+        String participante=null;
+       
         if(tablaDeFechaJTable.getSelectedRow()>-1)
         {
            
@@ -199,7 +205,39 @@ public class ModificarFixture extends JDialog {
                     dispose();
                     ven.setVisible(true);
                     }
+                    else{
+                        
+                       participante=(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getNombre();
+                        
+                  }
              
+            }
+            else{
+                
+               participante=(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getNombre();
+                
+            }
+            
+            if (((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getIdParticipante()==1)||(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getIdParticipante()==1){
+                
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane pane = new JOptionPane("<html><h4>El participante "+participante+" se encuentra libre en esta ronda</h4></html>", JOptionPane.ERROR_MESSAGE); 
+                pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+                JDialog dialog = pane.createDialog("Errores en los campos");
+                int altoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // ancho de la pantalla
+                int posicion= this.getLocationOnScreen().y;
+                int altoVentana= this.getHeight();
+                
+                if ((altoPantalla-(posicion+altoVentana) < posicion-5))
+                {
+                       dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2 - pane.getWidth()/2  , getLocationOnScreen().y - pane.getHeight()+30);
+                }
+                else
+                {
+                       dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2 - pane.getWidth()*3/4, getLocationOnScreen().y + this.getHeight()-pane.getHeight()*3/4);
+                }
+                
+                dialog.setVisible(true);
             }
          
         }

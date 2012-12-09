@@ -499,15 +499,15 @@ private void cargarRegiones()
             JDialog dialog = pane.createDialog("Errores en campos");
             int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
             int posicion= this.getLocationOnScreen().x;
-            int anchoVentana= this.getHeight();
+            int anchoVentana= this.getWidth();
             
             if ((anchoPantalla-(posicion+anchoVentana) > posicion))
             {
-                    dialog.setLocation(getLocationOnScreen().x + getHeight() , getLocationOnScreen().y);
+                    dialog.setLocation(getLocationOnScreen().x + this.getWidth()-30 , getLocationOnScreen().y);
             }
             else
             {
-                    dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+                    dialog.setLocation(getLocationOnScreen().x - pane.getWidth()+30, getLocationOnScreen().y);
             }
             dialog.setVisible(true);
             return false;

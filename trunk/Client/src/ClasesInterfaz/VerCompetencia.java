@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -304,9 +305,38 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarFixtureJButton_actionPerformed(ActionEvent e) {
-        ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual);
-        this.setVisible(false);
-        ven.setVisible(true);
+        
+        if((competencia.getFixture()!=null)&&(competencia.getFixture().getIdFixture())!=0){
+        
+            ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual);
+            this.setVisible(false);
+            ven.setVisible(true);
+        }
+        
+        else{
+        
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane pane = new JOptionPane("<html><h4>Primero debe generar el Fixture de la competencia</h4></html>", JOptionPane.ERROR_MESSAGE); 
+            pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+            JDialog dialog = pane.createDialog("Fixture inexistente");
+            int altoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // ancho de la pantalla
+            int posicion= this.getLocationOnScreen().y;
+            int altoVentana= this.getHeight();
+            
+            if ((altoPantalla-(posicion+altoVentana) < posicion))
+            {
+                   dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2-pane.getWidth()*1/2 , getLocationOnScreen().y - pane.getHeight()+40);
+            }
+            else
+            {
+                   dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2-pane.getWidth()*1/2 , getLocationOnScreen().y + this.getHeight()/2 +pane.getHeight());
+            }
+            
+            dialog.setVisible(true);
+        
+        
+        }
+        
     }
 
     private void mostrarTablaDePosicionesJButton_actionPerformed(ActionEvent e) {
