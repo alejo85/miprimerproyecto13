@@ -496,12 +496,10 @@ public class AltaCompetenciaDeportiva extends JDialog {
             listaLugaresJTable.setModel(modelo);
             //TableRowSorter<DefaultTableModel> elQueOrdena1 = new TableRowSorter<DefaultTableModel>(modelo);
             //listaLugaresJTable.setRowSorter(elQueOrdena1);
-            System.out.println("TAMAÑO DE VECTOR LUGARES"+lugares.size());
              for(int i=0; i<lugares.size();i++)
              {
                  Vector <String> datos = new Vector <String>();
                  datos.add(lugares.get(i).getNombre());
-                  System.out.println("NOMBRE LR: "+lugares.get(i).getNombre());
                  modelo.addRow(datos);
              }
         }
@@ -511,7 +509,6 @@ public class AltaCompetenciaDeportiva extends JDialog {
                  tablaLugarDisponibilidadJTable.setModel(modelo2);
                  TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo2);
                  tablaLugarDisponibilidadJTable.setRowSorter(elQueOrdena);
-                 System.out.println("TAMAÑO DE VECTOR LUGARES SEL"+lugaresSeleccionados.size());
              for(int i =0; i<lugaresSeleccionados.size();i++)
              {
                  Vector <String> datos = new Vector <String>();
@@ -527,7 +524,6 @@ public class AltaCompetenciaDeportiva extends JDialog {
                 modelo2 = new ModeloTabla(new String[] { "Lugar De Realizacion","Disponibilidad" }, 0);
                  tablaLugarDisponibilidadJTable.setModel(modelo2);
                  lugaresSeleccionados.removeAllElements();
-                 System.out.println("Tamaño lugaressel luego de remover:"+lugaresSeleccionados.size());
             
              }
          private void agregarJButton_actionPerformed(ActionEvent e) {
@@ -542,9 +538,13 @@ public class AltaCompetenciaDeportiva extends JDialog {
                      cargarLugares();
                      disponibilidadJTextArea.setText("");
                      cargarLugaresSeleccionados();
+                     deporteJComboBox.setEnabled(false);
+                     errorDeLugarSelect.setVisible(true);
                  }
-             deporteJComboBox.setEnabled(false);
-             errorDeLugarSelect.setVisible(true);
+             else{
+                 JOptionPane.showMessageDialog(null, "<html><h4>Debes seleccionar un lugar de realización y asignar una disponibilidad</h4></html>", "Alta competencia deportiva",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
+             }
+
          }
 
          private void quitarJButton_actionPerformed(ActionEvent e) {
@@ -638,6 +638,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
                  Toolkit.getDefaultToolkit().beep();
                  JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE);  
                  JDialog dialog = pane.createDialog("Errores en los campos");
+                 pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+                 
                  int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
                  int posicion= this.getLocationOnScreen().x;
                  int anchoVentana= this.getHeight();
@@ -683,11 +685,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
            
             
                  setVisible(false);
-                 JOptionPane.showMessageDialog(null, "La competencia se ha creado con éxito", "Alta competencia deportiva",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/check.png"));
+                 JOptionPane.showMessageDialog(null, "La competencia se ha creado con éxito", "Alta competencia deportiva",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/exito.png"));
                  ListarParticipantes ven;
                  ven = new ListarParticipantes(ussuarioActual, nuevaCompetencia);
                  ven.setVisible(true);
-                 this.setVisible(false);
+                 dispose();
                     
              }
          }
