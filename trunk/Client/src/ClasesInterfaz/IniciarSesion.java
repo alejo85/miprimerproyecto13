@@ -230,7 +230,7 @@ public class IniciarSesion extends JDialog {
             
             if(errores.length()==0){
                   //BUSCA USUARIO
-                   usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getText(), this.contraeñaJPasswordField.getPass());
+                   usuarioActual = UsuarioGestor.loguearseUsuario(this.correoElectronicoJTextArea.getText().toUpperCase(), this.contraeñaJPasswordField.getPass());
                    
                    //SI NO EXISTE USUARIO
                    if(usuarioActual==null){

@@ -13,6 +13,7 @@ import InterfazGrafica.CampoTexto.AreaTextoAlfabetico;
 import InterfazGrafica.CampoTexto.AreaTextoCorreo;
 import InterfazGrafica.CampoTexto.AreaTextoNombre;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -21,6 +22,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -37,12 +40,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 public class AltaParticipante extends JDialog {
     private AreaTextoNombre nombreParticipanteJTextArea = new AreaTextoNombre(50);
     private JLabel jLabelNombreParticipante = new JLabel();
-    private AreaTextoCorreo correoElectrónicoJTextArea = new AreaTextoCorreo(40);
+    private JTextField correoElectrónicoJTextArea = new JTextField();
     private JLabel jLabelCorreoElectrónico = new JLabel();
     private JButton examinarJButton = new JButton();
     private JTextArea imagenJTextArea = new JTextArea();
@@ -84,6 +88,8 @@ public class AltaParticipante extends JDialog {
         correoElectrónicoJTextArea.setBounds(new Rectangle(140, 60, 305, 30));
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
+        correoElectrónicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
         jLabelCorreoElectrónico.setText("Correo Electronico");
         jLabelCorreoElectrónico.setBounds(new Rectangle(10, 60, 175, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 13));
@@ -153,12 +159,13 @@ public class AltaParticipante extends JDialog {
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         String errores ="";
         // VALIDA CORREO ELECTRONICO
-        if(!isEmail(correoElectrónicoJTextArea.getTexto())){
+        if(!isEmail(correoElectrónicoJTextArea.getText())){
             errores=errores+"<li>Correo electrónico invalido</li>";
+            this.correoElectrónicoJTextArea.setBackground(Color.red);
         }
         if(correoElectrónicoJTextArea.getText().equals("")){
             errores="<li>Debes ingresar un correo</li>";
-            this.correoElectrónicoJTextArea.error();
+            this.correoElectrónicoJTextArea.setBackground(Color.red);
         }
         if(nombreParticipanteJTextArea.getText().equals("")){
             errores=errores+"<li>Debes ingresar un nombre</li>";
@@ -168,7 +175,7 @@ public class AltaParticipante extends JDialog {
             errores+="<li>El nombre del participante ya esta registrado</li>";
             this.nombreParticipanteJTextArea.error();
         }
-        if(!errores.equals("")){
+        if(errores.length()>0){
                 Toolkit.getDefaultToolkit().beep();
                 JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE); 
                 pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
@@ -198,6 +205,10 @@ public class AltaParticipante extends JDialog {
             ven.setVisible(true);
             dispose();
         }
+    }
+    public void reescribir(FocusEvent evt) {
+     correoElectrónicoJTextArea.setForeground(Color.black);
+     correoElectrónicoJTextArea.setBackground(Color.white);
     }
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
