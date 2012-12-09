@@ -195,7 +195,9 @@ public class IniciarSesion extends JDialog {
     public boolean isEmail(String correo) {
            Pattern pat = null;
            Matcher mat = null;
-           pat = Pattern.compile("^([0-9a-zA-Z]([_.w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-w]*[0-9a-zA-Z].)+([a-zA-Z]{2,9}.)+[a-zA-Z]{2,3})$");
+           pat = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+           //otra expresion regular /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/
+           //^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$ 
            mat = pat.matcher(correo);
            if (mat.find()) {
                System.out.println("[" + mat.group() + "]");
@@ -206,7 +208,7 @@ public class IniciarSesion extends JDialog {
        }
     private void aceptarJButton_actionPerformed(ActionEvent e) {
            String errores="";
-        
+        System.out.print(isEmail("cristian@test.com"));
             // VALIDA CORREO ELECTRONICO
             if(isEmail(correoElectronicoJTextArea.getTexto())){
                     // VALIDA CONTRASEÑA VACIA
