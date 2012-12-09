@@ -125,7 +125,7 @@ public class RegistrarUsuario extends JDialog{
                 }
             }
         });
-        
+        correoElectrónicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
        
         // TODO TRANSFORMAR TODO A MAYUSCULA EN INGRESO DE CORREO
         jLabelCorreoElectrónico.setText("Correo electrónico");
@@ -324,7 +324,10 @@ public class RegistrarUsuario extends JDialog{
        
     }
 
-
+    public void reescribir(FocusEvent evt) {
+     correoElectrónicoJTextArea.setForeground(Color.black);
+     correoElectrónicoJTextArea.setBackground(Color.white);
+    }
 
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
