@@ -24,6 +24,8 @@ import java.awt.event.ActionListener;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -90,6 +92,14 @@ public class AltaParticipante extends JDialog {
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
         correoElectrónicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
+        // TRANSFORMA EN MAYUSCULA
+         correoElectrónicoJTextArea.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z'){
+                     e.setKeyChar((char)(((int)e.getKeyChar()) - 32));
+                }
+            }
+        });
         jLabelCorreoElectrónico.setText("Correo Electronico");
         jLabelCorreoElectrónico.setBounds(new Rectangle(10, 60, 175, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 13));
@@ -198,12 +208,12 @@ public class AltaParticipante extends JDialog {
             Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
             // SE AGREGA EL PARTICIPANTE AL OBJETO COMPETENCIA LUEGO DE HABERLO INSERTADO EN LA BD
             competenciaSeleccionada.agregarParticipante(unParticipante);
-            JOptionPane.showMessageDialog(null, "El participante ha sido de alta con éxito", "Alta de participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
-
+            dispose();
             ListarParticipantes ven;
             ven = new ListarParticipantes(usuarioActual, competenciaSeleccionada);
+            JOptionPane.showMessageDialog(null, "El participante ha sido de alta con éxito", "Alta de participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
             ven.setVisible(true);
-            dispose();
+           
         }
     }
     public void reescribir(FocusEvent evt) {

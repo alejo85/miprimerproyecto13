@@ -276,12 +276,9 @@ public class VerCompetencia extends JDialog {
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
         int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
+            if(competencia.getParticipantes().length>2){
             System.out.println(""+competencia.getFixture().getIdFixture());
             if(competencia.getFixture().getIdFixture()!=0&&(competencia.getEstado().equals("Creada")||competencia.getEstado().equals("Planificada"))){
-               
-                
-                
-                
                     CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
                     //competencia.setParticipantes(ParticipanteGestor.instanciarParticipante(competencia.getIdCompetencia()));
                     competencia.setFixture(new Fixture());
@@ -299,7 +296,11 @@ public class VerCompetencia extends JDialog {
                 
                 }
             
-        } 
+        }
+            else{
+                JOptionPane.showMessageDialog(null, "Debes dar de alta participantes para generar el fixture", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
+            }
+        }
     }
 
     private void mostrarFixtureJButton_actionPerformed(ActionEvent e) {
