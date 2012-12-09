@@ -163,7 +163,8 @@ public class AltaParticipante extends JDialog {
         }
         if(!errores.equals("")){
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE);  
+                JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE); 
+                pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
                 JDialog dialog = pane.createDialog("Errores en los campos");
                 int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
                 int posicion= this.getLocationOnScreen().x;
@@ -183,7 +184,7 @@ public class AltaParticipante extends JDialog {
             Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
             // SE AGREGA EL PARTICIPANTE AL OBJETO COMPETENCIA LUEGO DE HABERLO INSERTADO EN LA BD
             competenciaSeleccionada.agregarParticipante(unParticipante);
-            JOptionPane.showMessageDialog(null, "El participante ha sido de alta con éxito", "Alta de participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/correcto2.png"));
+            JOptionPane.showMessageDialog(null, "El participante ha sido de alta con éxito", "Alta de participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
 
             ListarParticipantes ven;
             ven = new ListarParticipantes(usuarioActual, competenciaSeleccionada);
