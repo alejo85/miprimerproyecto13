@@ -362,17 +362,17 @@ public class AltaLugarDeRealizacion extends JDialog {
             JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
             pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
             JDialog dialog = pane.createDialog("Error al Autencicar");
-            int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
-            int posicion= this.getLocationOnScreen().x;
-            int anchoVentana= this.getHeight();
+            int altoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // alto de la pantalla
+            int posicion= this.getLocationOnScreen().y;
+            int altoVentana= this.getHeight();
             
-            if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+            if ((altoPantalla-(altoVentana+posicion)-40 <= posicion))
             {
-                    dialog.setLocation(getLocationOnScreen().x + getHeight()+90 , getLocationOnScreen().y);
+                    dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2 - pane.getWidth()*1/2 , getLocationOnScreen().y- pane.getHeight()+15);
             }
             else
             {
-                    dialog.setLocation(getLocationOnScreen().x - 450, getLocationOnScreen().y);
+                    dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2 - pane.getWidth()*1/2 , getLocationOnScreen().y+ this.getHeight()+15);
             }
             dialog.setVisible(true);
             return false;

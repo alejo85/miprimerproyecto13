@@ -302,8 +302,25 @@ public class BuscarCompetenciaDeportiva extends JDialog {
                 estadoJComboBox.setBackground(Color.red);
                 estadoJComboBox.setForeground(Color.white);
                 
-                    Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "<html><h4>Tienes que seleccionar al menos uno de los campos</h4></html>", "Errores en los campos",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/error.png"));
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane pane = new JOptionPane("<html><h4>Tienes que seleccionar al menos uno de los campos</h4></html>", JOptionPane.ERROR_MESSAGE); 
+                pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+                JDialog dialog = pane.createDialog("Errores en los campos");
+                int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+                int posicion= this.getLocationOnScreen().x;
+                int anchoVentana= this.getWidth();
+                
+                if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+                {
+                       dialog.setLocation(getLocationOnScreen().x + getWidth()*3/4-pane.getHeight()*3/4 , getLocationOnScreen().y + pane.getHeight()-10);
+                }
+                else
+                {
+                       dialog.setLocation(getLocationOnScreen().x - pane.getWidth()*1/4-5, getLocationOnScreen().y + pane.getHeight()-10);
+                }
+                
+                dialog.setVisible(true);
+                
                 
             }
         else{
@@ -425,8 +442,27 @@ public class BuscarCompetenciaDeportiva extends JDialog {
             ven.setVisible(true);
         }
         else{
-            JOptionPane.showMessageDialog(null, "<html><h4>Debes seleccionar un resultado de la búsqueda</h4></html>", "Ver competencia",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
-        }
+            
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane pane = new JOptionPane("<html><h4>Debes seleccionar un resultado de la búsqueda</h4></html>", JOptionPane.ERROR_MESSAGE); 
+            pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+            JDialog dialog = pane.createDialog("Errores en los campos");
+            int anchoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // ancho de la pantalla
+            int posicion= this.getLocationOnScreen().x;
+            int anchoVentana= this.getWidth();
+            
+            if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+            {
+                   dialog.setLocation(getLocationOnScreen().x + getWidth()*3/4-pane.getHeight()*3/4 , getLocationOnScreen().y + pane.getHeight()-10);
+            }
+            else
+            {
+                   dialog.setLocation(getLocationOnScreen().x - pane.getWidth()*1/4-5, getLocationOnScreen().y + pane.getHeight()-10);
+            }
+            
+            dialog.setVisible(true);
+            
+            }
     }
 
     private void nuevaCompetenciaJButton_actionPerformed(ActionEvent e) {

@@ -194,14 +194,14 @@ public class AltaParticipante extends JDialog {
                 int posicion= this.getLocationOnScreen().x;
                 int anchoVentana= this.getHeight();
                 
-                if ((anchoPantalla-(posicion+anchoVentana) > posicion))
-                {
-                        dialog.setLocation(getLocationOnScreen().x + getHeight()+200 , getLocationOnScreen().y);
-                }
-                else
-                {
-                        dialog.setLocation(getLocationOnScreen().x - 400, getLocationOnScreen().y);
-                }
+             if ((anchoPantalla-(posicion+anchoVentana) > posicion))
+            {
+                    dialog.setLocation(getLocationOnScreen().x + getWidth()+23 , getLocationOnScreen().y);
+            }
+            else
+            {
+                dialog.setLocation(getLocationOnScreen().x - pane.getWidth()-23, getLocationOnScreen().y);
+            }
                 dialog.setVisible(true);
         }
         else{
