@@ -654,7 +654,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
                  }
                  else
                  {
-                         dialog.setLocation(getLocationOnScreen().x - 400, getLocationOnScreen().y);
+                         dialog.setLocation(getLocationOnScreen().x - 200, getLocationOnScreen().y);
                  }
                  dialog.setVisible(true);
                  return false;
