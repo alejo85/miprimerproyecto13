@@ -248,7 +248,7 @@ public class IniciarSesion extends JDialog {
                    //SI NO EXISTE USUARIO
                    if(usuarioActual==null){
                        Toolkit.getDefaultToolkit().beep();
-                       JOptionPane pane = new JOptionPane("El correo electronico o la contraseña son incorrectos" , JOptionPane.ERROR_MESSAGE);  
+                       JOptionPane pane = new JOptionPane("<html><h4>El correo electronico o la<br /> contraseña son incorrectos</h4></html>" , JOptionPane.ERROR_MESSAGE);  
                        pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
                        JDialog dialog = pane.createDialog("Error al Autencicar");
                        
