@@ -580,23 +580,23 @@ public class AltaCompetenciaDeportiva extends JDialog {
                }*/
               try {
                   if(CompetenciaGestor.validarNombreDeCompetencia(nombreDeLaCompetenciaJTextArea.getText(), ussuarioActual.getCorreoElectronico())){
-                      errores= "\n\tEl nombre de la competencia esta en uso";
+                      errores= "<li>El nombre de la competencia esta en uso</li>";
                   }
               } catch (SQLException e) {
                   System.out.println(e.getMessage());
               }
              if(this.deporteJComboBox.getSelectedIndex()<1){
-                 errores=errores + "\n\tDebe seleccionar un deporte ";
+                 errores=errores + "<li>Debe seleccionar un deporte</li>";
                  deporteJComboBox.setBackground(Color.red);
                  deporteJComboBox.setForeground(Color.white);
              }
              if(this.lugaresSeleccionados.size()<1){
-                 errores=errores + "\n\tDebe seleccionar un lugar de realización ";
+                 errores=errores + "<li>Debe seleccionar un lugar <br/>de realización</li>";
                  listaLugaresJTable.setBackground(Color.red);
                  listaLugaresJTable.setForeground(Color.white);
              }
              if(this.modalidadJComboBox.getSelectedIndex()<1){
-                 errores=errores + "\n\tDebe seleccionar una modalidad ";
+                 errores=errores + "<li>Debe seleccionar una modalidad</li>";
                  modalidadJComboBox.setBackground(Color.red);
                  modalidadJComboBox.setForeground(Color.white);
              }
@@ -604,23 +604,23 @@ public class AltaCompetenciaDeportiva extends JDialog {
                  if(this.modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")){
                          if(puntosPorPartidoGanadosJTextArea.getText().equals("")){
                              this.puntosPorPartidoGanadosJTextArea.error();
-                             errores=errores +"\n\tPuntos por partido ganados no puede ser vacío";
+                             errores=errores +"<li>Puntos por partido ganados no<br/> puede ser vacío</li>";
                          }
                      if(empate){
                          if(puntosPorPartidoEmpatadoJTextArea.getText().equals("")){
                              this.puntosPorPartidoEmpatadoJTextArea.error();
-                             errores=errores +"\n\tPuntos por partido empatados no puede ser Vacío";
+                             errores=errores +"<li>Puntos por partido empatados<br/> no puede ser Vacío</li>";
                          }
                      }
                      if(puntosPorPartidoAsistidoJTextArea.getText().equals("")){
                          this.puntosPorPartidoAsistidoJTextArea.error();
-                         errores=errores +"\n\tPuntos por partido asistido no puede ser vacío";
+                         errores=errores +"<li>Puntos por partido asistido <br/>no puede ser vacío</li>";
                      }
                 
                  }
              }
              if(this.formaDePuntuaciónJComboBox.getSelectedIndex()<1){
-                 errores=errores + "\n\tDebe seleccionar una forma de puntuación ";
+                 errores=errores + "<li>Debe seleccionar una forma de puntuación</li>";
                  formaDePuntuaciónJComboBox.setBackground(Color.red);
                  formaDePuntuaciónJComboBox.setForeground(Color.white);
              }
@@ -628,19 +628,19 @@ public class AltaCompetenciaDeportiva extends JDialog {
                      if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")){
                              if(tantosPorPartidosGanadosJTextArea.getText().equals("")){
                                  this.tantosPorPartidosGanadosJTextArea.error();
-                                 errores=errores +"\n\tTantos por partidos ganados no puede ser Vacio";
+                                 errores=errores +"<li>Tantos por partidos ganados no puede ser Vacio<li>";
                              }
                      }
                      if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets")){
                          if(cantidadMaximaDeSetsJTextArea.getText().equals("")){
                              this.cantidadMaximaDeSetsJTextArea.error();
-                             errores=errores +"\n\tLa Cantidad de Set no puede ser Vacio";
+                             errores=errores +"<li>La Cantidad de Set no puede ser Vacio</li>";
                          }
                      }
                  }
              if(errores.length()>0){
                  Toolkit.getDefaultToolkit().beep();
-                 JOptionPane pane = new JOptionPane("Tienes los siguientes errores:"+errores , JOptionPane.ERROR_MESSAGE);  
+                 JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
                  JDialog dialog = pane.createDialog("Errores en los campos");
                  pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
                  
@@ -677,6 +677,9 @@ public class AltaCompetenciaDeportiva extends JDialog {
                  if(formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")) {
                      valor=Integer.parseInt(tantosPorPartidosGanadosJTextArea.getText());
                  }
+                 if(!empate){
+                     puntosPorPartidoEmpatadoJTextArea.setText("0");
+                 }
                  
                  // MENSAJES PARA LA CREACION DE LA COMPETENCIA
                  Competencia nuevaCompetencia = new Competencia();
@@ -684,7 +687,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
                  if (modalidadJComboBox.getSelectedItem().toString().equals("Sistema de Liga")){
                      nuevaCompetencia.setModalidad("Liga");
                 try {
-                    nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(),"Liga" , formaDePuntuaciónJComboBox.getSelectedItem().toString(),editor.getText(), this.deporte.get(deporte), lugaresSeleccionados,empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),Integer.parseInt(puntosPorPartidoEmpatadoJTextArea.getText()),Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),valor);
+                   nuevaCompetencia = CompetenciaGestor.altaCompetencia(ussuarioActual, nombreDeLaCompetenciaJTextArea.getText(),"Liga" , formaDePuntuaciónJComboBox.getSelectedItem().toString(),editor.getText(), this.deporte.get(deporte), lugaresSeleccionados,empate, Integer.parseInt(puntosPorPartidoGanadosJTextArea.getText()),Integer.parseInt(puntosPorPartidoEmpatadoJTextArea.getText()),Integer.parseInt(puntosPorPartidoAsistidoJTextArea.getText()),valor);
                 } catch (SQLException f) {//todo
                 }
             }
