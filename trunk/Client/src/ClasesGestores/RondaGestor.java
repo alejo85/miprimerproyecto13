@@ -21,7 +21,7 @@ public class RondaGestor {
         super();
     }
     
-   //TODO se borro public Ronda [] generarRonda(Competencia unaCompetencia)
+   
         
         
 
@@ -184,9 +184,7 @@ public class RondaGestor {
             System.out.println(e.getMessage());
         }
         
-               
-        //todo corregir el diagrama de secuencias!!! 17.1
-            
+  
       
             
             random = 0 + (int)(Math.random()*lugaresAux.length);

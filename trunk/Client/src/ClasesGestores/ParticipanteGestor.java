@@ -93,7 +93,7 @@ public class ParticipanteGestor {
                     retorno.setNombre(nombre);
                     retorno.setCorreo(correo);
                     datos.add(retorno);
-                    //todo recuperarImagen
+                    
                 }
                 participantes= new Participante[datos.size()];
                 for(int j=0;j<datos.size();j++){
@@ -129,7 +129,7 @@ public class ParticipanteGestor {
                     retorno.setNombre(nombre);
                     retorno.setCorreo(correo);
                  
-                    //todo recuperarImagen
+                   
                 }
 
         } catch (SQLException e) {

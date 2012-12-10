@@ -2,6 +2,7 @@ package ClasesGestores;
 
 
 import ClasesBD.CompetenciaDB;
+import ClasesBD.DeportesDB;
 import ClasesBD.LigaDB;
 
 import ClasesLogicas.Competencia;
@@ -404,8 +405,7 @@ public class CompetenciaGestor {
         
        
         switch (Modalidad.valueOf(modalidad)){
-            
-        //todo definir EN TODOS LADOS modalidad como Simple y Doble    
+      
         case Liga:
             //System.out.println("antes del gestor Fixture");
             fixture = FixtureGestor.generarFixture(participantes, participantes.length, competencia.getIdCompetencia());
@@ -542,7 +542,7 @@ public class CompetenciaGestor {
             unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
             if(unaCompetencia.getFormaDePuntuacion().equals("Sets")){
                     //unaCompetencia.setCantidadDeSets(CompetenciaGestor.getCantidadMaximaDeSets(unaCompetencia.getIdCompetencia()));
-                
+                    unaCompetencia.setFormaDePuntuacionSet(buscarSets(unaCompetencia.getIdCompetencia()));
             }
             if(unaCompetencia.getModalidad().equals("Liga"))
                 unaCompetencia.setTablaDePosiciones(CompetenciaDB.getTablaDePosiciones(unaCompetencia.getIdCompetencia()));
@@ -552,7 +552,7 @@ public class CompetenciaGestor {
             
         } catch (SQLException e) {
             
-            //todo hacer la exepcion correspondiente
+            //todo 
         }
        
         
@@ -607,7 +607,7 @@ public class CompetenciaGestor {
             }//while (consulta.next());
         } catch (SQLException e) {
             
-            //todo hacer la exepcion correspondiente
+            //todo 
         }
         System.out.println("");
         return competenciaEncontradas;
@@ -705,5 +705,31 @@ public class CompetenciaGestor {
             
         
         }
+    public static Set buscarSets(int idCompetencia){
+        
+            
+   
+        Set unSet = null;
+            ResultSet resultado=null;
 
+        try {
+            resultado = CompetenciaDB.buscandoSets(idCompetencia);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            while (resultado.next()){
+                int id = resultado.getInt("id_set");
+                int cantidadSet = resultado.getInt("cantidad_de_sets");
+           
+                unSet=new Set(id, cantidadSet );
+        
+            }
+        
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //TODO 
+        }
+        return unSet;
+        }
 }

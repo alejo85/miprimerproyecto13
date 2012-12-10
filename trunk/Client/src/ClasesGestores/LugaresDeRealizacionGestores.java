@@ -154,7 +154,7 @@ public class LugaresDeRealizacionGestores {
                         retorno.setIdLugar(id);
                         retorno.setDisponibilidad(disponibilidad);
                         datos.add(retorno);
-                        //todo recuperarImagen
+                        
                     }
                     lugares= new LugarDeRealizacion[datos.size()];
                     for(int j=0;j<datos.size();j++){

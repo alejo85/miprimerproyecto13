@@ -309,7 +309,7 @@ public class AltaLugarDeRealizacion extends JDialog {
             try {
                 LugaresDeRealizacionGestores.altaLugar(this.codigoJTextField.getText(), this.nombreLugarDeRealizacionJTextField.getText(), this.descripcionJTextArea.getText(), dSeleccionados, usuarioActual );
             } catch (SQLException f) {
-            	Toolkit.getDefaultToolkit().beep(); //TODO ver si va aca el sonido
+            	Toolkit.getDefaultToolkit().beep(); 
                 System.out.println(f.getMessage());
             }
             dispose();

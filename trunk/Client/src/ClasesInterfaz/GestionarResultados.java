@@ -132,6 +132,7 @@ public class GestionarResultados extends JDialog {
         this.setSize(new Dimension(596, 348));
         this.getContentPane().setLayout( null );
         this.setTitle("Gestionar Resultados");
+        
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(320, 255, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -223,8 +224,10 @@ public class GestionarResultados extends JDialog {
    
         CerrarVentana();
         this.setSize(new Dimension(578, 578));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Gestionar Resultados");
+        this.setResizable(false);
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(340, 460, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -292,6 +295,7 @@ public class GestionarResultados extends JDialog {
     private void jbInitPuntuacion() throws Exception {
            CerrarVentana();
        this.setSize(new Dimension(543, 486));
+           this.setLocationRelativeTo(null);
                this.getContentPane().setLayout( null );
                this.setTitle("Gestionar Resultados");
                cancelarJButton.setText("Cancelar");
@@ -380,8 +384,10 @@ public class GestionarResultados extends JDialog {
     private void jbInitResultadoFinalEmpateSi() throws Exception {
         CerrarVentana();
         this.setSize(new Dimension(596, 379));
+        this.setLocationRelativeTo(null);
             this.getContentPane().setLayout( null );
             this.setTitle("Gestionar Resultados");
+        this.setResizable(false);
             cancelarJButton.setText("Cancelar");
             cancelarJButton.setBounds(new Rectangle(320, 260, 110, 30));
             cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -471,8 +477,10 @@ public class GestionarResultados extends JDialog {
     private void jbInitResultadoFinalEmpateNo() throws Exception {
         CerrarVentana();
         this.setSize(new Dimension(596, 348));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Gestionar Resultados");
+        this.setResizable(false);
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(320, 255, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -599,7 +607,7 @@ public class GestionarResultados extends JDialog {
     private void modificarSetJButton_actionPerformed(ActionEvent e) {
         if(tablaDeSetsJTable.getSelectedRow()>-1){
             Vector <String> datos = new Vector <String>();
-        ModificarSet ve = new ModificarSet(tablaDeSetsJTable.getSelectedRow()+1,encuentroSeleccionado.getParticipanteA().getNombre(),encuentroSeleccionado.getParticipanteB().getNombre() , datos, this);
+        ModificarSet ve = new ModificarSet(tablaDeSetsJTable.getSelectedRow()+1,encuentroSeleccionado.getParticipanteA().getNombre(),encuentroSeleccionado.getParticipanteB().getNombre() , datos, this,competenciaActual.getLiga().getEmpate());
         this.setVisible(false);
         ve.setVisible(true);
         }
@@ -666,14 +674,13 @@ public class GestionarResultados extends JDialog {
                     CompetenciaGestor.actualizarEstado(competenciaActual, "En disputa");
                 }
                     
-            System.out.println("Estado Actualizado de la competencia "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
+        //    System.out.println("Estado Actualizado de la competencia "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
                 FixtureGestor.actualizarSubRonda(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getIdSubronda(), competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
-            System.out.println("Ronda Anterior: "+nroRonda+" Ronda Actual: "+nroRonda+1+"Estado R A: "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado()+"Estado Ronda Actual: "+competenciaActual.getFixture().getRondas()[nroRonda+1].getGanadores().getEstado());
+      //      System.out.println("Ronda Anterior: "+nroRonda+" Ronda Actual: "+nroRonda+1+"Estado R A: "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado()+"Estado Ronda Actual: "+competenciaActual.getFixture().getRondas()[nroRonda+1].getGanadores().getEstado());
                 new  ModificarFixture(competenciaActual, usuarioAcatual, nroRonda).setVisible(true);
         }
 
-        //competenciaActual=CompetenciaGestor.reemplazarEncuentro(competenciaActual, encuentroSeleccionado, nroRonda);
-       //TODO SETEAR LA COMPETENCIA CON EL RESULTADO
+        
         
         
 
@@ -750,9 +757,10 @@ public class GestionarResultados extends JDialog {
                                             EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB(),encuentroSeleccionado.getParticipanteA(), "Resultado Final");
                                             return true;
                                         }
-                                        else 
+                                    else {
                                     return false;
                                         //TODO mesaje error no selelos datos
+                                    }
                                     }
                                 }
                         }
@@ -770,8 +778,10 @@ public class GestionarResultados extends JDialog {
                                     return true;
                                 }
                                 else
-                                    return false;
-                                    //TODO mesaje error no selelos datos
+                                {
+                                        return false;
+                                        //TODO mesaje error no selelos datos
+                                }
                                 }
                         }
                     
@@ -797,8 +807,10 @@ public class GestionarResultados extends JDialog {
                                     return true;
                                 }
                                 else
-                            return false;
-                            //TODO mesaje error no selelos datos
+                                {
+                                    return false;
+                                    //TODO mesaje error no selelos datos
+                                }
                         }
                     }
                 }
@@ -823,8 +835,10 @@ public class GestionarResultados extends JDialog {
                                     return true;
                                 }
                                 else
-                                return false;
-                                //TODO mesaje error no selelos datos
+                                {
+                                    return false;
+                                    //TODO mesaje error no selelos datos
+                                }
                             }
                         }
                    

@@ -428,11 +428,7 @@ public class ModificarFixture extends JDialog {
            
          
     }
-    public void setCompetencia(Competencia unaCompetencia) {
-
-        competenciaSeleccionada=unaCompetencia;
-        //TODO Actualizar datos
-    }
+ 
 
  
 }
