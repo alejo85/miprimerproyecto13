@@ -26,7 +26,7 @@ public class InicioDeSistema {
         try {
             Conexion.conectar();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "<html><center><h4>Error al tratar de conectarse con la bd</h4><h5>Verifique su conexión a la red y vuelva a internarlo</h5></center></html>", "Error de conexión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/bd-error.png"));
+            JOptionPane.showMessageDialog(null, "<html><center><h4>Error al tratar de conectarse con la bd</h4><h5>Verifique su conexión a la red y vuelva a intentarlo</h5></center></html>", "Error de conexión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/bd-error.png"));
              System.exit(0);
         }
         Principal ventana = new Principal();
