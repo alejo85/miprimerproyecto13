@@ -250,9 +250,9 @@ public class EncuentroGestor {
                  unEncuentro.setGanador(participanteA);
                 unEncuentro.setPerdedor(participanteB);
         }
-          Stack <Resultados> rsult= new Stack <Resultados>();
-           rsult.add(unResultado);
-        unEncuentro.setResultado(rsult);
+         
+           
+        unEncuentro.setResultado(unResultado);
         unEncuentro.setAsistencia(0);
            try {
                EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);

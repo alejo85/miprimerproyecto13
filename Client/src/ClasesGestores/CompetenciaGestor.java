@@ -398,7 +398,7 @@ public class CompetenciaGestor {
         
         
         Participante[] participantes = competencia.getParticipantes();
-        
+        competencia.setFixture(new Fixture());
         String modalidad = competencia.getModalidad();
         Fixture fixture;
         
@@ -542,6 +542,7 @@ public class CompetenciaGestor {
             unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
             if(unaCompetencia.getFormaDePuntuacion().equals("Sets")){
                     //unaCompetencia.setCantidadDeSets(CompetenciaGestor.getCantidadMaximaDeSets(unaCompetencia.getIdCompetencia()));
+                
             }
             if(unaCompetencia.getModalidad().equals("Liga"))
                 unaCompetencia.setTablaDePosiciones(CompetenciaDB.getTablaDePosiciones(unaCompetencia.getIdCompetencia()));
@@ -628,8 +629,8 @@ public class CompetenciaGestor {
                      competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
                      competencia.getTablaDePosiciones().get(i).setPartidosGanados(competencia.getTablaDePosiciones().get(i).getPartidosGanados()+1);
                     if (competencia.getModalidad().equals("Puntuacion") || competencia.getModalidad().equals("Sets")){
-                        competencia.getTablaDePosiciones().get(i).setTantosAFavor(competencia.getTablaDePosiciones().get(i).getTantosAFavor() + encuentro.getResultado().pop().getPuntosA());
-                        competencia.getTablaDePosiciones().get(i).setTantosEncontra(competencia.getTablaDePosiciones().get(i).getTantosEncontra() + encuentro.getResultado().pop().getPuntosB());
+                        competencia.getTablaDePosiciones().get(i).setTantosAFavor(competencia.getTablaDePosiciones().get(i).getTantosAFavor() + encuentro.getResultado().getPuntosA());
+                        competencia.getTablaDePosiciones().get(i).setTantosEncontra(competencia.getTablaDePosiciones().get(i).getTantosEncontra() + encuentro.getResultado().getPuntosB());
                     }
                     
                     
@@ -649,8 +650,8 @@ public class CompetenciaGestor {
                         competencia.getTablaDePosiciones().get(i).setPuntos(competencia.getTablaDePosiciones().get(i).getPuntos()+ competencia.getLiga().getPuntosPorPartidoGanado()+competencia.getLiga().getPuntosPorPartidoAsistido() );
                         competencia.getTablaDePosiciones().get(i).setPartidosGanados(competencia.getTablaDePosiciones().get(i).getPartidosGanados()+1);
                          if (competencia.getModalidad().equals("Puntuacion") || competencia.getModalidad().equals("Sets")){
-                             competencia.getTablaDePosiciones().get(i).setTantosAFavor(competencia.getTablaDePosiciones().get(i).getTantosAFavor() + encuentro.getResultado().pop().getPuntosB());
-                             competencia.getTablaDePosiciones().get(i).setTantosEncontra(competencia.getTablaDePosiciones().get(i).getTantosEncontra() + encuentro.getResultado().pop().getPuntosA());
+                             competencia.getTablaDePosiciones().get(i).setTantosAFavor(competencia.getTablaDePosiciones().get(i).getTantosAFavor() + encuentro.getResultado().getPuntosB());
+                             competencia.getTablaDePosiciones().get(i).setTantosEncontra(competencia.getTablaDePosiciones().get(i).getTantosEncontra() + encuentro.getResultado().getPuntosA());
                         }   
                     
                 }
