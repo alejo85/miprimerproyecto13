@@ -60,17 +60,17 @@ public class ModificarFixture extends JDialog {
      * @param fixture
      * @param usuario
      */
-    public ModificarFixture(Competencia unaCompetencia,Usuario usuario) {
-        this(null, "", false, unaCompetencia, usuario);
+    public ModificarFixture(Competencia unaCompetencia,Usuario usuario, int nroRonda) {
+        this(null, "", false, unaCompetencia, usuario, nroRonda);
     }
 
-    public ModificarFixture(Frame parent, String title, boolean modal, Competencia unaCompetencia,Usuario usuario) {
+    public ModificarFixture(Frame parent, String title, boolean modal, Competencia unaCompetencia,Usuario usuario, int nroRonda) {
         super(parent, title, modal);
         try {
 
             usuarioAcatual=usuario;
             competenciaSeleccionada=unaCompetencia;
-            
+            this.nroRonda=nroRonda;
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,7 +133,7 @@ public class ModificarFixture extends JDialog {
                 }
             });
         gestionarResultadoJButton.setEnabled(false);
-        cargarRondas(0);
+        cargarRondas(nroRonda);
         cargarFixture(competenciaSeleccionada.getFixture().getRondas());
         anterioprJButton.setText("Anterior");
         anterioprJButton.setBounds(new Rectangle(480, 320, 110, 30));
@@ -200,10 +200,34 @@ public class ModificarFixture extends JDialog {
             {
                     if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getIdParticipante()!=1)
                     {
-                    GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()),nroRonda);
-                    this.setVisible(false);
-                    dispose();
-                    ven.setVisible(true);
+                        if(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()).getGanador()!=null){
+                                if(!getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()).getEmpate())
+                                {
+                                GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()),nroRonda);
+                                this.setVisible(false);
+                                dispose();
+                                ven.setVisible(true);}
+                                else
+                                {
+                                        int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea Modificar el Resultado de este encuentro "+getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()).getParticipanteA().getNombre()+"Vs."+getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()).getParticipanteB().getNombre()+"?", "Cambiar Resultado.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
+                                        if (respuesta == 0){
+                                            GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()),nroRonda);
+                                            this.setVisible(false);
+                                            dispose();
+                                            ven.setVisible(true);
+                                        }
+                                }
+                            }
+                        else
+                        {
+                               
+                                    GestionarResultados ven = new GestionarResultados( competenciaSeleccionada, usuarioAcatual,getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow()),nroRonda);
+                                    this.setVisible(false);
+                                    dispose();
+                                    ven.setVisible(true);
+                                
+                            }
+                        
                     }
                     else{
                         
@@ -280,6 +304,13 @@ public class ModificarFixture extends JDialog {
                                  resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoB()+" ]";
                                  datos.add(""+resultado);
                             }
+                            else
+                                if(encuentrosDeSubRonda[j].getEmpate())
+                                {
+                                    String resultado="";
+                                    resultado+="Empate ";
+                                    datos.add(""+resultado);
+                                }
                                  
                         }
                               
@@ -372,7 +403,8 @@ public class ModificarFixture extends JDialog {
         Ronda[] rondas=competenciaSeleccionada.getFixture().getRondas();
        
         if(rondaAnterior>-1){
-                Subronda sub = rondas[rondaAnterior].getGanadores();
+                Subronda sub = rondas[nroRonda-1].getGanadores();
+                System.out.println("Ronda Anterior: "+rondaAnterior+" Ronda Actual: "+nroRonda+"Estado R A: "+sub.getEstado()+"Estado Ronda Actual: "+rondas[nroRonda].getGanadores().getEstado());
                 if(sub.getEstado())
                 {
                         if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getIdParticipante()!=1)
