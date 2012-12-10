@@ -1,12 +1,8 @@
 package ClasesInterfaz;
 
 
-import ClasesBD.CompetenciaDB;
-import ClasesBD.LigaDB;
-
 import ClasesGestores.CompetenciaGestor;
 import ClasesGestores.DeporteGestor;
-import ClasesGestores.LigaGestor;
 import ClasesGestores.LugaresDeRealizacionGestores;
 
 import ClasesLogicas.Competencia;
@@ -15,7 +11,6 @@ import ClasesLogicas.LugarDeRealizacion;
 import ClasesLogicas.ModeloTabla;
 import ClasesLogicas.Usuario;
 
-import InterfazGrafica.CampoTexto.AreaTextoNombre;
 import InterfazGrafica.CampoTexto.AreaTextoNumerico;
 
 import java.awt.BorderLayout;
@@ -52,7 +47,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
