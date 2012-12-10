@@ -44,7 +44,7 @@ public class CompetenciaDB {
          String consultasql;
          int id;
          consultasql="INSERT INTO puntuacion(tantos_por_ausencia_contrincante, id_competencia) VALUES ('"+punt.getPtosAusencia()+"','"+id_competencia+"')RETURNING id_puntuacion;";
-         System.out.println(consultasql);
+         
         resultado = consulta.executeQuery(consultasql);
   
         resultado.next();
@@ -59,7 +59,7 @@ public class CompetenciaDB {
         String consultasql;
         int id;
         consultasql="INSERT INTO set(cantidad_de_sets,id_competencia) VALUES ('"+set.getCantidadSet()+"','"+id_competencia+"')RETURNING id_set;";
-        System.out.println(consultasql);
+        
         resultado = consulta.executeQuery(consultasql);
         
         resultado.next();
@@ -183,7 +183,7 @@ public class CompetenciaDB {
                                 "','"+competencia.getFormaDePuntuacion()+"', '"+competencia.getEstado()+"','"
                                 +competencia.getUsuarioCreador().getCorreoElectronico()+"', '"+competencia.getDeporte().getIdDeporte()+"', '"
                                     +competencia.getReglamento()+"')RETURNING id_Competencia;";
-                                   System.out.println(consultasql);
+                                   
                                 resultado = consulta.executeQuery(consultasql);
                                    
                                    resultado.next();
@@ -282,7 +282,7 @@ public class CompetenciaDB {
                     "   SET id_participantea='"+encuentros.get(i).getParticipanteA().getIdParticipante()+"', \n" + 
                     "       id_participanteb='"+encuentros.get(i).getParticipanteB().getIdParticipante()+"'\n" + 
                     " WHERE id_encuentro='"+encuentros.get(i).getIdEncuentro()+"' and id_lugar_de_realizacion='"+encuentros.get(i).getLocación().getIdLugar()+"'RETURNING *;";
-                    System.out.println(consultasql);
+                    
                     resultado = Conexion.consulta.executeQuery(consultasql);
                     
                }
@@ -306,7 +306,7 @@ public class CompetenciaDB {
         consultasql="UPDATE competencia\n" + 
         "   SET estado='"+estado+"'\n" + 
         " WHERE id_competencia='"+idCompetencia+"';";
-       // System.out.println(consultasql);
+       // 
         resultado = Conexion.consulta.executeQuery(consultasql);
         
         //conexion.cerrarConexion();
@@ -321,7 +321,7 @@ public class CompetenciaDB {
             
             consultasql="SELECT A.id_competencia, A.id_participante, A.fecha, A.hora, P.id_participante, P.nombre, P.correo, P.imagen\n" + 
             "  FROM participa as A, participante as P where P.nombre='"+nombreDelParticipante+"' and A.id_competencia='"+idCompetencia+"' and A.id_participante=P.id_participante;";
-           // System.out.println(consultasql);
+           // 
            resultado = Conexion.consulta.executeQuery(consultasql);
         
       //  conexion.cerrarConexion();
@@ -366,7 +366,7 @@ public class CompetenciaDB {
         "VALUES ('"+idCompetencia+"', '"+unaPosicion.getPosicion()+"', '"+unaPosicion.getPuntos()+"','"+unaPosicion.getDiferencia()+"'," +
             "'"+unaPosicion.getPartidosGanados()+"','"+unaPosicion.getPartidosEmpatados()+"','"+unaPosicion.getPartidosPerdidos()+"'," +
             "'"+unaPosicion.getTantosAFavor()+"','"+unaPosicion.getTantosEncontra()+"','"+unaPosicion.getParticipante().getIdParticipante()+"')RETURNING id_tabla;";
-        System.out.println(consultasql);
+        
         resultado = Conexion.consulta.executeQuery(consultasql);
         
         resultado.next();
@@ -384,7 +384,7 @@ public class CompetenciaDB {
         
         String consultasql;
         consultasql="DELETE FROM fila_tabla_de_posiciones WHERE id_competencia='"+idCompetencia+"';";
-        System.out.println(consultasql);
+        
 
         try {
             resultado = Conexion.consulta.executeQuery(consultasql);
