@@ -231,14 +231,14 @@ public class ModificarFixture extends JDialog {
                     }
                     else{
                         
-                       participante=(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getNombre();
+                       participante=(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getNombre();
                         
                   }
              
             }
             else{
                 
-               participante=(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getNombre();
+               participante=(getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteB().getNombre();
                 
             }
             
