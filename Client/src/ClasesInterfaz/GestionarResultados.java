@@ -127,7 +127,7 @@ public class GestionarResultados extends JDialog {
 
     }
     private void jbInit() throws Exception {
-        ///////////////////////////////////////////
+       
         CerrarVentana();
         this.setSize(new Dimension(596, 348));
         this.getContentPane().setLayout( null );
@@ -608,7 +608,7 @@ public class GestionarResultados extends JDialog {
     private void cancelarJButton_actionPerformed(ActionEvent e) {
        setVisible(false);
         dispose();
-        new  ModificarFixture(competenciaActual, usuarioAcatual).setVisible(true);
+        new  ModificarFixture(competenciaActual, usuarioAcatual, nroRonda).setVisible(true);
         
        
     }
@@ -649,8 +649,27 @@ public class GestionarResultados extends JDialog {
                 setVisible(false);
                 dispose();
                 competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().setEstado(RondaGestor.actualizarRonda(nroRonda, competenciaActual));
-                FixtureGestor.actualizarSubRonda(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getIdSubronda(), true);
-                new  ModificarFixture(competenciaActual, usuarioAcatual).setVisible(true);
+                if(nroRonda==competenciaActual.getFixture().getRondas().length)
+                {
+                    if(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado())
+                    {
+                        CompetenciaGestor.actualizarEstado(competenciaActual, "Finalizada");
+                        }
+                    else
+                    {
+                            CompetenciaGestor.actualizarEstado(competenciaActual, "En disputa");
+                        }
+                        
+                }
+                else
+                {
+                    CompetenciaGestor.actualizarEstado(competenciaActual, "En disputa");
+                }
+                    
+            System.out.println("Estado Actualizado de la competencia "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
+                FixtureGestor.actualizarSubRonda(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getIdSubronda(), competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
+            System.out.println("Ronda Anterior: "+nroRonda+" Ronda Actual: "+nroRonda+1+"Estado R A: "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado()+"Estado Ronda Actual: "+competenciaActual.getFixture().getRondas()[nroRonda+1].getGanadores().getEstado());
+                new  ModificarFixture(competenciaActual, usuarioAcatual, nroRonda).setVisible(true);
         }
 
         //competenciaActual=CompetenciaGestor.reemplazarEncuentro(competenciaActual, encuentroSeleccionado, nroRonda);
@@ -666,7 +685,7 @@ public class GestionarResultados extends JDialog {
     public void windowClosing(WindowEvent e) {
         setVisible(false);
         dispose();
-       new  ModificarFixture(competenciaActual, usuarioAcatual);
+       new  ModificarFixture(competenciaActual, usuarioAcatual, nroRonda);
         
        
     }
@@ -719,22 +738,22 @@ public class GestionarResultados extends JDialog {
                                     return true;
                                 }
                             else{
-                                    if(resultaoFinalAsistenciaAJRadioButton.isSelected())
+                                    if(ganadorEquipoAJRadioButton.isSelected())
                                     {
                                             EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteA(),encuentroSeleccionado.getParticipanteB(),"Resultado Final");
                                             return true;
                                         }
-                                else
+                                    else
                                     {
-                                    if(resultaoFinalAsistenciaBJRadioButton.isSelected())
+                                    if(ganadorEquipoBJRadioButton.isSelected())
                                     {
                                             EncuentroGestor.ganador(encuentroSeleccionado, encuentroSeleccionado.getParticipanteB(),encuentroSeleccionado.getParticipanteA(), "Resultado Final");
                                             return true;
                                         }
                                         else 
-                                return false;
+                                    return false;
                                         //TODO mesaje error no selelos datos
-                            }
+                                    }
                                 }
                         }
                     else{
