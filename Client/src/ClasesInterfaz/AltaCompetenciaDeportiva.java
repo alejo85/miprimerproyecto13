@@ -394,7 +394,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         panel.setSize(350, 270);
         reglamentoJPanel.setPreferredSize(new Dimension(350,270));
         jScrollPane2.getViewport().add(tablaLugarDisponibilidadJTable, null);
-        panelAlta.add(errorDeLugarSelect, new XYConstraints(70, 305, 675, 40));
+        panelAlta.add(errorDeLugarSelect, new XYConstraints(60, 305, 725, 40));
         panelAlta.add(jScrollPane2, new XYConstraints(485, 165, 270, 135));
         jScrollPane1.getViewport().add(listaLugaresJTable, null);
         panelAlta.add(jScrollPane1, new XYConstraints(50, 165, 245, 140));
