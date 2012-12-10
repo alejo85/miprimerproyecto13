@@ -48,6 +48,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -112,6 +113,7 @@ public class RegistrarUsuario extends JDialog{
         
         //LIMITA CARACTERES
         correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
+        correoElectrónicoJTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK), "none");
         correoElectrónicoJTextArea.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     aceptarJButton_actionPerformed(e);
