@@ -361,8 +361,7 @@ public class VerCompetencia extends JDialog {
             modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
             if(competencia.getFixture()!=null && competencia.getFixture().getIdFixture() != 0)
             {
-                  //  System.out.println("valor del fixture id: "+competencia.getFixture().getIdFixture());
-                //TODO CArgar fixture tabla en la pantalla
+
                     cargarFixture(competencia.getFixture().getRondas());
                 }
             tablaProximosEncuentosJTable.setModel(modelo2);

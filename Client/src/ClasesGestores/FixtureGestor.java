@@ -115,7 +115,7 @@ public class FixtureGestor {
             }
         }
         fixture.cargarParticipantes(locales, visitantes);
-        //TODO Guardar los participantes a la base
+       
     }
     public static Fixture retornarFixture( int idCompetencia){
         

@@ -7,15 +7,18 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class ModificarSet extends JDialog {
@@ -32,18 +35,20 @@ public class ModificarSet extends JDialog {
     private String equipoA;
     private String equipoB;
     private Vector <String> datos;
+    private boolean empate;
 
-    public ModificarSet(int numeroSet, String equipoA, String equipoB, Vector <String> datos, GestionarResultados ven) {
-        this(null, "", false, numeroSet,  equipoA,  equipoB,  datos,  ven);
+    public ModificarSet(int numeroSet, String equipoA, String equipoB, Vector <String> datos, GestionarResultados ven, boolean empate) {
+        this(null, "", false, numeroSet,  equipoA,  equipoB,  datos,  ven, empate);
     }
 
-    public ModificarSet(Frame parent, String title, boolean modal,int numeroSet, String equipoA, String equipoB, Vector <String> datos, GestionarResultados ven) {
+    public ModificarSet(Frame parent, String title, boolean modal,int numeroSet, String equipoA, String equipoB, Vector <String> datos, GestionarResultados ven, boolean empate) {
         super(parent, title, modal);
         this.numeroSet=numeroSet;
         ventanaAnterior= ven;
         this.equipoA=equipoA;
         this.equipoB=equipoB;
         this.datos=datos;
+        this.empate=empate;
        
        
        
@@ -105,12 +110,57 @@ public class ModificarSet extends JDialog {
     private void aceptarJButton_actionPerformed(ActionEvent e) {
         if(puntosEquipoAJTextArea.esCorrecto()&&puntosEquiposBJTextArea.esCorrecto())
         {
-            datos.add(""+numeroSet);
-                datos.add(puntosEquipoAJTextArea.getText());
-                datos.add(puntosEquiposBJTextArea.getText());
-                ventanaAnterior.setDatos(numeroSet, datos);
-                this.setVisible(false);
-                ventanaAnterior.setVisible(true);
+                if(!(Integer.parseInt(puntosEquipoAJTextArea.getText())==Integer.parseInt(puntosEquiposBJTextArea.getText())&&!empate)){
+                        datos.add(""+numeroSet);
+                        datos.add(puntosEquipoAJTextArea.getText());
+                        datos.add(puntosEquiposBJTextArea.getText());
+                        ventanaAnterior.setDatos(numeroSet, datos);
+                        this.setVisible(false);
+                        ventanaAnterior.setVisible(true);
+                    }
+                else
+                {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane pane = new JOptionPane("<html><h4>Esta competencia no permite errores</h4></html>", JOptionPane.ERROR_MESSAGE); 
+                    pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+                    JDialog dialog = pane.createDialog("Errores en los campos");
+                    int altoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // alto de la pantalla
+                    int posicion= this.getLocationOnScreen().y;
+                    int altoVentana= this.getHeight();
+                    
+                    if ((altoPantalla-(posicion+altoVentana) > posicion))
+                    {
+                           dialog.setLocation(getLocationOnScreen().x+50 , getLocationOnScreen().y + getHeight()+10);
+                    }
+                    else
+                    {
+                           dialog.setLocation(getLocationOnScreen().x+50, getLocationOnScreen().y - pane.getHeight()-30);
+                    }
+                    
+                    dialog.setVisible(true);
+                }
+            
             }
+        else
+        {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane pane = new JOptionPane("<html><h4>Los campos no deben ser vacíos</h4></html>", JOptionPane.ERROR_MESSAGE); 
+            pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+            JDialog dialog = pane.createDialog("Errores en los campos");
+            int altoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // alto de la pantalla
+            int posicion= this.getLocationOnScreen().y;
+            int altoVentana= this.getHeight();
+            
+            if ((altoPantalla-(posicion+altoVentana) > posicion))
+            {
+                   dialog.setLocation(getLocationOnScreen().x+50 , getLocationOnScreen().y + getHeight()+10);
+            }
+            else
+            {
+                   dialog.setLocation(getLocationOnScreen().x+50, getLocationOnScreen().y - pane.getHeight()-30);
+            }
+            
+            dialog.setVisible(true);
+        }
     }
 }

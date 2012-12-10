@@ -6,6 +6,13 @@ public class Set {
     public Set() {
         super();
     }
+
+    public Set(int idSet, int cantidadDeSets) {
+        super();
+        this.idSet = idSet;
+        this.cantidadDeSets = cantidadDeSets;
+    }
+
     public void setCantidadSet(int cantidad) {
         this.cantidadDeSets = cantidad;
     }

@@ -26,7 +26,6 @@ public class EncuentroGestor {
     }
 
     /**
-     * todo hacer la descripcion correspondiente
      * @param participanteA
      * @param participanteB
      * @param lugar
@@ -34,18 +33,15 @@ public class EncuentroGestor {
      */
     public Encuentro nuevoEncuentro(Participante participanteA, Participante participanteB, LugarDeRealizacion lugar){
         Encuentro retorno = new Encuentro();
-        //TODO llamar a la base de datos
+     
     
         retorno.setParticipanteA(participanteA);
         retorno.setParticipanteB(participanteB);
         retorno.setLocación(lugar);
         return retorno;}
 
-    /**
-     * @param participante
-     * @return
-     */
-    //TODO no se de donde salio
+
+ 
     public Encuentro actualizaParticipante(Participante participante){
         
         
@@ -101,10 +97,9 @@ public class EncuentroGestor {
                         if(idResultado!=0){
                             retorno.setResultado(ResultadoGestor.getResultado(idResultado));
                             }
-                        //TODO RecuperarResultado
-                      //System.out.println("id_encuentro: "+retorno.getIdEncuentro()+"Participante A: "+retorno.getParticipanteA().getNombre()+"Participante B: "+retorno.getParticipanteB().getNombre());
+                       
                         datos.add(retorno);
-                        System.out.println("terminaalalla");
+
                  
                     }
                     encuentros= new Encuentro[datos.size()];

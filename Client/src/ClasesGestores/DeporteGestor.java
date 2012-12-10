@@ -45,7 +45,7 @@ public class DeporteGestor {
         
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //TODO exepcion de SQL
+            //TODO 
         }
         return listaDeportes;
         }
@@ -75,7 +75,7 @@ public class DeporteGestor {
         
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            //TODO exepcion de SQL
+            //TODO 
         }
         return unDeporte;
         }

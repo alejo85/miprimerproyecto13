@@ -129,7 +129,7 @@ public class RegistrarUsuario extends JDialog{
         });
         correoElectrónicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
        
-        // TODO TRANSFORMAR TODO A MAYUSCULA EN INGRESO DE CORREO
+
         jLabelCorreoElectrónico.setText("Correo electrónico");
         jLabelCorreoElectrónico.setBounds(new Rectangle(15, 20, 135, 25));
         jLabelCorreoElectrónico.setFont(new Font("Tahoma", 0, 13));

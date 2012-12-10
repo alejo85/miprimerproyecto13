@@ -435,7 +435,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     //Metodos
 
      private void listarDeportes() {
-             deporte = buscarDeportes(); //todo ver que devuelve buscarDeportes en clasesBD
+             deporte = buscarDeportes(); 
              deporteJComboBox.addItem("Seleccionar Deporte");
              for(int i=0; i<deporte.size();i++){
              deporteJComboBox.addItem(deporte.get(i).getNombre());

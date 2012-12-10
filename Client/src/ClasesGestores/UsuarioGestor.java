@@ -27,7 +27,7 @@ public class UsuarioGestor {
 
         try {
             UsuarioDB.registrarUsuario(usuario,contraseña);
-        } catch (SQLException e) {//todo xception sql
+        } catch (SQLException e) {//todo
         //System.out.println("Al registrar en la base de datos"+e.getMessage());
         }
         return usuario;

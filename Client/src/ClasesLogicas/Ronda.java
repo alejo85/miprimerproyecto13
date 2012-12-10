@@ -44,12 +44,7 @@ public class Ronda {
         this.ganadores = ganadores;
     }
   
- //todo revisar si esto al final no se usa   
-/*    public void setGanadores (Subronda ganadores){
-        
-        this.ganadores[this.ganadores.length] = ganadores;
-    }
-*/
+ 
     public Subronda getGanadores() {
         return ganadores;
     }

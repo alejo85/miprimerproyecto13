@@ -198,8 +198,7 @@ public class EncuentroDB {
             }
             
             
-            
-        //TODO HACER EL GUARDAR
+         
         }
     public static int guardarEncuentro(Encuentro encuentro, int idSubRonda) throws SQLException {
         
