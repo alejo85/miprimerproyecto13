@@ -340,7 +340,7 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarTablaDePosicionesJButton_actionPerformed(ActionEvent e) {
-        TablaDePosiciones ven = new TablaDePosiciones();
+        TablaDePosiciones ven = new TablaDePosiciones(usuarioActual,competencia);
         dispose();
         ven.setVisible(true);
     }
