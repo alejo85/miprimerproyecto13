@@ -243,7 +243,7 @@ public class VerCompetencia extends JDialog {
         this.getContentPane().add(jScrollPaneParticipante, null);
         jScrollPaneProximoEncuentro.getViewport().add(tablaProximosEncuentosJTable, null);
         this.getContentPane().add(jScrollPaneProximoEncuentro, null);
-        cargarDatos();
+        
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
@@ -267,11 +267,7 @@ public class VerCompetencia extends JDialog {
         dispose();
         ven.setVisible(true);
     }
-    public void setCompetencia(Competencia unaCompetencia) {
 
-        competencia=unaCompetencia;
-        cargarDatos();
-    }
 
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
         int respuesta = JOptionPane.showOptionDialog(this, "<html><h4>¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?</h4></html>", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, new ImageIcon("src/Imagenes/pregunta.png") , new Object[]{"Si", "No"}, "Si");

@@ -192,7 +192,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
             }
         );
         
-        nombreDeLaCompetenciaJTextArea.setNextFocusableComponent(deporteJComboBox);
+       
         jLabelNombreDeLaCompetencia.setText("Nombre De La Competencia");
         jLabelNombreDeLaCompetencia.setFont(new Font("Tahoma", 0, 13));
         jLabelDeporte.setText("Deporte");
@@ -233,7 +233,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         puntosPorPartidoGanadosJTextArea.setBounds(new Rectangle(230, 25, 240, 30));
         puntosPorPartidoGanadosJTextArea.setFont(new Font("Tahoma", 0, 13));
         puntosPorPartidoGanadosJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        puntosPorPartidoGanadosJTextArea.setNextFocusableComponent(empateSiJRadioButton);
+     
         jPanelEmpate.setBounds(new Rectangle(25, 60, 455, 95));
         jPanelEmpate.setLayout(null);
         jPanelEmpate.setBorder(BorderFactory.createTitledBorder("Empate"));

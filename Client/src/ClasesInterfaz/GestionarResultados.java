@@ -655,7 +655,7 @@ public class GestionarResultados extends JDialog {
                 
                 
                 setVisible(false);
-                dispose();
+               
                 competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().setEstado(RondaGestor.actualizarRonda(nroRonda, competenciaActual));
                 if(nroRonda==competenciaActual.getFixture().getRondas().length)
                 {
@@ -674,10 +674,11 @@ public class GestionarResultados extends JDialog {
                     CompetenciaGestor.actualizarEstado(competenciaActual, "En disputa");
                 }
                     
-        //    System.out.println("Estado Actualizado de la competencia "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
+           System.out.println("Estado Actualizado de la competencia "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
                 FixtureGestor.actualizarSubRonda(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getIdSubronda(), competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
-      //      System.out.println("Ronda Anterior: "+nroRonda+" Ronda Actual: "+nroRonda+1+"Estado R A: "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado()+"Estado Ronda Actual: "+competenciaActual.getFixture().getRondas()[nroRonda+1].getGanadores().getEstado());
+        System.out.println("Ronda Anterior: "+nroRonda+" Ronda Actual: "+nroRonda+1+"Estado R A: "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado()+"Estado Ronda Actual: "+competenciaActual.getFixture().getRondas()[nroRonda+1].getGanadores().getEstado());
                 new  ModificarFixture(competenciaActual, usuarioAcatual, nroRonda).setVisible(true);
+            dispose();
         }
 
         
