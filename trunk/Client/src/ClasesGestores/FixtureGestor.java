@@ -27,14 +27,13 @@ public class FixtureGestor {
  
 
  
-    public static Fixture generarFixture(LugarDeRealizacion[] lugares,                   
-        Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
+    public static Fixture generarFixture(Participante[] participantes, int cantidadDeParticipantes, int idCompetencia){
         
         Fixture fixture = new Fixture();
         Ronda rondas[];
         Participante participantesAux[];
         int cantidad = cantidadDeParticipantes;
-        Competencia compe;
+        
            
         //Comienza decisicion para ver si el numero de participantes es impar, y si se debe
         //agregar un participante auxiliar
@@ -52,7 +51,7 @@ public class FixtureGestor {
             
             for (i=0;i<cantidadDeParticipantes-1;i++)
                 participantesAux[i] = participantes[i];
-                        Participante unParticipante = new Participante();//se agrega el participantes auxiliar
+            Participante unParticipante = new Participante();//se agrega el participantes auxiliar
             unParticipante.setIdParticipante(1);
             unParticipante.setNombre("*");
             unParticipante.setCorreo("nada@noexisto.com");
