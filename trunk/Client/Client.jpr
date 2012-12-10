@@ -73,7 +73,7 @@
          <hash n="appcl1">
             <hash n="archiveOptions">
                <value n="hasManifest" v="true"/>
-               <value n="mainClass" v="ClasesLogicas.InicioDeSistema"/>
+               <value n="mainClass" v="ClasesInterfaz.Principal"/>
             </hash>
             <hash n="fileGroups">
                <list n="groups">
@@ -106,9 +106,243 @@
             <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ClientProfile"/>
             <value n="profileName" v="appcl1"/>
          </hash>
+         <hash n="appcl2">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="ClasesLogicas.InicioDeSistema"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="DefaultFilters" v=""/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/appcl2.jar"/>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ClientProfile"/>
+            <value n="profileName" v="appcl2"/>
+         </hash>
+         <hash n="archive1">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="ClasesInterfaz.Principal"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="DefaultFilters" v=""/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/archive1.jar"/>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ArchiveProfile"/>
+            <value n="profileName" v="archive1"/>
+         </hash>
+         <hash n="extension1">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="ClasesInterfaz.Principal"/>
+            </hash>
+            <hash n="exportDefinition">
+               <hash n="contributors"/>
+               <hash n="rules"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="DefaultFilters" v=""/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <hash n="importDefinition">
+               <hash n="contributors"/>
+               <hash n="rules"/>
+            </hash>
+            <url n="jarURL" path="deploy/extension1.jar"/>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdevimpl.extensiondt.deploy.ExtensionProfile"/>
+            <value n="profileName" v="extension1"/>
+            <hash n="requireBundles">
+               <hash n="contributors"/>
+               <hash n="rules"/>
+            </hash>
+         </hash>
+         <hash n="JARPRUEBA">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="ClasesLogicas.InicioDeSistema"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="DefaultFilters" v=""/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/JARPRUEBA.jar"/>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ArchiveProfile"/>
+            <value n="profileName" v="JARPRUEBA"/>
+         </hash>
+         <hash n="prrobandojar">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="ClasesInterfaz.Principal"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="TP"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="DefaultFilters" v=""/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/prrobandojar.jar"/>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ClientProfile"/>
+            <value n="profileName" v="prrobandojar"/>
+         </hash>
+         <hash n="pruebaAle">
+            <hash n="archiveOptions">
+               <value n="hasManifest" v="true"/>
+               <value n="mainClass" v="ClasesLogicas.InicioDeSistema"/>
+            </hash>
+            <hash n="fileGroups">
+               <list n="groups">
+                  <hash>
+                     <list n="contributors">
+                        <hash>
+                           <value n="type" v="2"/>
+                        </hash>
+                        <hash>
+                           <value n="type" v="7"/>
+                        </hash>
+                     </list>
+                     <value n="displayName" v="Project Output"/>
+                     <hash n="filters">
+                        <list n="rules">
+                           <hash>
+                              <value n="DefaultFilters" v=""/>
+                           </hash>
+                        </list>
+                     </hash>
+                     <value n="internalName" v="project-output"/>
+                     <value n="type" v="1"/>
+                  </hash>
+               </list>
+            </hash>
+            <url n="jarURL" path="deploy/pruebaAle.jar"/>
+            <hash n="libraryDependencies">
+               <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+            </hash>
+            <value n="profileClass" v="oracle.jdeveloper.deploy.jar.ArchiveProfile"/>
+            <value n="profileName" v="pruebaAle"/>
+         </hash>
       </hash>
       <list n="profileList">
+         <string v="archive1"/>
          <string v="appcl1"/>
+         <string v="prrobandojar"/>
+         <string v="extension1"/>
+         <string v="JARPRUEBA"/>
+         <string v="appcl2"/>
+         <string v="pruebaAle"/>
       </list>
    </hash>
    <hash n="oracle.jdeveloper.runner.RunConfigurations">
