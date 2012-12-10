@@ -275,7 +275,7 @@ public class VerCompetencia extends JDialog {
     }
 
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
-        int respuesta = JOptionPane.showOptionDialog(this, "¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, null , new Object[]{"Si", "No"}, "Si");
+        int respuesta = JOptionPane.showOptionDialog(this, "<html><h4>¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?</h4></html>", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, new ImageIcon("src/Imagenes/pregunta.png") , new Object[]{"Si", "No"}, "Si");
         if (respuesta == 0){
             if(competencia.getParticipantes().length>=2){
             
@@ -285,14 +285,14 @@ public class VerCompetencia extends JDialog {
                     competencia.setFixture(new Fixture());
                  
                     CompetenciaGestor.generarFixture(competencia);
-                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+"se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+" se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
                     cargarDatos();
                 }
             else
             {
                     CompetenciaGestor.generarFixture(competencia);
                     competencia.setEstado("Planificada");
-                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+"se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+" se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
                     cargarDatos();
                 
                 }
