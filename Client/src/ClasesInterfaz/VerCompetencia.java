@@ -270,32 +270,56 @@ public class VerCompetencia extends JDialog {
 
 
     private void generarFixtureJButton_actionPerformed(ActionEvent e) {
-        int respuesta = JOptionPane.showOptionDialog(this, "<html><h4>¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?</h4></html>", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, new ImageIcon("src/Imagenes/pregunta.png") , new Object[]{"Si", "No"}, "Si");
-        if (respuesta == 0){
-            if(competencia.getParticipantes().length>=2){
-            
-            if(competencia.getFixture()!=null&&competencia.getFixture().getIdFixture()!=0&&(competencia.getEstado().equals("Creada")||competencia.getEstado().equals("Planificada"))){
-                    CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
-                    
-                    CompetenciaGestor.generarFixture(competencia);
-                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+" se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
-                    cargarDatos();
-                }
-            else
-            {
-                    CompetenciaGestor.generarFixture(competencia);
-                    competencia.setEstado("Planificada");
-                    JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+" se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
-                    cargarDatos();
-                
-                }
-            
-        }
-            else{
-                JOptionPane.showMessageDialog(null, "<html><h4>Debes dar de alta participantes para generar el fixture</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
+        int cant_disponibilidad=0;
+        for(int i=0;i<competencia.getLugares().length;i++){
+            cant_disponibilidad=cant_disponibilidad+competencia.getLugares()[i].getDisponibilidad();        
             }
+        if(cant_disponibilidad>=competencia.getParticipantes().length){
+                if(competencia.getEstado().equals("Creada") || competencia.getEstado().equals("Planificada")){
+                    int respuesta = JOptionPane.showOptionDialog(this, "<html><h4>¿Está seguro de que desea generar el fixture de la competencia "+competencia.getNombreCompetencia()+"?</h4></html>", "Generar Fixture.", JOptionPane.ERROR_MESSAGE, JOptionPane.ERROR_MESSAGE, new ImageIcon("src/Imagenes/pregunta.png") , new Object[]{"Si", "No"}, "Si");
+                    // SI ES MODALIDAD SIMPLE O DOBLE NO SE GENERA FIXTURE
+                    if(competencia.getModalidad().equals("Simple") || competencia.getModalidad().equals("Doble")){
+                       JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento para esta modalidad</h4><html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+                    }
+                    // SI ES LIGA SE GENERA
+                    else{
+                            // SI PRESIONO QUE SI QUIERE GENERAR
+                            if (respuesta == 0){
+                                // SI TIENE AL MENOS DOS PARTICIPANTES
+                                if(competencia.getParticipantes().length>=2){
+                                    // SI EXISTIA FIXTURE
+                                    if(competencia.getFixture()!=null && competencia.getFixture().getIdFixture()!=0){
+                                        CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
+                                        CompetenciaGestor.generarFixture(competencia);
+                                        JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+" se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+                                        cargarDatos();
+                                    }
+                                    //SI NO EXISTIA FIXTURE
+                                    else{
+                                            CompetenciaGestor.generarFixture(competencia);
+                                            competencia.setEstado("Planificada");
+                                            JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+" se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
+                                            cargarDatos();
+                                        
+                                        }
+                                
+                                }
+                                //SI NO TIENE AL MENOS DOS PARTICIPANTES
+                                else{
+                                    JOptionPane.showMessageDialog(null, "<html><h4>Debes dar de alta participantes para generar el fixture</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
+                                }
+                                }
+                        }
+                }
+                //SINO ESTA EN ESTADO PLANIFICADA O CREADA
+                else{
+                    JOptionPane.showMessageDialog(null, "<html><h4>No puede generar el fixture de una competencia que se encuentra en "+competencia.getEstado()+"</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/error.png"));
+                }        
         }
-    }
+        else{
+            JOptionPane.showMessageDialog(null, "<html><h4>No cuentas con la disponibilidad minima en lugares de realización</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/error.png"));
+        }
+            }
 
     private void mostrarFixtureJButton_actionPerformed(ActionEvent e) {
         
@@ -311,7 +335,7 @@ public class VerCompetencia extends JDialog {
             Toolkit.getDefaultToolkit().beep();
             JOptionPane pane = new JOptionPane("<html><h4>Primero debe generar el Fixture de la competencia</h4></html>", JOptionPane.ERROR_MESSAGE); 
             pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
-            JDialog dialog = pane.createDialog("Fixture inexistente");
+            JDialog dialog = pane.createDialog("Ver fixture");
             int altoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // ancho de la pantalla
             int posicion= this.getLocationOnScreen().y;
             int altoVentana= this.getHeight();
@@ -333,10 +357,33 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarTablaDePosicionesJButton_actionPerformed(ActionEvent e) {
-
-        TablaDePosiciones ven = new TablaDePosiciones(usuarioActual, competencia, competencia.getTablaDePosiciones());
-        dispose();
-        ven.setVisible(true);
+        System.out.println(competencia.getFixture());
+        if(competencia.getFixture()!=null){
+            TablaDePosiciones ven = new TablaDePosiciones(usuarioActual, competencia, competencia.getTablaDePosiciones());
+            dispose();
+            ven.setVisible(true);
+            }
+        else{
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane pane = new JOptionPane("<html><h4>Primero debe generar el Fixture de la competencia</h4></html>", JOptionPane.ERROR_MESSAGE); 
+            pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
+            JDialog dialog = pane.createDialog("Ver tabla posiciones");
+            int altoPantalla = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // ancho de la pantalla
+            int posicion= this.getLocationOnScreen().y;
+            int altoVentana= this.getHeight();
+            
+            if ((altoPantalla-(posicion+altoVentana) < posicion))
+            {
+                   dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2-pane.getWidth()*1/2 , getLocationOnScreen().y - pane.getHeight()+40);
+            }
+            else
+            {
+                   dialog.setLocation(getLocationOnScreen().x + this.getWidth()*1/2-pane.getWidth()*1/2 , getLocationOnScreen().y + this.getHeight()/2 +pane.getHeight());
+            }
+            
+            dialog.setVisible(true);
+            
+        }
     }
     private void cargarDatos(){
         nombreDeLaCompetenciaJLabel.setText(competencia.getNombreCompetencia());
