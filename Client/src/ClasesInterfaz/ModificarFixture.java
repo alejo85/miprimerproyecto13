@@ -291,17 +291,17 @@ public class ModificarFixture extends JDialog {
                              if(competenciaSeleccionada.getFormaDePuntuacion().equals("Sets"))
                              {
                                  String resultado="";
-                                 for(int h=0; h<encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion().length-1;h++)
+                                 for(int h=0; h<encuentrosDeSubRonda[j].getResultado().getPuntuacion().length-1;h++)
                                  {
-                                     resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[h].getPuntoB()+" ]";
+                                     resultado+="[ "+encuentrosDeSubRonda[j].getResultado().getPuntuacion()[h].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().getPuntuacion()[h].getPuntoB()+" ]";
                                  }
                                  datos.add(""+resultado);
                             }
 
-                            if(competenciaSeleccionada.getFormaDePuntuacion().equals("Puntuación")&&encuentrosDeSubRonda[j].getResultado().size()!=0)
+                            if(competenciaSeleccionada.getFormaDePuntuacion().equals("Puntuación")&&encuentrosDeSubRonda[j].getResultado()!=null)
                             {
                                  String resultado="";
-                                 resultado+="[ "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().get(0).getPuntuacion()[0].getPuntoB()+" ]";
+                                 resultado+="[ "+encuentrosDeSubRonda[j].getResultado().getPuntuacion()[0].getPuntoA()+" - "+encuentrosDeSubRonda[j].getResultado().getPuntuacion()[0].getPuntoB()+" ]";
                                  datos.add(""+resultado);
                             }
                             else

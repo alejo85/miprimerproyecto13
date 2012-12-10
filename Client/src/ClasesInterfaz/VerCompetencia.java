@@ -278,9 +278,9 @@ public class VerCompetencia extends JDialog {
         if (respuesta == 0){
             if(competencia.getParticipantes().length>=2){
             
-            if(competencia.getFixture().getIdFixture()!=0&&(competencia.getEstado().equals("Creada")||competencia.getEstado().equals("Planificada"))){
+            if(competencia.getFixture()!=null&&competencia.getFixture().getIdFixture()!=0&&(competencia.getEstado().equals("Creada")||competencia.getEstado().equals("Planificada"))){
                     CompetenciaGestor.eliminarFixtureDeCompetencia(competencia);
-                    competencia.setFixture(new Fixture());
+                    
                     CompetenciaGestor.generarFixture(competencia);
                     JOptionPane.showMessageDialog(null, "<html><h4>El fixture de "+competencia.getNombreCompetencia()+" se genero exitosamente</h4></html>", "Generar fixture",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/exito.png"));
                     cargarDatos();
