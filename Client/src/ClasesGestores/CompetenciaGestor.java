@@ -398,7 +398,7 @@ public class CompetenciaGestor {
         
         
         Participante[] participantes = competencia.getParticipantes();
-        LugarDeRealizacion[] lugares = competencia.getLugares();
+        
         String modalidad = competencia.getModalidad();
         Fixture fixture;
         
@@ -408,7 +408,7 @@ public class CompetenciaGestor {
         //todo definir EN TODOS LADOS modalidad como Simple y Doble    
         case Liga:
             //System.out.println("antes del gestor Fixture");
-            fixture = FixtureGestor.generarFixture(lugares, participantes, participantes.length, competencia.getIdCompetencia());
+            fixture = FixtureGestor.generarFixture(participantes, participantes.length, competencia.getIdCompetencia());
             competencia.setFixture(fixture);
             CompetenciaDB.guardarFixture( obtenerEncuentros(obtenerSubRondas(competencia)));
 
