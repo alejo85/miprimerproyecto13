@@ -546,7 +546,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
                      errorDeLugarSelect.setVisible(true);
                  }
              else{
-                 JOptionPane.showMessageDialog(null, "<html><h4>Debes seleccionar un lugar de realización y asignar una disponibilidad</h4></html>", "Alta competencia deportiva",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
+                 JOptionPane.showMessageDialog(null, "<html><h4>Debes seleccionar un lugar de realización y asignarle una disponibilidad</h4></html>", "Alta competencia deportiva",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/info.png"));
              }
 
          }
