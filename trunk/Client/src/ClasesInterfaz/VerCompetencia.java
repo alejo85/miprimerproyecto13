@@ -32,7 +32,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -308,7 +307,7 @@ public class VerCompetencia extends JDialog {
         
         if((competencia.getFixture()!=null)&&(competencia.getFixture().getIdFixture())!=0){
         
-            ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual);
+            ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual,Integer.parseInt(tablaProximosEncuentosJTable.getValueAt(0,0).toString())-1);
             dispose();
             ven.setVisible(true);
         }
@@ -340,8 +339,11 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarTablaDePosicionesJButton_actionPerformed(ActionEvent e) {
-        TablaDePosiciones ven = new TablaDePosiciones(usuarioActual,competencia);
-        dispose();
+
+        TablaDePosiciones ven = new TablaDePosiciones(usuarioActual, competencia, competencia.getTablaDePosiciones());
+        this.setVisible(false);
+
+
         ven.setVisible(true);
     }
     private void cargarDatos(){
@@ -384,14 +386,16 @@ public class VerCompetencia extends JDialog {
                 // System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
               for(int j=0;j<encuentrosDeSubRonda.length;j++)
                 {
-                  int aux=i+1;
-                     Vector <String> datos = new Vector <String>();
-                     datos.add(""+aux);
-                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
-                     datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
-                    
-                         
-                     modelo2.addRow(datos);
+                  if(!rondas[i].getGanadores().getEstado())
+                  {    int aux=i+1;
+                             Vector <String> datos = new Vector <String>();
+                             datos.add(""+aux);
+                             datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
+                             datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
+                            
+                                 
+                             modelo2.addRow(datos);
+                  }
                      }
              }
          
@@ -401,8 +405,8 @@ public class VerCompetencia extends JDialog {
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
-        BuscarCompetenciaDeportiva ven = new BuscarCompetenciaDeportiva(usuarioActual);
-        ven.setVisible(true);
+        new BuscarCompetenciaDeportiva(usuarioActual);
+        setVisible(false);
         dispose();
     }
     });
