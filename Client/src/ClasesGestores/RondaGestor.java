@@ -31,7 +31,7 @@ public class RondaGestor {
         Ronda laRonda = new Ronda();
         laRonda.setNumeroDeRonda(numeroRonda);
         laRonda.setGanadores(RondaGestor.generarSubRondaLiga(lugares,cantidadDeEncuentros));
-        //TODO Guardarla en la base
+      
         try {
             laRonda.setIdRonda(FixtureDB.guardarRonda(laRonda,idFixture));
         } catch (SQLException e) {
@@ -49,10 +49,9 @@ public class RondaGestor {
         {
             if(losEncuentros[i].getGanador()!=null )
                 aux++;
-            else{
-            if(losEncuentros[i].getEmpate())
+            if(losEncuentros[i].getEmpate()!=null)
                   aux++;
-            }
+    
           
         }
         if(aux==size)
@@ -172,18 +171,20 @@ public class RondaGestor {
     
     public static Subronda generarSubRondaLiga(LugarDeRealizacion[] lugares,int cantidadDeEncuentros){
         
+        
+        int random;
+        int repeticiones = cantidadDeEncuentros;
         Subronda subronda = new Subronda();
-        try {
+        Encuentro encuentros[] = new Encuentro[cantidadDeEncuentros];
+        LugarDeRealizacion[] lugaresAux = lugares;
+       
+       try {
             subronda.setIdSubronda(FixtureDB.guardarSubronda());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        LugarDeRealizacion[] lugaresAux = lugares;
-      
-        int random;
-        int repeticiones = cantidadDeEncuentros;
-        Encuentro encuentros[] = new Encuentro[cantidadDeEncuentros];
-                
+        
+               
         //todo corregir el diagrama de secuencias!!! 17.1
             
       
@@ -195,10 +196,9 @@ public class RondaGestor {
                 for(int i=0; i < cantidadDeEncuentros; i++){
                     
                    encuentros[i] = EncuentroGestor.crearEncuentro(lugaresAux[random],subronda.getIdSubronda() ); 
-                    lugaresAux[random].menosDisponibilidad();
-                   // System.out.println("Encuentro id: "+encuentros[i].getIdEncuentro());
+                   lugaresAux[random].menosDisponibilidad();
                 }
-              //  System.out.println("Repeticiones: "+repeticiones);
+              
                 repeticiones--;        
             }
    
