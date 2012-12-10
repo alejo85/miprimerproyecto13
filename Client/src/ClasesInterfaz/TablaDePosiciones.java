@@ -1,7 +1,10 @@
 package ClasesInterfaz;
 
 
+import ClasesLogicas.Competencia;
 import ClasesLogicas.Posicion;
+
+import ClasesLogicas.Usuario;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,20 +27,25 @@ public class TablaDePosiciones extends JDialog {
     private JTable tablaDePosicionesJTable = new JTable();
     private JButton cancelarJButton = new JButton();
     private Posicion[] tablaSeleccionada=null;
+    private Usuario usuarioActual=null;
+    private Competencia competenciaActual;
 
 
     /**
      * @param tabla
      */
-    public TablaDePosiciones(Posicion[] tabla) {
-        this(null, "", false,tabla);
+    public TablaDePosiciones(Usuario usuario, Competencia competencia,Posicion[] tabla) {
+        this(null, "", false,usuario,competencia,tabla);
     }
-    public TablaDePosiciones() {
-        this(null, "", false);
+   public TablaDePosiciones(Usuario usuario, Competencia competencia) {
+        this(null, "", false,usuario,competencia,null);
     }
-    public TablaDePosiciones(Frame parent, String title, boolean modal,Posicion[] tabla) {
+
+    public TablaDePosiciones(Frame parent, String title, boolean modal,Usuario usuario, Competencia competencia,Posicion[] tabla) {
         super(parent, title, modal);
         try {
+            usuarioActual=usuario;
+            competenciaActual=competencia;
             tablaSeleccionada=tabla;
             jbInit();
         } catch (Exception e) {
@@ -90,6 +98,8 @@ public class TablaDePosiciones extends JDialog {
     }
 
     private void cancelarJButton_actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        VerCompetencia ven =new VerCompetencia(usuarioActual, competenciaActual);
+        dispose();
+        ven.setVisible(true);
     }
 }
