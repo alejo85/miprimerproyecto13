@@ -32,7 +32,7 @@ public class LigaDB {
             String consultasql="";
             
                 consultasql="SELECT * FROM liga where id_competencia = '"+idCompetencia+"';";
-                System.out.println(consultasql);
+                
                 return Conexion.consulta.executeQuery(consultasql);
                 
              
