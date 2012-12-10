@@ -43,6 +43,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 
 public class AltaParticipante extends JDialog {
@@ -97,6 +98,7 @@ public class AltaParticipante extends JDialog {
         correoElectrónicoJTextArea.setFont(new Font("Tahoma", 0, 13));
         correoElectrónicoJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         correoElectrónicoJTextArea.setDocument(new LimitadorCaracteres(correoElectrónicoJTextArea,40));
+        correoElectrónicoJTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK), "none");
         correoElectrónicoJTextArea.addFocusListener(new FocusAdapter() { 
             public void focusGained(FocusEvent evt) { 
                 correoElectrónicoJTextArea.setForeground(Color.black);
