@@ -26,7 +26,7 @@ public class InicioDeSistema {
         try {
             Conexion.conectar();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "<html><center><h4>Error al tratar de conectarse con la bd<br />Vuelva a intertarlo mas tarde</h4></center></html>", "Error de conexión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/bd-error.png"));
+            JOptionPane.showMessageDialog(null, "<html><center><h4>Error al tratar de conectarse con la bd</h4><h5>Como la aplicación carece de sentido al no establecer la conexión, la misma se cerrará<br />Vuelva a internarlo mas tarde</h5></center></html>", "Error de conexión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/bd-error.png"));
              System.exit(0);
         }
         Principal ventana = new Principal();
