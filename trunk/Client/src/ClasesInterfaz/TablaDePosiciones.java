@@ -78,6 +78,8 @@ public class TablaDePosiciones extends JDialog {
     }
   
     private void jbInit() throws Exception {
+        CerrarVentana();
+        setResizable(false);
         this.setSize(new Dimension(1002, 615));
         this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
@@ -123,16 +125,14 @@ public class TablaDePosiciones extends JDialog {
         VerCompetencia ven =new VerCompetencia(usuarioActual, competenciaActual);
         dispose();
         ven.setVisible(true);
-        new VerCompetencia(usuarioActual, competenciaSeleccionada).setVisible(true);
-        dispose();
     }
+    
     private void CerrarVentana(){
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent e) {
-        setVisible(false);
-        new VerCompetencia(usuarioActual, competenciaSeleccionada);
-
+        VerCompetencia ven =new VerCompetencia(usuarioActual, competenciaActual);
         dispose();
+        ven.setVisible(true);
     }
     });
     }
