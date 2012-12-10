@@ -71,15 +71,15 @@ public class ResultadoGestor {
        
         return unResultado;
     }
-    public static Stack <Resultados> getResultado(int idResultado){
-            Stack <Resultados> resultado=new Stack <Resultados>();
+    public static Resultados getResultado(int idResultado){
+            
             Resultados unResultado = new Resultados();
             unResultado.setIdResultado(idResultado);
             unResultado.setPuntuacion(PuntoGestor.getPuntos(idResultado));
             
             
             
-            return resultado;
+            return unResultado;
         }
 
 
