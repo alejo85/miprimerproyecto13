@@ -265,8 +265,8 @@ public class VerCompetencia extends JDialog {
     private void gestionarParticipantesJButton_actionPerformed(ActionEvent e) {
         ListarParticipantes ven;
         ven = new ListarParticipantes(usuarioActual, competencia);
+        dispose();
         ven.setVisible(true);
-        this.setVisible(false);
     }
     public void setCompetencia(Competencia unaCompetencia) {
 
@@ -309,7 +309,7 @@ public class VerCompetencia extends JDialog {
         if((competencia.getFixture()!=null)&&(competencia.getFixture().getIdFixture())!=0){
         
             ModificarFixture ven = new ModificarFixture(this.competencia, this.usuarioActual);
-            this.setVisible(false);
+            dispose();
             ven.setVisible(true);
         }
         
@@ -341,6 +341,7 @@ public class VerCompetencia extends JDialog {
 
     private void mostrarTablaDePosicionesJButton_actionPerformed(ActionEvent e) {
         TablaDePosiciones ven = new TablaDePosiciones();
+        dispose();
         ven.setVisible(true);
     }
     private void cargarDatos(){
