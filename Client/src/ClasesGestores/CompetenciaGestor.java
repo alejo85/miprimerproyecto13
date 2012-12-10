@@ -2,7 +2,6 @@ package ClasesGestores;
 
 
 import ClasesBD.CompetenciaDB;
-
 import ClasesBD.LigaDB;
 
 import ClasesLogicas.Competencia;
@@ -437,7 +436,7 @@ public class CompetenciaGestor {
     }
     public static void actualizarEstado(ClasesLogicas.Competencia competencia, String estado){
         
-        
+        competencia.setEstado(estado);
 
 
             try {
