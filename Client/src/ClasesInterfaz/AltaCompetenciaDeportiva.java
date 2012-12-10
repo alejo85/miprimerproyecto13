@@ -24,6 +24,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -179,6 +181,15 @@ public class AltaCompetenciaDeportiva extends JDialog {
                 nombreDeLaCompetenciaJTextArea.setBackground(Color.white);
                 nombreDeLaCompetenciaJTextArea.setForeground(Color.black);
                 } });
+        // TRANSFORMA EN MAYUSCULA
+         nombreDeLaCompetenciaJTextArea.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z'){
+                     e.setKeyChar((char)(((int)e.getKeyChar()) - 32));
+                }
+                }
+            }
+        );
         
         nombreDeLaCompetenciaJTextArea.setNextFocusableComponent(deporteJComboBox);
         jLabelNombreDeLaCompetencia.setText("Nombre De La Competencia");
