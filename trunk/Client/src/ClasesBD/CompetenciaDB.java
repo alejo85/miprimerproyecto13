@@ -393,7 +393,17 @@ public class CompetenciaDB {
         }
     }
     
-    
+    public static ResultSet buscandoSets(int idcompetencia) throws SQLException {
+        ResultSet resultado=null;
+        Statement consulta = Conexion.consultar();
+        String consultasql;
+        int id;
+        consultasql="SELECT * FROM set where id_competencia='+"+idcompetencia+"';";
+        
+        resultado = consulta.executeQuery(consultasql);
+        return resultado;
+    }
+
     
     
 }

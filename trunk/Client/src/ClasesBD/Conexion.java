@@ -17,7 +17,7 @@ public class Conexion
     {
 
 
-        conexion = DriverManager.getConnection("jdbc:postgresql://192.168.0.101:5432/TP?user=postgres&password=Publica123");
+        conexion = DriverManager.getConnection("jdbc:postgresql://192.168.0.100:5432/TP?user=postgres&password=Publica123");
         consulta = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
     }
