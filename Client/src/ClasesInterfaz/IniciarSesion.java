@@ -12,6 +12,7 @@ import ClasesInterfaz.Central;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Image;
@@ -22,6 +23,7 @@ import java.awt.event.ActionListener;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -43,6 +45,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.JTextComponent;
 
 
 public class IniciarSesion extends JDialog {
@@ -103,6 +108,7 @@ public class IniciarSesion extends JDialog {
             });
         correoElectronicoJTextArea.setDocument(new LimitadorCaracteres(correoElectronicoJTextArea,40));
         correoElectronicoJTextArea.addFocusListener(new FocusAdapter() { public void focusGained(FocusEvent evt) { reescribir(evt); } });
+        correoElectronicoJTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK), "none");
         
         // TRANSFORMA EN MAYUSCULA
          correoElectronicoJTextArea.addKeyListener(new KeyAdapter(){
@@ -110,9 +116,10 @@ public class IniciarSesion extends JDialog {
                 if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z'){
                      e.setKeyChar((char)(((int)e.getKeyChar()) - 32));
                 }
+                }
             }
-        });
-         
+        );
+
          
         // CONTRASEÑA TEXTO Y CAMPO
         jLabelContraseña.setText("Contraseña");
