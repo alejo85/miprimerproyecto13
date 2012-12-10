@@ -88,17 +88,18 @@ public class EncuentroDB {
                 {
                         if(encuentro.getAsistencia()==0)
                         {
-                                Stack <Resultados> rsult= encuentro.getResultado();
+                               
                                 
-                                    int idResultado =(ResultadodB.guardarResultado( encuentro.getResultado().get(0), dias, horas));
-                                rsult.get(0).setIdResultado(idResultado);
-                                encuentro.setResultado(rsult);
+                                    int idResultado =(ResultadodB.guardarResultado( encuentro.getResultado(), dias, horas));
+                             
+                                encuentro.getResultado().setIdResultado(idResultado);
+                               
                                 encuentro.setHoraResultado(horas);
                                 encuentro.setFechaResultado(dias);
-                                    for(int i=0;i<encuentro.getResultado().get(0).getPuntuacion().length;i++){
-                                        Puntos unPuntos[]= encuentro.getResultado().get(0).getPuntuacion();
-                                        int idResultado3 =encuentro.getResultado().get(0).getIdResultado();
-                                            encuentro.getResultado().get(0).getPuntuacion()[i]=PuntoGestor.crearPunto(unPuntos[i],idResultado3 );
+                                    for(int i=0;i<encuentro.getResultado().getPuntuacion().length;i++){
+                                        Puntos unPuntos[]= encuentro.getResultado().getPuntuacion();
+                                        int idResultado3 =encuentro.getResultado().getIdResultado();
+                                            encuentro.getResultado().getPuntuacion()[i]=PuntoGestor.crearPunto(unPuntos[i],idResultado3 );
                                         }
                                
                             
@@ -141,16 +142,16 @@ public class EncuentroDB {
                 {
                         if(encuentro.getAsistencia()==0)
                         {
-                                Stack <Resultados> rsult= encuentro.getResultado();
-                                int idResultado =(ResultadodB.guardarResultado( encuentro.getResultado().get(0), dias, horas));
-                                rsult.get(0).setIdResultado(idResultado);
-                                encuentro.setResultado(rsult);
+                                
+                                int idResultado =(ResultadodB.guardarResultado( encuentro.getResultado(), dias, horas));
+                               
+                                encuentro.getResultado().setIdResultado(idResultado);
                                 encuentro.setHoraResultado(horas);
                                 encuentro.setFechaResultado(dias);
-                                for(int i=0;i<encuentro.getResultado().get(0).getPuntuacion().length;i++){
-                                    Puntos unPuntos[]= encuentro.getResultado().get(0).getPuntuacion();
-                                    int idResultado3 =encuentro.getResultado().get(0).getIdResultado();
-                                        encuentro.getResultado().get(0).getPuntuacion()[i]=PuntoGestor.crearPunto(unPuntos[i],idResultado3 );
+                                for(int i=0;i<encuentro.getResultado().getPuntuacion().length;i++){
+                                    Puntos unPuntos[]= encuentro.getResultado().getPuntuacion();
+                                    int idResultado3 =encuentro.getResultado().getIdResultado();
+                                        encuentro.getResultado().getPuntuacion()[i]=PuntoGestor.crearPunto(unPuntos[i],idResultado3 );
                                     }
                                 if(encuentro.getEmpate())
                                 {
