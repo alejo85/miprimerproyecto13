@@ -14,7 +14,7 @@ public class Encuentro {
     private String horaResultado;
     private String fechaResultado;
 
-    private Stack <Resultados> resultado;
+    private Resultados resultado;
     private LugarDeRealizacion locación;
     
 
@@ -26,7 +26,7 @@ public class Encuentro {
 
 
     public Encuentro(Participante participanteA, Participante participanteB, Participante ganador,
-                     Participante perdedor, Boolean empate, Stack<Resultados> resultado, LugarDeRealizacion locación) {
+                     Participante perdedor, Boolean empate, Resultados resultado, LugarDeRealizacion locación) {
         super();
         this.participanteA = participanteA;
         this.participanteB = participanteB;
@@ -44,7 +44,7 @@ public class Encuentro {
 
     public Encuentro(Integer idEncuentro, Participante participanteA, Participante participanteB, Participante ganador,
                      Participante perdedor, Boolean empate, int asistencia, String horaResultado,
-                     String fechaResultado, Stack<Resultados> resultado, LugarDeRealizacion locación) {
+                     String fechaResultado, Resultados resultado, LugarDeRealizacion locación) {
         super();
         this.idEncuentro = idEncuentro;
         this.participanteA = participanteA;
@@ -92,10 +92,10 @@ public class Encuentro {
 
             int puntosA=0;
             int puntosB=0;
-            for(int i=0; i<this.resultado.pop().getPuntuacion().length;i++)
+            for(int i=0; i<this.resultado.getPuntuacion().length;i++)
             {
-                    puntosA+=this.resultado.pop().getPuntuacion()[i].getPuntoA();
-                    puntosB+=this.resultado.pop().getPuntuacion()[i].getPuntoB();
+                    puntosA+=this.resultado.getPuntuacion()[i].getPuntoA();
+                    puntosB+=this.resultado.getPuntuacion()[i].getPuntoB();
                 }
             if(puntosA==puntosB)
             {
@@ -137,16 +137,10 @@ public class Encuentro {
         return empate;
     }
 
-    public void setResultado(Stack<Resultados> resultado) {
+    public void setResultado(Resultados resultado) {
         this.resultado = resultado;
     }
-    public void setResultado(Resultados resultado) {
-        this.resultado.push(resultado);
-    }
-    public Stack<Resultados> getResultado() {
-        
-        return resultado;
-    }
+
 
     public void setLocación(LugarDeRealizacion locación) {
         this.locación = locación;
@@ -160,8 +154,7 @@ public class Encuentro {
      * @param resultado
      */
     public void asignaResultado(Resultados resultado){
-        this.resultado= new Stack <Resultados>();
-            this.resultado.add(resultado);
+        this.resultado = resultado;
             
         }
 
@@ -187,5 +180,9 @@ public class Encuentro {
 
     public String getFechaResultado() {
         return fechaResultado;
+    }
+
+    public Resultados getResultado() {
+        return resultado;
     }
 }
