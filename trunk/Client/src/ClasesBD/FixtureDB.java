@@ -77,7 +77,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="INSERT INTO ronda(numeroronda, id_subronda_ganadores, id_fixture)VALUES ('"+ronda.getNumeroDeRonda()+"', '"+ronda.getGanadores().getIdSubronda()+"', '"+idFixture+"')RETURNING id_ronda;";
-            //System.out.println(consultasql);
+            //
             resultado = Conexion.consulta.executeQuery(consultasql);
             resultado.next();
            // System.out.println("despues del next id_ronda");
@@ -96,7 +96,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="SELECT id_ronda, numeroronda, id_subronda_ganadores, id_subronda_perdedores, id_fixture FROM ronda where id_fixture='"+idFixture+"' ;";
-            System.out.println(consultasql);
+            
             resultado = Conexion.consulta.executeQuery(consultasql);
             //conexion.cerrarConexion();
             return resultado;
@@ -112,7 +112,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="SELECT id_subronda, estado FROM subronda where id_subronda='"+idSubRonda+"';";
-            System.out.println(consultasql);
+            
             resultado = consulta.executeQuery(consultasql); 
             //conexion.cerrarConexion();
             return resultado;
@@ -128,7 +128,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="DELETE FROM ronda WHERE id_fixture='"+idFixture+"';";
-       //    System.out.println(consultasql);
+       //    
             consulta.executeUpdate(consultasql);
            // conexion.cerrarConexion();
             
@@ -144,7 +144,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="DELETE FROM subronda WHERE id_subronda='"+idSubRonda+"';";
-       //    System.out.println(consultasql);
+       //    
             consulta.executeUpdate(consultasql);
             //conexion.cerrarConexion();
             
@@ -160,7 +160,7 @@ public class FixtureDB {
             String consultasql;
             
             consultasql="DELETE FROM fixture WHERE id_fixture='"+idFixture+"';";
-       //    System.out.println(consultasql);
+       //    
             consulta.executeUpdate(consultasql);
            // conexion.cerrarConexion();
             
