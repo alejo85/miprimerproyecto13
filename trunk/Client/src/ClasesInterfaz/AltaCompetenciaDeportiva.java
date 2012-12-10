@@ -47,6 +47,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
@@ -175,7 +176,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
           });
         nombreDeLaCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreDeLaCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
+        nombreDeLaCompetenciaJTextArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_V, ActionEvent.CTRL_MASK), "none");
         nombreDeLaCompetenciaJTextArea.addFocusListener(new FocusAdapter() { 
             public void focusGained(FocusEvent evt) {          
                 nombreDeLaCompetenciaJTextArea.setBackground(Color.white);
