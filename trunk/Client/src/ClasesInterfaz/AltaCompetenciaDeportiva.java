@@ -27,6 +27,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -64,6 +66,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
     private JScrollPane jScrollPane1 = new JScrollPane();
     private ModeloTabla modelo = new ModeloTabla(new String[] { "Lugar De Realizacion" }, 0);
     private ModeloTabla modelo2 = new ModeloTabla(new String[] { "Lugar De Realizacion","Disponibilidad" }, 0);
+    private ModeloTabla modelo1 = new ModeloTabla(new String[] { "Lugar De Realizacion" }, 0);
     private JTextField nombreDeLaCompetenciaJTextArea = new JTextField();
     private DefaultListModel listModel = new DefaultListModel();
     private JLabel jLabelNombreDeLaCompetencia = new JLabel();
@@ -177,6 +180,12 @@ public class AltaCompetenciaDeportiva extends JDialog {
         nombreDeLaCompetenciaJTextArea.setFont(new Font("Tahoma", 0, 13));
         nombreDeLaCompetenciaJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        nombreDeLaCompetenciaJTextArea.addFocusListener(new FocusAdapter() { 
+            public void focusGained(FocusEvent evt) {          
+                nombreDeLaCompetenciaJTextArea.setBackground(Color.white);
+                nombreDeLaCompetenciaJTextArea.setForeground(Color.black);
+                } });
+        
         nombreDeLaCompetenciaJTextArea.setNextFocusableComponent(deporteJComboBox);
         jLabelNombreDeLaCompetencia.setText("Nombre De La Competencia");
         jLabelNombreDeLaCompetencia.setFont(new Font("Tahoma", 0, 13));
@@ -298,6 +307,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
                     quitarJButton_actionPerformed(e);
                 }
             });
+        quitarJButton.setEnabled(false);
         disponibilidadJTextArea.setFont(new Font("Tahoma", 0, 13));
         disponibilidadJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
         disponibilidadJTextArea.addActionListener(new ActionListener() {
@@ -305,6 +315,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
                     agregarJButton_actionPerformed(e);
                 }
             });
+        disponibilidadJTextArea.addFocusListener(new FocusAdapter() { 
+            public void focusGained(FocusEvent evt) {          
+                disponibilidadJTextArea.setBackground(Color.white);
+                disponibilidadJTextArea.setForeground(Color.black);
+                } });
         jLabelDisponibilidad.setText("Disponibilidad");
         jLabelDisponibilidad.setFont(new Font("Tahoma", 0, 13));
         
@@ -313,6 +328,7 @@ public class AltaCompetenciaDeportiva extends JDialog {
         
         agregarJButton.setText("Agregar");
         agregarJButton.setFont(new Font("Tahoma", 0, 13));
+        agregarJButton.setEnabled(false);
         agregarJButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     agregarJButton_actionPerformed(e);
@@ -442,8 +458,9 @@ public class AltaCompetenciaDeportiva extends JDialog {
          }
 
          private void formaDePuntuaciónJComboBox_actionPerformed(ActionEvent e) {
-             formaDePuntuaciónJComboBox.setBackground(background);
-             formaDePuntuaciónJComboBox.setForeground(foreground);
+             
+             formaDePuntuaciónJComboBox.setBackground(Color.white);
+             formaDePuntuaciónJComboBox.setForeground(Color.black);
              if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets"))
 
              {
@@ -463,15 +480,23 @@ public class AltaCompetenciaDeportiva extends JDialog {
 
         // SI SE SELECCIONA UN DEPORTE
          private void deporteJComboBox_actionPerformed(ActionEvent e) {
-             deporteJComboBox.setBackground(background);
-             deporteJComboBox.setForeground(foreground);
+             deporteJComboBox.setBackground(Color.white);
+             deporteJComboBox.setForeground(Color.black);
              listaLugaresJTable();
              
              if(deporteJComboBox.getSelectedIndex()>0){
+                 agregarJButton.setEnabled(true);
+                 quitarJButton.setEnabled(true);
                  if(lugaresSeleccionados.size()>0){
                      deporteJComboBox.setEnabled(false);
                  }
                  cargarLugaresDeRealizacion();
+             }
+             else{
+                 agregarJButton.setEnabled(false);
+                 quitarJButton.setEnabled(false);
+                 modelo1 = new ModeloTabla(new String[] { "Lugar De Realizacion" }, 0);
+                 listaLugaresJTable.setModel(modelo1);
              }
          }
          
@@ -485,7 +510,6 @@ public class AltaCompetenciaDeportiva extends JDialog {
              
              try {
                  lugares = LugaresDeRealizacionGestores.lugaresDeRealizaciónAsociadosAlDeporte(ussuarioActual.getCorreoElectronico(),codigo );
-                 System.out.println("Tamaño lugares despues de buscar:"+lugares.size());
                  cargarLugares();
                 removerSelecionados();
              }
@@ -574,24 +598,31 @@ public class AltaCompetenciaDeportiva extends JDialog {
          private Boolean datosValidosRegistro(){
              String errores="";
 
-              /* if(nombreDeLaCompetenciaJTextArea.getText().equals("")){
-                   this.nombreDeLaCompetenciaJTextArea.error();
-                   errores=errores +"\n        Nombre de la Competencia Vacio";
-               }*/
-              try {
-                  if(CompetenciaGestor.validarNombreDeCompetencia(nombreDeLaCompetenciaJTextArea.getText(), ussuarioActual.getCorreoElectronico())){
-                      errores= "<li>El nombre de la competencia esta en uso</li>";
-                  }
-              } catch (SQLException e) {
-                  System.out.println(e.getMessage());
-              }
-             if(this.deporteJComboBox.getSelectedIndex()<1){
+               if(nombreDeLaCompetenciaJTextArea.getText().equals("")){
+                   errores="<li>Nombre competencia vacío </li>";
+                   nombreDeLaCompetenciaJTextArea.setForeground(Color.white);
+                      nombreDeLaCompetenciaJTextArea.setBackground(Color.red);
+               }
+            
+                else
+            try {
+                if(CompetenciaGestor.validarNombreDeCompetencia(nombreDeLaCompetenciaJTextArea.getText(), ussuarioActual.getCorreoElectronico())){
+                      errores= "<li>Nombre de la competencia en uso</li>";
+                      nombreDeLaCompetenciaJTextArea.setForeground(Color.white);
+                         nombreDeLaCompetenciaJTextArea.setBackground(Color.red);
+                }
+            } catch (SQLException e) {
+            }
+
+        if(this.deporteJComboBox.getSelectedIndex()<1){
                  errores=errores + "<li>Debe seleccionar un deporte</li>";
                  deporteJComboBox.setBackground(Color.red);
                  deporteJComboBox.setForeground(Color.white);
+                 disponibilidadJTextArea.setBackground(Color.red);
+                 disponibilidadJTextArea.setForeground(Color.white);
              }
-             if(this.lugaresSeleccionados.size()<1){
-                 errores=errores + "<li>Debe seleccionar un lugar <br/>de realización</li>";
+             else if(this.lugaresSeleccionados.size()<1){
+                 errores=errores + "<li>Debe seleccionar un lugar de realización</li>";
                  listaLugaresJTable.setBackground(Color.red);
                  listaLugaresJTable.setForeground(Color.white);
              }
@@ -604,17 +635,17 @@ public class AltaCompetenciaDeportiva extends JDialog {
                  if(this.modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")){
                          if(puntosPorPartidoGanadosJTextArea.getText().equals("")){
                              this.puntosPorPartidoGanadosJTextArea.error();
-                             errores=errores +"<li>Puntos por partido ganados no<br/> puede ser vacío</li>";
+                             errores=errores +"<li>Puntos por partido ganados vacío</li>";
                          }
                      if(empate){
                          if(puntosPorPartidoEmpatadoJTextArea.getText().equals("")){
                              this.puntosPorPartidoEmpatadoJTextArea.error();
-                             errores=errores +"<li>Puntos por partido empatados<br/> no puede ser Vacío</li>";
+                             errores=errores +"<li>Puntos por partido empatados vacío</li>";
                          }
                      }
                      if(puntosPorPartidoAsistidoJTextArea.getText().equals("")){
                          this.puntosPorPartidoAsistidoJTextArea.error();
-                         errores=errores +"<li>Puntos por partido asistido <br/>no puede ser vacío</li>";
+                         errores=errores +"<li>Puntos por partido asistido vacío</li>";
                      }
                 
                  }
@@ -628,19 +659,19 @@ public class AltaCompetenciaDeportiva extends JDialog {
                      if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")){
                              if(tantosPorPartidosGanadosJTextArea.getText().equals("")){
                                  this.tantosPorPartidosGanadosJTextArea.error();
-                                 errores=errores +"<li>Tantos por partidos ganados no puede ser Vacio<li>";
+                                 errores=errores +"<li>Tantos por partidos ganados vacío<li>";
                              }
                      }
                      if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets")){
                          if(cantidadMaximaDeSetsJTextArea.getText().equals("")){
                              this.cantidadMaximaDeSetsJTextArea.error();
-                             errores=errores +"<li>La Cantidad de Set no puede ser Vacio</li>";
+                             errores=errores +"<li>Cantidad de Set vacío</li>";
                          }
                      }
                  }
              if(errores.length()>0){
                  Toolkit.getDefaultToolkit().beep();
-                 JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores:</h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
+                 JOptionPane pane = new JOptionPane("<html><h3>Tienes los siguientes errores: </h3><ul>"+errores+"</ul></html>", JOptionPane.ERROR_MESSAGE);  
                  JDialog dialog = pane.createDialog("Errores en los campos");
                  pane.setIcon(new ImageIcon("src/Imagenes/error.png"));
                  
@@ -706,12 +737,6 @@ public class AltaCompetenciaDeportiva extends JDialog {
             }
                  
                  
-               System.out.println("Nombre: "+nuevaCompetencia.getNombreCompetencia()); 
-               System.out.println("Deporte: "+nuevaCompetencia.getDeporte().getNombre()); 
-               System.out.println("ID "+nuevaCompetencia.getIdCompetencia()); 
-               System.out.println("Forma de puntuacion "+nuevaCompetencia.getFormaDePuntuacion()); 
-                // System.out.println("LIGA DATOS "+nuevaCompetencia.getLiga().getEmpate() + nuevaCompetencia.getLiga().getPuntosPorPartidoAsistido()); 
-                 
                  setVisible(false);
                  JOptionPane.showMessageDialog(null, "La competencia se ha creado con éxito", "Alta competencia deportiva",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("classes/Imagenes/exito.png"));
                  ListarParticipantes ven;
@@ -745,7 +770,8 @@ public class AltaCompetenciaDeportiva extends JDialog {
              this.dispose();
          }
     private void modalidadJComboBox_actionPerformed(ActionEvent e) {
-
+        modalidadJComboBox.setBackground(Color.white);
+        modalidadJComboBox.setForeground(Color.black);
         if (modalidadJComboBox.getSelectedItem().equals("Sistema de Liga")) {
             modalidadLigaJPanel.setVisible(true);
         }
