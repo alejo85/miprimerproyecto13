@@ -466,16 +466,17 @@ public class AltaCompetenciaDeportiva extends JDialog {
              
              formaDePuntuaciónJComboBox.setBackground(Color.white);
              formaDePuntuaciónJComboBox.setForeground(Color.black);
-             if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets"))
-
-             {
-
-                 jPanelFormaDePuntuaciónSet.setVisible(true);
+             if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Sets")){
+                jPanelFormaDePuntuaciónSet.setVisible(true);
                  formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
              } else if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Puntuación")) {
                  jPanelFormaDePuntuaciónSet.setVisible(false);
                  formaDePuntuaciónPuntuaciónJPanel.setVisible(true);
              } else if (formaDePuntuaciónJComboBox.getSelectedItem().equals("Resultado Final")) {
+                 jPanelFormaDePuntuaciónSet.setVisible(false);
+                 formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
+             }
+             else{
                  jPanelFormaDePuntuaciónSet.setVisible(false);
                  formaDePuntuaciónPuntuaciónJPanel.setVisible(false);
              }
