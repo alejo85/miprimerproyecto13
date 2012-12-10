@@ -10,6 +10,9 @@ import ClasesInterfaz.Principal;
 
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 
 public class InicioDeSistema {
    
@@ -23,6 +26,8 @@ public class InicioDeSistema {
         try {
             Conexion.conectar();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "<html><center><h4>Error al tratar de conectarse con la bd<br />Vuelva a intertarlo mas tarde</h4></center></html>", "Error de conexión",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/bd-error.png"));
+             System.exit(0);
         }
         Principal ventana = new Principal();
         
