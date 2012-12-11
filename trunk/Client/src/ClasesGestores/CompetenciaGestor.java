@@ -722,6 +722,7 @@ public class CompetenciaGestor {
             actualizarPosicion(tabla.get(i));
             posicion++;
         }
+        tabla=getTablaDePosicion(idCompetencia);
     }
     public static Vector <Posicion> getTablaDePosicion( int idCompetencia){
             Vector <Posicion> vector = new Vector <Posicion>();

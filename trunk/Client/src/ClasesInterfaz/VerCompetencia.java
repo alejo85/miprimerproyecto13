@@ -418,24 +418,21 @@ public class VerCompetencia extends JDialog {
      */
      public void cargarFixture(Ronda [] rondas){
          
-         for(int i=0; i<rondas.length;i++ ){
-                 Subronda sub = rondas[i].getGanadores();
-                 Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
-                // System.out.println("Valor de I: "+i+" id de subrondas: "+sub.getIdSubronda()+"numero de ronda"+rondas[i].getNumeroDeRonda());
-              for(int j=0;j<encuentrosDeSubRonda.length;j++)
-                {
-                  if(!rondas[i].getGanadores().getEstado())
-                  {    int aux=i+1;
-                             Vector <String> datos = new Vector <String>();
-                             datos.add(""+aux);
-                             datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
-                             datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
-                            
-                                 
-                             modelo2.addRow(datos);
-                  }
-                     }
-             }
+        for(int i=0; i<rondas.length;i++ )
+        {
+            Subronda sub = rondas[i].getGanadores();
+            Encuentro[] encuentrosDeSubRonda=sub.getEncuentros();
+ 
+            for(int j=0;j<encuentrosDeSubRonda.length;j++)
+            {
+                int aux=i+1;
+                Vector <String> datos = new Vector <String>();
+                datos.add(""+aux);
+                datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteA().getNombre());
+                datos.add(rondas[i].getGanadores().getEncuentros()[j].getParticipanteB().getNombre());
+                modelo2.addRow(datos);
+            }
+        }
          
         
      }

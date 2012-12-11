@@ -48,10 +48,23 @@ public class RondaGestor {
         for(int i =0;i<losEncuentros.length ;i++)
         {
             if(losEncuentros[i].getGanador()!=null )
+            {
                 aux++;
+            }
             else{
-            if(losEncuentros[i].getEmpate()!=null)
-                  aux++;
+                if(losEncuentros[i].getEmpate())
+                      aux++;
+                }
+            if(losEncuentros[i].getParticipanteA().getIdParticipante()==1)
+            {
+                    aux++;
+            }
+            else
+            {
+                if(losEncuentros[i].getParticipanteB().getIdParticipante()==1)
+                {
+                    aux++;
+                }
             }
           
         }

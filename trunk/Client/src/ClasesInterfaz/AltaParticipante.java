@@ -224,6 +224,7 @@ public class AltaParticipante extends JDialog {
             Participante unParticipante =  ParticipanteGestor.agregarParticipante(nombreParticipanteJTextArea.getText(), correoElectrónicoJTextArea.getText(), competenciaSeleccionada);
             // SE AGREGA EL PARTICIPANTE AL OBJETO COMPETENCIA LUEGO DE HABERLO INSERTADO EN LA BD
             competenciaSeleccionada.agregarParticipante(unParticipante);
+            
             dispose();
             ListarParticipantes ven;
             ven = new ListarParticipantes(usuarioActual, competenciaSeleccionada);

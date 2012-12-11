@@ -282,7 +282,7 @@ public class CompetenciaDB {
  
     }
     
-    public static void actualizarEstado (int idCompetencia, String estado) throws SQLException {
+    public static void actualizarEstado(int idCompetencia, String estado) throws SQLException {
         
         //Conexion conexion = new Conexion();
         ResultSet resultado=null;
