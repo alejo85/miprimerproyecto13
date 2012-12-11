@@ -82,30 +82,16 @@ public class CompetenciaDB {
                 
           return resultado;
           }
-    public static Vector<Posicion> getTablaDePosiciones(int idCompetencia) throws SQLException {
+    public static ResultSet getTablaDePosiciones(int idCompetencia) throws SQLException {
         
-        Vector <Posicion> vector = new Vector <Posicion>();
         Statement consulta = Conexion.consultar();
         String consultasql="";
-        consultasql="SELECT * FROM fila_tabla_de_posiciones where id_Competencia='"+idCompetencia+"';";
+        consultasql=
+            "SELECT *" + 
+            "  FROM fila_tabla_de_posiciones " + 
+            "where id_competencia='"+idCompetencia+"' ORDER BY puntos DESC, diferencia DESC,  tantos_a_favor DESC;";
         ResultSet resultado = consulta.executeQuery(consultasql);
-        while(resultado.next()){
-           Posicion unaPosicion = new Posicion();
-           unaPosicion.setIdTabla(resultado.getInt("id_tabla"));
-           unaPosicion.setPosicion(resultado.getInt("posicion"));
-           unaPosicion.setPuntos(resultado.getInt("puntos"));
-           unaPosicion.setPartidosGanados(resultado.getInt("pg"));
-           unaPosicion.setPartidosPerdidos(resultado.getInt("pp"));
-           unaPosicion.setPartidosEmpatados(resultado.getInt("pe"));
-           unaPosicion.setTantosAFavor(resultado.getInt("tantos_a_favor"));
-           unaPosicion.setTantosEncontra(resultado.getInt("tantos_en_contra"));
-           unaPosicion.setDiferencia(resultado.getInt("diferencia"));
-           unaPosicion.setParticipante(ParticipanteGestor.instanciarUnParticipante(resultado.getInt("id_participante")));
-           vector.add(unaPosicion);      
-            
-        }
-                
-        return vector;
+        return resultado;
     }
     
     
@@ -374,7 +360,7 @@ public class CompetenciaDB {
         
         
     }
-    
+        
     
     
     public static void eliminarPosiciones(int idCompetencia) {
@@ -392,7 +378,22 @@ public class CompetenciaDB {
             System.out.println(e.getMessage());
         }
     }
-    
+    public static void actualizarPosicion(Posicion unaPosicion) throws SQLException {
+        
+        
+        ResultSet resultado=null;
+        
+        String consultasql;
+        consultasql="UPDATE fila_tabla_de_posiciones"+
+                    " SET posicion='"+unaPosicion.getPosicion()+"'"+
+                    " WHERE id_tabla='"+unaPosicion.getIdTabla()+"'"+
+                    "RETURNING *;";
+        
+        resultado = Conexion.consulta.executeQuery(consultasql);
+
+        
+        
+    }
     public static ResultSet buscandoSets(int idCompetencia) throws SQLException {
         ResultSet resultado=null;
         Statement consulta = Conexion.consultar();
