@@ -18,7 +18,7 @@ public class ResultadodB {
         String consultasql;
             consultasql="INSERT INTO resultado( fecha, hora)\n" + 
             "    VALUES ('"+ fecha+"','"+ hora+"')RETURNING id_resultado;";
-            //System.out.println(consultasql);
+      
             resultado = reglamento.executeQuery(consultasql);
             resultado.next();
             return resultado.getInt("id_resultado");
@@ -29,19 +29,19 @@ public class ResultadodB {
             Statement retornoEmpate = Conexion.consultar();
             Statement consulta = Conexion.consultar();
             //conexion.conectar();
-            //  System.out.println("llega conecta conexion");
+          
             String consultasql;
             int id=0;
           
-                            //System.out.println(competencia.getModalidad());
+                            
                             consultasql="INSERT INTO punto(punto_a, punto_b, id_resultado)VALUES ( '"+unPunto.getPuntoA()+"', '"+unPunto.getPuntoB()+"', '"+idResultado+"')RETURNING id_punto;";
-                            //System.out.println(consultasql);
+                            
                             resultado = reglamento.executeQuery(consultasql);
                  
     
-            //System.out.println("sale al regla no null");
+          
             resultado.next();
-            //System.out.println("despues del next");
+           
             id = resultado.getInt("id_punto");
             return id;
         }

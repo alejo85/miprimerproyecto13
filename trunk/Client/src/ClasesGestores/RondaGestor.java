@@ -93,10 +93,10 @@ public class RondaGestor {
                 unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
                 unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
                 unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores")));
-               // System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
+               
 
                 datos.add(unaRonda);
-                //System.out.println("valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
+             
                 h++;
             } 
         laRonda= new Ronda[datos.size()];
@@ -104,7 +104,7 @@ public class RondaGestor {
                 
                 laRonda[j]=datos.get(j);
                 //laRonda[j].setNumeroDeRonda(j+1);
-               // System.out.println("valor de jota"+j+"Valor de numero de ronda"+datos.get(j).getNumeroDeRonda()+"valor en la ronda: "+laRonda[j].getNumeroDeRonda());
+               
             }
     } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -125,10 +125,10 @@ public class RondaGestor {
                 unaRonda.setIdRonda(busqueda.getInt("id_ronda"));
                 unaRonda.setNumeroDeRonda(busqueda.getInt("numeroronda"));
                 unaRonda.setGanadores(getSubRondas(busqueda.getInt("id_subronda_ganadores")));
-                System.out.println("valor de la ronda:       "+unaRonda.getNumeroDeRonda());
+                
 
                 datos.add(unaRonda);
-                System.out.println(""+h+"   valor de la ronda:       "+datos.get(h).getNumeroDeRonda());
+               
                 h++;
                 
             } 
@@ -153,14 +153,14 @@ public class RondaGestor {
                 unaRonda.setIdSubronda(idSubRonda);
                 unaRonda.setEstado(busqueda.getBoolean("estado"));
                 Encuentro[] encuentrosDeSubRonda =EncuentroGestor.encuentrosDeSubRonda(idSubRonda );
-               // System.out.println("lonitud de  encuentros de la base: "+encuentrosDeSubRonda.length);
+               
             unaRonda.setEncuentros(encuentrosDeSubRonda);
    
             
             }
             
        
-            //System.out.println("Id SUbRonda"+unaRonda.getIdSubronda());
+            
         return unaRonda;
         }
     public void estadoRonda(){}

@@ -58,7 +58,6 @@ public class Central extends JFrame {
     public Central() {
           
         this.usuarioActual=null;
-
         try {
             jbInit();
         } catch (Exception e) {

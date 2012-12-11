@@ -251,7 +251,7 @@ public class CompetenciaDB {
      * @param competencia
      */
     public static void guardarFixture(Vector<Encuentro> encuentros){
-       // System.out.println("antes del guardar el fixture!!!");
+    
         //Conexion conexion = new Conexion();
         ResultSet resultado=null;
         /*try {
@@ -312,12 +312,12 @@ public class CompetenciaDB {
         
       //  conexion.cerrarConexion();
             if(resultado.next()){
-               // System.out.println(false);
+              
                 return false;
                 
             }
             else{
-              //  System.out.println(true);
+             
                 return true;
             }
         
