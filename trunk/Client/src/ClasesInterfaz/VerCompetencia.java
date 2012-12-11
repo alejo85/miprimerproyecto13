@@ -404,13 +404,13 @@ public class VerCompetencia extends JDialog {
             modelo2 =  new ModeloTabla(new String[] { "Fecha/Ronda Nº", "Equipo A", "Equipo B" }, 0);
             if(competencia.getFixture()!=null && competencia.getFixture().getIdFixture() != 0)
             {
-
-                    cargarFixture(competencia.getFixture().getRondas());
+                cargarFixture(competencia.getFixture().getRondas());
                 }
             tablaProximosEncuentosJTable.setModel(modelo2);
             // ORDENAR SEGUN COLUMNA SELECCIONADA
             TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo2);
             tablaProximosEncuentosJTable.setRowSorter(elQueOrdena);
+
         }
 
     /**

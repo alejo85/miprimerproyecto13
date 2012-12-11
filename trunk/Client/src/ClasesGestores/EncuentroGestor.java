@@ -162,10 +162,16 @@ public class EncuentroGestor {
     /**
      * @param participanteGanador
      */
-    public static void ganador(Encuentro unEncuentro,Participante participanteGanador, Participante participantePerdedor, String modalidad){
+    
+    // GANADOR PARA RESULTADO FINAL
+    public static void ganador(Encuentro unEncuentro,Participante participanteGanador, Participante participantePerdedor, String modalidad, int asistencia){
+        System.out.println("resultado final");
         unEncuentro.setGanador(participanteGanador);
         unEncuentro.setPerdedor(participantePerdedor);
-        unEncuentro.setAsistencia(0);
+        unEncuentro.setAsistencia(asistencia);
+        System.out.println("asistencia: "+unEncuentro.getAsistencia());
+         System.out.println("GANADOR: "+unEncuentro.getGanador().getNombre());
+        System.out.println("PERDEDOR: "+unEncuentro.getPerdedor().getNombre());
         try {
             EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
         } catch (SQLException e) {
@@ -199,8 +205,6 @@ public class EncuentroGestor {
      */
     public static void ganadorEmpate(Encuentro unEncuentro, String modalidad){
         unEncuentro.setEmpate(true);
-        
-        
         try {
             EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
         } catch (SQLException e) {
@@ -240,29 +244,38 @@ public class EncuentroGestor {
      * @param puntoB
      */
     public static void ganador(Encuentro unEncuentro, Participante participanteA,Participante participanteB,int  puntoA,int  puntoB, String modalidad){
-        Puntos unPunto = new Puntos();
-        unPunto.setPuntoA(puntoA);
-        unPunto.setPuntoB(puntoB);
-        Resultados unResultado = new Resultados();
-        unResultado.setPuntuacion(unPunto);
-     
-        
-        
-        if (puntoA==puntoB)
-            unEncuentro.setEmpate(true);
-        else
-        if(puntoA<puntoB){
-                 unEncuentro.setGanador(participanteB);
-                unEncuentro.setPerdedor(participanteA);
-        }
-        else{
-                 unEncuentro.setGanador(participanteA);
-                unEncuentro.setPerdedor(participanteB);
-        }
-         
-           
-        unEncuentro.setResultado(unResultado);
         unEncuentro.setAsistencia(0);
+        Resultados unResultado = new Resultados();
+        //NUEVO PUNTO
+        Puntos unPunto = new Puntos();
+        // SETEAR PUNTOA 
+        unPunto.setPuntoA(puntoA);
+        // SETEAR PUNTOB
+        unPunto.setPuntoB(puntoB);
+        // SETEAMOS PUNTO DENTRO DE RESULTADO
+        unResultado.setPuntuacion(unPunto);
+        // SETEAMOS EL RESULTADO EN EL ENCUENTRO
+        unEncuentro.setResultado(unResultado);
+   
+        if (puntoA==puntoB){
+                System.out.println("entre empate");
+                unEncuentro.setEmpate(true);
+        }
+            else if(puntoA<puntoB){
+                System.out.println("entra ptos b mayor que a");
+                    unEncuentro.setGanador(participanteB);
+                    unEncuentro.setPerdedor(participanteA);
+            }
+            else{
+                System.out.println("entra ptos a mayor q b");
+                    unEncuentro.setGanador(participanteA);
+                    unEncuentro.setPerdedor(participanteB);
+            }
+
+           System.out.println("COMPETENCIA MODALIDAD PUNTOS");
+           System.out.println("asistencia: "+unEncuentro.getAsistencia());
+            System.out.println("GANADOR: "+unEncuentro.getGanador().getNombre());
+           System.out.println("PERDEDOR: "+unEncuentro.getPerdedor().getNombre());
            try {
                EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
            } catch (SQLException e) {
@@ -271,13 +284,11 @@ public class EncuentroGestor {
         
        }
     public static void unGanador(Encuentro unEncuentro, Participante participanteGanador,Participante participantePerdedor,  int asistencia, String modalidad ){
-
- 
-                 unEncuentro.setGanador(participanteGanador);
-
-                 unEncuentro.setPerdedor(participantePerdedor);
-
-        unEncuentro.setAsistencia(asistencia);
+           
+            unEncuentro.setGanador(participanteGanador);
+            unEncuentro.setPerdedor(participantePerdedor);
+            unEncuentro.setAsistencia(asistencia);
+           System.out.println("Se presento solo: "+unEncuentro.getGanador().getNombre() );
            try {
                EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
            } catch (SQLException e) {
