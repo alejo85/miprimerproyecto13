@@ -35,7 +35,7 @@ public class ExcelTableExporter {
                 
                     for (int i = 0; i < table.getColumnCount(); i++) {
                         for (int j = 0; j < table.getRowCount(); j++) {
-                            Object objeto = table.getTableHeader().getColumnModel().getColumn(0).getHeaderValue().toString();  
+                            Object objeto = table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString();  
                             s.addCell(new Label(i, j, String.valueOf(objeto)));
                         }
                     }
