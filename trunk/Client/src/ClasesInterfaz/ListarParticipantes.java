@@ -165,11 +165,11 @@ public class ListarParticipantes extends JDialog {
     }
 
     private void modificarParticipanteJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Modificar participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+        JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento</h4></html>", "Modificar participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
 
     private void eliminarPrticipanteJButton_actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Funcionalidad no disponible por el momento", "Eliminar participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
+        JOptionPane.showMessageDialog(null, "<html><h4>Funcionalidad no disponible por el momento</h4></html>", "Eliminar participante",JOptionPane.INFORMATION_MESSAGE, new ImageIcon("src/Imagenes/en_construccion.png"));
     }
     private void cargarParticipantes(){
            
