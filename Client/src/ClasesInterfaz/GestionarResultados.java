@@ -75,6 +75,9 @@ public class GestionarResultados extends JDialog {
     private JRadioButton resultaoFinalAsistenciaAJRadioButton = new JRadioButton();
     private JRadioButton resultaoFinalAsistenciaBJRadioButton = new JRadioButton();
     private JRadioButton resultaoFinalAsistenciaAmbosJRadioButton = new JRadioButton();
+    private FlowLayout flowLayout2 = new FlowLayout();
+    private FlowLayout flowLayout3 = new FlowLayout();
+    private FlowLayout flowLayout4 = new FlowLayout();
 
 
     public GestionarResultados(Competencia competenciaSeleccionada, Usuario usuario , Encuentro encuentro, int ronda) {
@@ -127,14 +130,14 @@ public class GestionarResultados extends JDialog {
 
     }
     private void jbInit() throws Exception {
-       
         CerrarVentana();
-        this.setSize(new Dimension(596, 348));
+        this.setSize(new Dimension(578, 578));
+        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Gestionar Resultados");
-        
+        this.setResizable(false);
         cancelarJButton.setText("Cancelar");
-        cancelarJButton.setBounds(new Rectangle(320, 255, 110, 30));
+        cancelarJButton.setBounds(new Rectangle(340, 460, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
         cancelarJButton.setSize(new Dimension(110, 30));
         cancelarJButton.addActionListener(new ActionListener() {
@@ -143,73 +146,59 @@ public class GestionarResultados extends JDialog {
             }
         });
         aceptarJButton.setText("Aceptar");
-        aceptarJButton.setBounds(new Rectangle(130, 255, 110, 30));
+        aceptarJButton.setBounds(new Rectangle(110, 460, 110, 30));
         aceptarJButton.setFont(new Font("Tahoma", 0, 13));
-        
         aceptarJButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-         aceptarJButton_actionPerformed(e);
-        }
-        });
-        equipoAJLabel.setBounds(new Rectangle(50, 25, 135, 25));
-        equipoAJLabel.setFont(new Font("Tahoma", 0, 13));
-
-        equipoBJLabel.setBounds(new Rectangle(390, 25, 135, 25));
-        equipoBJLabel.setFont(new Font("Tahoma", 0, 13));
-        resultadoFinalJPanel.setBounds(new Rectangle(50, 140, 475, 90));
-        resultadoFinalJPanel.setLayout(null);
-        resultadoFinalAsistenciaJPanel.setBounds(new Rectangle(50, 30, 475, 90));
-        resultadoFinalAsistenciaJPanel.setLayout(flowLayout1);
-        resultadoFinalAsistenciaJPanel.setBorder(BorderFactory.createTitledBorder("Asistencia De Participantes"));
-        resultaoFinalAsistenciaAJRadioButton.setText("Presente: "+encuentroSeleccionado.getParticipanteA().getNombre());
-        resultaoFinalAsistenciaAJRadioButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    resultaoFinalAsistenciaAJRadioButton_actionPerformed(e);
-                }
-            });
-        resultaoFinalAsistenciaBJRadioButton.setText("Presente: "+encuentroSeleccionado.getParticipanteB().getNombre());
-        resultaoFinalAsistenciaBJRadioButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    resultaoFinalAsistenciaBJRadioButton_actionPerformed(e);
-                }
-            });
-        resultaoFinalAsistenciaAmbosJRadioButton.setText("Presente: Ambos");
-        resultaoFinalAsistenciaAmbosJRadioButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    resultaoFinalAsistenciaAmbosJRadioButton_actionPerformed(e);
-                }
-            });
-        resultadoFinalJPanel.setBorder(BorderFactory.createTitledBorder("Resultado Final"));
-        resultadoFinalJPanel.setVisible(false);
-        ganadorEquipoAJRadioButton.setText("Ganador "+encuentroSeleccionado.getParticipanteA().getNombre());
-        ganadorEquipoAJRadioButton.setBounds(new Rectangle(30, 30, 130, 20));
-        ganadorEquipoAJRadioButton.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 aceptarJButton_actionPerformed(e);
+             }
+         });
+        setsJPanel.setBounds(new Rectangle(110, 155, 340, 265));
+        asistenciaSetsJPanel.setBorder(BorderFactory.createTitledBorder("Asistencia"));
+        setsJPanel.setLayout(null);
+        setsJPanel.setBorder(BorderFactory.createTitledBorder("Sets"));
+        jScrollPane1.setBounds(new Rectangle(15, 25, 170, 220));
+        modificarSetJButton.setText("Modificar");
+        modificarSetJButton.setBounds(new Rectangle(215, 80, 110, 30));
+        modificarSetJButton.setFont(new Font("Tahoma", 0, 13));
+        modificarSetJButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ganadorEquipoAJRadioButton_actionPerformed(e);
+                modificarSetJButton_actionPerformed(e);
             }
         });
-        ganadorEquipoBJRadioButton.setText("Ganador "+encuentroSeleccionado.getParticipanteB().getNombre());
-        ganadorEquipoBJRadioButton.setBounds(new Rectangle(290, 30, 135, 20));
-        ganadorEquipoBJRadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ganadorEquipoBJRadioButton_actionPerformed(e);
-            }
-        });
-        resultadoFinalJPanel.add(ganadorEquipoAJRadioButton, null);
-        resultadoFinalJPanel.add(ganadorEquipoBJRadioButton, null);
-        resultadoFinalAsistenciaJPanel.add(resultaoFinalAsistenciaAJRadioButton, null);
-        resultadoFinalAsistenciaJPanel.add(resultaoFinalAsistenciaBJRadioButton, null);
-        resultadoFinalAsistenciaJPanel.add(resultaoFinalAsistenciaAmbosJRadioButton, null);
-        this.getContentPane().add(resultadoFinalAsistenciaJPanel, null);
-        this.getContentPane().add(resultadoFinalJPanel, null);
-        this.getContentPane().add(equipoBJLabel, null);
-        this.getContentPane().add(equipoAJLabel, null);
 
-
+        tablaDeSetsJTable.setModel(modeloDeTablaDeSets);
+        asistenciaSetsJPanel.setBounds(new Rectangle(110, 65, 335, 60));
+        equipoASetJRadioButton.setText(encuentroSeleccionado.getParticipanteA().getNombre());
+        equipoASetJRadioButton.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 equipoASetJRadioButton_actionPerformed(e);
+             }
+         });
+        setsJPanel.setVisible(false);
+        equipoBSetJRadioButton.setText(encuentroSeleccionado.getParticipanteB().getNombre());
+        equipoBSetJRadioButton.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 equipoBSetJRadioButton_actionPerformed(e);
+             }
+         });
+        equipoAmbosSetJRadioButton.setText("Ambos");
+        equipoAmbosSetJRadioButton.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 equipoAmbosSetJRadioButton_actionPerformed(e);
+             }
+         });
+        jScrollPane1.getViewport().add(tablaDeSetsJTable, null);
+        setsJPanel.add(jScrollPane1, null);
+        setsJPanel.add(modificarSetJButton, null);
+        asistenciaSetsJPanel.add(equipoASetJRadioButton, null);
+        asistenciaSetsJPanel.add(equipoBSetJRadioButton, null);
+        asistenciaSetsJPanel.add(equipoAmbosSetJRadioButton, null);
+        this.getContentPane().add(asistenciaSetsJPanel, null);
+        this.getContentPane().add(setsJPanel, null);
         this.getContentPane().add(aceptarJButton, null);
         this.getContentPane().add(cancelarJButton, null);
         cargarDatos();
-
         
        
 
@@ -294,7 +283,7 @@ public class GestionarResultados extends JDialog {
     }
     private void jbInitPuntuacion() throws Exception {
            CerrarVentana();
-       this.setSize(new Dimension(543, 486));
+           this.setSize(new Dimension(543, 486));
            this.setLocationRelativeTo(null);
                this.getContentPane().setLayout( null );
                this.setTitle("Gestionar Resultados");
@@ -315,19 +304,19 @@ public class GestionarResultados extends JDialog {
                        aceptarJButton_actionPerformed(e);
                    }
                });
-       puntuacionJPanel.setBounds(new Rectangle(80, 95, 370, 260));
+           puntuacionJPanel.setBounds(new Rectangle(80, 95, 370, 260));
                puntuacionJPanel.setLayout(null);
                puntuacionJPanel.setBorder(BorderFactory.createTitledBorder("Puntuación"));
 
                equipoAJLabel.setBounds(new Rectangle(85, 50, 135, 25));
                equipoAJLabel.setFont(new Font("Tahoma", 0, 13));
-    
+           
                equipoBJLabel.setBounds(new Rectangle(310, 50, 135, 25));
                equipoBJLabel.setFont(new Font("Tahoma", 0, 13));
-               jLabelPuntosEquipoB.setText("Puntos Equipo B");
+               jLabelPuntosEquipoB.setText("Puntos "+encuentroSeleccionado.getParticipanteA().getNombre());
                jLabelPuntosEquipoB.setBounds(new Rectangle(210, 170, 135, 25));
                jLabelPuntosEquipoB.setFont(new Font("Tahoma", 0, 13));
-               jLabelPuntosEquipoA.setText("Puntos Equipo A");
+               jLabelPuntosEquipoA.setText("Puntos "+encuentroSeleccionado.getParticipanteB().getNombre());
                jLabelPuntosEquipoA.setBounds(new Rectangle(15, 170, 135, 25));
                jLabelPuntosEquipoA.setFont(new Font("Tahoma", 0, 13));
                puntosEquipoAJTextArea.setBounds(new Rectangle(10, 200, 130, 30));
@@ -336,48 +325,45 @@ public class GestionarResultados extends JDialog {
                puntosEquipoBJTextArea.setBounds(new Rectangle(190, 200, 130, 30));
                puntosEquipoBJTextArea.setFont(new Font("Tahoma", 0, 13));
                puntosEquipoBJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-       equipoPresenteJPanel.setBounds(new Rectangle(20, 45, 330, 90));
-               equipoPresenteJPanel.setLayout(null);
+           equipoPresenteJPanel.setBounds(new Rectangle(20, 45, 330, 90));
+               equipoPresenteJPanel.setLayout(flowLayout4);
                equipoPresenteJPanel.setBorder(BorderFactory.createTitledBorder("Equipo Presente"));
-               presenteEquipoBJRadioButton.setText("Equipo B");
-               presenteEquipoBJRadioButton.setBounds(new Rectangle(115, 35, 80, 20));
-               presenteEquipoBJRadioButton.addActionListener(new ActionListener() {
+               presenteEquipoBJRadioButton.setText("Equipo "+encuentroSeleccionado.getParticipanteB().getNombre());
+           presenteEquipoBJRadioButton.addActionListener(new ActionListener() {
                        public void actionPerformed(ActionEvent e) {
                            presenteEquipoBJRadioButton_actionPerformed(e);
                        }
                    });
                presenteEquipoAmbosJRadioButton.setText("Ambos");
-               presenteEquipoAmbosJRadioButton.setBounds(new Rectangle(220, 35, 90, 20));
-               presenteEquipoAmbosJRadioButton.addActionListener(new ActionListener() {
+           presenteEquipoAmbosJRadioButton.addActionListener(new ActionListener() {
                        public void actionPerformed(ActionEvent e) {
                            presenteEquipoAmbosJRadioButton_actionPerformed(e);
                        }
                    });
-               presenteEquipoAJRadioButton.setText("Equipo A");
-               presenteEquipoAJRadioButton.setBounds(new Rectangle(5, 35, 95, 20));
-               presenteEquipoAJRadioButton.addActionListener(new ActionListener() {
+               presenteEquipoAJRadioButton.setText("Equipo "+encuentroSeleccionado.getParticipanteA().getNombre());
+           presenteEquipoAJRadioButton.addActionListener(new ActionListener() {
                        public void actionPerformed(ActionEvent e) {
                            presenteEquipoAJRadioButton_actionPerformed(e);
                        }
                    });
-       jLabelPuntosEquipoA.setVisible(false);
+           jLabelPuntosEquipoA.setVisible(false);
                jLabelPuntosEquipoB.setVisible(false);
                puntosEquipoAJTextArea.setVisible(false);
                puntosEquipoBJTextArea.setVisible(false);
-       this.getContentPane().add(equipoBJLabel, null);
-       this.getContentPane().add(equipoAJLabel, null);
-       this.getContentPane().add(puntuacionJPanel, null);
-       this.getContentPane().add(aceptarJButton, null);
-       this.getContentPane().add(cancelarJButton, null);
-       equipoPresenteJPanel.add(presenteEquipoAJRadioButton, null);
-       equipoPresenteJPanel.add(presenteEquipoBJRadioButton, null);
-       equipoPresenteJPanel.add(presenteEquipoAmbosJRadioButton, null);
-       puntuacionJPanel.add(equipoPresenteJPanel, null);
-       puntuacionJPanel.add(jLabelPuntosEquipoA, null);
-       puntuacionJPanel.add(jLabelPuntosEquipoB, null);
-       puntuacionJPanel.add(puntosEquipoAJTextArea, null);
-       puntuacionJPanel.add(puntosEquipoBJTextArea, null);
-        
+           this.getContentPane().add(equipoBJLabel, null);
+           this.getContentPane().add(equipoAJLabel, null);
+           this.getContentPane().add(puntuacionJPanel, null);
+           this.getContentPane().add(aceptarJButton, null);
+           this.getContentPane().add(cancelarJButton, null);
+           equipoPresenteJPanel.add(presenteEquipoAJRadioButton, null);
+           equipoPresenteJPanel.add(presenteEquipoBJRadioButton, null);
+           equipoPresenteJPanel.add(presenteEquipoAmbosJRadioButton, null);
+           puntuacionJPanel.add(equipoPresenteJPanel, null);
+           puntuacionJPanel.add(jLabelPuntosEquipoA, null);
+           puntuacionJPanel.add(jLabelPuntosEquipoB, null);
+           puntuacionJPanel.add(puntosEquipoAJTextArea, null);
+           puntuacionJPanel.add(puntosEquipoBJTextArea, null);
+           
            cargarDatos();
        }
 
@@ -412,12 +398,11 @@ public class GestionarResultados extends JDialog {
             equipoBJLabel.setBounds(new Rectangle(390, 25, 135, 25));
             equipoBJLabel.setFont(new Font("Tahoma", 0, 13));
         resultadoFinalJPanel.setBounds(new Rectangle(50, 145, 475, 90));
-            resultadoFinalJPanel.setLayout(null);
+            resultadoFinalJPanel.setLayout(flowLayout3);
             resultadoFinalJPanel.setBorder(BorderFactory.createTitledBorder("Resultado Final"));
             empateJRadioButton.setText("Empate");
-            empateJRadioButton.setBounds(new Rectangle(175, 30, 90, 20));
-        
-            empateJRadioButton.addActionListener(new ActionListener() {
+
+        empateJRadioButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         empateJRadioButton_actionPerformed(e);
                     }
@@ -445,15 +430,13 @@ public class GestionarResultados extends JDialog {
              }
          });
         ganadorEquipoAJRadioButton.setText("Ganador "+encuentroSeleccionado.getParticipanteA().getNombre());
-            ganadorEquipoAJRadioButton.setBounds(new Rectangle(30, 30, 130, 20));
-            ganadorEquipoAJRadioButton.addActionListener(new ActionListener() {
+        ganadorEquipoAJRadioButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         ganadorEquipoAJRadioButton_actionPerformed(e);
                     }
                 });
             ganadorEquipoBJRadioButton.setText("Ganador "+encuentroSeleccionado.getParticipanteB().getNombre());
-            ganadorEquipoBJRadioButton.setBounds(new Rectangle(290, 30, 135, 20));
-            ganadorEquipoBJRadioButton.addActionListener(new ActionListener() {
+        ganadorEquipoBJRadioButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         ganadorEquipoBJRadioButton_actionPerformed(e);
                     }
@@ -473,14 +456,14 @@ public class GestionarResultados extends JDialog {
         this.getContentPane().add(aceptarJButton, null);
         this.getContentPane().add(cancelarJButton, null);
         cargarDatos();
+        
     }
     private void jbInitResultadoFinalEmpateNo() throws Exception {
         CerrarVentana();
         this.setSize(new Dimension(596, 348));
-        this.setLocationRelativeTo(null);
         this.getContentPane().setLayout( null );
         this.setTitle("Gestionar Resultados");
-        this.setResizable(false);
+        
         cancelarJButton.setText("Cancelar");
         cancelarJButton.setBounds(new Rectangle(320, 255, 110, 30));
         cancelarJButton.setFont(new Font("Tahoma", 0, 13));
@@ -505,7 +488,7 @@ public class GestionarResultados extends JDialog {
         equipoBJLabel.setBounds(new Rectangle(390, 25, 135, 25));
         equipoBJLabel.setFont(new Font("Tahoma", 0, 13));
         resultadoFinalJPanel.setBounds(new Rectangle(50, 140, 475, 90));
-        resultadoFinalJPanel.setLayout(null);
+        resultadoFinalJPanel.setLayout(flowLayout2);
         resultadoFinalAsistenciaJPanel.setBounds(new Rectangle(50, 30, 475, 90));
         resultadoFinalAsistenciaJPanel.setLayout(flowLayout1);
         resultadoFinalAsistenciaJPanel.setBorder(BorderFactory.createTitledBorder("Asistencia De Participantes"));
@@ -530,14 +513,12 @@ public class GestionarResultados extends JDialog {
         resultadoFinalJPanel.setBorder(BorderFactory.createTitledBorder("Resultado Final"));
         resultadoFinalJPanel.setVisible(false);
         ganadorEquipoAJRadioButton.setText("Ganador "+encuentroSeleccionado.getParticipanteA().getNombre());
-        ganadorEquipoAJRadioButton.setBounds(new Rectangle(30, 30, 130, 20));
         ganadorEquipoAJRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ganadorEquipoAJRadioButton_actionPerformed(e);
             }
         });
         ganadorEquipoBJRadioButton.setText("Ganador "+encuentroSeleccionado.getParticipanteB().getNombre());
-        ganadorEquipoBJRadioButton.setBounds(new Rectangle(290, 30, 135, 20));
         ganadorEquipoBJRadioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ganadorEquipoBJRadioButton_actionPerformed(e);
@@ -657,7 +638,8 @@ public class GestionarResultados extends JDialog {
                 setVisible(false);
                
                 competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().setEstado(RondaGestor.actualizarRonda(nroRonda, competenciaActual));
-                if(nroRonda==competenciaActual.getFixture().getRondas().length)
+                int rondaAux =nroRonda+1;
+                if(rondaAux==competenciaActual.getFixture().getRondas().length)
                 {
                     if(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado())
                     {
@@ -674,9 +656,9 @@ public class GestionarResultados extends JDialog {
                     CompetenciaGestor.actualizarEstado(competenciaActual, "En disputa");
                 }
                     
-           System.out.println("Estado Actualizado de la competencia "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
+
                 FixtureGestor.actualizarSubRonda(competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getIdSubronda(), competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado());
-        System.out.println("Ronda Anterior: "+nroRonda+" Ronda Actual: "+nroRonda+1+"Estado R A: "+competenciaActual.getFixture().getRondas()[nroRonda].getGanadores().getEstado()+"Estado Ronda Actual: "+competenciaActual.getFixture().getRondas()[nroRonda+1].getGanadores().getEstado());
+
                 new  ModificarFixture(competenciaActual, usuarioAcatual, nroRonda).setVisible(true);
             dispose();
         }
@@ -703,11 +685,13 @@ public class GestionarResultados extends JDialog {
     private void equipoASetJRadioButton_actionPerformed(ActionEvent e) {
         equipoBSetJRadioButton.setSelected(false);
         equipoAmbosSetJRadioButton.setSelected(false);
+        setsJPanel.setVisible(false);
     }
 
     private void equipoBSetJRadioButton_actionPerformed(ActionEvent e) {
         equipoASetJRadioButton.setSelected(false);
         equipoAmbosSetJRadioButton.setSelected(false);
+        setsJPanel.setVisible(false);
     }
 
     private void equipoAmbosSetJRadioButton_actionPerformed(ActionEvent e) {
