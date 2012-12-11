@@ -9,7 +9,7 @@ public class AreaTextoNumerico extends AreaTexto
 {
  private int longitud;
  private String texto;
- private String expresion = "[1-9]{1}[0-9]*" ;
+ private String expresion = "[0-9]{1}[0-9]*" ;
  private boolean estricto = true;
  
  public AreaTextoNumerico(int longitudMaxima)
