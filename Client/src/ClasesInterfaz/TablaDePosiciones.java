@@ -5,13 +5,15 @@ package ClasesInterfaz;
 import ClasesLogicas.Competencia;
 import ClasesLogicas.Encuentro;
 import ClasesLogicas.ModeloTabla;
-
+import excelexporter.ExcelTableExporter;
 import ClasesLogicas.Posicion;
 
 
 import ClasesLogicas.Ronda;
 import ClasesLogicas.Subronda;
 import ClasesLogicas.Usuario;
+
+import excelexporter.ExcelTableExporter;
 
 import java.awt.Component;
 
@@ -30,10 +32,23 @@ import java.awt.event.WindowEvent;
 
 import java.awt.print.PrinterException;
 
+import java.io.File;
+
+import java.text.MessageFormat;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Vector;
+
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+
+import javax.print.attribute.standard.OrientationRequested;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
@@ -87,6 +102,11 @@ public class TablaDePosiciones extends JDialog {
         exportarJButton.setText("Exportar");
         exportarJButton.setBounds(new Rectangle(245, 520, 110, 30));
         exportarJButton.setFont(new Font("Tahoma", 0, 13));
+        exportarJButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    exportarJButton_actionPerformed(e);
+                }
+            });
         imprimirJButton.setText("Imprimir");
         imprimirJButton.setBounds(new Rectangle(445, 520, 110, 30));
         imprimirJButton.setFont(new Font("Tahoma", 0, 13));
@@ -141,7 +161,7 @@ public class TablaDePosiciones extends JDialog {
         {
             if(competenciaSeleccionada.getLiga().getEmpate())
             {
-                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "Partidos Ganados", "Partidos Empatados", "Partidos Perdidos" }, 0);
+                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "Partidos Ganados", "PG", "PE", "PP", }, 0);
                 for(int i=0;i<tablaSeleccionada.size();i++)
                 {
                     Vector <String> datos = new Vector <String>();
@@ -159,7 +179,7 @@ public class TablaDePosiciones extends JDialog {
             }
             else
             {
-                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "Partidos Ganados", "Partidos Perdidos" }, 0);
+                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "PG", "PP" }, 0);
                 for(int i=0;i<tablaSeleccionada.size();i++)
                 {
                     Vector <String> datos = new Vector <String>();
@@ -182,7 +202,7 @@ public class TablaDePosiciones extends JDialog {
         {
             if(competenciaSeleccionada.getLiga().getEmpate())
             {
-                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "Partidos Ganados", "Partidos Empatados", "Partidos Perdidos", "Goles a Favor", "Goles Encontra", "Diferencia"}, 0);
+                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "PG", "PE", "PP", "Goles a Favor", "Goles Encontra", "Diferencia"}, 0);
             
                 for(int i=0;i<tablaSeleccionada.size();i++)
                 {
@@ -204,7 +224,7 @@ public class TablaDePosiciones extends JDialog {
             }
             else
             {
-                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "Partidos Ganados", "Partidos Perdidos", "Goles a Favor", "Goles Encontra", "Diferencia"}, 0);
+                tablaDePosicionesModeloTabla= new ModeloTabla(new String[] { "Pocision", "Equipo", "Puntos", "PG", "PP", "Goles a Favor", "Goles Encontra", "Diferencia"}, 0);
                 for(int i=0;i<tablaSeleccionada.size();i++)
                 {
                     Vector <String> datos = new Vector <String>();
@@ -229,7 +249,13 @@ public class TablaDePosiciones extends JDialog {
     }
     private void imprimirJButton_actionPerformed(ActionEvent e) {
         try {
-                   tablaDePosicionesJTable.print(JTable.PrintMode.FIT_WIDTH);
+                  
+                   String strDate = MessageFormat.format("{0,date,short} {0,time,short}", new Date());
+                   MessageFormat headerFormat = new MessageFormat("Tabla de Posiociones de:"+competenciaSeleccionada.getNombreCompetencia()+"    Impreso: "+strDate);
+                   MessageFormat footerFormat = new MessageFormat("- {0} -");
+                   PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+                           aset.add(OrientationRequested.LANDSCAPE);
+                   tablaDePosicionesJTable.print(JTable.PrintMode.FIT_WIDTH, headerFormat, footerFormat, true, aset, true);
                } catch (PrinterException f) {
                }
     }
@@ -252,4 +278,23 @@ public class TablaDePosiciones extends JDialog {
             }
         
         }
+
+    private void exportarJButton_actionPerformed(ActionEvent e) {
+        
+        //ExcelTableExporter excelExporter = new ExcelTableExporter(tablaDePosicionesJTable, new File("exportar.xls"), sheetsName);
+        List<JTable> tables = new ArrayList<JTable>();
+        List<String> sheetsName = new ArrayList<String>();
+        tables.add(tablaDePosicionesJTable);
+
+        sheetsName.add("Tabla de Posiciones");
+
+        ExcelTableExporter excelExporter=null;
+        try {
+            excelExporter = new ExcelTableExporter(tables, new File("exportar.xls"), sheetsName);
+        } catch (Exception f) {
+        }
+        if (excelExporter.export()) {
+            JOptionPane.showMessageDialog(null, "Exportado con exito!");
+        }
+    }
 }

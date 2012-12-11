@@ -2,8 +2,6 @@ package ClasesGestores;
 
 
 import ClasesBD.CompetenciaDB;
-import ClasesBD.Conexion;
-import ClasesBD.DeportesDB;
 import ClasesBD.LigaDB;
 
 import ClasesLogicas.Competencia;
@@ -23,12 +21,9 @@ import ClasesLogicas.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.sql.Statement;
-
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 
 public class CompetenciaGestor {
@@ -784,4 +779,7 @@ public class CompetenciaGestor {
         }
         return unSet;
         }
+   
+
+
 }
