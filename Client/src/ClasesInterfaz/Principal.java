@@ -18,9 +18,8 @@ public class Principal {
          
         for (int i=0; i < plaf.length; i++){
          
-              System.out.println("Nombre: " + plaf[i].getName());
+             
          
-              System.out.println("Nombre de la clase: "+ plaf[i].getClassName());
          
         }
        

@@ -58,7 +58,7 @@ public class EncuentroGestor {
     public static Encuentro[] encuentrosDeSubRonda(int idSubRonda)
     {
         
-        //System.out.println("encuentrosDeSubRonda");
+        
             Encuentro retorno=null;
                 Vector <Encuentro> datos=new Vector <Encuentro>();
                 Encuentro [] encuentros=null;
@@ -70,7 +70,7 @@ public class EncuentroGestor {
 
                
                     while(resultado.next()){
-                        System.out.println("empieza");
+                       
                         int id = resultado.getInt("id_encuentro");
                         int idParticipanteA= resultado.getInt("id_participantea");
                         int idParticipanteB= resultado.getInt("id_participanteb");
@@ -104,7 +104,7 @@ public class EncuentroGestor {
                     encuentros= new Encuentro[datos.size()];
                     for(int j=0;j<datos.size();j++){
                             encuentros[j]=datos.get(j);
-                           // System.out.println("id_encuentro: "+encuentros[j].getIdEncuentro()+"Participante A: "+encuentros[j].getParticipanteA().getNombre()+"Participante B: "+encuentros[j].getParticipanteB().getNombre());
+                          
                         }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -165,13 +165,11 @@ public class EncuentroGestor {
     
     // GANADOR PARA RESULTADO FINAL
     public static void ganador(Encuentro unEncuentro,Participante participanteGanador, Participante participantePerdedor, String modalidad, int asistencia){
-        System.out.println("resultado final");
+        
         unEncuentro.setGanador(participanteGanador);
         unEncuentro.setPerdedor(participantePerdedor);
         unEncuentro.setAsistencia(asistencia);
-        System.out.println("asistencia: "+unEncuentro.getAsistencia());
-         System.out.println("GANADOR: "+unEncuentro.getGanador().getNombre());
-        System.out.println("PERDEDOR: "+unEncuentro.getPerdedor().getNombre());
+
         try {
             EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
         } catch (SQLException e) {
@@ -258,24 +256,21 @@ public class EncuentroGestor {
         unEncuentro.setResultado(unResultado);
    
         if (puntoA==puntoB){
-                System.out.println("entre empate");
+            
                 unEncuentro.setEmpate(true);
         }
             else if(puntoA<puntoB){
-                System.out.println("entra ptos b mayor que a");
+     
                     unEncuentro.setGanador(participanteB);
                     unEncuentro.setPerdedor(participanteA);
             }
             else{
-                System.out.println("entra ptos a mayor q b");
+                
                     unEncuentro.setGanador(participanteA);
                     unEncuentro.setPerdedor(participanteB);
             }
 
-           System.out.println("COMPETENCIA MODALIDAD PUNTOS");
-           System.out.println("asistencia: "+unEncuentro.getAsistencia());
-            System.out.println("GANADOR: "+unEncuentro.getGanador().getNombre());
-           System.out.println("PERDEDOR: "+unEncuentro.getPerdedor().getNombre());
+
            try {
                EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
            } catch (SQLException e) {
@@ -288,7 +283,7 @@ public class EncuentroGestor {
             unEncuentro.setGanador(participanteGanador);
             unEncuentro.setPerdedor(participantePerdedor);
             unEncuentro.setAsistencia(asistencia);
-           System.out.println("Se presento solo: "+unEncuentro.getGanador().getNombre() );
+           
            try {
                EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);
            } catch (SQLException e) {

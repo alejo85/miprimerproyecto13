@@ -357,7 +357,7 @@ public class VerCompetencia extends JDialog {
     }
 
     private void mostrarTablaDePosicionesJButton_actionPerformed(ActionEvent e) {
-        System.out.println(competencia.getFixture());
+      
         if(competencia.getFixture()!=null){
             TablaDePosiciones ven = new TablaDePosiciones(usuarioActual, competencia, competencia.getTablaDePosiciones());
             dispose();

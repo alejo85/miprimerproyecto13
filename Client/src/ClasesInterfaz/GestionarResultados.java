@@ -620,7 +620,7 @@ public class GestionarResultados extends JDialog {
                 datos.add(""+aux);
                     datos.add(" ");
                     datos.add(" ");
-                System.out.println(datos);
+                
                 modeloDeTablaDeSets.addRow(datos);
                 }
             tablaDeSetsJTable.setModel(modeloDeTablaDeSets);

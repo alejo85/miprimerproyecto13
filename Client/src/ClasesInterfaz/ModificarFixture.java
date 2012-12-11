@@ -407,7 +407,7 @@ public class ModificarFixture extends JDialog {
        
         if(rondaAnterior>-1){
                 Subronda sub = rondas[nroRonda-1].getGanadores();
-                System.out.println("Ronda Anterior: "+rondaAnterior+" Ronda Actual: "+nroRonda+"Estado R A: "+sub.getEstado()+"Estado Ronda Actual: "+rondas[nroRonda].getGanadores().getEstado());
+                
                 if(sub.getEstado())
                 {
                         if((getEncuentro(nroRonda, tablaDeFechaJTable.getSelectedRow())).getParticipanteA().getIdParticipante()!=1)

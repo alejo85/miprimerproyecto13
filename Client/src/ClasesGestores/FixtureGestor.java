@@ -129,7 +129,7 @@ public class FixtureGestor {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-            //System.out.println("antes de retornar el fixture ronda 0= "+fixture.getRonda1().get(1).getNumeroDeRonda());
+         
         return fixture;
         }
     public static void eliminarFixture( int idFixture){

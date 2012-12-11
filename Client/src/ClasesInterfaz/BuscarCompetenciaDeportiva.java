@@ -391,7 +391,7 @@ public class BuscarCompetenciaDeportiva extends JDialog {
         tablaResultadoJTable.setModel(modelo);
         TableRowSorter<DefaultTableModel> elQueOrdena = new TableRowSorter<DefaultTableModel>(modelo);
         tablaResultadoJTable.setRowSorter(elQueOrdena);
-        //System.out.println("tamaño resultado: "+competenciasEncontradas.size());
+ 
         for(int i =0; i<competenciasEncontradas.size();i++)
         {
             Vector <String> datos = new Vector <String>();
