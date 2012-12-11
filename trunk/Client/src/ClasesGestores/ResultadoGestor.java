@@ -46,14 +46,16 @@ public class ResultadoGestor {
         
         Puntos[] retorno=new Puntos[cantidadPuntos];
         Puntos nuevo;
-        String dato=null;
+
+       
+        
         for(int i=0; i<cantidadPuntos; i++){            
             nuevo = new Puntos();
-                dato=tablaDeSetsJTable.getValueAt(i, 1).toString();
-                System.out.println("valor de la celda: "+dato);
+              
+
             if(!tablaDeSetsJTable.getValueAt(i, 1).toString().equals(" "))
             {
-                System.out.println("Puntos de A: "+tablaDeSetsJTable.getValueAt(i, 1).toString());
+
                 nuevo.setPuntoA( Integer.parseInt(tablaDeSetsJTable.getValueAt(i, 1).toString()));
                 nuevo.setPuntoB(Integer.parseInt(tablaDeSetsJTable.getValueAt(i, 2).toString()));
                 retorno[i]=nuevo;
@@ -66,7 +68,8 @@ public class ResultadoGestor {
     }
 
     public static  Resultados crearResultado(int cantidadPuntos, JTable tablaDeSetsJTable ){
-        Resultados unResultado=crearResultado(crearPuntosSets(cantidadPuntos, tablaDeSetsJTable));
+        
+        Resultados unResultado=crearResultado(crearPuntosSets(cantidadPuntos, tablaDeSetsJTable ));
 
        
         return unResultado;

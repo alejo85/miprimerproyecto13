@@ -13,7 +13,6 @@ import ClasesLogicas.Resultados;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.Stack;
 import java.util.Vector;
 
 import javax.swing.JTable;
@@ -209,9 +208,24 @@ public class EncuentroGestor {
         }
     }
     public static void guardarResultado(Encuentro unEncuentro,int cantidadPuntos, JTable tablaDeSetsJTable, int asistencia, String modalidad){
+        int setA=0;
+        int setB=0;
         unEncuentro.setAsistencia(asistencia);
         unEncuentro.asignaResultado(ResultadoGestor.crearResultado(cantidadPuntos, tablaDeSetsJTable));
         unEncuentro.setGanador();
+        if (setA==setB)
+        {
+                unEncuentro.setEmpate(true);
+            }
+        else
+        if(setA<setB){
+            unEncuentro.setGanador(unEncuentro.getParticipanteB());
+            unEncuentro.setPerdedor(unEncuentro.getParticipanteA());
+        }
+        else{
+            unEncuentro.setGanador(unEncuentro.getParticipanteA());
+            unEncuentro.setPerdedor(unEncuentro.getParticipanteB());
+        }
         
         try {
             EncuentroDB.actualizarEncuentro(unEncuentro, modalidad);

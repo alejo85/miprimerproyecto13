@@ -2,6 +2,7 @@ package ClasesGestores;
 
 
 import ClasesBD.CompetenciaDB;
+import ClasesBD.Conexion;
 import ClasesBD.DeportesDB;
 import ClasesBD.LigaDB;
 
@@ -21,6 +22,8 @@ import ClasesLogicas.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java.sql.Statement;
 
 import java.util.Vector;
 
@@ -539,13 +542,16 @@ public class CompetenciaGestor {
                 
 
             }while (consulta.next());
-            unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
+            
             if(unaCompetencia.getFormaDePuntuacion().equals("Sets")){
-                    //unaCompetencia.setCantidadDeSets(CompetenciaGestor.getCantidadMaximaDeSets(unaCompetencia.getIdCompetencia()));
+                    
                     unaCompetencia.setFormaDePuntuacionSet(buscarSets(unaCompetencia.getIdCompetencia()));
             }
             if(unaCompetencia.getModalidad().equals("Liga"))
-                unaCompetencia.setTablaDePosiciones(CompetenciaDB.getTablaDePosiciones(unaCompetencia.getIdCompetencia()));
+            {
+                unaCompetencia.setTablaDePosiciones(getTablaDePosicion(unaCompetencia.getIdCompetencia()));
+                unaCompetencia.setLiga(LigaGestor.recuperarliga(unaCompetencia.getIdCompetencia()));
+            }
             unaCompetencia.setParticipantes(ParticipanteGestor.instanciarParticipante(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setLugares(LugaresDeRealizacionGestores.lugaresDeLaCompetencia(unaCompetencia.getIdCompetencia()));
             unaCompetencia.setFixture(FixtureGestor.retornarFixture(idCompetencia));
@@ -686,21 +692,66 @@ public class CompetenciaGestor {
         Liga, Simple, Doble; 
     }
     
+    public static void actualizarPosicion(Posicion unaPosicion){
+
+        try {
+            CompetenciaDB.actualizarPosicion(unaPosicion);
+        } catch (SQLException e) {
+        }
+    }
     public static void setTabla(Vector <Posicion> tabla, int idCompetencia){
         int idTabla=0;
+        int posicion=1;
       
                 
             for(int i=0; i<tabla.size(); i++){
                 
             try {
                 idTabla = CompetenciaDB.guardarPosicion(tabla.get(i),idCompetencia);
-            } catch (SQLException e) {
+            } 
+            catch (SQLException e) 
+            {//TODO
             }
             tabla.get(i).setIdTabla(idTabla);
             
         }
-            
-         
+        tabla=getTablaDePosicion(idCompetencia);
+        for(int i=0; i<tabla.size(); i++)
+        {
+            tabla.get(i).setPosicion(posicion);
+            actualizarPosicion(tabla.get(i));
+            posicion++;
+        }
+    }
+    public static Vector <Posicion> getTablaDePosicion( int idCompetencia){
+            Vector <Posicion> vector = new Vector <Posicion>();
+            ResultSet resultado=null;
+
+        try {
+            resultado=CompetenciaDB.getTablaDePosiciones(idCompetencia);
+        } catch (SQLException e) {
+            //TODO
+        }
+
+        try {
+            while(resultado.next()){
+               Posicion unaPosicion = new Posicion();
+               unaPosicion.setIdTabla(resultado.getInt("id_tabla"));
+               unaPosicion.setPosicion(resultado.getInt("posicion"));
+               unaPosicion.setPuntos(resultado.getInt("puntos"));
+               unaPosicion.setPartidosGanados(resultado.getInt("pg"));
+               unaPosicion.setPartidosPerdidos(resultado.getInt("pp"));
+               unaPosicion.setPartidosEmpatados(resultado.getInt("pe"));
+               unaPosicion.setTantosAFavor(resultado.getInt("tantos_a_favor"));
+               unaPosicion.setTantosEncontra(resultado.getInt("tantos_en_contra"));
+               unaPosicion.setDiferencia(resultado.getInt("diferencia"));
+               unaPosicion.setParticipante(ParticipanteGestor.instanciarUnParticipante(resultado.getInt("id_participante")));
+               vector.add(unaPosicion);
+
+            }
+        } catch (SQLException e) {//TODO
+        }
+        return vector;
             
             
         
