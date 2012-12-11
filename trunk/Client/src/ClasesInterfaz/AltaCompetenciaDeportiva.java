@@ -283,11 +283,11 @@ public class AltaCompetenciaDeportiva extends JDialog {
         cantidadMaximaDeSetsJTextArea.setBounds(new Rectangle(210, 20, 160, 30));
         cantidadMaximaDeSetsJTextArea.setFont(new Font("Tahoma", 0, 13));
         cantidadMaximaDeSetsJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        tantosPorPartidosGanadosJTextArea.setBounds(new Rectangle(210, 25, 160, 25));
+        tantosPorPartidosGanadosJTextArea.setBounds(new Rectangle(250, 25, 160, 25));
         tantosPorPartidosGanadosJTextArea.setFont(new Font("Tahoma", 0, 13));
         tantosPorPartidosGanadosJTextArea.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jLabelTantosPorPartidosGanados.setText("Tantos Por Partido Ganados");
-        jLabelTantosPorPartidosGanados.setBounds(new Rectangle(20, 25, 160, 25));
+        jLabelTantosPorPartidosGanados.setText("Puntos por ausencia de contrincante");
+        jLabelTantosPorPartidosGanados.setBounds(new Rectangle(20, 25, 260, 25));
         jLabelTantosPorPartidosGanados.setFont(new Font("Tahoma", 0, 13));
 
 
