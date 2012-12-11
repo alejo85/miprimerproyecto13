@@ -674,6 +674,14 @@ public class AltaCompetenciaDeportiva extends JDialog {
                              this.cantidadMaximaDeSetsJTextArea.error();
                              errores=errores +"<li>Cantidad de Set vacío</li>";
                          }
+                         else if(Integer.parseInt(cantidadMaximaDeSetsJTextArea.getText())%2==0){
+                             this.cantidadMaximaDeSetsJTextArea.error();
+                             errores=errores +"<li>Cantidad de Set debe ser impar</li>";
+                         }
+                         else if(Integer.parseInt(cantidadMaximaDeSetsJTextArea.getText())>10){
+                             this.cantidadMaximaDeSetsJTextArea.error();
+                             errores=errores +"<li>Cantidad de Set no puede ser mayor que 10</li>";
+                         }
                      }
                  }
              if(errores.length()>0){
